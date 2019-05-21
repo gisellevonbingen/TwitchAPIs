@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using Newtonsoft.Json.Linq;
 using TwitchAPI.Web;
 
@@ -13,11 +14,24 @@ namespace TwitchAPI
     {
         public WebExplorer Web { get; }
         public string ClientId { get; }
+        public string SecretKey { get; }
 
-        public TwitchCrawler(string clientId)
+        public TwitchCrawler(string clientId, string secretKey)
         {
             this.Web = new WebExplorer();
             this.ClientId = clientId;
+            this.SecretKey = secretKey;
+        }
+
+        public TwitchUser UpdateUser(string bearerAccessToken, string description)
+        {
+            var req = this.CreateDefaultRequestParameter();
+            req.Method = "PUT";
+            req.URL = $"https://api.twitch.tv/helix/users?description={description}";
+            req.Headers["Authorization"] = $"Bearer {bearerAccessToken}";
+
+            var jobj = this.GetResponseAsJson(req);
+            return this.ParseUser(jobj);
         }
 
         public Authorization ParseAuthorization(JToken jToken)
@@ -32,21 +46,21 @@ namespace TwitchAPI
             return authorization;
         }
 
-        public Authorization RefreshAuthorize(string secretKey, string accessToken)
+        public Authorization RefreshAuthorize(string accessToken)
         {
             var req = this.CreateDefaultRequestParameter();
             req.Method = "POST";
-            req.URL = $"https://id.twitch.tv/oauth2/token--data-urlencode?grant_type=refresh_token&refresh_token={accessToken}&client_id=${this.ClientId}&client_secret={secretKey}";
+            req.URL = $"https://id.twitch.tv/oauth2/token?grant_type=refresh_token&refresh_token={accessToken}&client_id=${this.ClientId}&client_secret={this.SecretKey}";
 
             var jobj = this.GetResponseAsJson(req);
             return this.ParseAuthorization(jobj);
         }
 
-        public Authorization Authorize(string secretKey, string scope)
+        public Authorization Authorize(string scope)
         {
             var req = this.CreateDefaultRequestParameter();
             req.Method = "POST";
-            req.URL = $"https://id.twitch.tv/oauth2/token?client_id={this.ClientId}&client_secret={secretKey}&grant_type=client_credentials&scope={scope}";
+            req.URL = $"https://id.twitch.tv/oauth2/token?client_id={this.ClientId}&client_secret={this.SecretKey}&grant_type=client_credentials&scope={scope}";
 
             var jobj = this.GetResponseAsJson(req);
             return this.ParseAuthorization(jobj);
@@ -107,21 +121,27 @@ namespace TwitchAPI
             for (int i = 0; i < count; i++)
             {
                 var token = data[i];
-                var user = new TwitchUser();
-                user.BroadcasterType = token.Value<string>("broadcaster_type");
-                user.Description = token.Value<string>("description");
-                user.DisplayName = token.Value<string>("display_name");
-                user.Email = token.Value<string>("email");
-                user.Id = token.Value<string>("id");
-                user.Login = token.Value<string>("login");
-                user.OfflineImageUrl = token.Value<string>("offline_image_url");
-                user.ProfileImageUrl = token.Value<string>("profile_image_url");
-                user.Type = token.Value<string>("type");
-                user.ViewCount = token.Value<int>("view_count");
+                var user = this.ParseUser(token);
                 users.Add(user);
             }
 
             return users;
+        }
+
+        private TwitchUser ParseUser(JToken token)
+        {
+            var user = new TwitchUser();
+            user.BroadcasterType = token.Value<string>("broadcaster_type");
+            user.Description = token.Value<string>("description");
+            user.DisplayName = token.Value<string>("display_name");
+            user.Email = token.Value<string>("email");
+            user.Id = token.Value<string>("id");
+            user.Login = token.Value<string>("login");
+            user.OfflineImageUrl = token.Value<string>("offline_image_url");
+            user.ProfileImageUrl = token.Value<string>("profile_image_url");
+            user.Type = token.Value<string>("type");
+            user.ViewCount = token.Value<int>("view_count");
+            return user;
         }
 
         public string GetResponseAsString(RequestParameter request)

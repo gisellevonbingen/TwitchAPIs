@@ -16,8 +16,12 @@ namespace TwitchAPI
             var clientId = Console.ReadLine();
             var secretKey = Console.ReadLine();
 
-            var crawler = new TwitchCrawler(clientId);
-            crawler.Authorize(secretKey, "chat:read");
+            var crawler = new TwitchCrawler(clientId, secretKey);
+            var authorization = crawler.Authorize("user:read:broadcast");
+            Console.WriteLine(authorization.AccessToken);
+
+            authorization = crawler.RefreshAuthorize(authorization.AccessToken);
+            Console.WriteLine(authorization.RefreshToken);
 
         }
 
