@@ -12,7 +12,7 @@ namespace TwitchAPI
     {
         public static void Main(string[] args)
         {
-            var streamers = new List<string> { };
+            var streamers = new List<string> {  };
             string clientId = "";
 
             foreach (var streamer in streamers)
@@ -27,7 +27,7 @@ namespace TwitchAPI
 
                 while (true)
                 {
-                    var follows = crawler.GetUserFollows(user.Id, cursor);
+                    var follows = crawler.GetUserFollows(FollowsType.From, user.Id, cursor);
                     list.AddRange(follows.Followers.Select(u => u.DisplayName));
                     cursor = follows.Cursor;
 

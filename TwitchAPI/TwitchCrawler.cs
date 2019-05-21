@@ -19,15 +19,15 @@ namespace TwitchAPI
             this.ClientId = clientId;
         }
 
-        public TwitchFollowers GetUserFollows(string id)
+        public TwitchFollowers GetUserFollows(FollowsType type, string id)
         {
-            return this.GetUserFollows(id, null);
+            return this.GetUserFollows(type, id, null);
         }
 
-        public TwitchFollowers GetUserFollows(string id, string cursor)
+        public TwitchFollowers GetUserFollows(FollowsType type, string id, string cursor)
         {
             var req = this.CreateDefaultRequestParameter();
-            req.URL = "https://api.twitch.tv/helix/users/follows?to_id=" + id;
+            req.URL = "https://api.twitch.tv/helix/users/follows?" + type.Request + "_id=" + id;
 
             if (cursor != null)
             {
@@ -47,8 +47,8 @@ namespace TwitchAPI
             {
                 var token = data[i];
                 var follower = new TwitchFollower();
-                follower.Id = token.Value<string>("from_id");
-                follower.DisplayName = token.Value<string>("from_name");
+                follower.Id = token.Value<string>(type.Response + "_id");
+                follower.DisplayName = token.Value<string>(type.Response + "_name");
                 follower.FollowedAt = token.Value<DateTime>("followed_at");
 
                 followers.Followers.Add(follower);
