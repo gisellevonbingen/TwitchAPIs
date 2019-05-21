@@ -55,6 +55,8 @@
     <Compile Include="TwitchFollower.cs" />
     <Compile Include="TwitchFollowers.cs" />
     <Compile Include="TwitchUser.cs" />
+    <Compile Include="UserRequest.cs" />
+    <Compile Include="UserType.cs" />
     <Compile Include="Web\NetworkException.cs" />
     <Compile Include="Web\ProxySettings.cs" />
     <Compile Include="Web\RequestParameter.cs" />

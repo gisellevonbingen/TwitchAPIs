@@ -57,31 +57,41 @@ namespace TwitchAPI
             return followers;
         }
 
-        public TwitchUser GetUser(string loginName)
+        public TwitchUser GetUser(UserRequest request)
+        {
+            var users = this.GetUsers(new UserRequest[] { request });
+            return users.FirstOrDefault();
+        }
+
+        public List<TwitchUser> GetUsers(IEnumerable<UserRequest> requests)
         {
             var req = this.CreateDefaultRequestParameter();
-            req.URL = "https://api.twitch.tv/helix/users?login=" + loginName;
+            req.URL = "https://api.twitch.tv/helix/users?" + string.Join("&", requests);
             req.Method = "GET";
 
             var jobj = this.GetJsonResponse(req);
             var data = (JArray)jobj["data"];
             var count = data.Count;
+            var users = new List<TwitchUser>();
 
-            if (count == 1)
+            for (int i = 0; i < count; i++)
             {
-                var token = data[0];
+                var token = data[i];
                 var user = new TwitchUser();
+                user.BroadcasterType = token.Value<string>("broadcaster_type");
+                user.Description = token.Value<string>("description");
+                user.DisplayName = token.Value<string>("display_name");
+                user.Email = token.Value<string>("email");
                 user.Id = token.Value<string>("id");
                 user.Login = token.Value<string>("login");
-                user.DisplayName = token.Value<string>("display_name");
-
-                return user;
-            }
-            else
-            {
-                return null;
+                user.OfflineImageUrl = token.Value<string>("offline_image_url");
+                user.ProfileImageUrl = token.Value<string>("profile_image_url");
+                user.Type = token.Value<string>("type");
+                user.ViewCount = token.Value<int>("view_count");
+                users.Add(user);
             }
 
+            return users;
         }
 
         public JObject GetJsonResponse(RequestParameter request)

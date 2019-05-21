@@ -12,36 +12,19 @@ namespace TwitchAPI
     {
         public static void Main(string[] args)
         {
-            var streamers = new List<string> {  };
+            var logins = new List<string> {  };
             string clientId = "";
 
-            foreach (var streamer in streamers)
+            var crawler = new TwitchCrawler(clientId);
+            var requests = logins.Select(v => new UserRequest(UserType.Login, v)).ToArray();
+            var users = crawler.GetUsers(requests);
+
+            foreach (var user in users)
             {
-                var crawler = new TwitchCrawler(clientId);
-                var user = crawler.GetUser(streamer);
-
-                var list = new List<string>();
-                string cursor = null;
-
-                Console.WriteLine("START : " + user.DisplayName);
-
-                while (true)
-                {
-                    var follows = crawler.GetUserFollows(FollowsType.From, user.Id, cursor);
-                    list.AddRange(follows.Followers.Select(u => u.DisplayName));
-                    cursor = follows.Cursor;
-
-                    Console.WriteLine("Cursor : " + follows.Cursor);
-
-                    if (follows.Cursor == null)
-                    {
-                        break;
-                    }
-
-                    Thread.Sleep(1000);
-                }
-
-                File.WriteAllLines("result/" + streamer + ".txt", list);
+                Console.WriteLine("=======");
+                Console.WriteLine(user.Id);
+                Console.WriteLine(user.Login);
+                Console.WriteLine(user.DisplayName);
             }
 
         }
