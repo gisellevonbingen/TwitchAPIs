@@ -46,7 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authorization.cs" />
     <Compile Include="FollowsType.cs" />
+    <Compile Include="JsonUtils.cs" />
     <Compile Include="ObjectUtils.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -61,7 +63,6 @@
     <Compile Include="Web\ProxySettings.cs" />
     <Compile Include="Web\RequestParameter.cs" />
     <Compile Include="Web\RequestWriteEventArgs.cs" />
-    <Compile Include="Web\SessionResponse.cs" />
     <Compile Include="Web\WebExplorer.cs" />
   </ItemGroup>
   <ItemGroup>

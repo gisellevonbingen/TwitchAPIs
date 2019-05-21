@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,38 @@ namespace TwitchAPI
             this.ClientId = clientId;
         }
 
+        public Authorization ParseAuthorization(JToken jToken)
+        {
+            var authorization = new Authorization();
+            authorization.AccessToken = jToken.Value<string>("access_token");
+            authorization.RefreshToken = jToken.Value<string>("refresh_token");
+            authorization.ExpiresIn = jToken.Value<int>("expires_in");
+            authorization.Scope = jToken.GetArrayValues<string>("scope")?.ToArray();
+            authorization.TokenType = jToken.Value<string>("token_type");
+
+            return authorization;
+        }
+
+        public Authorization RefreshAuthorize(string secretKey, string accessToken)
+        {
+            var req = this.CreateDefaultRequestParameter();
+            req.Method = "POST";
+            req.URL = $"https://id.twitch.tv/oauth2/token--data-urlencode?grant_type=refresh_token&refresh_token={accessToken}&client_id=${this.ClientId}&client_secret={secretKey}";
+
+            var jobj = this.GetResponseAsJson(req);
+            return this.ParseAuthorization(jobj);
+        }
+
+        public Authorization Authorize(string secretKey, string scope)
+        {
+            var req = this.CreateDefaultRequestParameter();
+            req.Method = "POST";
+            req.URL = $"https://id.twitch.tv/oauth2/token?client_id={this.ClientId}&client_secret={secretKey}&grant_type=client_credentials&scope={scope}";
+
+            var jobj = this.GetResponseAsJson(req);
+            return this.ParseAuthorization(jobj);
+        }
+
         public TwitchFollowers GetUserFollows(FollowsType type, string id)
         {
             return this.GetUserFollows(type, id, null);
@@ -27,16 +60,14 @@ namespace TwitchAPI
         public TwitchFollowers GetUserFollows(FollowsType type, string id, string cursor)
         {
             var req = this.CreateDefaultRequestParameter();
-            req.URL = "https://api.twitch.tv/helix/users/follows?" + type.Request + "_id=" + id;
+            req.URL = $"https://api.twitch.tv/helix/users/follows?{type.Request}_id={id}";
 
             if (cursor != null)
             {
                 req.URL += "&after=" + cursor;
             }
 
-            req.Method = "GET";
-
-            var jobj = this.GetJsonResponse(req);
+            var jobj = this.GetResponseAsJson(req);
             var data = jobj.Value<JArray>("data");
 
             var followers = new TwitchFollowers();
@@ -66,10 +97,9 @@ namespace TwitchAPI
         public List<TwitchUser> GetUsers(IEnumerable<UserRequest> requests)
         {
             var req = this.CreateDefaultRequestParameter();
-            req.URL = "https://api.twitch.tv/helix/users?" + string.Join("&", requests);
-            req.Method = "GET";
+            req.URL = $"https://api.twitch.tv/helix/users?{string.Join("&", requests)}";
 
-            var jobj = this.GetJsonResponse(req);
+            var jobj = this.GetResponseAsJson(req);
             var data = (JArray)jobj["data"];
             var count = data.Count;
             var users = new List<TwitchUser>();
@@ -94,29 +124,44 @@ namespace TwitchAPI
             return users;
         }
 
-        public JObject GetJsonResponse(RequestParameter request)
+        public string GetResponseAsString(RequestParameter request)
         {
             using (var response = this.Web.Request(request))
             {
-                var content = response.ReadToEnd();
-                var jobj = JObject.Parse(content);
-
-                var error = jobj.Value<string>("error");
-
-                if (error != null)
+                using (var stream = response.GetResponseStream())
                 {
-                    var message = jobj.Value<string>("message");
-                    throw new TwitchException(message);
+                    using (var reader = new StreamReader(stream))
+                    {
+                        var content = reader.ReadToEnd();
+                        return content;
+                    }
+
                 }
 
-                return jobj;
             }
 
+        }
+
+        public JObject GetResponseAsJson(RequestParameter request)
+        {
+            var content = this.GetResponseAsString(request);
+            var jobj = JObject.Parse(content);
+
+            var error = jobj.Value<string>("error");
+
+            if (error != null)
+            {
+                var message = jobj.Value<string>("message");
+                throw new TwitchException(message);
+            }
+
+            return jobj;
         }
 
         public RequestParameter CreateDefaultRequestParameter()
         {
             var rp = new RequestParameter();
+            rp.Method = "GET";
             rp.Headers["Client-Id"] = this.ClientId;
 
             return rp;

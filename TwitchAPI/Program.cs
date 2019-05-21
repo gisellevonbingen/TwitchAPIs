@@ -12,20 +12,12 @@ namespace TwitchAPI
     {
         public static void Main(string[] args)
         {
-            var logins = new List<string> {  };
-            string clientId = "";
+            var logins = new List<string> { };
+            var clientId = Console.ReadLine();
+            var secretKey = Console.ReadLine();
 
             var crawler = new TwitchCrawler(clientId);
-            var requests = logins.Select(v => new UserRequest(UserType.Login, v)).ToArray();
-            var users = crawler.GetUsers(requests);
-
-            foreach (var user in users)
-            {
-                Console.WriteLine("=======");
-                Console.WriteLine(user.Id);
-                Console.WriteLine(user.Login);
-                Console.WriteLine(user.DisplayName);
-            }
+            crawler.Authorize(secretKey, "chat:read");
 
         }
 
