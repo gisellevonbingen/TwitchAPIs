@@ -30,28 +30,29 @@ namespace TwitchAPI.Test
 
         public abstract string ReadInput(string message);
 
-        public virtual int QueryInput<T>(string message, T[] names)
+        public virtual int QueryInput<T>(string message, IEnumerable<T> collection)
         {
-            return this.QueryInput(message, names, false);
+            return this.QueryInput(message, collection, false);
         }
 
-        public virtual int QueryInput<T>(string message, T[] names, bool breakable)
+        public virtual int QueryInput<T>(string message, IEnumerable<T> collection, bool breakable)
         {
             var breakInput = this.BreakInput;
-            return this.QueryInput(message, names, breakable, breakInput, $"Break to '{breakInput}'");
+            return this.QueryInput(message, collection, breakable, breakInput, $"Break to '{breakInput}'");
         }
 
-        public virtual int QueryInput<T>(string message, T[] names, bool breakable, string breakInput, string breakMessage)
+        public virtual int QueryInput<T>(string message, IEnumerable<T> collection, bool breakable, string breakInput, string breakMessage)
         {
-            int digits = (int)(Math.Log10(names.Length) + 1);
+            var arry = collection.ToArray();
+            int digits = (int)(Math.Log10(arry.Length) + 1);
             var format = "D" + digits;
             breakInput = breakInput ?? this.BreakInput;
 
             while (true)
             {
-                for (int i = 0; i < names.Length; i++)
+                for (int i = 0; i < arry.Length; i++)
                 {
-                    var value = names[i];
+                    var value = arry[i];
                     this.SendMessage($"{i.ToString(format)} - {value}");
                 }
 
@@ -70,7 +71,7 @@ namespace TwitchAPI.Test
                     }
 
                 }
-                else if (int.TryParse(input, out int index) == true && 0 <= index && index < names.Length)
+                else if (int.TryParse(input, out int index) == true && 0 <= index && index < arry.Length)
                 {
                     return index;
                 }
