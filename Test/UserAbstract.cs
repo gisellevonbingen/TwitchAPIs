@@ -23,6 +23,30 @@ namespace TwitchAPI.Test
 
         public abstract string ReadInput(string message);
 
+        public virtual int QueryInput<T>(string message, T[] names)
+        {
+            while (true)
+            {
+                for (int i = 0; i < names.Length; i++)
+                {
+                    var value = names[i];
+                    this.SendMessage($"{i} - {value}");
+                }
+
+                if (int.TryParse(this.ReadInput(message), out int input) == true && (0 <= input && input < names.Length))
+                {
+                    return input;
+                }
+                else
+                {
+                    this.SendMessage();
+                    continue;
+                }
+
+            }
+
+        }
+
     }
 
 }

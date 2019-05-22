@@ -66,13 +66,9 @@ namespace TwitchAPI.Test
                 user.SendMessage();
                 user.SendMessage();
 
-                for (int i = 0; i < tests.Count; i++)
-                {
-                    var test = tests[i];
-                    user.SendMessage($"{i} - {test.GetType().Name}");
-                }
+                var input = user.QueryInput("Enter Test number", tests.Select(t => t.GetType().Name).ToArray());
 
-                if (int.TryParse(user.ReadInput("Enter Test number"), out int input) == true && (0 <= input && input <= tests.Count))
+                if (input != -1)
                 {
                     var test = tests[input];
                     user.SendMessage("Test - " + test.GetType().Name);
