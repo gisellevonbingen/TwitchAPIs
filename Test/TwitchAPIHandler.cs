@@ -12,7 +12,7 @@ namespace TwitchAPI.Test
 {
     public class TwitchAPIHandler
     {
-        public UserAbstract User { get; private set; }
+        private UserAbstract User;
 
         public TwitchCrawler Crawler { get; private set; }
         public OAuthRequest OAuthRequest { get; private set; }
