@@ -21,12 +21,7 @@ namespace TwitchAPI.Test
 
         public AuthorizeTest(ConsoleUser user, TwitchCrawler crawler) : base(user, crawler)
         {
-            var authRequest = this.OAuthRequest = new OAuthRequest();
-            authRequest.RedirectURI = user.ReadInput("RedirectURI");
-            authRequest.ResponseType = OAuthResponseType.Token;
-            authRequest.Scope = "chat:read";
-            authRequest.ForceVerify = true;
-            authRequest.State = Guid.NewGuid().ToString().Replace("-", "");
+            var authRequest = this.OAuthRequest = this.CreateRequest(user);
             var authURI = this.OAuthURI = crawler.GetOAuthURI(authRequest);
 
             Application.SetCompatibleTextRenderingDefault(false);
@@ -47,38 +42,7 @@ namespace TwitchAPI.Test
 
             if (responseURI != null)
             {
-                var responseType = authRequest.ResponseType;
-                NameValueCollection query = null;
-                OAuthAuthorization authorization = null;
-
-                if (responseType.Equals(OAuthResponseType.Authorization, StringComparison.OrdinalIgnoreCase) == true)
-                {
-                    query = this.ParseQueryString(responseURI.Query, "?");
-
-                    var accessTokenRequest = new OAuthAccessTokenRequest();
-                    accessTokenRequest.ClientSecret = user.ReadInput("Client-Secret");
-                    accessTokenRequest.Code = query["code"];
-                    accessTokenRequest.RedirectURI = authRequest.RedirectURI;
-                    authorization = this.Crawler.GetOAuthAccessToken(accessTokenRequest);
-
-                }
-                else if (responseType.Equals(OAuthResponseType.Token, StringComparison.OrdinalIgnoreCase) == true)
-                {
-                    query = this.ParseQueryString(responseURI.Fragment, "#");
-                    authorization = this.Crawler.ParseOAuthAuthorization(query);
-                }
-                else
-                {
-                    user.SendMessage($"Invalid Response Type : " + responseType);
-                    return;
-                }
-
-                if (authRequest.State.Equals(query["state"]) == false)
-                {
-                    user.SendMessage($"Invalid State : {authRequest.State} vs {query["state"]}");
-                    return;
-                }
-
+                var authorization = this.Crawler.GetOAuthAuthorization(responseURI, authRequest);
                 user.SendMessage($"AccessToken = {authorization.AccessToken}");
                 user.SendMessage($"RefreshToken = {authorization.RefreshToken}");
                 user.SendMessage($"ExpiresIn = {authorization.ExpiresIn}");
@@ -92,14 +56,45 @@ namespace TwitchAPI.Test
 
         }
 
-        private NameValueCollection ParseQueryString(string str, string prefix)
+        private OAuthRequest CreateRequest(ConsoleUser user)
         {
-            if (str.StartsWith(prefix) == true)
+            var map = new Dictionary<int, OAuthRequest>();
+            map[1] = new OAuthRequestToken();
+            map[2] = new OAuthRequestAuthorization();
+
+            OAuthRequest request = null;
+
+            while (true)
             {
-                str = str.Substring(prefix.Length);
+                foreach (var pair in map)
+                {
+                    user.SendMessage($"{pair.Key} - {pair.Value.GetType().Name}");
+                }
+
+                if (int.TryParse(user.ReadInput("RequestType"), out int input) == true && map.TryGetValue(input, out request))
+                {
+                    break;
+                }
+                else
+                {
+                    user.SendMessage();
+
+                    continue;
+                }
+
             }
 
-            return HttpUtility.ParseQueryString(str);
+            if (request is OAuthRequestAuthorization auth)
+            {
+                auth.ClientSecret = user.ReadInput("Client-Secret");
+            }
+
+            request.RedirectURI = user.ReadInput("RedirectURI");
+            request.Scope = "chat:read";
+            request.ForceVerify = true;
+            request.State = Guid.NewGuid().ToString().Replace("-", "");
+
+            return request;
         }
 
         private void OnFormResize(object sender, EventArgs e)

@@ -8,6 +8,11 @@ namespace TwitchAPI.Test
 {
     public class ConsoleUser : AbstractUser
     {
+        public override void SendMessage()
+        {
+            Console.WriteLine();
+        }
+
         public override string ReadInput(string message)
         {
             Console.WriteLine(message);

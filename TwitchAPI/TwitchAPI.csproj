@@ -56,6 +56,9 @@
     <Compile Include="OAuthRequest.cs" />
     <Compile Include="FollowsType.cs" />
     <Compile Include="JsonUtils.cs" />
+    <Compile Include="OAuthRequestAuthorization.cs" />
+    <Compile Include="OAuthRequestOption.cs" />
+    <Compile Include="OAuthRequestToken.cs" />
     <Compile Include="OAuthResponseType.cs" />
     <Compile Include="ObjectUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

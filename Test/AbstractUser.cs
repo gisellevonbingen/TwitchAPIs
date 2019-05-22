@@ -8,6 +8,8 @@ namespace TwitchAPI.Test
 {
     public abstract class AbstractUser
     {
+        public abstract void SendMessage();
+
         public abstract void SendMessage(string message);
 
         public virtual void SendMessage(IEnumerable<string> messages)

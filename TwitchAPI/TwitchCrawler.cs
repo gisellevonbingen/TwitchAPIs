@@ -45,7 +45,67 @@ namespace TwitchAPI
             return authorization;
         }
 
-        public OAuthAuthorization GetOAuthAccessToken(OAuthAccessTokenRequest request)
+        public OAuthAuthorization GetOAuthAuthorization(Uri responseURI, OAuthRequest request)
+        {
+            var responseType = request.ResponseType;
+            NameValueCollection query = null;
+            OAuthAuthorization authorization = null;
+
+            if (request is OAuthRequestAuthorization auth)
+            {
+                query = this.ParseQueryString(responseURI.Query, "?");
+                this.EnsureOAuthStateEquals(query, request);
+
+                var accessTokenRequest = new OAuthAccessTokenRequest();
+                accessTokenRequest.ClientSecret = auth.ClientSecret;
+                accessTokenRequest.Code = query["code"];
+                accessTokenRequest.RedirectURI = auth.RedirectURI;
+                authorization = this.GetOAuthAuthorization(accessTokenRequest);
+            }
+            else if (request is OAuthRequestToken)
+            {
+                query = this.ParseQueryString(responseURI.Fragment, "#");
+                this.EnsureOAuthStateEquals(query, request);
+
+                authorization = this.ParseOAuthAuthorization(query);
+            }
+            else
+            {
+                throw new ArgumentException("Invalid OAuthRequest Type", nameof(request));
+            }
+
+            return authorization;
+        }
+
+        public void EnsureOAuthStateEquals(NameValueCollection map, OAuthRequest request)
+        {
+            var requested = request.State;
+
+            if (requested == null)
+            {
+                return;
+            }
+
+            var responsed = map["state"];
+
+            if (requested.Equals(responsed) == false)
+            {
+                throw new TwitchException($"OAuth state mismatched - Request:{requested} vs Response:{responsed})");
+            }
+
+        }
+
+        private NameValueCollection ParseQueryString(string str, string prefix)
+        {
+            if (str.StartsWith(prefix) == true)
+            {
+                str = str.Substring(prefix.Length);
+            }
+
+            return HttpUtility.ParseQueryString(str);
+        }
+
+        public OAuthAuthorization GetOAuthAuthorization(OAuthAccessTokenRequest request)
         {
             var url = $"https://id.twitch.tv/oauth2/token";
             url += $"?client_id={this.ClientId}";
