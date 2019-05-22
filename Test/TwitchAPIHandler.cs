@@ -51,7 +51,7 @@ namespace TwitchAPI.Test
 
             if (responseURI != null)
             {
-                 this.OAuthAuthorization = crawler.GetOAuthAuthorization(responseURI, authRequest);
+                this.OAuthAuthorization = crawler.GetOAuthAuthorization(responseURI, authRequest);
                 return true;
             }
             else
