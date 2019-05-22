@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Windows.Forms;
@@ -40,20 +41,34 @@ namespace TwitchAPI.Test
 
             var responseURI = this.ResponseURI;
 
-            if (responseURI != null)
-            {
-                var authorization = this.Crawler.GetOAuthAuthorization(responseURI, authRequest);
-                user.SendMessage($"AccessToken = {authorization.AccessToken}");
-                user.SendMessage($"RefreshToken = {authorization.RefreshToken}");
-                user.SendMessage($"ExpiresIn = {authorization.ExpiresIn}");
-                user.SendMessage($"Scope = [{string.Join(", ", authorization.Scope)}]");
-                user.SendMessage($"TokenType = {authorization.TokenType}");
-            }
-            else
+            if (responseURI == null)
             {
                 user.SendMessage($"What's wrong?");
+                return;
             }
 
+            var authorization = crawler.GetOAuthAuthorization(responseURI, authRequest);
+            this.PrintAuthoriztion(user, authorization);
+
+            user.SendMessage($"Refresh OAuth after 5s");
+            Thread.Sleep(5000);
+            user.SendMessage($"Refresh OAuth start");
+
+            if (authorization.RefreshToken != null && authRequest is OAuthRequestAuthorization auth)
+            {
+                var refresh = crawler.RefreshOAuthAuthorization(authorization.RefreshToken, auth.ClientSecret);
+                this.PrintAuthoriztion(user, refresh);
+            }
+
+        }
+
+        private void PrintAuthoriztion(ConsoleUser user, OAuthAuthorization authorization)
+        {
+            user.SendMessage($"AccessToken = {authorization.AccessToken}");
+            user.SendMessage($"RefreshToken = {authorization.RefreshToken}");
+            user.SendMessage($"ExpiresIn = {authorization.ExpiresIn}");
+            user.SendMessage($"Scope = [{string.Join(", ", authorization.Scope)}]");
+            user.SendMessage($"TokenType = {authorization.TokenType}");
         }
 
         private OAuthRequest CreateRequest(ConsoleUser user)

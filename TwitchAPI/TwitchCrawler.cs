@@ -77,6 +77,26 @@ namespace TwitchAPI
             return authorization;
         }
 
+        public OAuthAuthorization RefreshOAuthAuthorization(string refreshToken, string clientSecret)
+        {
+            var url = $"https://id.twitch.tv/oauth2/token";
+            url += $"?grant_type=refresh_token";
+            url += $"&refresh_token={refreshToken}";
+            url += $"&client_id={this.ClientId}";
+            url += $"&client_secret={clientSecret}";
+
+            var req = this.CreateDefaultRequestParameter();
+            req.Method = "POST";
+            req.URL = url;
+
+            using (var res = this.Web.Request(req))
+            {
+                var jobj = this.EnsureNotError(res.ReadAsJSON(), "status", "message");
+                return this.ParseOAuthAuthorization(jobj);
+            }
+
+        }
+
         public void EnsureOAuthStateEquals(NameValueCollection map, OAuthRequest request)
         {
             var requested = request.State;
