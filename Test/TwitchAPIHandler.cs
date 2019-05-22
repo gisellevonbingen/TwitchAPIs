@@ -32,7 +32,8 @@ namespace TwitchAPI.Test
         {
             var user = this.User;
             var clientId = user.ReadInput("Enter Client-ID");
-            var crawler = this.Crawler = new TwitchCrawler(clientId);
+            var crawler = this.Crawler = new TwitchCrawler();
+            crawler.ClientId = clientId;
             var authRequest = this.OAuthRequest = this.CreateOAuthRequest(user);
             var authURI = this.OAuthURI = crawler.GetOAuthURI(authRequest);
 
@@ -51,7 +52,9 @@ namespace TwitchAPI.Test
 
             if (responseURI != null)
             {
-                this.OAuthAuthorization = crawler.GetOAuthAuthorization(responseURI, authRequest);
+                var oAuth = this.OAuthAuthorization = crawler.GetOAuthAuthorization(responseURI, authRequest);
+                crawler.AccessToken = oAuth.AccessToken;
+
                 return true;
             }
             else

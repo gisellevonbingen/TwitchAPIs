@@ -19,7 +19,9 @@ namespace TwitchAPI.Test
 
             if (authorization.RefreshToken != null && authRequest is OAuthRequestAuthorization auth)
             {
-                handler.OAuthAuthorization = crawler.RefreshOAuthAuthorization(authorization.RefreshToken, auth.ClientSecret);
+                var oAuth = handler.OAuthAuthorization = crawler.RefreshOAuthAuthorization(authorization.RefreshToken, auth.ClientSecret);
+                crawler.AccessToken = oAuth.AccessToken;
+
                 main.PrintAuthoriztion();
             }
 
