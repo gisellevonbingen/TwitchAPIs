@@ -159,7 +159,7 @@ namespace TwitchAPI
 
             if (forceVerify == true)
             {
-                url += $"&force_verify={forceVerify}";
+                url += $"&force_verify={forceVerify.ToString().ToLowerInvariant()}";
             }
 
             if (string.IsNullOrWhiteSpace(state) == false)
