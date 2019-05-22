@@ -138,7 +138,7 @@ namespace TwitchAPI.Web
 
         }
 
-        public HttpWebResponse Request(RequestParameter parameter)
+        public SessionResponse Request(RequestParameter parameter)
         {
             Exception lastException = null;
 
@@ -158,7 +158,7 @@ namespace TwitchAPI.Web
             throw new NetworkException("", lastException);
         }
 
-        private HttpWebResponse Request0(RequestParameter parameter)
+        private SessionResponse Request0(RequestParameter parameter)
         {
             HttpWebResponse response = null;
             Exception innerException = null;
@@ -181,8 +181,7 @@ namespace TwitchAPI.Web
                 if (response != null)
                 {
                     this.Cookies.Add(response.Cookies);
-
-                    return response;
+                    return new SessionResponse(response);
                 }
 
             }

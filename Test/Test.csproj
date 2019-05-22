@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EED766CC-4928-4EE4-96FA-F31D79229C1F}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <RootNamespace>TwitchAPI</RootNamespace>
-    <AssemblyName>TwitchAPI</AssemblyName>
+    <ProjectGuid>{7013285A-7AC1-4CA5-A829-428F69D9A64A}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>TwitchAPI.Test</RootNamespace>
+    <AssemblyName>TwitchAPI.Test</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -32,16 +32,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\Libs\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,29 +46,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccessTokenRequest.cs" />
-    <Compile Include="Authorization.cs" />
-    <Compile Include="AuthorizeRequest.cs" />
-    <Compile Include="FollowsType.cs" />
-    <Compile Include="JsonUtils.cs" />
-    <Compile Include="ObjectUtils.cs" />
+    <Compile Include="AbstractTest.cs" />
+    <Compile Include="AbstractUser.cs" />
+    <Compile Include="AuthorizeTest.cs" />
+    <Compile Include="ConsoleUser.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TwitchCrawler.cs" />
-    <Compile Include="TwitchException.cs" />
-    <Compile Include="TwitchFollower.cs" />
-    <Compile Include="TwitchFollowers.cs" />
-    <Compile Include="TwitchUser.cs" />
-    <Compile Include="UserRequest.cs" />
-    <Compile Include="UserType.cs" />
-    <Compile Include="Web\NetworkException.cs" />
-    <Compile Include="Web\ProxySettings.cs" />
-    <Compile Include="Web\RequestParameter.cs" />
-    <Compile Include="Web\RequestWriteEventArgs.cs" />
-    <Compile Include="Web\SessionResponse.cs" />
-    <Compile Include="Web\WebExplorer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TwitchAPI\TwitchAPI.csproj">
+      <Project>{eed766cc-4928-4ee4-96fa-f31d79229c1f}</Project>
+      <Name>TwitchAPI</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

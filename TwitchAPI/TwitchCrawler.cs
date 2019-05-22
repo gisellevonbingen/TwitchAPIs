@@ -14,24 +14,10 @@ namespace TwitchAPI
     {
         public WebExplorer Web { get; }
         public string ClientId { get; }
-        public string SecretKey { get; }
-
-        public TwitchCrawler(string clientId, string secretKey)
+        public TwitchCrawler(string clientId)
         {
             this.Web = new WebExplorer();
             this.ClientId = clientId;
-            this.SecretKey = secretKey;
-        }
-
-        public TwitchUser UpdateUser(string bearerAccessToken, string description)
-        {
-            var req = this.CreateDefaultRequestParameter();
-            req.Method = "PUT";
-            req.URL = $"https://api.twitch.tv/helix/users?description={description}";
-            req.Headers["Authorization"] = $"Bearer {bearerAccessToken}";
-
-            var jobj = this.GetResponseAsJson(req);
-            return this.ParseUser(jobj);
         }
 
         public Authorization ParseAuthorization(JToken jToken)
@@ -46,24 +32,57 @@ namespace TwitchAPI
             return authorization;
         }
 
-        public Authorization RefreshAuthorize(string accessToken)
+        public Authorization GetAccessToken(AccessTokenRequest request)
         {
+            var url = $"https://id.twitch.tv/oauth2/token";
+            url += $"?client_id={this.ClientId}";
+            url += $"&client_secret={request.ClientSecret}";
+            url += $"&code={request.Code}";
+            url += $"&grant_type=authorization_code";
+            url += $"&redirect_uri={request.RedirectURI}";
+
             var req = this.CreateDefaultRequestParameter();
             req.Method = "POST";
-            req.URL = $"https://id.twitch.tv/oauth2/token?grant_type=refresh_token&refresh_token={accessToken}&client_id=${this.ClientId}&client_secret={this.SecretKey}";
+            req.URL = url;
 
-            var jobj = this.GetResponseAsJson(req);
-            return this.ParseAuthorization(jobj);
+            using (var res = this.Web.Request(req))
+            {
+                var jobj = this.EnsureNotError(res.ReadAsJSON(), "status", "message");
+                return this.ParseAuthorization(jobj);
+            }
+
         }
 
-        public Authorization Authorize(string scope)
+        public string GetAuthorizeURI(AuthorizeRequest request)
         {
-            var req = this.CreateDefaultRequestParameter();
-            req.Method = "POST";
-            req.URL = $"https://id.twitch.tv/oauth2/token?client_id={this.ClientId}&client_secret={this.SecretKey}&grant_type=client_credentials&scope={scope}";
+            var url = "https://id.twitch.tv/oauth2/authorize";
+            url += $"?client_id={this.ClientId}";
+            url += $"&response_type=code";
+            url += $"&redirect_uri={request.RedirectURI}";
+            url += $"&scope={request.Scope}";
 
-            var jobj = this.GetResponseAsJson(req);
-            return this.ParseAuthorization(jobj);
+            var forceVerify = request.ForceVerify;
+            var state = request.State;
+
+            if (forceVerify == true)
+            {
+                url += $"&force_verify={forceVerify}";
+            }
+
+            if (string.IsNullOrWhiteSpace(state) == false)
+            {
+                url += $"&state={state}";
+            }
+
+            var req = this.CreateDefaultRequestParameter();
+            req.Method = "GET";
+            req.URL = url;
+
+            using (var res = this.Web.Request(req))
+            {
+                return res.Impl.ResponseUri.AbsoluteUri;
+            }
+
         }
 
         public TwitchFollowers GetUserFollows(FollowsType type, string id)
@@ -81,25 +100,29 @@ namespace TwitchAPI
                 req.URL += "&after=" + cursor;
             }
 
-            var jobj = this.GetResponseAsJson(req);
-            var data = jobj.Value<JArray>("data");
-
-            var followers = new TwitchFollowers();
-            followers.Total = jobj.Value<int>("total");
-            followers.Cursor = jobj["pagination"].Value<string>("cursor");
-
-            for (int i = 0; i < data.Count; i++)
+            using (var res = this.Web.Request(req))
             {
-                var token = data[i];
-                var follower = new TwitchFollower();
-                follower.Id = token.Value<string>(type.Response + "_id");
-                follower.DisplayName = token.Value<string>(type.Response + "_name");
-                follower.FollowedAt = token.Value<DateTime>("followed_at");
+                var jobj = this.EnsureNotError(res.ReadAsJSON());
+                var data = jobj.Value<JArray>("data");
 
-                followers.Followers.Add(follower);
+                var followers = new TwitchFollowers();
+                followers.Total = jobj.Value<int>("total");
+                followers.Cursor = jobj["pagination"].Value<string>("cursor");
+
+                for (int i = 0; i < data.Count; i++)
+                {
+                    var token = data[i];
+                    var follower = new TwitchFollower();
+                    follower.Id = token.Value<string>(type.Response + "_id");
+                    follower.DisplayName = token.Value<string>(type.Response + "_name");
+                    follower.FollowedAt = token.Value<DateTime>("followed_at");
+
+                    followers.Followers.Add(follower);
+                }
+
+                return followers;
             }
 
-            return followers;
         }
 
         public TwitchUser GetUser(UserRequest request)
@@ -113,19 +136,23 @@ namespace TwitchAPI
             var req = this.CreateDefaultRequestParameter();
             req.URL = $"https://api.twitch.tv/helix/users?{string.Join("&", requests)}";
 
-            var jobj = this.GetResponseAsJson(req);
-            var data = (JArray)jobj["data"];
-            var count = data.Count;
-            var users = new List<TwitchUser>();
-
-            for (int i = 0; i < count; i++)
+            using (var res = this.Web.Request(req))
             {
-                var token = data[i];
-                var user = this.ParseUser(token);
-                users.Add(user);
+                var jobj = this.EnsureNotError(res.ReadAsJSON());
+                var data = (JArray)jobj["data"];
+                var count = data.Count;
+                var users = new List<TwitchUser>();
+
+                for (int i = 0; i < count; i++)
+                {
+                    var token = data[i];
+                    var user = this.ParseUser(token);
+                    users.Add(user);
+                }
+
+                return users;
             }
 
-            return users;
         }
 
         private TwitchUser ParseUser(JToken token)
@@ -144,38 +171,22 @@ namespace TwitchAPI
             return user;
         }
 
-        public string GetResponseAsString(RequestParameter request)
+        public JToken EnsureNotError(JToken token, string checkKey, string messageKey)
         {
-            using (var response = this.Web.Request(request))
-            {
-                using (var stream = response.GetResponseStream())
-                {
-                    using (var reader = new StreamReader(stream))
-                    {
-                        var content = reader.ReadToEnd();
-                        return content;
-                    }
-
-                }
-
-            }
-
-        }
-
-        public JObject GetResponseAsJson(RequestParameter request)
-        {
-            var content = this.GetResponseAsString(request);
-            var jobj = JObject.Parse(content);
-
-            var error = jobj.Value<string>("error");
+            var error = token.Value<string>(checkKey);
 
             if (error != null)
             {
-                var message = jobj.Value<string>("message");
+                var message = token.Value<string>(messageKey);
                 throw new TwitchException(message);
             }
 
-            return jobj;
+            return token;
+        }
+
+        public JToken EnsureNotError(JToken token)
+        {
+            return this.EnsureNotError(token, "error", "message");
         }
 
         public RequestParameter CreateDefaultRequestParameter()
