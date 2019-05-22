@@ -97,7 +97,7 @@ namespace TwitchAPI.Test
 
             request.RedirectURI = user.ReadInput("Enter RedirectURI");
             request.Scope = user.ReadInput("Enter Scope");
-            request.ForceVerify = true;
+            request.ForceVerify = false;
             request.State = Guid.NewGuid().ToString().Replace("-", "");
 
             return request;
