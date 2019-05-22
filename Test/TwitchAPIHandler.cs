@@ -96,7 +96,7 @@ namespace TwitchAPI.Test
             }
 
             request.RedirectURI = user.ReadInput("Enter RedirectURI");
-            request.Scope = "chat:read";
+            request.Scope = user.ReadInput("Enter Scope");
             request.ForceVerify = true;
             request.State = Guid.NewGuid().ToString().Replace("-", "");
 
