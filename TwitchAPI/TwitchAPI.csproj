@@ -64,8 +64,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TwitchCrawler.cs" />
     <Compile Include="TwitchException.cs" />
-    <Compile Include="TwitchFollower.cs" />
-    <Compile Include="TwitchFollowers.cs" />
+    <Compile Include="TwitchFollow.cs" />
+    <Compile Include="TwitchUserFollows.cs" />
     <Compile Include="TwitchUser.cs" />
     <Compile Include="UserRequest.cs" />
     <Compile Include="UserType.cs" />

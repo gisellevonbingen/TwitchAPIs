@@ -59,6 +59,7 @@ namespace TwitchAPI.Test
             var user = this.User;
 
             var tests = new List<TestAbstract>();
+            tests.Add(new TestGetUserFollows());
             tests.Add(new TestRefreshOAuthAuthorization());
 
             while (true)
@@ -67,18 +68,9 @@ namespace TwitchAPI.Test
                 user.SendMessage();
 
                 var input = user.QueryInput("Enter Test number", tests.Select(t => t.GetType().Name).ToArray());
-
-                if (input != -1)
-                {
-                    var test = tests[input];
-                    user.SendMessage("Test - " + test.GetType().Name);
-                    test.Run(this);
-                }
-                else
-                {
-                    continue;
-                }
-
+                var test = tests[input];
+                user.SendMessage("Test - " + test.GetType().Name);
+                test.Run(this);
             }
 
         }

@@ -178,12 +178,12 @@ namespace TwitchAPI
 
         }
 
-        public TwitchFollowers GetUserFollows(FollowsType type, string id)
+        public TwitchUserFollows GetUserFollows(FollowsType type, string id)
         {
             return this.GetUserFollows(type, id, null);
         }
 
-        public TwitchFollowers GetUserFollows(FollowsType type, string id, string cursor)
+        public TwitchUserFollows GetUserFollows(FollowsType type, string id, string cursor)
         {
             var req = this.CreateDefaultRequestParameter();
             req.Method = "GET";
@@ -199,19 +199,19 @@ namespace TwitchAPI
                 var jobj = this.EnsureNotError(res.ReadAsJSON());
                 var data = jobj.Value<JArray>("data");
 
-                var followers = new TwitchFollowers();
+                var followers = new TwitchUserFollows();
                 followers.Total = jobj.Value<int>("total");
                 followers.Cursor = jobj["pagination"].Value<string>("cursor");
 
                 for (int i = 0; i < data.Count; i++)
                 {
                     var token = data[i];
-                    var follower = new TwitchFollower();
+                    var follower = new TwitchFollow();
                     follower.Id = token.Value<string>(type.Response + "_id");
                     follower.DisplayName = token.Value<string>(type.Response + "_name");
                     follower.FollowedAt = token.Value<DateTime>("followed_at");
 
-                    followers.Followers.Add(follower);
+                    followers.Follows.Add(follower);
                 }
 
                 return followers;
