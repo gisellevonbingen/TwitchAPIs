@@ -19,7 +19,6 @@ namespace TwitchAPI.Test
             var user = main.User;
             var handler = main.TwitchAPIHandler;
 
-
             var followsTypes = new Dictionary<FollowsType, string>
             {
                 { FollowsType.From ,"XXX followed from id, Followings" },
