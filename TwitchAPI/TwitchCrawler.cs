@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,21 @@ namespace TwitchAPI
             this.ClientId = clientId;
         }
 
-        public Authorization ParseAuthorization(JToken jToken)
+        public OAuthAuthorization ParseOAuthAuthorization(NameValueCollection map)
         {
-            var authorization = new Authorization();
+            var authorization = new OAuthAuthorization();
+            authorization.AccessToken = map["access_token"];
+            authorization.RefreshToken = map["refresh_token"];
+            authorization.ExpiresIn = NumberUtils.ToInt(map["expires_in"]);
+            authorization.Scope = new string[] { map["scope"] };
+            authorization.TokenType = map["token_type"];
+
+            return authorization;
+        }
+
+        public OAuthAuthorization ParseOAuthAuthorization(JToken jToken)
+        {
+            var authorization = new OAuthAuthorization();
             authorization.AccessToken = jToken.Value<string>("access_token");
             authorization.RefreshToken = jToken.Value<string>("refresh_token");
             authorization.ExpiresIn = jToken.Value<int>("expires_in");
@@ -32,7 +45,7 @@ namespace TwitchAPI
             return authorization;
         }
 
-        public Authorization GetAccessToken(AccessTokenRequest request)
+        public OAuthAuthorization GetOAuthAccessToken(OAuthAccessTokenRequest request)
         {
             var url = $"https://id.twitch.tv/oauth2/token";
             url += $"?client_id={this.ClientId}";
@@ -48,16 +61,16 @@ namespace TwitchAPI
             using (var res = this.Web.Request(req))
             {
                 var jobj = this.EnsureNotError(res.ReadAsJSON(), "status", "message");
-                return this.ParseAuthorization(jobj);
+                return this.ParseOAuthAuthorization(jobj);
             }
 
         }
 
-        public string GetAuthorizeURI(AuthorizeRequest request)
+        public string GetOAuthURI(OAuthRequest request)
         {
             var url = "https://id.twitch.tv/oauth2/authorize";
             url += $"?client_id={this.ClientId}";
-            url += $"&response_type=code";
+            url += $"&response_type={request.ResponseType}";
             url += $"&redirect_uri={request.RedirectURI}";
             url += $"&scope={request.Scope}";
 
@@ -93,6 +106,7 @@ namespace TwitchAPI
         public TwitchFollowers GetUserFollows(FollowsType type, string id, string cursor)
         {
             var req = this.CreateDefaultRequestParameter();
+            req.Method = "GET";
             req.URL = $"https://api.twitch.tv/helix/users/follows?{type.Request}_id={id}";
 
             if (cursor != null)
@@ -134,6 +148,7 @@ namespace TwitchAPI
         public List<TwitchUser> GetUsers(IEnumerable<UserRequest> requests)
         {
             var req = this.CreateDefaultRequestParameter();
+            req.Method = "GET";
             req.URL = $"https://api.twitch.tv/helix/users?{string.Join("&", requests)}";
 
             using (var res = this.Web.Request(req))
@@ -192,7 +207,6 @@ namespace TwitchAPI
         public RequestParameter CreateDefaultRequestParameter()
         {
             var rp = new RequestParameter();
-            rp.Method = "GET";
             rp.Headers["Client-Id"] = this.ClientId;
 
             return rp;

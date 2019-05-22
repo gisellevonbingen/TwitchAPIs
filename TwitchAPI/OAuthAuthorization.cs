@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TwitchAPI
 {
-    public class Authorization
+    public class OAuthAuthorization
     {
         public string AccessToken { get; set; }
 
@@ -18,7 +18,7 @@ namespace TwitchAPI
 
         public string TokenType { get; set; }
 
-        public Authorization()
+        public OAuthAuthorization()
         {
 
         }
