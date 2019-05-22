@@ -11,15 +11,16 @@ namespace TwitchAPI.Test
         public override void Run(TestMain main)
         {
             var user = main.User;
+            var handler = main.TwitchAPIHandler;
 
-            var crawler = main.Crawler;
-            var authRequest = main.OAuthRequest;
-            var authorization = main.OAuthAuthorization;
+            var crawler = handler.Crawler;
+            var authRequest = handler.OAuthRequest;
+            var authorization = handler.OAuthAuthorization;
 
             if (authorization.RefreshToken != null && authRequest is OAuthRequestAuthorization auth)
             {
-                var refresh = main.OAuthAuthorization = crawler.RefreshOAuthAuthorization(authorization.RefreshToken, auth.ClientSecret);
-                main.PrintAuthoriztion(user, refresh);
+                handler.OAuthAuthorization = crawler.RefreshOAuthAuthorization(authorization.RefreshToken, auth.ClientSecret);
+                main.PrintAuthoriztion();
             }
 
         }

@@ -50,8 +50,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AbstractUser.cs" />
-    <Compile Include="ConsoleUser.cs" />
+    <Compile Include="TwitchAPIHandler.cs" />
+    <Compile Include="UserAbstract.cs" />
+    <Compile Include="UserConsole.cs" />
+    <Compile Include="UserFile.cs" />
     <Compile Include="TestAbstract.cs" />
     <Compile Include="TestMain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

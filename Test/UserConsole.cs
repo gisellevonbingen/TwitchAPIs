@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TwitchAPI.Test
 {
-    public class ConsoleUser : AbstractUser
+    public class UserConsole : UserAbstract
     {
         public override void SendMessage()
         {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TwitchAPI.Test
 {
-    public abstract class AbstractUser
+    public abstract class UserAbstract
     {
         public abstract void SendMessage();
 
