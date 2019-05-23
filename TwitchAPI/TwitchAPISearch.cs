@@ -14,6 +14,36 @@ namespace TwitchAPI
 
         }
 
+        public TwitchGame[] SearchGames(string query, bool? live = null)
+        {
+            var url = $"https://api.twitch.tv/kraken/search/games?query={query}";
+
+            if (live.HasValue == true)
+            {
+                url += $"&live={live.Value}";
+            }
+
+            using (var res = this.Parent.Request(APIVersion.V5, url, "GET"))
+            {
+                var token = res.ReadAsJSON();
+                return this.ParseGames((JArray)token["games"]);
+            }
+
+        }
+
+        public TwitchGame[] ParseGames(JArray arrayToken)
+        {
+            var values = new TwitchGame[arrayToken.Count];
+
+            for (int i = 0; i < values.Length; i++)
+            {
+                var itemToken = arrayToken[i];
+                values[i] = new TwitchGame().Read(itemToken);
+            }
+
+            return values;
+        }
+
         public TwitchChannel[] SearchChannels(string query, int? limit = null, int? offset = null)
         {
             var url = $"https://api.twitch.tv/kraken/search/channels?query={query}";

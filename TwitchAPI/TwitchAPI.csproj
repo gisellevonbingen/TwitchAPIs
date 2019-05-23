@@ -73,6 +73,8 @@
     <Compile Include="TwitchChannel.cs" />
     <Compile Include="TwitchException.cs" />
     <Compile Include="TwitchFollow.cs" />
+    <Compile Include="TwitchGame.cs" />
+    <Compile Include="TwitchImageSet.cs" />
     <Compile Include="TwitchUserFollows.cs" />
     <Compile Include="TwitchUser.cs" />
     <Compile Include="UserRequest.cs" />

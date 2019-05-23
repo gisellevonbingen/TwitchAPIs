@@ -20,11 +20,31 @@ namespace TwitchAPI.Test
 
             var methods = new List<Tuple<string, Action<TestMain>>>();
             methods.Add(new Tuple<string, Action<TestMain>>(nameof(this.TestChannels), this.TestChannels));
+            methods.Add(new Tuple<string, Action<TestMain>>(nameof(this.TestGames), this.TestGames));
 
             var index = user.QueryInput("Enter SearchType", methods.Select(t => t.Item1));
             var tuple = methods[index];
 
             tuple.Item2(main);
+        }
+
+        public void TestGames(TestMain main)
+        {
+            var user = main.User;
+            var handler = main.TwitchAPIHandler;
+
+            string query = user.ReadInput("Enter Query");
+            bool? live = NumberUtils.ToBoolNullable(user.ReadInput("Enter Live"));
+
+            var games = handler.API.Search.SearchGames(query, live);
+            user.SendMessage("Games Count : " + games.Length);
+
+            for (int i = 0; i < games.Length; i++)
+            {
+                var game = games[i];
+                main.PrintReflection(user, $"{i} / {games.Length}", game);
+            }
+
         }
 
         public void TestChannels(TestMain main)
