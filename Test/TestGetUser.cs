@@ -45,7 +45,8 @@ namespace TwitchAPI.Test
             for (int i = 0; i < users.Count; i++)
             {
                 var u = users[i];
-                user.SendMessage($"{i} - {u.DisplayName}({u.Login}, {u.Id}), BroadcasterType={u.BroadcasterType}, Type={u.Type}");
+                user.SendMessage($"{i} / {users.Count}");
+                main.PrintUser(user, u);
             }
 
         }

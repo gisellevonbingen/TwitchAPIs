@@ -24,6 +24,19 @@ namespace TwitchAPI
             this.AccessToken = null;
         }
 
+        public TwitchUser UpdateUser(string description)
+        {
+            var req = new RequestParameter();
+            req.Method = "PUT";
+            req.URL = $"https://api.twitch.tv/helix/users?description={HttpUtility.UrlEncode(description)}";
+
+            using (var res = this.Request(req))
+            {
+               return this.ParseUsers(res.ReadAsJSON()).FirstOrDefault();
+            }
+
+        }
+
         public OAuthAuthorization ParseOAuthAuthorization(NameValueCollection map)
         {
             var authorization = new OAuthAuthorization();
@@ -38,6 +51,8 @@ namespace TwitchAPI
 
         public OAuthAuthorization ParseOAuthAuthorization(JToken jToken)
         {
+            this.EnsureNotError(jToken, "status", "message");
+
             var authorization = new OAuthAuthorization();
             authorization.AccessToken = jToken.Value<string>("access_token");
             authorization.RefreshToken = jToken.Value<string>("refresh_token");
@@ -94,8 +109,7 @@ namespace TwitchAPI
 
             using (var res = this.Request(req))
             {
-                var jobj = this.EnsureNotError(res.ReadAsJSON(), "status", "message");
-                return this.ParseOAuthAuthorization(jobj);
+                return this.ParseOAuthAuthorization(res.ReadAsJSON());
             }
 
         }
@@ -143,8 +157,7 @@ namespace TwitchAPI
 
             using (var res = this.Request(req))
             {
-                var jobj = this.EnsureNotError(res.ReadAsJSON(), "status", "message");
-                return this.ParseOAuthAuthorization(jobj);
+                return this.ParseOAuthAuthorization(res.ReadAsJSON());
             }
 
         }
@@ -236,21 +249,27 @@ namespace TwitchAPI
 
             using (var res = this.Request(req))
             {
-                var jobj = this.EnsureNotError(res.ReadAsJSON());
-                var data = (JArray)jobj["data"];
-                var count = data.Count;
-                var users = new List<TwitchUser>();
-
-                for (int i = 0; i < count; i++)
-                {
-                    var token = data[i];
-                    var user = this.ParseUser(token);
-                    users.Add(user);
-                }
-
-                return users;
+                return this.ParseUsers(res.ReadAsJSON());
             }
 
+        }
+
+        private List<TwitchUser> ParseUsers(JToken token)
+        {
+            this.EnsureNotError(token);
+
+            var data = (JArray)token["data"];
+            var count = data.Count;
+            var users = new List<TwitchUser>();
+
+            for (int i = 0; i < count; i++)
+            {
+                var itemToken = data[i];
+                var user = this.ParseUser(itemToken);
+                users.Add(user);
+            }
+
+            return users;
         }
 
         private TwitchUser ParseUser(JToken token)

@@ -60,6 +60,7 @@ namespace TwitchAPI.Test
 
             var tests = new List<TestAbstract>();
             tests.Add(new TestGetUser());
+            tests.Add(new TestUpdateUser());
             tests.Add(new TestGetUserFollows());
             tests.Add(new TestRefreshOAuthAuthorization());
 
@@ -89,6 +90,23 @@ namespace TwitchAPI.Test
         {
             this.PrintAuthoriztion(this.User, this.TwitchAPIHandler.OAuthAuthorization);
         }
+
+        public void PrintUser(UserAbstract user, TwitchUser tuser)
+        {
+            user.SendMessage();
+            user.SendMessage("== TwitchUser ==");
+            user.SendMessage($"    BroadcasterType = {tuser.BroadcasterType}");
+            user.SendMessage($"    Description = {tuser.Description}");
+            user.SendMessage($"    DisplayName = {tuser.DisplayName}");
+            user.SendMessage($"    Email = {tuser.Email}");
+            user.SendMessage($"    Id = {tuser.Id}");
+            user.SendMessage($"    Login = {tuser.Login}");
+            user.SendMessage($"    OfflineImageUrl = {tuser.OfflineImageUrl}");
+            user.SendMessage($"    ProfileImageUrl = {tuser.ProfileImageUrl}");
+            user.SendMessage($"    Type = {tuser.Type}");
+            user.SendMessage($"    ViewCount = {tuser.ViewCount}");
+        }
+
 
         public void PrintAuthoriztion(UserAbstract user, OAuthAuthorization authorization)
         {
