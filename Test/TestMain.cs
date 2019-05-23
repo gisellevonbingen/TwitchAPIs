@@ -115,7 +115,7 @@ namespace TwitchAPI.Test
             user.SendMessage($"    AccessToken = {authorization.AccessToken}");
             user.SendMessage($"    RefreshToken = {authorization.RefreshToken}");
             user.SendMessage($"    ExpiresIn = {authorization.ExpiresIn}");
-            user.SendMessage($"    Scope = [{string.Join(", ", authorization.Scope)}]");
+            user.SendMessage($"    Scope = [{string.Join(", ", authorization.Scope ?? new string[0])}]");
             user.SendMessage($"    TokenType = {authorization.TokenType}");
         }
 
