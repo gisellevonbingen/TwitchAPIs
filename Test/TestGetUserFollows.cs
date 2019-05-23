@@ -29,14 +29,14 @@ namespace TwitchAPI.Test
             var input = user.QueryInput("Enter FollowsType", followsTypes.Select(pair => pair.Value).ToArray());
             var followsType = followsTypes[input].Key;
 
-            var crawler = handler.Crawler;
+            var api = handler.API;
             string cursor = null;
 
             int index = 0;
 
             while (true)
             {
-                var userFollows = crawler.User.GetUserFollows(followsType, userId, cursor);
+                var userFollows = api.User.GetUserFollows(followsType, userId, cursor);
                 var follows = userFollows.Follows;
 
                 user.SendMessage($"Total : {userFollows.Total}");

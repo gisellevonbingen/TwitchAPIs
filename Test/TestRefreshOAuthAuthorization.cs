@@ -13,14 +13,14 @@ namespace TwitchAPI.Test
             var user = main.User;
             var handler = main.TwitchAPIHandler;
 
-            var crawler = handler.Crawler;
+            var api = handler.API;
             var authRequest = handler.OAuthRequest;
             var authorization = handler.OAuthAuthorization;
 
             if (authorization.RefreshToken != null && authRequest is OAuthRequestAuthorization auth)
             {
-                var oAuth = handler.OAuthAuthorization = crawler.Authorization.RefreshOAuthAuthorization(authorization.RefreshToken, auth.ClientSecret);
-                crawler.AccessToken = oAuth.AccessToken;
+                var oAuth = handler.OAuthAuthorization = api.Authorization.RefreshOAuthAuthorization(authorization.RefreshToken, auth.ClientSecret);
+                api.AccessToken = oAuth.AccessToken;
 
                 main.PrintAuthoriztion();
             }

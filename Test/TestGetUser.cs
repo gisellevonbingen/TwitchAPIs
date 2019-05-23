@@ -37,8 +37,8 @@ namespace TwitchAPI.Test
                 requests.Add(request);
             }
 
-            var crawler = handler.Crawler;
-            var users = crawler.User.GetUsers(requests);
+            var api = handler.API;
+            var users = api.User.GetUsers(requests);
 
             user.SendMessage("Users Count : " + users.Count);
 
