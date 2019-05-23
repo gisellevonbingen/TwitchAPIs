@@ -11,11 +11,11 @@ namespace TwitchAPI
     {
         public int Total { get; set; }
         public string Cursor { get; set; }
-        public List<TwitchFollow> Follows { get; }
+        public TwitchFollow[] Follows { get; set; }
 
         public TwitchUserFollows()
         {
-            this.Follows = new List<TwitchFollow>();
+
         }
 
     }

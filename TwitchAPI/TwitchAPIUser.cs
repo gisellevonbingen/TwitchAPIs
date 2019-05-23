@@ -46,20 +46,20 @@ namespace TwitchAPI
                 var jobj = this.Parent.EnsureNotError(res.ReadAsJSON());
                 var data = jobj.Value<JArray>("data");
 
-                var followers = new TwitchUserFollows();
-                followers.Total = jobj.Value<int>("total");
-                followers.Cursor = jobj["pagination"].Value<string>("cursor");
+                var uerFollows = new TwitchUserFollows();
+                uerFollows.Total = jobj.Value<int>("total");
+                uerFollows.Cursor = jobj["pagination"].Value<string>("cursor");
+
+                var follows = uerFollows.Follows = new TwitchFollow[data.Count];
 
                 for (int i = 0; i < data.Count; i++)
                 {
                     var token = data[i];
-                    var follower = new TwitchFollow();
-                    follower.Read(token, type);
-
-                    followers.Follows.Add(follower);
+                    var follow = follows[i] = new TwitchFollow();
+                    follow.Read(token, type);
                 }
 
-                return followers;
+                return uerFollows;
             }
 
         }
@@ -70,7 +70,7 @@ namespace TwitchAPI
             return users.FirstOrDefault();
         }
 
-        public List<TwitchUser> GetUsers(IEnumerable<UserRequest> requests)
+        public TwitchUser[] GetUsers(IEnumerable<UserRequest> requests)
         {
             var url = $"https://api.twitch.tv/helix/users?{string.Join("&", requests)}";
 
@@ -81,20 +81,25 @@ namespace TwitchAPI
 
         }
 
-        public List<TwitchUser> ParseUsers(JToken token)
+        public TwitchUser[] ParseUsers(JToken token)
         {
             this.Parent.EnsureNotError(token);
 
-            var data = (JArray)token["data"];
+            var data = token["data"] as JArray;
+
+            if (data == null)
+            {
+                return new TwitchUser[0];
+            }
+
             var count = data.Count;
-            var users = new List<TwitchUser>();
+            var users = new TwitchUser[count];
 
             for (int i = 0; i < count; i++)
             {
                 var itemToken = data[i];
-                var user = new TwitchUser();
+                var user = users[i] = new TwitchUser();
                 user.Read(itemToken);
-                users.Add(user);
             }
 
             return users;
