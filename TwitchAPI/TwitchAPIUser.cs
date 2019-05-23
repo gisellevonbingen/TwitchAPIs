@@ -54,9 +54,7 @@ namespace TwitchAPI
                 {
                     var token = data[i];
                     var follower = new TwitchFollow();
-                    follower.Id = token.Value<string>(type.Response + "_id");
-                    follower.DisplayName = token.Value<string>(type.Response + "_name");
-                    follower.FollowedAt = token.Value<DateTime>("followed_at");
+                    follower.Read(token, type);
 
                     followers.Follows.Add(follower);
                 }
@@ -94,28 +92,12 @@ namespace TwitchAPI
             for (int i = 0; i < count; i++)
             {
                 var itemToken = data[i];
-                var user = this.ParseUser(itemToken);
+                var user = new TwitchUser();
+                user.Read(itemToken);
                 users.Add(user);
             }
 
             return users;
-        }
-
-        public TwitchUser ParseUser(JToken token)
-        {
-            var user = new TwitchUser();
-            user.BroadcasterType = token.Value<string>("broadcaster_type");
-            user.Description = token.Value<string>("description");
-            user.DisplayName = token.Value<string>("display_name");
-            user.Email = token.Value<string>("email");
-            user.Id = token.Value<string>("id");
-            user.Login = token.Value<string>("login");
-            user.OfflineImageUrl = token.Value<string>("offline_image_url");
-            user.ProfileImageUrl = token.Value<string>("profile_image_url");
-            user.Type = token.Value<string>("type");
-            user.ViewCount = token.Value<int>("view_count");
-
-            return user;
         }
 
     }

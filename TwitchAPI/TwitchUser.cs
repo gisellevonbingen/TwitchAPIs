@@ -25,6 +25,20 @@ namespace TwitchAPI
 
         }
 
+        public void Read(JToken token)
+        {
+            this.BroadcasterType = token.Value<string>("broadcaster_type");
+            this.Description = token.Value<string>("description");
+            this.DisplayName = token.Value<string>("display_name");
+            this.Email = token.Value<string>("email");
+            this.Id = token.Value<string>("id");
+            this.Login = token.Value<string>("login");
+            this.OfflineImageUrl = token.Value<string>("offline_image_url");
+            this.ProfileImageUrl = token.Value<string>("profile_image_url");
+            this.Type = token.Value<string>("type");
+            this.ViewCount = token.Value<int>("view_count");
+        }
+
     }
 
 }
