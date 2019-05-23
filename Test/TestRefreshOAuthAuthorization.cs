@@ -22,7 +22,7 @@ namespace TwitchAPI.Test
                 var oAuth = handler.OAuthAuthorization = api.Authorization.RefreshOAuthAuthorization(authorization.RefreshToken, auth.ClientSecret);
                 api.AccessToken = oAuth.AccessToken;
 
-                main.PrintAuthoriztion();
+                main.PrintReflection(user, "Refreshed OAuthAuthorization", oAuth);
             }
 
         }

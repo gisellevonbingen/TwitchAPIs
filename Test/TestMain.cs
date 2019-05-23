@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -37,7 +39,7 @@ namespace TwitchAPI.Test
                 return;
             }
 
-            this.PrintAuthoriztion();
+            this.PrintReflection(user, "Current OAuthAuthorization", handler.OAuthAuthorization);
             this.RunTest();
         }
 
@@ -63,6 +65,7 @@ namespace TwitchAPI.Test
             tests.Add(new TestUpdateUser());
             tests.Add(new TestGetUserFollows());
             tests.Add(new TestRefreshOAuthAuthorization());
+            tests.Add(new TestSearch());
 
             while (true)
             {
@@ -86,37 +89,45 @@ namespace TwitchAPI.Test
 
         }
 
-        public void PrintAuthoriztion()
-        {
-            this.PrintAuthoriztion(this.User, this.TwitchAPIHandler.OAuthAuthorization);
-        }
-
-        public void PrintUser(UserAbstract user, TwitchUser tuser)
+        public void PrintReflection<T>(UserAbstract user, string name, T value)
         {
             user.SendMessage();
-            user.SendMessage("== TwitchUser ==");
-            user.SendMessage($"    BroadcasterType = {tuser.BroadcasterType}");
-            user.SendMessage($"    Description = {tuser.Description}");
-            user.SendMessage($"    DisplayName = {tuser.DisplayName}");
-            user.SendMessage($"    Email = {tuser.Email}");
-            user.SendMessage($"    Id = {tuser.Id}");
-            user.SendMessage($"    Login = {tuser.Login}");
-            user.SendMessage($"    OfflineImageUrl = {tuser.OfflineImageUrl}");
-            user.SendMessage($"    ProfileImageUrl = {tuser.ProfileImageUrl}");
-            user.SendMessage($"    Type = {tuser.Type}");
-            user.SendMessage($"    ViewCount = {tuser.ViewCount}");
+            user.SendMessage($"== {name} ==");
+            user.SendMessage($"    Is Null = {value == null}");
+
+            if (value != null)
+            {
+                var type = value.GetType();
+                user.SendMessage($"    Type.FullName = {type.FullName}");
+                var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.GetProperty);
+                user.SendMessage($"    Properties.Length = {properties.Length}");
+
+                for (int i = 0; i < properties.Length; i++)
+                {
+                    var property = properties[i];
+                    user.SendMessage($"    {property.Name} = {this.ToString(property.GetValue(value))}");
+                }
+
+            }
+
         }
 
-
-        public void PrintAuthoriztion(UserAbstract user, OAuthAuthorization authorization)
+        public object ToString(object obj)
         {
-            user.SendMessage();
-            user.SendMessage("== OAuthAuthorization ==");
-            user.SendMessage($"    AccessToken = {authorization.AccessToken}");
-            user.SendMessage($"    RefreshToken = {authorization.RefreshToken}");
-            user.SendMessage($"    ExpiresIn = {authorization.ExpiresIn}");
-            user.SendMessage($"    Scope = [{string.Join(", ", authorization.Scope ?? new string[0])}]");
-            user.SendMessage($"    TokenType = {authorization.TokenType}");
+            if (obj == null)
+            {
+                return "{null}";
+            }
+            else if (obj is Array arry)
+            {
+                return $"[{string.Join(", ", (object[]) arry)}]";
+            }
+            else
+            {
+                var toString = obj.ToString();
+                return $"'{toString}'";
+            }
+
         }
 
     }

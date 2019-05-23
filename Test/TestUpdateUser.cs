@@ -21,7 +21,7 @@ namespace TwitchAPI.Test
             var description = user.ReadInput("Enter Descrption");
             var tuser = handler.API.User.UpdateUser(description);
 
-            main.PrintUser(user, tuser);
+            main.PrintReflection(user, "Updated User", tuser);
         }
 
     }
