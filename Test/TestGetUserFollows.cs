@@ -26,7 +26,7 @@ namespace TwitchAPI.Test
             }.ToArray();
 
             var userId = user.ReadInput("UserId");
-            var input = user.QueryInput("Enter FollowsType", followsTypes.Select(pair => pair.Value).ToArray());
+            var input = user.QueryInput("Enter FollowsType", followsTypes.Select(pair => pair.Value));
             var followsType = followsTypes[input].Key;
 
             var api = handler.API;
