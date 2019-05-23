@@ -36,7 +36,7 @@ namespace TwitchAPI.Test
 
             while (true)
             {
-                var userFollows = crawler.GetUserFollows(followsType, userId, cursor);
+                var userFollows = crawler.User.GetUserFollows(followsType, userId, cursor);
                 var follows = userFollows.Follows;
 
                 user.SendMessage($"Total : {userFollows.Total}");

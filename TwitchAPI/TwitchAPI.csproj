@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HttpUtility2.cs" />
     <Compile Include="NumberUtils.cs" />
     <Compile Include="OAuthAccessTokenRequest.cs" />
     <Compile Include="OAuthAuthorization.cs" />
@@ -62,7 +63,10 @@
     <Compile Include="OAuthResponseType.cs" />
     <Compile Include="ObjectUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TwitchCrawler.cs" />
+    <Compile Include="TwitchAPI.cs" />
+    <Compile Include="TwitchAPIAuthorization.cs" />
+    <Compile Include="TwitchAPIPart.cs" />
+    <Compile Include="TwitchAPIUser.cs" />
     <Compile Include="TwitchException.cs" />
     <Compile Include="TwitchFollow.cs" />
     <Compile Include="TwitchUserFollows.cs" />
