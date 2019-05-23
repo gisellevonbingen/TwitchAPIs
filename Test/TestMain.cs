@@ -92,43 +92,64 @@ namespace TwitchAPI.Test
 
         public void PrintReflection<T>(UserAbstract user, string name, T value)
         {
+            var lines = this.ToString(value);
+
             user.SendMessage();
             user.SendMessage($"== {name} ==");
-            user.SendMessage($"    Is Null = {value == null}");
 
-            if (value != null)
+            for (int i = 0; i < lines.Count; i++)
             {
-                var type = value.GetType();
-                user.SendMessage($"    Type.FullName = {type.FullName}");
-                var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.GetProperty);
-                user.SendMessage($"    Properties.Length = {properties.Length}");
-
-                for (int i = 0; i < properties.Length; i++)
-                {
-                    var property = properties[i];
-                    user.SendMessage($"    {property.Name} = {this.ToString(property.GetValue(value))}");
-                }
-
+                var line = lines[i];
+                var prefix = new string(' ', (line.Level + 1) * 4);
+                user.SendMessage($"{prefix}{line.Message}");
             }
 
         }
 
-        public object ToString(object obj)
+        public List<PrintableLine> ToString(object obj, int level = 0)
         {
+            var list = new List<PrintableLine>();
+
             if (obj == null)
             {
-                return "{null}";
+                list.Add(new PrintableLine(level, "{null}"));
             }
-            else if (obj is Array arry)
+            else if (obj is IConvertible convertible)
             {
-                return $"[{string.Join(", ", (object[]) arry)}]";
+                list.Add(new PrintableLine(level, $"'{convertible}'"));
+            }
+            else if (obj is IEnumerable enumerable)
+            {
+                list.Add(new PrintableLine(level, $"[{string.Join(", ", enumerable.OfType<object>())}]"));
             }
             else
             {
-                var toString = obj.ToString();
-                return $"'{toString}'";
+                var type = obj.GetType();
+                var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.GetProperty);
+
+                list.Add(new PrintableLine(level, $"Type.FullName = {type.FullName}"));
+                list.Add(new PrintableLine(level, $"Properties.Length = {properties.Length}"));
+
+                for (int i = 0; i < properties.Length; i++)
+                {
+                    var property = properties[i];
+                    var propertyLines = this.ToString(property.GetValue(obj), level + 1);
+
+                    if (propertyLines.Count == 1)
+                    {
+                        list.Add(new PrintableLine(level, $"{property.Name} = {propertyLines[0].Message}"));
+                    }
+                    else
+                    {
+                        list.Add(new PrintableLine(level, $"{property.Name}"));
+                        list.AddRange(propertyLines);
+                    }
+
+                }
+
             }
 
+            return list;
         }
 
     }

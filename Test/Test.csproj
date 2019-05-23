@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PrintableLine.cs" />
     <Compile Include="TestGetChannel.cs" />
     <Compile Include="TestGetUser.cs" />
     <Compile Include="TestGetUserFollows.cs" />
