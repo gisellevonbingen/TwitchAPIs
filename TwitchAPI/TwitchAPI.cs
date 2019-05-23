@@ -16,6 +16,7 @@ namespace TwitchAPI
         public WebExplorer Web { get; }
         public TwitchAPIUser User { get; }
         public TwitchAPIAuthorization Authorization { get; }
+        public TwitchAPISearch Search { get; }
 
         public string ClientId { get; set; }
         public string AccessToken { get; set; }
@@ -25,6 +26,7 @@ namespace TwitchAPI
             this.Web = new WebExplorer();
             this.User = new TwitchAPIUser(this);
             this.Authorization = new TwitchAPIAuthorization(this);
+            this.Search = new TwitchAPISearch(this);
 
             this.ClientId = null;
             this.AccessToken = null;

@@ -8,6 +8,11 @@ namespace TwitchAPI
 {
     public static class NumberUtils
     {
+        public static int? ToIntNullable(string s)
+        {
+            return int.TryParse(s, out int result) ? new int?(result) : null;
+        }
+
         public static int ToInt(string s, int fallback)
         {
             return int.TryParse(s, out int result) ? result : fallback;

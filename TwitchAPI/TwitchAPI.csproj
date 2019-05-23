@@ -67,7 +67,9 @@
     <Compile Include="TwitchAPI.cs" />
     <Compile Include="TwitchAPIAuthorization.cs" />
     <Compile Include="TwitchAPIPart.cs" />
+    <Compile Include="TwitchAPISearch.cs" />
     <Compile Include="TwitchAPIUser.cs" />
+    <Compile Include="TwitchChannel.cs" />
     <Compile Include="TwitchException.cs" />
     <Compile Include="TwitchFollow.cs" />
     <Compile Include="TwitchUserFollows.cs" />

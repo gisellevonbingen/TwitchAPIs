@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="TestGetUser.cs" />
     <Compile Include="TestGetUserFollows.cs" />
+    <Compile Include="TestSearch.cs" />
     <Compile Include="TestUpdateUser.cs" />
     <Compile Include="TwitchAPIHandler.cs" />
     <Compile Include="UserAbstract.cs" />
