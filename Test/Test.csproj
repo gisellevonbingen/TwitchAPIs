@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TestGetChannel.cs" />
     <Compile Include="TestGetUser.cs" />
     <Compile Include="TestGetUserFollows.cs" />
     <Compile Include="TestSearch.cs" />

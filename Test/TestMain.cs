@@ -66,6 +66,7 @@ namespace TwitchAPI.Test
             tests.Add(new TestGetUserFollows());
             tests.Add(new TestRefreshOAuthAuthorization());
             tests.Add(new TestSearch());
+            tests.Add(new TestGetChannel());
 
             while (true)
             {
