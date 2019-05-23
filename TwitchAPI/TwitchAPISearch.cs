@@ -26,13 +26,19 @@ namespace TwitchAPI
             using (var res = this.Parent.Request(APIVersion.V5, url, "GET"))
             {
                 var token = res.ReadAsJSON();
-                return this.ParseGames((JArray)token["games"]);
+                this.Parent.EnsureNotError(token);
+                return this.ParseGames(token["games"] as JArray);
             }
 
         }
 
         public TwitchGame[] ParseGames(JArray arrayToken)
         {
+            if (arrayToken == null)
+            {
+                return new TwitchGame[0];
+            }
+
             var values = new TwitchGame[arrayToken.Count];
 
             for (int i = 0; i < values.Length; i++)
@@ -61,13 +67,18 @@ namespace TwitchAPI
             using (var res = this.Parent.Request(APIVersion.V5, url, "GET"))
             {
                 var token = res.ReadAsJSON();
-                return this.ParseChannels((JArray) token["channels"]);
+                return this.ParseChannels(token["channels"] as JArray);
             }
 
         }
 
         public TwitchChannel[] ParseChannels(JArray arrayToken)
         {
+            if (arrayToken == null)
+            {
+                return new TwitchChannel[0];
+            }
+
             var values = new TwitchChannel[arrayToken.Count];
 
             for (int i = 0; i < values.Length; i++)
