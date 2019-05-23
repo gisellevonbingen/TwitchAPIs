@@ -16,32 +16,6 @@ namespace TwitchAPI
 
         }
 
-        public OAuthAuthorization ParseOAuthAuthorization(NameValueCollection map)
-        {
-            var authorization = new OAuthAuthorization();
-            authorization.AccessToken = map["access_token"];
-            authorization.RefreshToken = map["refresh_token"];
-            authorization.ExpiresIn = NumberUtils.ToInt(map["expires_in"]);
-            authorization.Scope = new string[] { map["scope"] };
-            authorization.TokenType = map["token_type"];
-
-            return authorization;
-        }
-
-        public OAuthAuthorization ParseOAuthAuthorization(JToken jToken)
-        {
-            this.Parent.EnsureNotError(jToken, "status", "message");
-
-            var authorization = new OAuthAuthorization();
-            authorization.AccessToken = jToken.Value<string>("access_token");
-            authorization.RefreshToken = jToken.Value<string>("refresh_token");
-            authorization.ExpiresIn = jToken.Value<int>("expires_in");
-            authorization.Scope = jToken.GetArrayValues<string>("scope")?.ToArray();
-            authorization.TokenType = jToken.Value<string>("token_type");
-
-            return authorization;
-        }
-
         public OAuthAuthorization GetOAuthAuthorization(Uri responseURI, OAuthRequest request)
         {
             var responseType = request.ResponseType;
@@ -64,7 +38,8 @@ namespace TwitchAPI
                 query = HttpUtility2.ParseQueryString(responseURI.Fragment, "#");
                 this.EnsureOAuthStateEquals(query, request);
 
-                authorization = this.ParseOAuthAuthorization(query);
+                authorization = new OAuthAuthorization();
+                authorization.Read(query);
             }
             else
             {
@@ -84,7 +59,12 @@ namespace TwitchAPI
 
             using (var res = this.Parent.Request(APIVersion.New, url, "POST"))
             {
-                return this.ParseOAuthAuthorization(res.ReadAsJSON());
+                var jToken = res.ReadAsJSON();
+                this.Parent.EnsureNotError(jToken, "status", "message");
+
+                var value = new OAuthAuthorization();
+                value.Read(jToken);
+                return value;
             }
 
         }
@@ -118,7 +98,12 @@ namespace TwitchAPI
 
             using (var res = this.Parent.Request(APIVersion.New, url, "POST"))
             {
-                return this.ParseOAuthAuthorization(res.ReadAsJSON());
+                var jToken = res.ReadAsJSON();
+                this.Parent.EnsureNotError(jToken, "status", "message");
+
+                var value = new OAuthAuthorization();
+                value.Read(jToken);
+                return value;
             }
 
         }
