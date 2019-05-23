@@ -83,7 +83,7 @@ namespace TwitchAPI
 
         }
 
-        private List<TwitchUser> ParseUsers(JToken token)
+        public List<TwitchUser> ParseUsers(JToken token)
         {
             this.Parent.EnsureNotError(token);
 
