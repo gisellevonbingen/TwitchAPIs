@@ -36,7 +36,7 @@ namespace TwitchAPI
 
         }
 
-        public void Read(JToken token)
+        public TwitchChannel Read(JToken token)
         {
             this.Mature = token.Value<bool>("mature");
             this.Status = token.Value<string>("status");
@@ -60,6 +60,7 @@ namespace TwitchAPI
             this.StreamKey = token.Value<string>("stream_key");
             this.Email = token.Value<string>("email");
 
+            return this;
         }
 
     }

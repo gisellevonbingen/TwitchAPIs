@@ -25,7 +25,7 @@ namespace TwitchAPI
 
         }
 
-        public void Read(JToken token)
+        public TwitchUser Read(JToken token)
         {
             this.BroadcasterType = token.Value<string>("broadcaster_type");
             this.Description = token.Value<string>("description");
@@ -37,6 +37,8 @@ namespace TwitchAPI
             this.ProfileImageUrl = token.Value<string>("profile_image_url");
             this.Type = token.Value<string>("type");
             this.ViewCount = token.Value<int>("view_count");
+
+            return this;
         }
 
     }

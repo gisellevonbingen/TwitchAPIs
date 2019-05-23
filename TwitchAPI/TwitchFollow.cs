@@ -18,11 +18,13 @@ namespace TwitchAPI
 
         }
 
-        public void Read(JToken token, FollowsType type)
+        public TwitchFollow Read(JToken token, FollowsType type)
         {
             this.Id = token.Value<string>(type.Response + "_id");
             this.DisplayName = token.Value<string>(type.Response + "_name");
             this.FollowedAt = token.Value<DateTime>("followed_at");
+
+            return this;
         }
 
     }
