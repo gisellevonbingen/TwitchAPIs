@@ -18,11 +18,9 @@ namespace TwitchAPI
 
         public TwitchUser UpdateUser(string description)
         {
-            var req = new RequestParameter();
-            req.Method = "PUT";
-            req.URL = $"https://api.twitch.tv/helix/users?description={HttpUtility.UrlEncode(description)}";
+            var url = $"https://api.twitch.tv/helix/users?description={HttpUtility.UrlEncode(description)}";
 
-            using (var res = this.Parent.Request(req))
+            using (var res = this.Parent.Request(APIVersion.New, url, "PUT"))
             {
                 return this.ParseUsers(res.ReadAsJSON()).FirstOrDefault();
             }
@@ -36,16 +34,14 @@ namespace TwitchAPI
 
         public TwitchUserFollows GetUserFollows(FollowsType type, string id, string cursor)
         {
-            var req = new RequestParameter();
-            req.Method = "GET";
-            req.URL = $"https://api.twitch.tv/helix/users/follows?{type.Request}_id={id}";
+            var url = $"https://api.twitch.tv/helix/users/follows?{type.Request}_id={id}";
 
             if (cursor != null)
             {
-                req.URL += "&after=" + cursor;
+                url += "&after=" + cursor;
             }
 
-            using (var res = this.Parent.Request(req))
+            using (var res = this.Parent.Request(APIVersion.New, url, "GET"))
             {
                 var jobj = this.Parent.EnsureNotError(res.ReadAsJSON());
                 var data = jobj.Value<JArray>("data");
@@ -78,11 +74,9 @@ namespace TwitchAPI
 
         public List<TwitchUser> GetUsers(IEnumerable<UserRequest> requests)
         {
-            var req = new RequestParameter();
-            req.Method = "GET";
-            req.URL = $"https://api.twitch.tv/helix/users?{string.Join("&", requests)}";
+            var url = $"https://api.twitch.tv/helix/users?{string.Join("&", requests)}";
 
-            using (var res = this.Parent.Request(req))
+            using (var res = this.Parent.Request(APIVersion.New, url, "GET"))
             {
                 return this.ParseUsers(res.ReadAsJSON());
             }

@@ -48,10 +48,10 @@ namespace TwitchAPI
             return this.EnsureNotError(token, "error", "message");
         }
 
-        public void SetupRequest(RequestParameter request)
+        public void SetupRequest(RequestParameter request, APIVersion version)
         {
-            var haders = request.Headers;
-            haders["Client-Id"] = this.ClientId;
+            var headers = request.Headers;
+            headers["Client-Id"] = this.ClientId;
 
             var accessToken = this.AccessToken;
 
@@ -61,21 +61,36 @@ namespace TwitchAPI
 
                 if (url.StartsWith("https://api.twitch.tv/helix/") == true)
                 {
-                    haders["Authorization"] = $"Bearer {accessToken}";
+                    headers["Authorization"] = $"Bearer {accessToken}";
                 }
                 else if (url.StartsWith("https://api.twitch.tv/kraken/") == true)
                 {
-                    haders["Authorization"] = $"OAuth {accessToken}";
+                    headers["Authorization"] = $"OAuth {accessToken}";
                 }
 
             }
 
+            if (version == APIVersion.V5)
+            {
+                request.Accept = "application/vnd.twitchtv.v5+json";
+            }
+
         }
 
-        public SessionResponse Request(RequestParameter request)
+        public SessionResponse Request(APIVersion version, string url, string method)
         {
-            this.SetupRequest(request);
+            var request = this.CreateRequest(version, url, method);
             return this.Web.Request(request);
+        }
+
+        public RequestParameter CreateRequest(APIVersion version, string url, string method)
+        {
+            var request = new RequestParameter();
+            request.URL = url;
+            request.Method = method;
+            this.SetupRequest(request, version);
+
+            return request;
         }
 
     }

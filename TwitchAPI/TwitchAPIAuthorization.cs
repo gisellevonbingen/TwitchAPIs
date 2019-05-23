@@ -82,11 +82,7 @@ namespace TwitchAPI
             url += $"&client_id={this.Parent.ClientId}";
             url += $"&client_secret={clientSecret}";
 
-            var req = new RequestParameter();
-            req.Method = "POST";
-            req.URL = url;
-
-            using (var res = this.Parent.Request(req))
+            using (var res = this.Parent.Request(APIVersion.New, url, "POST"))
             {
                 return this.ParseOAuthAuthorization(res.ReadAsJSON());
             }
@@ -120,11 +116,7 @@ namespace TwitchAPI
             url += $"&grant_type=authorization_code";
             url += $"&redirect_uri={request.RedirectURI}";
 
-            var req = new RequestParameter();
-            req.Method = "POST";
-            req.URL = url;
-
-            using (var res = this.Parent.Request(req))
+            using (var res = this.Parent.Request(APIVersion.New, url, "POST"))
             {
                 return this.ParseOAuthAuthorization(res.ReadAsJSON());
             }
@@ -152,11 +144,7 @@ namespace TwitchAPI
                 url += $"&state={state}";
             }
 
-            var req = new RequestParameter();
-            req.Method = "GET";
-            req.URL = url;
-
-            using (var res = this.Parent.Request(req))
+            using (var res = this.Parent.Request(APIVersion.New, url, "GET"))
             {
                 return res.Impl.ResponseUri.AbsoluteUri;
             }
