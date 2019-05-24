@@ -121,7 +121,15 @@ namespace TwitchAPI.Test
             }
             else if (obj is IEnumerable enumerable)
             {
-                list.Add(new PrintableLine(level, $"[{string.Join(", ", enumerable.OfType<object>())}]"));
+                var array = enumerable.OfType<object>().ToArray();
+                list.Add(new PrintableLine(level, $"Enumerable Count = {array.Length}"));
+
+                for (int i = 0; i < array.Length; i++)
+                {
+                    list.Add(new PrintableLine(level, $"{i}/{array.Length}"));
+                    list.AddRange(ToString(array[i], level + 1));
+                }
+
             }
             else
             {
