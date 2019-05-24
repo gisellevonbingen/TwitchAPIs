@@ -38,7 +38,7 @@ namespace TwitchAPI.Test
             }
 
             var api = handler.API;
-            var tusers = api.User.GetUsers(requests);
+            var tusers = api.Users.GetUsers(requests);
             main.PrintReflection(user, $"TwitchUsers", tusers);
         }
 

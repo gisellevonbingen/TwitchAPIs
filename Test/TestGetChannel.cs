@@ -24,11 +24,11 @@ namespace TwitchAPI.Test
 
             if (string.IsNullOrWhiteSpace(id) == true)
             {
-                channel = api.Channel.GetChannel();
+                channel = api.Channels.GetChannel();
             }
             else
             {
-                channel = api.Channel.GetChannel(id);
+                channel = api.Channels.GetChannel(id);
             }
 
             main.PrintReflection(user, "TwitchChannel", channel);
