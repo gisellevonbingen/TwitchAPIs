@@ -11,12 +11,14 @@ namespace TwitchAPI
     {
         public int Total { get; set; }
 
-        public TwitchGame[] Top { get; set; }
+        public TwitchTopGame[] Top { get; set; }
 
-        public void Read(JToken jToken)
+        public TwitchTopGames Read(JToken jToken)
         {
             this.Total = jToken.Value<int>("_total");
-            this.Top = jToken.ReadArray("top", t => new TwitchGame().Read(t)) ?? new TwitchGame[0];
+            this.Top = jToken.ReadArray("top", t => new TwitchTopGame().Read(t)) ?? new TwitchTopGame[0];
+
+            return this;
         }
 
     }
