@@ -32,20 +32,10 @@ namespace TwitchAPI.Test
             var api = handler.API;
             string cursor = null;
 
-            int index = 0;
-
             while (true)
             {
                 var userFollows = api.User.GetUserFollows(followsType, userId, cursor);
-                var follows = userFollows.Follows;
-
-                user.SendMessage($"Total : {userFollows.Total}");
-                user.SendMessage($"Cursor : {userFollows.Cursor}");
-
-                foreach (var follow in follows)
-                {
-                    user.SendMessage($"{index++} - {followsType.Response} {follow.DisplayName} at {follow.FollowedAt.ToString("yyyy-MM-dd HH:mm:ss")}");
-                }
+                main.PrintReflection(user, "UserFollows", userFollows);
 
                 cursor = userFollows.Cursor;
 

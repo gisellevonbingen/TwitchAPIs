@@ -37,14 +37,7 @@ namespace TwitchAPI.Test
             bool? live = NumberUtils.ToBoolNullable(user.ReadInput("Enter Live"));
 
             var games = handler.API.Search.SearchGames(query, live);
-            user.SendMessage("Games Count : " + games.Length);
-
-            for (int i = 0; i < games.Length; i++)
-            {
-                var game = games[i];
-                main.PrintReflection(user, $"{i} / {games.Length}", game);
-            }
-
+            main.PrintReflection(user, $"TwitchGames", games);
         }
 
         public void TestChannels(TestMain main)
@@ -57,14 +50,7 @@ namespace TwitchAPI.Test
             int? offset = NumberUtils.ToIntNullable(user.ReadInput("Enter Offset"));
 
             var channels = handler.API.Search.SearchChannels(query, limit, offset);
-            user.SendMessage("Channels Count : " + channels.Length);
-
-            for (int i = 0; i < channels.Length; i++)
-            {
-                var channel = channels[i];
-                main.PrintReflection(user, $"{i} / {channels.Length}", channel);
-            }
-
+            main.PrintReflection(user, $"TwitchChannels", channels);
         }
 
     }
