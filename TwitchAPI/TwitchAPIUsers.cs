@@ -9,9 +9,9 @@ using TwitchAPI.Web;
 
 namespace TwitchAPI
 {
-    public class TwitchAPIUser : TwitchAPIPart
+    public class TwitchAPIUsers : TwitchAPIPart
     {
-        public TwitchAPIUser(TwitchAPI parent) : base(parent)
+        public TwitchAPIUsers(TwitchAPI parent) : base(parent)
         {
 
         }

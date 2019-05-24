@@ -14,10 +14,10 @@ namespace TwitchAPI
     public class TwitchAPI
     {
         public WebExplorer Web { get; }
-        public TwitchAPIUser User { get; }
+        public TwitchAPIUsers User { get; }
         public TwitchAPIAuthorization Authorization { get; }
         public TwitchAPISearch Search { get; }
-        public TwitchAPIChannel Channel { get; }
+        public TwitchAPIChannels Channel { get; }
 
         public string ClientId { get; set; }
         public string AccessToken { get; set; }
@@ -25,10 +25,10 @@ namespace TwitchAPI
         public TwitchAPI()
         {
             this.Web = new WebExplorer();
-            this.User = new TwitchAPIUser(this);
+            this.User = new TwitchAPIUsers(this);
             this.Authorization = new TwitchAPIAuthorization(this);
             this.Search = new TwitchAPISearch(this);
-            this.Channel = new TwitchAPIChannel(this);
+            this.Channel = new TwitchAPIChannels(this);
 
             this.ClientId = null;
             this.AccessToken = null;

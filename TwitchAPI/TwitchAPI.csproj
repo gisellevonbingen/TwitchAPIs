@@ -66,10 +66,11 @@
     <Compile Include="APIVersion.cs" />
     <Compile Include="TwitchAPI.cs" />
     <Compile Include="TwitchAPIAuthorization.cs" />
-    <Compile Include="TwitchAPIChannel.cs" />
+    <Compile Include="TwitchAPIChannels.cs" />
+    <Compile Include="TwitchAPIGames.cs" />
     <Compile Include="TwitchAPIPart.cs" />
     <Compile Include="TwitchAPISearch.cs" />
-    <Compile Include="TwitchAPIUser.cs" />
+    <Compile Include="TwitchAPIUsers.cs" />
     <Compile Include="TwitchChannel.cs" />
     <Compile Include="TwitchException.cs" />
     <Compile Include="TwitchFollow.cs" />

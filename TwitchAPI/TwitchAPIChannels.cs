@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace TwitchAPI
 {
-    public class TwitchAPIChannel : TwitchAPIPart
+    public class TwitchAPIChannels : TwitchAPIPart
     {
-        public TwitchAPIChannel(TwitchAPI parent) : base(parent)
+        public TwitchAPIChannels(TwitchAPI parent) : base(parent)
         {
 
         }
