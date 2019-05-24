@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="PrintableLine.cs" />
     <Compile Include="TestGetChannel.cs" />
+    <Compile Include="TestGetTopGames.cs" />
     <Compile Include="TestGetUser.cs" />
     <Compile Include="TestGetUserFollows.cs" />
     <Compile Include="TestSearch.cs" />

@@ -67,6 +67,7 @@ namespace TwitchAPI.Test
             tests.Add(new TestRefreshOAuthAuthorization());
             tests.Add(new TestSearch());
             tests.Add(new TestGetChannel());
+            tests.Add(new TestGetTopGames());
 
             while (true)
             {

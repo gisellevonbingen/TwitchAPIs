@@ -9,6 +9,26 @@ namespace TwitchAPI
 {
     public static class JsonUtils
     {
+        public static T[] ReadArray<T>(this JToken value, object key, Func<JToken, T> func)
+        {
+            var jArray = value[key] as JArray;
+
+            if (jArray == null)
+            {
+                return null;
+            }
+
+            var array = new T[jArray.Count];
+
+            for (int i = 0; i < jArray.Count; i++)
+            {
+                var token = jArray[i];
+                array[i] = func(token);
+            }
+
+            return array;
+        }
+
         public static T ReadIfExist<T>(this JToken value, object key, Func<JToken, T> func)
         {
             var token = value[key];

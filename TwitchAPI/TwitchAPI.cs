@@ -18,6 +18,7 @@ namespace TwitchAPI
         public TwitchAPIAuthorization Authorization { get; }
         public TwitchAPISearch Search { get; }
         public TwitchAPIChannels Channel { get; }
+        public TwitchAPIGames Games { get; }
 
         public string ClientId { get; set; }
         public string AccessToken { get; set; }
@@ -29,6 +30,7 @@ namespace TwitchAPI
             this.Authorization = new TwitchAPIAuthorization(this);
             this.Search = new TwitchAPISearch(this);
             this.Channel = new TwitchAPIChannels(this);
+            this.Games = new TwitchAPIGames(this);
 
             this.ClientId = null;
             this.AccessToken = null;
