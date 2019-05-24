@@ -41,7 +41,7 @@ namespace TwitchAPI
             return default(T);
         }
 
-        public static IEnumerable<T> GetArrayValues<T>(this JToken value, object key)
+        public static IEnumerable<T> ArrayValues<T>(this JToken value, object key)
         {
             if (value == null)
             {

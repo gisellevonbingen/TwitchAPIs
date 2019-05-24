@@ -41,7 +41,7 @@ namespace TwitchAPI
             this.AccessToken = jToken.Value<string>("access_token");
             this.RefreshToken = jToken.Value<string>("refresh_token");
             this.ExpiresIn = jToken.Value<int>("expires_in");
-            this.Scope = jToken.GetArrayValues<string>("scope")?.ToArray();
+            this.Scope = jToken.ArrayValues<string>("scope")?.ToArray();
             this.TokenType = jToken.Value<string>("token_type");
 
             return this;
