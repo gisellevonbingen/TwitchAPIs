@@ -41,7 +41,7 @@ namespace TwitchAPI
             if (error != null)
             {
                 var message = token.Value<string>(messageKey);
-                throw new TwitchException(message);
+                throw new TwitchException(error + " - " + message);
             }
 
             return token;
