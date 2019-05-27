@@ -10,6 +10,7 @@ namespace TwitchAPI.Test
     public class TwitchAuthHandler : IDisposable
     {
         private UserAbstract User;
+        private TwitchAPI API;
 
         private Form Form;
         private WebBrowser Browser;
@@ -17,9 +18,10 @@ namespace TwitchAPI.Test
         private OAuthRequest Request;
         private Uri ResponseURI;
 
-        public TwitchAuthHandler(UserAbstract user)
+        public TwitchAuthHandler(UserAbstract user, TwitchAPI api)
         {
             this.User = user;
+            this.API = api;
 
             var form = this.Form = new Form();
             var browser = this.Browser = new WebBrowser();
@@ -28,7 +30,6 @@ namespace TwitchAPI.Test
             form.SizeChanged += this.OnFormResize;
 
             this.UpdateBrowserSize();
-
         }
 
         ~TwitchAuthHandler()
@@ -47,14 +48,25 @@ namespace TwitchAPI.Test
             ObjectUtils.DisposeQuietly(this.Form);
         }
 
-        public Uri Auth(OAuthRequest request, string uri)
+        public OAuthAuthorization Auth(OAuthRequest request)
         {
+            var api = this.API;
+            var authUri = api.Authorization.GetOAuthURI(request);
+
             this.Request = request;
-            this.Browser.Navigate(uri);
+            this.Browser.Navigate(authUri);
 
             Application.Run(this.Form);
 
-            return this.ResponseURI;
+            var responseURI = this.ResponseURI;
+
+            if (responseURI != null)
+            {
+                var oAuth = api.Authorization.GetOAuthAuthorization(responseURI, request);
+                return oAuth;
+            }
+
+            return null;
         }
 
         private void OnFormResize(object sender, EventArgs e)
