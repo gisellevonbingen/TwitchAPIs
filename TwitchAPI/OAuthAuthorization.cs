@@ -30,7 +30,8 @@ namespace TwitchAPI
             this.AccessToken = map["access_token"];
             this.RefreshToken = map["refresh_token"];
             this.ExpiresIn = NumberUtils.ToInt(map["expires_in"]);
-            this.Scope = new string[] { map["scope"] };
+            var scope = map["scope"];
+            this.Scope = string.IsNullOrWhiteSpace(scope) ? null : scope.Split(' ');
             this.TokenType = map["token_type"];
 
             return this;
