@@ -18,6 +18,7 @@ namespace TwitchAPI.ChatTest
             var authUser = args.Length > 0 ? new UserFile(args[0]) : (UserAbstract)user;
             var clientId = authUser.ReadInput("Client-Id");
             var redirectURI = authUser.ReadInput("Redirect-URI");
+            var nickName = authUser.ReadInput("Nickname").ToLowerInvariant();
 
             var api = new TwitchAPI();
             api.ClientId = clientId;
@@ -30,7 +31,7 @@ namespace TwitchAPI.ChatTest
             chat.Connect();
 
             chat.Send($"PASS oauth:{api.AccessToken}");
-            chat.Send($"NICK {api.AccessToken}");
+            chat.Send($"NICK {nickName}");
 
 
             new Thread(() =>
