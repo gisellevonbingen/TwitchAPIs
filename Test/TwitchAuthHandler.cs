@@ -9,7 +9,6 @@ namespace TwitchAPI.Test
 {
     public class TwitchAuthHandler : IDisposable
     {
-        private UserAbstract User;
         private TwitchAPI API;
 
         private Form Form;
@@ -18,9 +17,8 @@ namespace TwitchAPI.Test
         private OAuthRequest Request;
         private Uri ResponseURI;
 
-        public TwitchAuthHandler(UserAbstract user, TwitchAPI api)
+        public TwitchAuthHandler(TwitchAPI api)
         {
-            this.User = user;
             this.API = api;
 
             var form = this.Form = new Form();
@@ -83,7 +81,6 @@ namespace TwitchAPI.Test
         {
             var browser = sender as WebBrowser;
             var url = browser.Url;
-            this.User.SendMessage($"OnBrowserNavigated : {url}");
 
             if (url.AbsoluteUri.StartsWith(this.Request.RedirectURI) == true)
             {
