@@ -46,8 +46,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConnectMode.cs" />
+    <Compile Include="GenericCapabilities.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TwitchChat.cs" />
+    <Compile Include="TwitchChatIRC.cs" />
+    <Compile Include="TwitchChatWebSocket.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

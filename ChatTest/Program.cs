@@ -11,108 +11,60 @@ namespace TwitchAPI.ChatTest
 {
     public class Program
     {
+        [STAThread]
         public static void Main(string[] args)
         {
             var user = new UserConsole();
-            var clientId = user.ReadInput("Client-Id");
-            var redirectURI = user.ReadInput("Redirect-URI");
+            var authUser = args.Length > 0 ? new UserFile(args[0]) : (UserAbstract)user;
+            var clientId = authUser.ReadInput("Client-Id");
+            var redirectURI = authUser.ReadInput("Redirect-URI");
 
             var api = new TwitchAPI();
             api.ClientId = clientId;
+            var authorization = Auth(api, redirectURI);
+            api.AccessToken = authorization.AccessToken;
 
-            var authRequest = new OAuthRequestToken();
-            authRequest.RedirectURI = redirectURI;
-            authRequest.Scope = "chat:edit+chat:read";
-            authRequest.State = Guid.NewGuid().ToString().Replace("-", "");
-            api.Authorization.GetOAuthURI(authRequest);
+            //var chat = new TwitchChatIRC();
+            var chat = new TwitchChatWebSocket();
+            chat.ConnectMode = ConnectMode.Default;
+            chat.Connect();
 
-            var ws = new WebSocket("ws://irc-ws.chat.twitch.tv:80");
-            ws.Log.Output = null;
-            ws.OnMessage += OnMessage;
-            ws.OnError += OnError;
-            ws.Connect();
+            chat.Send($"PASS oauth:{api.AccessToken}");
+            chat.Send($"NICK {api.AccessToken}");
 
-            ws.Send("CAP REQ :twitch.tv/tags twitch.tv/commands");
-            ws.Send($"PASS {"oauth:"}");
-            ws.Send($"NICK {"gisellevonbingen"}");
-
-            Console.WriteLine("ReadyState : " + ws.ReadyState);
 
             new Thread(() =>
             {
                 while (true)
                 {
-                    ws.Ping("tmi.twitch.tv");
-                    Thread.Sleep(5000);
+                    var str = Console.ReadLine();
+                    chat.Send(str);
                 }
 
             }).Start();
 
-            while (true)
+            new Thread(() =>
             {
-                var command = Console.ReadLine();
-                ws.Send(command);
-            }
-
-        }
-
-        private static void OnError(object sender, WebSocketSharp.ErrorEventArgs e)
-        {
-            Console.WriteLine("ERROR : " + e.Message);
-        }
-
-        private static List<Tuple<char, string>> Split(string str)
-        {
-            var list = new List<Tuple<char, string>>();
-            char mod = '\0';
-            string prev = string.Empty;
-
-            for (int i = 0; i < str.Length; i++)
-            {
-                var c = str[i];
-
-                if (c == '@' || c == ':')
+                while (true)
                 {
-                    if (mod != '\0')
-                    {
-                        if (prev.Length > 0)
-                        {
-                            list.Add(new Tuple<char, string>(mod, prev));
-                        }
-
-                    }
-
-                    mod = c;
-                    prev = string.Empty;
-                }
-                else
-                {
-                    prev += c;
+                    var str = chat.Receive();
+                    Console.WriteLine(str);
                 }
 
-            }
+            }).Start();
 
-            if (mod != '\0')
-            {
-                if (prev.Length > 0)
-                {
-                    list.Add(new Tuple<char, string>(mod, prev));
-                }
-
-            }
-
-            return list;
         }
-
-        private static void OnMessage(object sender, MessageEventArgs e)
+        private static OAuthAuthorization Auth(TwitchAPI api, string redirectURI)
         {
-            Console.WriteLine($"'{e.Data}'");
-            //var splited = Split(e.Data);
+            using (var authHandler = new TwitchAuthHandler(api))
+            {
+                var authRequest = new OAuthRequestToken();
+                authRequest.State = Guid.NewGuid().ToString().Replace("-", "");
+                authRequest.RedirectURI = redirectURI;
+                authRequest.Scope = "chat:edit+chat:read";
 
-            //foreach (var str in splited)
-            //{
-            //    Console.WriteLine(str.Item1 + "-" + str.Item2);
-            //}
+                return authHandler.Auth(authRequest);
+            }
 
         }
 
