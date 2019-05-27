@@ -30,7 +30,7 @@ namespace TwitchAPI.Test
             var api = this.API = new TwitchAPI();
             api.ClientId = clientId;
 
-            using (var authHandler = new TwitchAuthHandler(user, api))
+            using (var authHandler = new TwitchAuthHandler(api))
             {
                 var authRequest = this.OAuthRequest = this.CreateOAuthRequest(user);
                 var oAuth = this.OAuthAuthorization = authHandler.Auth(authRequest);
