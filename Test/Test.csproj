@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ObjectUtils.cs" />
     <Compile Include="PrintableLine.cs" />
     <Compile Include="TestGetChannel.cs" />
     <Compile Include="TestGetTopGames.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="TestSearch.cs" />
     <Compile Include="TestUpdateUser.cs" />
     <Compile Include="TwitchAPIHandler.cs" />
+    <Compile Include="TwitchAuthHandler.cs" />
     <Compile Include="UserAbstract.cs" />
     <Compile Include="UserConsole.cs" />
     <Compile Include="UserFile.cs" />
