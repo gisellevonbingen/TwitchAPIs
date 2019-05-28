@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
-using TwitchAPI.Web;
+using TwitchAPIs.Web;
 
-namespace TwitchAPI
+namespace TwitchAPIs
 {
     public class TwitchAPIUsers : TwitchAPIPart
     {

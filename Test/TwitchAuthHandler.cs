@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace TwitchAPI.Test
+namespace TwitchAPIs.Test
 {
     public class TwitchAuthHandler : IDisposable
     {
-        private TwitchAPI API;
+        private TwitchAPI.TwitchAPI API;
 
         private Form Form;
         private WebBrowser Browser;
@@ -17,7 +17,7 @@ namespace TwitchAPI.Test
         private OAuthRequest Request;
         private Uri ResponseURI;
 
-        public TwitchAuthHandler(TwitchAPI api)
+        public TwitchAuthHandler(TwitchAPI.TwitchAPI api)
         {
             this.API = api;
 

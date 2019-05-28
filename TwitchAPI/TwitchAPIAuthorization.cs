@@ -5,9 +5,9 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TwitchAPI.Web;
+using TwitchAPIs.Web;
 
-namespace TwitchAPI
+namespace TwitchAPIs
 {
     public class TwitchAPIAuthorization : TwitchAPIPart
     {

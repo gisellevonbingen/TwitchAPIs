@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TwitchAPI.Test
+namespace TwitchAPIs.Test
 {
     public class TestUpdateUser : TestAbstract
     {

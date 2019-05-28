@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Windows.Forms;
 
-namespace TwitchAPI.Test
+namespace TwitchAPIs.Test
 {
     public class TestMain
     {

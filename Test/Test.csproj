@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{7013285A-7AC1-4CA5-A829-428F69D9A64A}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>TwitchAPI.Test</RootNamespace>
-    <AssemblyName>TwitchAPI.Test</AssemblyName>
+    <RootNamespace>TwitchAPIs.Test</RootNamespace>
+    <AssemblyName>TwitchAPIs.Test</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -72,9 +72,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TwitchAPI\TwitchAPI.csproj">
+    <ProjectReference Include="..\TwitchAPI\TwitchAPIs.csproj">
       <Project>{eed766cc-4928-4ee4-96fa-f31d79229c1f}</Project>
-      <Name>TwitchAPI</Name>
+      <Name>TwitchAPIs</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

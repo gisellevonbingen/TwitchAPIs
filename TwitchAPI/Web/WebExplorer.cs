@@ -8,7 +8,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TwitchAPI.Web
+namespace TwitchAPIs.Web
 {
     public class WebExplorer
     {

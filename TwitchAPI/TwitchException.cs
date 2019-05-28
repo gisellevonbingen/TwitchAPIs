@@ -7,7 +7,7 @@ using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TwitchAPI
+namespace TwitchAPIs
 {
     [Serializable]
     public class TwitchException : WebException

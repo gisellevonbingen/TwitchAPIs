@@ -7,7 +7,7 @@ using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TwitchAPI.Web
+namespace TwitchAPIs.Web
 {
     [Serializable]
     public class NetworkException : Exception

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Windows.Forms;
 
-namespace TwitchAPI.Test
+namespace TwitchAPIs.Test
 {
     public class TwitchAPIHandler
     {
@@ -27,7 +27,7 @@ namespace TwitchAPI.Test
         {
             var user = this.User;
             var clientId = user.ReadInput("Enter Client-ID");
-            var api = this.API = new TwitchAPI();
+            var api = this.API = new TwitchAPI.TwitchAPI();
             api.ClientId = clientId;
 
             using (var authHandler = new TwitchAuthHandler(api))

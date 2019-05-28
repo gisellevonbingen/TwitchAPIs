@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{EED766CC-4928-4EE4-96FA-F31D79229C1F}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>TwitchAPI</RootNamespace>
-    <AssemblyName>TwitchAPI</AssemblyName>
+    <RootNamespace>TwitchAPIs</RootNamespace>
+    <AssemblyName>TwitchAPIs</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

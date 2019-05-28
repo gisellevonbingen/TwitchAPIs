@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 
-namespace TwitchAPI
+namespace TwitchAPIs
 {
     public class TwitchTopGames
     {

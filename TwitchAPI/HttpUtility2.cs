@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace TwitchAPI
+namespace TwitchAPIs
 {
     public static class HttpUtility2
     {

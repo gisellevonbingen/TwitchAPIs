@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using Newtonsoft.Json.Linq;
-using TwitchAPI.Web;
+using TwitchAPIs.Web;
 
-namespace TwitchAPI
+namespace TwitchAPIs
 {
     public class TwitchAPI
     {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TwitchAPI.Web
+namespace TwitchAPIs.Web
 {
     public delegate void RequestWriteEventHandler(object sender, RequestWriteEventArgs e);
 
