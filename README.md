@@ -2,7 +2,7 @@
 'Test' project has simple example
 
 ### Reference
-[Twitch Developers Reference](https://dev.twitch.tv/docs/api/reference/)
+* [Twitch Developers Reference](https://dev.twitch.tv/docs/api/reference/)
 
 ### Support functions
 * OAuthAuthorization
