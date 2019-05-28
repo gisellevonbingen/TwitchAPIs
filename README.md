@@ -4,6 +4,16 @@
 ### Reference
 * [Twitch Developers Reference](https://dev.twitch.tv/docs/api/reference/)
 
+### Requires
+* [Newtonsoft.Json](https://www.newtonsoft.com/json)
+* System.Web
+
+### Test.Requires
+* [Newtonsoft.Json](https://www.newtonsoft.com/json)
+* System.Web
+* System.Drawing
+* System.Windows.Forms
+
 ### Support functions
 * OAuthAuthorization
 * GetUser, GetUsers
