@@ -27,7 +27,7 @@ namespace TwitchAPIs.Test
         {
             var user = this.User;
             var clientId = user.ReadInput("Enter Client-ID");
-            var api = this.API = new TwitchAPI.TwitchAPI();
+            var api = this.API = new TwitchAPI();
             api.ClientId = clientId;
 
             using (var authHandler = new TwitchAuthHandler(api))

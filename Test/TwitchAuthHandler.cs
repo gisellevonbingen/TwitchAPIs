@@ -9,7 +9,7 @@ namespace TwitchAPIs.Test
 {
     public class TwitchAuthHandler : IDisposable
     {
-        private TwitchAPI.TwitchAPI API;
+        private TwitchAPI API;
 
         private Form Form;
         private WebBrowser Browser;
@@ -17,7 +17,7 @@ namespace TwitchAPIs.Test
         private OAuthRequest Request;
         private Uri ResponseURI;
 
-        public TwitchAuthHandler(TwitchAPI.TwitchAPI api)
+        public TwitchAuthHandler(TwitchAPI api)
         {
             this.API = api;
 
