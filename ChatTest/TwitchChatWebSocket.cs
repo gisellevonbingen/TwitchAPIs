@@ -88,25 +88,21 @@ namespace TwitchAPI.ChatTest
             var receiveQueue = this.ReceiveQueue;
             var receiveEvent = this.ReceiveEvent;
 
-            this.EnsureNotDispose();
-
-            if (receiveQueue.Count == 0)
+            while (true)
             {
+                this.EnsureNotDispose();
+
+                lock (receiveQueue)
+                {
+                    if (receiveQueue.Count > 0)
+                    {
+                        return receiveQueue.Dequeue();
+                    }
+
+                }
+
                 receiveEvent.Wait();
                 receiveEvent.Reset();
-            }
-
-            lock (receiveQueue)
-            {
-                if (receiveQueue.Count != 0)
-                {
-                    return receiveQueue.Dequeue();
-                }
-                else
-                {
-                    return null;
-                }
-
             }
 
         }
