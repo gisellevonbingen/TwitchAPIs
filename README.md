@@ -1,10 +1,10 @@
 # Twitch API (New, V5) C# Wrapper
 'Test' project has simple example
 
-Reference is here. Twitch Developers Reference
+### Reference
+[Twitch Developers Reference](https://dev.twitch.tv/docs/api/reference/)
 
-Support functions
-
+### Support functions
 * OAuthAuthorization
 * GetUser, GetUsers
 * UpdateUser Descrption
