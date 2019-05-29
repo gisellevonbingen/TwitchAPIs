@@ -28,7 +28,14 @@ namespace TwitchAPIs.Test
 
         }
 
-        public abstract string ReadInput(string message);
+        public abstract string ReadInput();
+
+        public virtual string ReadInput(string message)
+        {
+            this.SendMessage(message);
+
+            return this.ReadInput();
+        }
 
         public virtual int QueryInput<T>(string message, IEnumerable<T> collection)
         {
