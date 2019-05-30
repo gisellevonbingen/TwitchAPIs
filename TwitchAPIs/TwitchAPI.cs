@@ -19,6 +19,7 @@ namespace TwitchAPIs
         public TwitchAPISearch Search { get; }
         public TwitchAPIChannels Channels { get; }
         public TwitchAPIGames Games { get; }
+        public TwitchAPIBadges Badges { get; }
 
         public string ClientId { get; set; }
         public string AccessToken { get; set; }
@@ -31,6 +32,7 @@ namespace TwitchAPIs
             this.Search = new TwitchAPISearch(this);
             this.Channels = new TwitchAPIChannels(this);
             this.Games = new TwitchAPIGames(this);
+            this.Badges = new TwitchAPIBadges(this);
 
             this.ClientId = null;
             this.AccessToken = null;

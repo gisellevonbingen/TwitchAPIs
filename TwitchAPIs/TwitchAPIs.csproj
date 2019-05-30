@@ -71,6 +71,8 @@
     <Compile Include="TwitchAPIPart.cs" />
     <Compile Include="TwitchAPISearch.cs" />
     <Compile Include="TwitchAPIUsers.cs" />
+    <Compile Include="TwitchBadge.cs" />
+    <Compile Include="TwitchBadgeSet.cs" />
     <Compile Include="TwitchChannel.cs" />
     <Compile Include="TwitchException.cs" />
     <Compile Include="TwitchFollow.cs" />
@@ -80,6 +82,7 @@
     <Compile Include="TwitchImageSet.cs" />
     <Compile Include="TwitchUserFollows.cs" />
     <Compile Include="TwitchUser.cs" />
+    <Compile Include="TwitchAPIBadges.cs" />
     <Compile Include="UserRequest.cs" />
     <Compile Include="UserType.cs" />
     <Compile Include="Web\NetworkException.cs" />
