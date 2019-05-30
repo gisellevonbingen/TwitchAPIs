@@ -8,27 +8,54 @@ namespace TwitchAPIs.Test
 {
     public class UserConsole : UserAbstract
     {
+        private Encoding _InputEncoding;
+        private Encoding _OutputEncoding;
+        private string _ReadPrefix;
+        private int _CursorLeft;
+
         public object SyncRoot { get; }
         public StringBuilder ReadBuffer { get; set; }
-
-        private string _ReadPrefix;
+        public Encoding InputEncoding { get { return this._InputEncoding; } set { this.UpdateInputEncoding(value); } }
+        public Encoding OutputEncoding { get { return this._OutputEncoding; } set { this.UpdateOutputEncoding(value); } }
         public string ReadPrefix { get { return this._ReadPrefix; } set { this.UpdateReadPrefix(value); } }
-
-        private int _CursorLeft;
         public int CursorLeft { get { return this._CursorLeft; } set { this.UpdateCursor(value); } }
 
         public UserConsole()
         {
-            this.SyncRoot = new object();
-            this.ReadBuffer = new StringBuilder();
-
+            this._InputEncoding = Console.InputEncoding;
+            this._OutputEncoding = Console.OutputEncoding;
             this._ReadPrefix = "> ";
             this._CursorLeft = 0;
 
+            this.SyncRoot = new object();
+            this.ReadBuffer = new StringBuilder();
+
             this.RefreshLine();
+
+            this.WriteLine(Console.InputEncoding.CodePage + " : " + Console.OutputEncoding);
         }
 
-        private void UpdateReadPrefix(string value)
+        protected virtual void UpdateInputEncoding(Encoding value)
+        {
+            lock (this.SyncRoot)
+            {
+                this._InputEncoding = value;
+                Console.InputEncoding = value;
+            }
+
+        }
+
+        protected virtual void UpdateOutputEncoding(Encoding value)
+        {
+            lock (this.SyncRoot)
+            {
+                this._OutputEncoding = value;
+                Console.OutputEncoding = value;
+            }
+
+        }
+
+        protected virtual void UpdateReadPrefix(string value)
         {
             lock (this.SyncRoot)
             {
@@ -43,7 +70,7 @@ namespace TwitchAPIs.Test
             this.UpdateCursor(this.CursorLeft);
         }
 
-        public void UpdateCursor(int newCursorLeft)
+        public virtual void UpdateCursor(int newCursorLeft)
         {
             lock (this.SyncRoot)
             {
