@@ -22,3 +22,4 @@
 * Search Channels, Games
 * Get Channel, Channels
 * Get Top Games
+* Get Chat Badges
