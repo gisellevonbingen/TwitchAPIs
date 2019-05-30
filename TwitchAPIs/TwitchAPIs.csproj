@@ -67,6 +67,7 @@
     <Compile Include="TwitchAPI.cs" />
     <Compile Include="TwitchAPIAuthorization.cs" />
     <Compile Include="TwitchAPIChannels.cs" />
+    <Compile Include="TwitchAPIChat.cs" />
     <Compile Include="TwitchAPIGames.cs" />
     <Compile Include="TwitchAPIPart.cs" />
     <Compile Include="TwitchAPISearch.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="TwitchUserFollows.cs" />
     <Compile Include="TwitchUser.cs" />
     <Compile Include="TwitchAPIBadges.cs" />
+    <Compile Include="TwtichChatRoom.cs" />
     <Compile Include="UserRequest.cs" />
     <Compile Include="UserType.cs" />
     <Compile Include="Web\NetworkException.cs" />

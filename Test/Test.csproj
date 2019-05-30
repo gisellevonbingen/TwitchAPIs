@@ -51,6 +51,7 @@
     <Compile Include="PrintableLine.cs" />
     <Compile Include="TestGetChannel.cs" />
     <Compile Include="TestGetChatBadges.cs" />
+    <Compile Include="TestGetChatRooms.cs" />
     <Compile Include="TestGetTopGames.cs" />
     <Compile Include="TestGetUser.cs" />
     <Compile Include="TestGetUserFollows.cs" />
