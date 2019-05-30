@@ -4,4 +4,7 @@
     <StartArguments>C:\Users\Seil\Desktop\AutoAuth.txt</StartArguments>
     <StartAction>Project</StartAction>
   </PropertyGroup>
+  <PropertyGroup>
+    <ProjectView>ProjectFiles</ProjectView>
+  </PropertyGroup>
 </Project>
