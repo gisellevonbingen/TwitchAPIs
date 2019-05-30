@@ -8,22 +8,19 @@ namespace TwitchAPIs.Test
 {
     public class UserConsole : UserAbstract
     {
-        private Encoding _InputEncoding;
-        private Encoding _OutputEncoding;
+        private Encoding _Encoding;
         private string _ReadPrefix;
         private int _CursorLeft;
 
         public object SyncRoot { get; }
         public StringBuilder ReadBuffer { get; set; }
-        public Encoding InputEncoding { get { return this._InputEncoding; } set { this.UpdateInputEncoding(value); } }
-        public Encoding OutputEncoding { get { return this._OutputEncoding; } set { this.UpdateOutputEncoding(value); } }
+        public Encoding Encoding { get { return this._Encoding; } set { this.UpdateEncoding(value); } }
         public string ReadPrefix { get { return this._ReadPrefix; } set { this.UpdateReadPrefix(value); } }
         public int CursorLeft { get { return this._CursorLeft; } set { this.UpdateCursor(value); } }
 
         public UserConsole()
         {
-            this._InputEncoding = Console.InputEncoding;
-            this._OutputEncoding = Console.OutputEncoding;
+            this._Encoding = Console.InputEncoding;
             this._ReadPrefix = "> ";
             this._CursorLeft = 0;
 
@@ -33,21 +30,12 @@ namespace TwitchAPIs.Test
             this.RefreshLine();
         }
 
-        protected virtual void UpdateInputEncoding(Encoding value)
+        protected virtual void UpdateEncoding(Encoding value)
         {
             lock (this.SyncRoot)
             {
-                this._InputEncoding = value;
+                this._Encoding = value;
                 Console.InputEncoding = value;
-            }
-
-        }
-
-        protected virtual void UpdateOutputEncoding(Encoding value)
-        {
-            lock (this.SyncRoot)
-            {
-                this._OutputEncoding = value;
                 Console.OutputEncoding = value;
             }
 
@@ -76,8 +64,10 @@ namespace TwitchAPIs.Test
                 var readBuffer = this.ReadBuffer.ToString();
                 newCursorLeft = Math.Max(0, Math.Min(newCursorLeft, readBuffer.Length));
 
+                var bytesCount = this.Encoding.GetByteCount(readBuffer.ToCharArray(), 0, newCursorLeft);
+
                 this._CursorLeft = newCursorLeft;
-                Console.CursorLeft = prefixLength + this.CursorLeft;
+                Console.CursorLeft = prefixLength + bytesCount;
             }
 
         }
