@@ -31,8 +31,6 @@ namespace TwitchAPIs.Test
             this.ReadBuffer = new StringBuilder();
 
             this.RefreshLine();
-
-            this.WriteLine(Console.InputEncoding.CodePage + " : " + Console.OutputEncoding);
         }
 
         protected virtual void UpdateInputEncoding(Encoding value)
