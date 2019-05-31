@@ -13,7 +13,7 @@ namespace TwitchAPIs.Test
         private int _CursorLeft;
 
         public object SyncRoot { get; }
-        public StringBuilder ReadBuffer { get; set; }
+        public StringBuilder ReadBuffer { get; }
         public Encoding Encoding { get { return this._Encoding; } set { this.UpdateEncoding(value); } }
         public string ReadPrefix { get { return this._ReadPrefix; } set { this.UpdateReadPrefix(value); } }
         public int CursorLeft { get { return this._CursorLeft; } set { this.UpdateCursor(value); } }
