@@ -143,54 +143,6 @@ namespace TwitchAPIs.Test
 
         }
 
-        protected void WriteLine()
-        {
-            this.WriteLine(string.Empty);
-        }
-
-        public override void SendMessage()
-        {
-            this.WriteLine();
-        }
-
-        private void MoveCursorLeft(bool word)
-        {
-            lock (this.SyncRoot)
-            {
-                var cursor = this.CursorLeft;
-
-                if (word == true)
-                {
-                    this.CursorLeft = this.GetPrevWordIndex(cursor);
-                }
-                else
-                {
-                    this.CursorLeft = cursor - 1;
-                }
-
-            }
-
-        }
-
-        private void MoveCursorRight(bool word)
-        {
-            lock (this.SyncRoot)
-            {
-                var cursor = this.CursorLeft;
-
-                if (word == true)
-                {
-                    this.CursorLeft = this.GetNextWordIndex(cursor);
-                }
-                else
-                {
-                    this.CursorLeft = cursor + 1;
-                }
-
-            }
-
-        }
-
         public int GetPrevWordIndex(int cursor)
         {
             lock (this.SyncRoot)
@@ -235,22 +187,14 @@ namespace TwitchAPIs.Test
 
         }
 
-        public void MoveCursorHead()
+        protected void WriteLine()
         {
-            lock (this.SyncRoot)
-            {
-                this.CursorLeft = 0;
-            }
-
+            this.WriteLine(string.Empty);
         }
 
-        public void MoveCursorTail()
+        public override void SendMessage()
         {
-            lock (this.SyncRoot)
-            {
-                this.CursorLeft = this.InputBuffer.Length;
-            }
-
+            this.WriteLine();
         }
 
         public override string ReadInput()
@@ -331,6 +275,62 @@ namespace TwitchAPIs.Test
 
                 }
 
+            }
+
+        }
+
+        private void MoveCursorLeft(bool word)
+        {
+            lock (this.SyncRoot)
+            {
+                var cursor = this.CursorLeft;
+
+                if (word == true)
+                {
+                    this.CursorLeft = this.GetPrevWordIndex(cursor);
+                }
+                else
+                {
+                    this.CursorLeft = cursor - 1;
+                }
+
+            }
+
+        }
+
+        private void MoveCursorRight(bool word)
+        {
+            lock (this.SyncRoot)
+            {
+                var cursor = this.CursorLeft;
+
+                if (word == true)
+                {
+                    this.CursorLeft = this.GetNextWordIndex(cursor);
+                }
+                else
+                {
+                    this.CursorLeft = cursor + 1;
+                }
+
+            }
+
+        }
+
+        public void MoveCursorHead()
+        {
+            lock (this.SyncRoot)
+            {
+                this.CursorLeft = 0;
+            }
+
+        }
+
+        public void MoveCursorTail()
+        {
+            lock (this.SyncRoot)
+            {
+                this.CursorLeft = this.InputBuffer.Length;
             }
 
         }
