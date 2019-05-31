@@ -8,11 +8,13 @@ namespace TwitchAPIs.Test
 {
     public class InputSnapShot
     {
-        public string Text { get; }
-        public int CursorLeft { get; }
+        public InputEditType Type { get; set; }
+        public string Text { get; set; }
+        public int CursorLeft { get; set; }
 
-        public InputSnapShot(string text, int cursorLeft)
+        public InputSnapShot(InputEditType type, string text, int cursorLeft)
         {
+            this.Type = type;
             this.Text = text;
             this.CursorLeft = cursorLeft;
         }

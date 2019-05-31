@@ -8,8 +8,8 @@ namespace TwitchAPIs.Test
 {
     public class InputEditHistory
     {
-        public List<InputSnapShot> History { get; }
-        public int Cursor { get; private set; }
+        private List<InputSnapShot> History;
+        private int Cursor;
 
         public InputEditHistory()
         {
@@ -41,7 +41,7 @@ namespace TwitchAPIs.Test
 
         public InputSnapShot Prev()
         {
-            this.Cursor = Math.Max(0, this.Cursor - 1);
+            this.Cursor = Math.Max(-1, this.Cursor - 1);
             return this.Feach();
         }
 
@@ -57,7 +57,7 @@ namespace TwitchAPIs.Test
             this.Cursor = -1;
         }
 
-        public void Record(string input, int cursorLeft)
+        public void Record(InputEditType type, string text, int cursorLeft)
         {
             var history = this.History;
             var cursor = this.Cursor;
@@ -67,10 +67,38 @@ namespace TwitchAPIs.Test
             var removeCount = endIndex - startIndex;
             history.RemoveRange(startIndex, removeCount);
 
-            history.Add(new InputSnapShot(input, cursorLeft));
-            this.Cursor = history.Count - 1;
+            var prev = this.GetPrevIfTypeEquals(type, cursor);
+
+            if (prev != null)
+            {
+                prev.Text = text;
+                prev.CursorLeft = cursorLeft;
+            }
+            else
+            {
+                history.Add(new InputSnapShot(type, text, cursorLeft));
+                this.Cursor = history.Count - 1;
+            }
+
         }
 
+        private InputSnapShot GetPrevIfTypeEquals(InputEditType type, int cursor)
+        {
+            InputSnapShot prev = null;
+
+            if (cursor > -1)
+            {
+                var cursored = this.History[cursor];
+
+                if (cursored.Type == type)
+                {
+                    prev = cursored;
+                }
+
+            }
+
+            return prev;
+        }
     }
 
 }

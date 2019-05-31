@@ -29,7 +29,7 @@ namespace TwitchAPIs.Test
             this.InputBuffer = new StringBuilder();
             this.InputEditHistory = new InputEditHistory();
 
-            this.RefreshLine(false);
+            this.RefreshLine();
         }
 
         protected virtual void UpdateEncoding(Encoding value)
@@ -48,7 +48,7 @@ namespace TwitchAPIs.Test
             lock (this.SyncRoot)
             {
                 this._InputPrefix = value;
-                this.RefreshLine(false);
+                this.RefreshLine();
             }
 
         }
@@ -88,19 +88,17 @@ namespace TwitchAPIs.Test
 
         }
 
-        protected void RefreshLine(bool record)
+        protected void RefreshLine(InputEditType? editType = null)
         {
             lock (this.SyncRoot)
             {
                 this.ClearLine();
                 this.WriteInputBuffer();
 
-                if (record == true)
+                if (editType.HasValue == true)
                 {
                     var editHistory = this.InputEditHistory;
-                    editHistory.Record(this.InputBuffer.ToString(), this.CursorLeft);
-
-
+                    editHistory.Record(editType.Value, this.InputBuffer.ToString(), this.CursorLeft);
                 }
 
             }
@@ -261,13 +259,13 @@ namespace TwitchAPIs.Test
                         var count = cursor - wordIndex;
                         buffer.Remove(wordIndex, count);
                         this.CursorLeft -= count;
-                        this.RefreshLine(true);
+                        this.RefreshLine(InputEditType.Backspace);
                     }
                     else
                     {
                         buffer.Remove(cursor - 1, 1);
                         this.CursorLeft--;
-                        this.RefreshLine(true);
+                        this.RefreshLine(InputEditType.Backspace);
                     }
 
                 }
@@ -290,12 +288,12 @@ namespace TwitchAPIs.Test
                         var wordIndex = this.GetNextWordIndex(cursor);
                         var count = wordIndex - cursor;
                         buffer.Remove(cursor, count);
-                        this.RefreshLine(true);
+                        this.RefreshLine(InputEditType.Delete);
                     }
                     else
                     {
                         buffer.Remove(cursor, 1);
-                        this.RefreshLine(true);
+                        this.RefreshLine(InputEditType.Delete);
                     }
 
                 }
@@ -308,14 +306,8 @@ namespace TwitchAPIs.Test
         {
             var editHistory = this.InputEditHistory;
             var buffer = this.InputBuffer;
-
-            lock (this.SyncRoot)
-            {
-                editHistory.Clear();
-                buffer.Clear();
-
-                this.RefreshLine(true);
-            }
+            editHistory.Clear();
+            buffer.Clear();
 
             while (true)
             {
@@ -377,7 +369,7 @@ namespace TwitchAPIs.Test
                     {
                         buffer.Insert(this.CursorLeft, keyInfo.KeyChar);
                         this.CursorLeft++;
-                        this.RefreshLine(true);
+                        this.RefreshLine(InputEditType.Append);
                     }
 
                 }
@@ -393,15 +385,20 @@ namespace TwitchAPIs.Test
                 var editHistory = this.InputEditHistory;
                 var prev = editHistory.Prev();
 
+                var buffer = this.InputBuffer;
+                buffer.Clear();
+
                 if (prev != null)
                 {
-                    var buffer = this.InputBuffer;
-                    buffer.Clear();
                     buffer.Append(prev.Text);
                     this.CursorLeft = prev.CursorLeft;
-                    this.RefreshLine(false);
+                }
+                else
+                {
+                    this.CursorLeft = 0;
                 }
 
+                this.RefreshLine();
             }
 
         }
@@ -419,7 +416,7 @@ namespace TwitchAPIs.Test
                     buffer.Clear();
                     buffer.Append(next.Text);
                     this.CursorLeft = next.CursorLeft;
-                    this.RefreshLine(false);
+                    this.RefreshLine();
                 }
 
             }
