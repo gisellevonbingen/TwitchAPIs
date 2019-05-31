@@ -14,6 +14,7 @@ namespace TwitchAPIs.Test
 
         public object SyncRoot { get; }
         public StringBuilder InputBuffer { get; }
+        public InputEditHistory InputEditHistory { get; }
         public Encoding Encoding { get { return this._Encoding; } set { this.UpdateEncoding(value); } }
         public string InputPrefix { get { return this._InputPrefix; } set { this.UpdateInputPrefix(value); } }
         public int CursorLeft { get { return this._CursorLeft; } set { this.UpdateCursor(value); } }
@@ -26,8 +27,9 @@ namespace TwitchAPIs.Test
 
             this.SyncRoot = new object();
             this.InputBuffer = new StringBuilder();
+            this.InputEditHistory = new InputEditHistory();
 
-            this.RefreshLine();
+            this.RefreshLine(false);
         }
 
         protected virtual void UpdateEncoding(Encoding value)
@@ -46,7 +48,7 @@ namespace TwitchAPIs.Test
             lock (this.SyncRoot)
             {
                 this._InputPrefix = value;
-                this.RefreshLine();
+                this.RefreshLine(false);
             }
 
         }
@@ -61,10 +63,10 @@ namespace TwitchAPIs.Test
             lock (this.SyncRoot)
             {
                 var prefixLength = this.InputPrefix.Length;
-                var readBuffer = this.InputBuffer.ToString();
-                newCursorLeft = Math.Max(0, Math.Min(newCursorLeft, readBuffer.Length));
+                var inputBuffer = this.InputBuffer.ToString();
+                newCursorLeft = Math.Max(0, Math.Min(newCursorLeft, inputBuffer.Length));
 
-                var bytesCount = this.Encoding.GetByteCount(readBuffer.ToCharArray(), 0, newCursorLeft);
+                var bytesCount = this.Encoding.GetByteCount(inputBuffer.ToCharArray(), 0, newCursorLeft);
 
                 this._CursorLeft = newCursorLeft;
                 Console.CursorLeft = prefixLength + bytesCount;
@@ -86,12 +88,21 @@ namespace TwitchAPIs.Test
 
         }
 
-        protected void RefreshLine()
+        protected void RefreshLine(bool record)
         {
             lock (this.SyncRoot)
             {
                 this.ClearLine();
                 this.WriteInputBuffer();
+
+                if (record == true)
+                {
+                    var editHistory = this.InputEditHistory;
+                    editHistory.Record(this.InputBuffer.ToString(), this.CursorLeft);
+
+
+                }
+
             }
 
         }
@@ -177,11 +188,11 @@ namespace TwitchAPIs.Test
         {
             lock (this.SyncRoot)
             {
-                var readBuffer = this.InputBuffer.ToString();
+                var input = this.InputBuffer.ToString();
 
                 if (cursor > 1)
                 {
-                    var index = readBuffer.LastIndexOf(' ', cursor - 2);
+                    var index = input.LastIndexOf(' ', cursor - 2);
 
                     if (index != -1)
                     {
@@ -199,11 +210,11 @@ namespace TwitchAPIs.Test
         {
             lock (this.SyncRoot)
             {
-                var readBuffer = this.InputBuffer.ToString();
+                var input = this.InputBuffer.ToString();
 
-                if (cursor < readBuffer.Length)
+                if (cursor < input.Length)
                 {
-                    var index = readBuffer.IndexOf(' ', cursor + 1);
+                    var index = input.IndexOf(' ', cursor + 1);
 
                     if (index != -1)
                     {
@@ -212,7 +223,7 @@ namespace TwitchAPIs.Test
 
                 }
 
-                return readBuffer.Length;
+                return input.Length;
             }
 
         }
@@ -240,21 +251,25 @@ namespace TwitchAPIs.Test
             lock (this.SyncRoot)
             {
                 var cursor = this.CursorLeft;
-                var builder = this.InputBuffer;
+                var buffer = this.InputBuffer;
 
-                if (word == true)
+                if (cursor > 0)
                 {
-                    var wordIndex = this.GetPrevWordIndex(cursor);
-                    var count = cursor - wordIndex;
-                    builder.Remove(wordIndex, count);
-                    this.CursorLeft -= count;
-                    this.RefreshLine();
-                }
-                else if (cursor > 0)
-                {
-                    builder.Remove(cursor - 1, 1);
-                    this.CursorLeft--;
-                    this.RefreshLine();
+                    if (word == true)
+                    {
+                        var wordIndex = this.GetPrevWordIndex(cursor);
+                        var count = cursor - wordIndex;
+                        buffer.Remove(wordIndex, count);
+                        this.CursorLeft -= count;
+                        this.RefreshLine(true);
+                    }
+                    else
+                    {
+                        buffer.Remove(cursor - 1, 1);
+                        this.CursorLeft--;
+                        this.RefreshLine(true);
+                    }
+
                 }
 
             }
@@ -266,19 +281,23 @@ namespace TwitchAPIs.Test
             lock (this.SyncRoot)
             {
                 var cursor = this.CursorLeft;
-                var builder = this.InputBuffer;
+                var buffer = this.InputBuffer;
 
-                if (word == true)
+                if (cursor < buffer.Length)
                 {
-                    var wordIndex = this.GetNextWordIndex(cursor);
-                    var count = wordIndex - cursor;
-                    builder.Remove(cursor, count);
-                    this.RefreshLine();
-                }
-                else if (cursor < builder.Length)
-                {
-                    builder.Remove(cursor, 1);
-                    this.RefreshLine();
+                    if (word == true)
+                    {
+                        var wordIndex = this.GetNextWordIndex(cursor);
+                        var count = wordIndex - cursor;
+                        buffer.Remove(cursor, count);
+                        this.RefreshLine(true);
+                    }
+                    else
+                    {
+                        buffer.Remove(cursor, 1);
+                        this.RefreshLine(true);
+                    }
+
                 }
 
             }
@@ -287,8 +306,16 @@ namespace TwitchAPIs.Test
 
         public override string ReadInput()
         {
-            var builder = this.InputBuffer;
-            builder.Clear();
+            var editHistory = this.InputEditHistory;
+            var buffer = this.InputBuffer;
+
+            lock (this.SyncRoot)
+            {
+                editHistory.Clear();
+                buffer.Clear();
+
+                this.RefreshLine(true);
+            }
 
             while (true)
             {
@@ -300,8 +327,9 @@ namespace TwitchAPIs.Test
                 {
                     if (key == ConsoleKey.Enter)
                     {
-                        var input = builder.ToString();
-                        builder.Clear();
+                        var input = buffer.ToString();
+                        editHistory.Clear();
+                        buffer.Clear();
 
                         this.WriteLine(this.InputPrefix + input);
                         this.WriteLine();
@@ -337,13 +365,61 @@ namespace TwitchAPIs.Test
                     {
                         this.Delete(control);
                     }
+                    else if (key == ConsoleKey.Z && control == true)
+                    {
+                        this.PrevEdit();
+                    }
+                    else if (key == ConsoleKey.Y && control == true)
+                    {
+                        this.NextEdit();
+                    }
                     else
                     {
-                        builder.Insert(this.CursorLeft, keyInfo.KeyChar);
+                        buffer.Insert(this.CursorLeft, keyInfo.KeyChar);
                         this.CursorLeft++;
-                        this.RefreshLine();
+                        this.RefreshLine(true);
                     }
 
+                }
+
+            }
+
+        }
+
+        public void PrevEdit()
+        {
+            lock (this.SyncRoot)
+            {
+                var editHistory = this.InputEditHistory;
+                var prev = editHistory.Prev();
+
+                if (prev != null)
+                {
+                    var buffer = this.InputBuffer;
+                    buffer.Clear();
+                    buffer.Append(prev.Text);
+                    this.CursorLeft = prev.CursorLeft;
+                    this.RefreshLine(false);
+                }
+
+            }
+
+        }
+
+        public void NextEdit()
+        {
+            lock (this.SyncRoot)
+            {
+                var editHistory = this.InputEditHistory;
+                var next = editHistory.Next();
+
+                if (next != null)
+                {
+                    var buffer = this.InputBuffer;
+                    buffer.Clear();
+                    buffer.Append(next.Text);
+                    this.CursorLeft = next.CursorLeft;
+                    this.RefreshLine(false);
                 }
 
             }
