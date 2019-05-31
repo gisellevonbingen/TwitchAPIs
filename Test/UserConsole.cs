@@ -15,6 +15,7 @@ namespace TwitchAPIs.Test
         public object SyncRoot { get; }
         public StringBuilder InputBuffer { get; }
         public InputEditHistory InputEditHistory { get; }
+        public History<string> InputEnterHistory { get; }
         public Encoding Encoding { get { return this._Encoding; } set { this.UpdateEncoding(value); } }
         public string InputPrefix { get { return this._InputPrefix; } set { this.UpdateInputPrefix(value); } }
         public int CursorLeft { get { return this._CursorLeft; } set { this.UpdateCursor(value); } }
@@ -28,6 +29,7 @@ namespace TwitchAPIs.Test
             this.SyncRoot = new object();
             this.InputBuffer = new StringBuilder();
             this.InputEditHistory = new InputEditHistory();
+            this.InputEnterHistory = new History<string>(0);
 
             this.RefreshLine();
         }
@@ -88,7 +90,7 @@ namespace TwitchAPIs.Test
 
         }
 
-        protected void RefreshLine(InputEditType? editType = null)
+        protected void RefreshLine(InputEditType? editType = null, bool resetEnterCursor = true)
         {
             lock (this.SyncRoot)
             {
@@ -99,6 +101,13 @@ namespace TwitchAPIs.Test
                 {
                     var editHistory = this.InputEditHistory;
                     editHistory.Record(new InputEditSnapshot(editType.Value, this.InputBuffer.ToString(), this.CursorLeft));
+
+                }
+
+                if (resetEnterCursor == true)
+                {
+                    var inputEnterHistory = this.InputEnterHistory;
+                    inputEnterHistory.Cursor = inputEnterHistory.GetMaxCursor();
                 }
 
             }
@@ -327,6 +336,8 @@ namespace TwitchAPIs.Test
                         this.WriteLine();
                         this.CursorLeft = 0;
 
+                        this.InputEnterHistory.Record(input);
+
                         return input;
                     }
                     else if (key == ConsoleKey.LeftArrow)
@@ -345,9 +356,13 @@ namespace TwitchAPIs.Test
                     {
                         this.MoveCursorTail();
                     }
-                    else if (key == ConsoleKey.UpArrow || key == ConsoleKey.DownArrow)
+                    else if (key == ConsoleKey.UpArrow)
                     {
-
+                        this.PrevInput();
+                    }
+                    else if (key == ConsoleKey.DownArrow)
+                    {
+                        this.NextInput();
                     }
                     else if (key == ConsoleKey.Backspace)
                     {
@@ -374,6 +389,53 @@ namespace TwitchAPIs.Test
 
                 }
 
+            }
+
+        }
+
+        public void PrevInput()
+        {
+            lock (this.SyncRoot)
+            {
+                var enterHistory = this.InputEnterHistory;
+                var prev = enterHistory.Prev();
+
+                if (prev != null)
+                {
+                    var buffer = this.InputBuffer;
+                    buffer.Clear();
+                    buffer.Append(prev);
+                    this.CursorLeft = prev.Length;
+                    this.RefreshLine(resetEnterCursor: false);
+                }
+
+            }
+
+        }
+
+        public void NextInput()
+        {
+            lock (this.SyncRoot)
+            {
+                var enterHistory = this.InputEnterHistory;
+                var next = enterHistory.Next();
+
+                var buffer = this.InputBuffer;
+                buffer.Clear();
+
+                if (next != null)
+                {
+                    buffer.Append(next);
+                    this.CursorLeft = next.Length;
+                }
+                else
+                {
+                    var lastEdit = this.InputEditHistory.Feach();
+                    buffer.Append(lastEdit?.Text);
+                    this.CursorLeft = lastEdit?.CursorLeft ?? 0;
+                }
+
+                this.RefreshLine(resetEnterCursor: false);
             }
 
         }
