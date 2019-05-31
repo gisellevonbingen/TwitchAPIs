@@ -14,9 +14,21 @@ namespace TwitchAPIs.Test
 
         }
 
-        protected override void OnRecord(InputEditSnapshot value)
+        public void RemoveAfter(int cursor)
+        {
+            var list = this.List;
+            var startIndex = cursor - this.CursorOffset;
+            var endIndex = list.Count;
+            var removeCount = endIndex - startIndex;
+
+            list.RemoveRange(startIndex, removeCount);
+        }
+
+        public override void Record(InputEditSnapshot value)
         {
             var cursor = this.Cursor;
+            this.RemoveAfter(cursor);
+
             var prev = this.GetPrevIfTypeEquals(value.Type, cursor);
 
             if (prev != null)
@@ -26,7 +38,7 @@ namespace TwitchAPIs.Test
             }
             else
             {
-                base.OnRecord(value);
+                base.Record(value);
             }
 
         }

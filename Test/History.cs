@@ -10,7 +10,7 @@ namespace TwitchAPIs.Test
     {
         private int _Cursor;
 
-        private readonly List<T> List;
+        protected List<T> List { get; }
         public int CursorOffset { get; }
         public int Cursor { get { return this._Cursor; } set { this.UpdateCursor(value); } }
         public int Count { get { return this.List.Count; } }
@@ -81,24 +81,7 @@ namespace TwitchAPIs.Test
             this.Cursor = this.CursorOffset;
         }
 
-        public void RemoveAfter(int cursor)
-        {
-            var list = this.List;
-            var startIndex = cursor - this.CursorOffset;
-            var endIndex = list.Count;
-            var removeCount = endIndex - startIndex;
-
-            list.RemoveRange(startIndex, removeCount);
-        }
-
-        public void Record(T value)
-        {
-            this.RemoveAfter(this.Cursor);
-
-            this.OnRecord(value);
-        }
-
-        protected virtual void OnRecord(T value)
+        public virtual void Record(T value)
         {
             var list = this.List;
             list.Add(value);
