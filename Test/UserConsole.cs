@@ -9,23 +9,23 @@ namespace TwitchAPIs.Test
     public class UserConsole : UserAbstract
     {
         private Encoding _Encoding;
-        private string _ReadPrefix;
+        private string _InputPrefix;
         private int _CursorLeft;
 
         public object SyncRoot { get; }
-        public StringBuilder ReadBuffer { get; }
+        public StringBuilder InputBuffer { get; }
         public Encoding Encoding { get { return this._Encoding; } set { this.UpdateEncoding(value); } }
-        public string ReadPrefix { get { return this._ReadPrefix; } set { this.UpdateReadPrefix(value); } }
+        public string InputPrefix { get { return this._InputPrefix; } set { this.UpdateInputPrefix(value); } }
         public int CursorLeft { get { return this._CursorLeft; } set { this.UpdateCursor(value); } }
 
         public UserConsole()
         {
             this._Encoding = Console.InputEncoding;
-            this._ReadPrefix = "> ";
+            this._InputPrefix = "> ";
             this._CursorLeft = 0;
 
             this.SyncRoot = new object();
-            this.ReadBuffer = new StringBuilder();
+            this.InputBuffer = new StringBuilder();
 
             this.RefreshLine();
         }
@@ -41,11 +41,11 @@ namespace TwitchAPIs.Test
 
         }
 
-        protected virtual void UpdateReadPrefix(string value)
+        protected virtual void UpdateInputPrefix(string value)
         {
             lock (this.SyncRoot)
             {
-                this._ReadPrefix = value;
+                this._InputPrefix = value;
                 this.RefreshLine();
             }
 
@@ -60,8 +60,8 @@ namespace TwitchAPIs.Test
         {
             lock (this.SyncRoot)
             {
-                var prefixLength = this.ReadPrefix.Length;
-                var readBuffer = this.ReadBuffer.ToString();
+                var prefixLength = this.InputPrefix.Length;
+                var readBuffer = this.InputBuffer.ToString();
                 newCursorLeft = Math.Max(0, Math.Min(newCursorLeft, readBuffer.Length));
 
                 var bytesCount = this.Encoding.GetByteCount(readBuffer.ToCharArray(), 0, newCursorLeft);
@@ -81,7 +81,7 @@ namespace TwitchAPIs.Test
                 Console.CursorLeft = 0;
                 Console.WriteLine(str);
 
-                this.WriteReadBuffer();
+                this.WriteInputBuffer();
             }
 
         }
@@ -91,17 +91,17 @@ namespace TwitchAPIs.Test
             lock (this.SyncRoot)
             {
                 this.ClearLine();
-                this.WriteReadBuffer();
+                this.WriteInputBuffer();
             }
 
         }
 
-        protected void WriteReadBuffer()
+        protected void WriteInputBuffer()
         {
             lock (this.SyncRoot)
             {
                 Console.CursorLeft = 0;
-                Console.Write(this.ReadPrefix + this.ReadBuffer);
+                Console.Write(this.InputPrefix + this.InputBuffer);
 
                 this.UpdateCursor();
             }
@@ -177,7 +177,7 @@ namespace TwitchAPIs.Test
         {
             lock (this.SyncRoot)
             {
-                var readBuffer = this.ReadBuffer.ToString();
+                var readBuffer = this.InputBuffer.ToString();
 
                 if (cursor > 1)
                 {
@@ -199,7 +199,7 @@ namespace TwitchAPIs.Test
         {
             lock (this.SyncRoot)
             {
-                var readBuffer = this.ReadBuffer.ToString();
+                var readBuffer = this.InputBuffer.ToString();
 
                 if (cursor < readBuffer.Length)
                 {
@@ -230,7 +230,7 @@ namespace TwitchAPIs.Test
         {
             lock (this.SyncRoot)
             {
-                this.CursorLeft = this.ReadBuffer.Length;
+                this.CursorLeft = this.InputBuffer.Length;
             }
 
         }
@@ -240,7 +240,7 @@ namespace TwitchAPIs.Test
             lock (this.SyncRoot)
             {
                 var cursor = this.CursorLeft;
-                var builder = this.ReadBuffer;
+                var builder = this.InputBuffer;
 
                 if (word == true)
                 {
@@ -266,7 +266,7 @@ namespace TwitchAPIs.Test
             lock (this.SyncRoot)
             {
                 var cursor = this.CursorLeft;
-                var builder = this.ReadBuffer;
+                var builder = this.InputBuffer;
 
                 if (word == true)
                 {
@@ -287,7 +287,7 @@ namespace TwitchAPIs.Test
 
         public override string ReadInput()
         {
-            var builder = this.ReadBuffer;
+            var builder = this.InputBuffer;
             builder.Clear();
 
             while (true)
@@ -303,7 +303,7 @@ namespace TwitchAPIs.Test
                         var input = builder.ToString();
                         builder.Clear();
 
-                        this.WriteLine(this.ReadPrefix + input);
+                        this.WriteLine(this.InputPrefix + input);
                         this.WriteLine();
                         this.CursorLeft = 0;
 
