@@ -8,15 +8,39 @@ namespace TwitchAPIs.Test
 {
     public class History<T>
     {
-        private readonly List<T> List;
-        public int Cursor { get; private set; }
+        private int _Cursor;
 
-        public History()
+        private readonly List<T> List;
+        public int CursorOffset { get; }
+        public int Cursor { get { return this._Cursor; } set { this.UpdateCursor(value); } }
+        public int Count { get { return this.List.Count; } }
+
+        public History(int cursorOffset)
         {
+            this._Cursor = 0;
+
+            this.CursorOffset = cursorOffset;
             this.List = new List<T>();
-            this.Cursor = -1;
 
             this.Clear();
+        }
+
+        protected virtual void UpdateCursor(int value)
+        {
+            this._Cursor = Math.Min(this.GetMaxCursor(), Math.Max(this.GetMinCursor(), value));
+        }
+
+        public int GetMinCursor()
+        {
+            return this.CursorOffset;
+        }
+
+        public int GetMaxCursor()
+        {
+            var list = this.List;
+            var cursorOffset = this.CursorOffset;
+
+            return list.Count + cursorOffset;
         }
 
         public T Feach()
@@ -41,26 +65,26 @@ namespace TwitchAPIs.Test
 
         public T Prev()
         {
-            this.Cursor = Math.Max(-1, this.Cursor - 1);
+            this.Cursor--;
             return this.Feach();
         }
 
         public T Next()
         {
-            this.Cursor = Math.Min(this.List.Count - 1, this.Cursor + 1);
+            this.Cursor++;
             return this.Feach();
         }
 
         public void Clear()
         {
             this.List.Clear();
-            this.Cursor = -1;
+            this.Cursor = this.CursorOffset;
         }
 
         public void RemoveAfter(int cursor)
         {
             var list = this.List;
-            var startIndex = cursor + 1;
+            var startIndex = cursor - this.CursorOffset;
             var endIndex = list.Count;
             var removeCount = endIndex - startIndex;
 
@@ -78,7 +102,7 @@ namespace TwitchAPIs.Test
         {
             var list = this.List;
             list.Add(value);
-            this.Cursor = list.Count - 1;
+            this.Cursor = list.Count + this.CursorOffset;
         }
 
     }

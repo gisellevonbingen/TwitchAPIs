@@ -9,6 +9,7 @@ namespace TwitchAPIs.Test
     public class InputEditHistory : History<InputEditSnapshot>
     {
         public InputEditHistory()
+            : base(-1)
         {
 
         }
