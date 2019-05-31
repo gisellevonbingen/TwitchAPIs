@@ -98,7 +98,7 @@ namespace TwitchAPIs.Test
                 if (editType.HasValue == true)
                 {
                     var editHistory = this.InputEditHistory;
-                    editHistory.Record(editType.Value, this.InputBuffer.ToString(), this.CursorLeft);
+                    editHistory.Record(new InputEditSnapshot(editType.Value, this.InputBuffer.ToString(), this.CursorLeft));
                 }
 
             }

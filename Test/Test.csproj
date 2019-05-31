@@ -48,9 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="History.cs" />
     <Compile Include="InputEditHistory.cs" />
     <Compile Include="InputEditType.cs" />
-    <Compile Include="InputSnapShot.cs" />
+    <Compile Include="InputEditSnapshot.cs" />
     <Compile Include="PrintableLine.cs" />
     <Compile Include="TestGetChannel.cs" />
     <Compile Include="TestGetChatBadges.cs" />
