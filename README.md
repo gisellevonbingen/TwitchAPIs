@@ -23,3 +23,4 @@
 * Get Channel, Channels
 * Get Top Games
 * Get Chat Badges
+* Get Channel's Chat Rooms
