@@ -253,64 +253,6 @@ namespace TwitchAPIs.Test
 
         }
 
-        public void Backspace(bool word)
-        {
-            lock (this.SyncRoot)
-            {
-                var cursor = this.CursorLeft;
-                var buffer = this.InputBuffer;
-
-                if (cursor > 0)
-                {
-                    if (word == true)
-                    {
-                        var wordIndex = this.GetPrevWordIndex(cursor);
-                        var count = cursor - wordIndex;
-                        buffer.Remove(wordIndex, count);
-                        this.CursorLeft -= count;
-                        this.RefreshLine(InputEditType.Backspace);
-                    }
-                    else
-                    {
-                        buffer.Remove(cursor - 1, 1);
-                        this.CursorLeft--;
-                        this.RefreshLine(InputEditType.Backspace);
-                    }
-
-                }
-
-            }
-
-        }
-
-        public void Delete(bool word)
-        {
-            lock (this.SyncRoot)
-            {
-                var cursor = this.CursorLeft;
-                var buffer = this.InputBuffer;
-
-                if (cursor < buffer.Length)
-                {
-                    if (word == true)
-                    {
-                        var wordIndex = this.GetNextWordIndex(cursor);
-                        var count = wordIndex - cursor;
-                        buffer.Remove(cursor, count);
-                        this.RefreshLine(InputEditType.Delete);
-                    }
-                    else
-                    {
-                        buffer.Remove(cursor, 1);
-                        this.RefreshLine(InputEditType.Delete);
-                    }
-
-                }
-
-            }
-
-        }
-
         public override string ReadInput()
         {
             var editHistory = this.InputEditHistory;
@@ -385,6 +327,64 @@ namespace TwitchAPIs.Test
                         buffer.Insert(this.CursorLeft, keyInfo.KeyChar);
                         this.CursorLeft++;
                         this.RefreshLine(InputEditType.Append);
+                    }
+
+                }
+
+            }
+
+        }
+
+        public void Backspace(bool word)
+        {
+            lock (this.SyncRoot)
+            {
+                var cursor = this.CursorLeft;
+                var buffer = this.InputBuffer;
+
+                if (cursor > 0)
+                {
+                    if (word == true)
+                    {
+                        var wordIndex = this.GetPrevWordIndex(cursor);
+                        var count = cursor - wordIndex;
+                        buffer.Remove(wordIndex, count);
+                        this.CursorLeft -= count;
+                        this.RefreshLine(InputEditType.Backspace);
+                    }
+                    else
+                    {
+                        buffer.Remove(cursor - 1, 1);
+                        this.CursorLeft--;
+                        this.RefreshLine(InputEditType.Backspace);
+                    }
+
+                }
+
+            }
+
+        }
+
+        public void Delete(bool word)
+        {
+            lock (this.SyncRoot)
+            {
+                var cursor = this.CursorLeft;
+                var buffer = this.InputBuffer;
+
+                if (cursor < buffer.Length)
+                {
+                    if (word == true)
+                    {
+                        var wordIndex = this.GetNextWordIndex(cursor);
+                        var count = wordIndex - cursor;
+                        buffer.Remove(cursor, count);
+                        this.RefreshLine(InputEditType.Delete);
+                    }
+                    else
+                    {
+                        buffer.Remove(cursor, 1);
+                        this.RefreshLine(InputEditType.Delete);
                     }
 
                 }
