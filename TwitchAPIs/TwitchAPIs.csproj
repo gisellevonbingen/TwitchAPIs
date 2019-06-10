@@ -55,7 +55,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HttpUtility2.cs" />
-    <Compile Include="NumberUtils.cs" />
     <Compile Include="OAuthAccessTokenRequest.cs" />
     <Compile Include="OAuthAuthorization.cs" />
     <Compile Include="OAuthRequest.cs" />
