@@ -15,6 +15,22 @@ namespace TwitchAPIs
 
         }
 
+        public TwitchBadgeSet GetIntegrationBadges(string channelName)
+        {
+            var req = new RequestParameter();
+            req.URL = $"https://cbenni.com/api/badges/{channelName}";
+            req.Method = "GET";
+
+            using (var res = this.Parent.Web.Request(req))
+            {
+                var set = new TwitchBadgeSet();
+                set.Read(res.ReadAsJSON());
+
+                return set;
+            }
+
+        }
+
         public TwitchBadgeSet GetGlobalBadges()
         {
             var req = new RequestParameter();
