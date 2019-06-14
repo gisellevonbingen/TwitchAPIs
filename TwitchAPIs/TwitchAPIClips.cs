@@ -22,12 +22,7 @@ namespace TwitchAPIs
 
             apiRequest.QueryValues.Add("broadcaster_id", options.BroadcasterId);
             apiRequest.QueryValues.Add("game_id", options.GameId);
-
-            foreach (var id in options.Ids)
-            {
-                apiRequest.QueryValues.Add("id", id);
-            }
-
+            apiRequest.QueryValues.AddRange("id", options.Ids);
             apiRequest.QueryValues.Add("after", options.After);
             apiRequest.QueryValues.Add("before", options.Before);
             apiRequest.QueryValues.Add("ended_at", options.EndedAt);

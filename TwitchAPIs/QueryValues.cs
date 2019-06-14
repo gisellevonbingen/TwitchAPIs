@@ -76,6 +76,19 @@ namespace TwitchAPIs
             this.Add(new QueryValue(key, string.Concat(value)));
         }
 
+        public void AddRange<T>(string key, IEnumerable<T> values)
+        {
+            if (values != null)
+            {
+                foreach (var value in values)
+                {
+                    this.Add(key, value);
+                }
+
+            }
+
+        }
+
         public string Single(string key)
         {
             return this.FirstOrDefault(pair => pair.Key.Equals(key, StringComparison.OrdinalIgnoreCase)).Value;
