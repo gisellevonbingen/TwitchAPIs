@@ -125,7 +125,6 @@ namespace TwitchAPIs.Test
             else if (obj is IEnumerable enumerable)
             {
                 var array = enumerable.OfType<object>().ToArray();
-                list.Add(new PrintableLine(level, $"Enumerable Count = {array.Length}"));
 
                 for (int i = 0; i < array.Length; i++)
                 {
@@ -140,8 +139,6 @@ namespace TwitchAPIs.Test
                 var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.GetProperty);
 
                 list.Add(new PrintableLine(level, $"Type.FullName = {type.FullName}"));
-                list.Add(new PrintableLine(level, $"Properties.Length = {properties.Length}"));
-
                 for (int i = 0; i < properties.Length; i++)
                 {
                     var property = properties[i];
