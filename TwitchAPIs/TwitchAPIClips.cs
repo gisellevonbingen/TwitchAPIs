@@ -19,7 +19,6 @@ namespace TwitchAPIs
             apiRequest.Version = APIVersion.New;
             apiRequest.Path = "clips";
             apiRequest.Method = "GET";
-
             apiRequest.QueryValues.Add("broadcaster_id", options.BroadcasterId);
             apiRequest.QueryValues.Add("game_id", options.GameId);
             apiRequest.QueryValues.AddRange("id", options.Ids);
