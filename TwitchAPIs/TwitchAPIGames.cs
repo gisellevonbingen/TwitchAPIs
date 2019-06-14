@@ -14,6 +14,21 @@ namespace TwitchAPIs
 
         }
 
+        public TwitchGameNew[] GetGames(string id, string name)
+        {
+            var apiRequest = new TwitchAPIRequest();
+            apiRequest.Version = APIVersion.New;
+            apiRequest.Path = "games";
+            apiRequest.Method = "GET";
+            apiRequest.QueryValues.Add("id", id);
+            apiRequest.QueryValues.Add("name", name);
+            var jToken = this.Parent.RequestAsJson(apiRequest);
+
+            var games = jToken.ReadArray("data", t => new TwitchGameNew().Read(t)) ?? new TwitchGameNew[0];
+
+            return games;
+        }
+
         public TwitchTopGames GetTopGames(int? limit = null, int? offset = null)
         {
             var apiRequest = new TwitchAPIRequest();

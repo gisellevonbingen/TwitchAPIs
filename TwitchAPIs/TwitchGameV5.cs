@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TwitchAPIs
 {
-    public class TwitchGame
+    public class TwitchGameV5
     {
         public string Id { get; set; }
         public TwitchImageSet Box { get; set; }
@@ -16,12 +16,12 @@ namespace TwitchAPIs
         public string Name { get; set; }
         public int Popularity { get; set; }
 
-        public TwitchGame()
+        public TwitchGameV5()
         {
 
         }
 
-        public TwitchGame Read(JToken jToken)
+        public TwitchGameV5 Read(JToken jToken)
         {
             this.Id = jToken.Value<string>("_id");
             this.Box = jToken.ReadIfExist("box", t => new TwitchImageSet().Read(t));

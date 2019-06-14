@@ -14,7 +14,7 @@ namespace TwitchAPIs
 
         }
 
-        public TwitchGame[] SearchGames(string query, bool? live = null)
+        public TwitchGameV5[] SearchGames(string query, bool? live = null)
         {
             var apiRequest = new TwitchAPIRequest();
             apiRequest.Version = APIVersion.V5;
@@ -24,7 +24,7 @@ namespace TwitchAPIs
             apiRequest.QueryValues.Add("live", live);
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
-            return jToken.ReadArray("games", t => new TwitchGame().Read(t)) ?? new TwitchGame[0];
+            return jToken.ReadArray("games", t => new TwitchGameV5().Read(t)) ?? new TwitchGameV5[0];
         }
 
         public TwitchChannel[] SearchChannels(string query, int? limit = null, int? offset = null)

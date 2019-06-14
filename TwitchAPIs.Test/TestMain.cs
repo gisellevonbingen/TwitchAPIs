@@ -72,6 +72,7 @@ namespace TwitchAPIs.Test
             tests.Add(new TestGetChatRooms());
             tests.Add(new TestGetClips());
             tests.Add(new TestGetAllStreamTags());
+            tests.Add(new TestGetGames());
 
             while (true)
             {
