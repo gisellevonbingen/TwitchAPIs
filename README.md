@@ -27,3 +27,4 @@
 * Get Chat Badges
 * Get Channel's Chat Rooms
 * Get Clips
+* Get All Stream Tags
