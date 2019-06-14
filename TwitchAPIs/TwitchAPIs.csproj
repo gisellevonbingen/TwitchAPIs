@@ -64,6 +64,7 @@
     <Compile Include="OAuthRequestOption.cs" />
     <Compile Include="OAuthRequestToken.cs" />
     <Compile Include="OAuthResponseType.cs" />
+    <Compile Include="Pagination.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="APIVersion.cs" />
     <Compile Include="QueryValue.cs" />
