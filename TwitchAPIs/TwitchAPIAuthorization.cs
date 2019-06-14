@@ -57,7 +57,7 @@ namespace TwitchAPIs
             queryValues["client_id"] = this.Parent.ClientId;
             queryValues["client_secret"] = clientSecret;
 
-            var jToken = this.Parent.Request(new TwitchAPIRequestParameter() { Method = "POST", BaseURL = "https://id.twitch.tv/oauth2/token", QueryValues = queryValues });
+            var jToken = this.Parent.Request(new TwitchAPIRequestParameter() { Method = "POST", BaseURL = "https://id.twitch.tv/oauth2/token", QueryValues = queryValues }, , "status");
 
             var value = new OAuthAuthorization();
             value.Read(jToken);
