@@ -23,21 +23,25 @@ namespace TwitchAPIs
 
             var setToken = token.Value<JObject>("badge_sets");
 
-            foreach (var pair in setToken)
+            if (setToken != null)
             {
-                var name = pair.Key.ToLowerInvariant();
-                var versions = new Dictionary<string, TwitchBadge>();
-                set[name] = versions;
-
-                var versionsToken = pair.Value.Value<JObject>("versions");
-
-                foreach (var pair2 in versionsToken)
+                foreach (var pair in setToken)
                 {
-                    var version = pair2.Key.ToLowerInvariant();
-                    var badge = new TwitchBadge();
-                    badge.Read(pair2.Value);
+                    var name = pair.Key.ToLowerInvariant();
+                    var versions = new Dictionary<string, TwitchBadge>();
+                    set[name] = versions;
 
-                    versions[version] = badge;
+                    var versionsToken = pair.Value.Value<JObject>("versions");
+
+                    foreach (var pair2 in versionsToken)
+                    {
+                        var version = pair2.Key.ToLowerInvariant();
+                        var badge = new TwitchBadge();
+                        badge.Read(pair2.Value);
+
+                        versions[version] = badge;
+                    }
+
                 }
 
             }
