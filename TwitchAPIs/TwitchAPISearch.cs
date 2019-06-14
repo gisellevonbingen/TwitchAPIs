@@ -23,8 +23,8 @@ namespace TwitchAPIs
                 path += $"&live={live.Value}";
             }
 
-            var token = this.Parent.Request(APIVersion.V5, path, "GET");
-            return token.ReadArray("games", t => new TwitchGame().Read(t)) ?? new TwitchGame[0];
+            var jToken = this.Parent.Request(APIVersion.V5, path, "GET");
+            return jToken.ReadArray("games", t => new TwitchGame().Read(t)) ?? new TwitchGame[0];
         }
 
         public TwitchChannel[] SearchChannels(string query, int? limit = null, int? offset = null)
@@ -41,8 +41,8 @@ namespace TwitchAPIs
                 path += $"&offset={offset.Value}";
             }
 
-            var token = this.Parent.Request(APIVersion.V5, path, "GET");
-            return token.ReadArray("channels", t => new TwitchChannel().Read(t)) ?? new TwitchChannel[0];
+            var jToken = this.Parent.Request(APIVersion.V5, path, "GET");
+            return jToken.ReadArray("channels", t => new TwitchChannel().Read(t)) ?? new TwitchChannel[0];
         }
 
     }

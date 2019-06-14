@@ -18,9 +18,9 @@ namespace TwitchAPIs
         public TwitchUser UpdateUser(string description)
         {
             var path = $"users?description={HttpUtility.UrlEncode(description)}";
-            var token = this.Parent.Request(APIVersion.New, path, "PUT");
+            var jToken = this.Parent.Request(APIVersion.New, path, "PUT");
 
-            return this.ParseUsers(token).FirstOrDefault();
+            return this.ParseUsers(jToken).FirstOrDefault();
         }
 
         public TwitchUserFollows GetUserFollows(FollowsType type, string id)
@@ -37,12 +37,12 @@ namespace TwitchAPIs
                 path += "&after=" + cursor;
             }
 
-            var jobj = this.Parent.Request(APIVersion.New, path, "GET");
+            var jToken = this.Parent.Request(APIVersion.New, path, "GET");
 
             var uerFollows = new TwitchUserFollows();
-            uerFollows.Total = jobj.Value<int>("total");
-            uerFollows.Cursor = jobj["pagination"].Value<string>("cursor");
-            uerFollows.Follows = jobj.ReadArray("data", t => new TwitchFollow().Read(t, type)) ?? new TwitchFollow[0];
+            uerFollows.Total = jToken.Value<int>("total");
+            uerFollows.Cursor = jToken["pagination"].Value<string>("cursor");
+            uerFollows.Follows = jToken.ReadArray("data", t => new TwitchFollow().Read(t, type)) ?? new TwitchFollow[0];
 
             return uerFollows;
         }
@@ -56,9 +56,9 @@ namespace TwitchAPIs
         public TwitchUser[] GetUsers(IEnumerable<UserRequest> requests)
         {
             var path = $"users?{string.Join("&", requests)}";
-            var token = this.Parent.Request(APIVersion.New, path, "GET");
+            var jToken = this.Parent.Request(APIVersion.New, path, "GET");
 
-            return this.ParseUsers(token);
+            return this.ParseUsers(jToken);
         }
 
         private TwitchUser[] ParseUsers(JToken token)
