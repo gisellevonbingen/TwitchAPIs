@@ -151,7 +151,7 @@ namespace TwitchAPIs
                 baseURI = new Uri($"{this.GetRequestBaseURL(version.Value)}{path}");
             }
 
-            return baseURI ?? throw new TwitchException($"{nameof(baseURL)} or {nameof(version)} is not specificated");
+            return baseURI ?? throw new TwitchException($"{nameof(baseURL)} or {nameof(version)}, {nameof(path)} is not specificated");
         }
 
     }
