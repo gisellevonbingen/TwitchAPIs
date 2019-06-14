@@ -57,7 +57,7 @@ namespace TwitchAPIs
             return null;
         }
 
-        public Pagination GetPaination(JToken jToken, string key)
+        public Pagination GetPaination(JToken jToken, string key = "pagination")
         {
             var paginationToken = jToken[key];
 

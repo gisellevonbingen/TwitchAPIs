@@ -45,7 +45,7 @@ namespace TwitchAPIs
 
             var uerFollows = new TwitchUserFollows();
             uerFollows.Total = jToken.Value<int>("total");
-            uerFollows.Cursor = this.Parent.GetPaination(jToken, "pagination")?.Cursor;
+            uerFollows.Cursor = this.Parent.GetPaination(jToken)?.Cursor;
             uerFollows.Follows = jToken.ReadArray("data", t => new TwitchFollow().Read(t, type)) ?? new TwitchFollow[0];
 
             return uerFollows;
