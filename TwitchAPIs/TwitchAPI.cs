@@ -73,7 +73,7 @@ namespace TwitchAPIs
             return null;
         }
 
-        public void SetupRequest(RequestParameter request, APIVersion version)
+        public void SetupRequest(WebRequestParameter request, APIVersion version)
         {
             var headers = request.Headers;
             headers["Client-Id"] = this.ClientId;
@@ -100,28 +100,28 @@ namespace TwitchAPIs
 
         }
 
-        public SessionResponse Request(string url, string method)
+        public WebResponse Request(string url, string method)
         {
             var request = this.CreateRequest(url, method);
             return this.Web.Request(request);
         }
 
-        public SessionResponse Request(APIVersion version, string path, string method)
+        public WebResponse Request(APIVersion version, string path, string method)
         {
             var request = this.CreateRequest(version, path, method);
             return this.Web.Request(request);
         }
 
-        public RequestParameter CreateRequest(string url, string method)
+        public WebRequestParameter CreateRequest(string url, string method)
         {
-            var request = new RequestParameter();
+            var request = new WebRequestParameter();
             request.URL = url;
             request.Method = method;
 
             return request;
         }
 
-        public RequestParameter CreateRequest(APIVersion version, string path, string method)
+        public WebRequestParameter CreateRequest(APIVersion version, string path, string method)
         {
             var url = this.GetRequestBaseURL(version) + path;
             var request = this.CreateRequest(url, method);

@@ -10,7 +10,7 @@ namespace TwitchAPIs
 {
     public static class WebExplorerExtenstions
     {
-        public static JToken ReadAsJSON(this SessionResponse session)
+        public static JToken ReadAsJSON(this WebResponse session)
         {
             var content = session.ReadAsString();
             var jToken = JObject.Parse(content);
