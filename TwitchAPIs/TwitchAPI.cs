@@ -88,12 +88,12 @@ namespace TwitchAPIs
 
             var error = errorKey != null ? jToken.Value<string>(errorKey) : null;
 
-            if (error != null)
+            if (string.IsNullOrWhiteSpace(error) == false)
             {
                 var messageKey = "message";
                 string message = messageKey != null ? jToken.Value<string>(messageKey) : null;
 
-                if (message != null)
+                if (string.IsNullOrWhiteSpace(message) == false)
                 {
                     throw new TwitchException($"{error} - {message}");
                 }
