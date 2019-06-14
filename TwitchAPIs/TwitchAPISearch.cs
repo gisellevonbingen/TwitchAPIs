@@ -24,25 +24,7 @@ namespace TwitchAPIs
             }
 
             var token = this.Parent.Request(APIVersion.V5, path, "GET");
-            return this.ParseGames(token["games"] as JArray);
-        }
-
-        public TwitchGame[] ParseGames(JArray arrayToken)
-        {
-            if (arrayToken == null)
-            {
-                return new TwitchGame[0];
-            }
-
-            var values = new TwitchGame[arrayToken.Count];
-
-            for (int i = 0; i < values.Length; i++)
-            {
-                var itemToken = arrayToken[i];
-                values[i] = new TwitchGame().Read(itemToken);
-            }
-
-            return values;
+            return token.ReadArray("games", t => new TwitchGame().Read(t)) ?? new TwitchGame[0];
         }
 
         public TwitchChannel[] SearchChannels(string query, int? limit = null, int? offset = null)
@@ -60,26 +42,7 @@ namespace TwitchAPIs
             }
 
             var token = this.Parent.Request(APIVersion.V5, path, "GET");
-            return this.ParseChannels(token["channels"] as JArray);
-        }
-
-        public TwitchChannel[] ParseChannels(JArray arrayToken)
-        {
-            if (arrayToken == null)
-            {
-                return new TwitchChannel[0];
-            }
-
-            var values = new TwitchChannel[arrayToken.Count];
-
-            for (int i = 0; i < values.Length; i++)
-            {
-                var itemToken = arrayToken[i];
-                var value = values[i] = new TwitchChannel();
-                value.Read(itemToken);
-            }
-
-            return values;
+            return token.ReadArray("channels", t => new TwitchChannel().Read(t)) ?? new TwitchChannel[0];
         }
 
     }
