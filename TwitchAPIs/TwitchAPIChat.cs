@@ -16,9 +16,9 @@ namespace TwitchAPIs
 
         public TwtichChatRoom[] GetChatRooms(string channelId)
         {
-            var url = $"https://api.twitch.tv/kraken/chat/{channelId}/rooms";
+            var path = $"chat/{channelId}/rooms";
 
-            using (var res = this.Parent.Request(APIVersion.V5, url, "GET"))
+            using (var res = this.Parent.Request(APIVersion.V5, path, "GET"))
             {
                 var token = res.ReadAsJSON();
                 var roomsToken = token.Value<JArray>("rooms");

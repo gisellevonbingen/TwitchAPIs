@@ -15,9 +15,9 @@ namespace TwitchAPIs
 
         public TwitchChannel GetChannel()
         {
-            var url = "https://api.twitch.tv/kraken/channel";
+            var path = "channel";
 
-            using (var res = this.Parent.Request(APIVersion.V5, url, "GET"))
+            using (var res = this.Parent.Request(APIVersion.V5, path, "GET"))
             {
                 var jToken = this.Parent.EnsureNotError(res.ReadAsJSON());
                 var channel = new TwitchChannel();
@@ -30,9 +30,9 @@ namespace TwitchAPIs
 
         public TwitchChannel GetChannel(string id)
         {
-            var url = $"https://api.twitch.tv/kraken/channels/{id}";
+            var path = $"channels/{id}";
 
-            using (var res = this.Parent.Request(APIVersion.V5, url, "GET"))
+            using (var res = this.Parent.Request(APIVersion.V5, path, "GET"))
             {
                 var jToken = this.Parent.EnsureNotError(res.ReadAsJSON());
                 var channel = new TwitchChannel();

@@ -28,15 +28,15 @@ namespace TwitchAPIs
                 query["offset"] = offset.Value.ToString();
             }
 
-            var url = "https://api.twitch.tv/kraken/games/top";
+            var path = "games/top";
             var queryToString = string.Join("&", query.Select(pair => $"{pair.Key}={pair.Value}"));
 
             if (string.IsNullOrEmpty(queryToString) == false)
             {
-                url += "?" + queryToString;
+                path += "?" + queryToString;
             }
 
-            using (var res = this.Parent.Request(APIVersion.V5, url, "GET"))
+            using (var res = this.Parent.Request(APIVersion.V5, path, "GET"))
             {
                 var jToken = res.ReadAsJSON();
                 var value = new TwitchTopGames();

@@ -16,14 +16,14 @@ namespace TwitchAPIs
 
         public TwitchGame[] SearchGames(string query, bool? live = null)
         {
-            var url = $"https://api.twitch.tv/kraken/search/games?query={query}";
+            var path = $"search/games?query={query}";
 
             if (live.HasValue == true)
             {
-                url += $"&live={live.Value}";
+                path += $"&live={live.Value}";
             }
 
-            using (var res = this.Parent.Request(APIVersion.V5, url, "GET"))
+            using (var res = this.Parent.Request(APIVersion.V5, path, "GET"))
             {
                 var token = res.ReadAsJSON();
                 this.Parent.EnsureNotError(token);
@@ -52,19 +52,19 @@ namespace TwitchAPIs
 
         public TwitchChannel[] SearchChannels(string query, int? limit = null, int? offset = null)
         {
-            var url = $"https://api.twitch.tv/kraken/search/channels?query={query}";
+            var path = $"search/channels?query={query}";
 
             if (limit.HasValue == true)
             {
-                url += $"&limit={limit.Value}";
+                path += $"&limit={limit.Value}";
             }
 
             if (offset.HasValue == true)
             {
-                url += $"&offset={offset.Value}";
+                path += $"&offset={offset.Value}";
             }
 
-            using (var res = this.Parent.Request(APIVersion.V5, url, "GET"))
+            using (var res = this.Parent.Request(APIVersion.V5, path, "GET"))
             {
                 var token = res.ReadAsJSON();
                 return this.ParseChannels(token["channels"] as JArray);

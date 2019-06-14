@@ -59,22 +59,38 @@ namespace TwitchAPIs
             return this.EnsureNotError(token, "error", "message");
         }
 
-        public void SetupRequest(RequestParameter request, APIVersion version)
+        public string GetRequestBaseURL(APIVersion version)
+        {
+            if (version == APIVersion.New)
+            {
+                return "https://api.twitch.tv/helix/";
+            }
+            else if (version == APIVersion.V5)
+            {
+                return "https://api.twitch.tv/kraken/";
+            }
+
+            return null;
+        }
+
+        public void SetupRequest(RequestParameter request)
         {
             var headers = request.Headers;
             headers["Client-Id"] = this.ClientId;
+        }
 
+        public void SetupRequest(RequestParameter request, APIVersion version)
+        {
+            var headers = request.Headers;
             var accessToken = this.AccessToken;
 
             if (accessToken != null)
             {
-                var url = request.URL.ToLowerInvariant();
-
-                if (url.StartsWith("https://api.twitch.tv/helix/") == true)
+                if (version == APIVersion.New)
                 {
                     headers["Authorization"] = $"Bearer {accessToken}";
                 }
-                else if (url.StartsWith("https://api.twitch.tv/kraken/") == true)
+                else if (version == APIVersion.V5)
                 {
                     headers["Authorization"] = $"OAuth {accessToken}";
                 }
@@ -88,17 +104,33 @@ namespace TwitchAPIs
 
         }
 
-        public SessionResponse Request(APIVersion version, string url, string method)
+        public SessionResponse Request(string url, string method)
         {
-            var request = this.CreateRequest(version, url, method);
+            var request = this.CreateRequest(url, method);
             return this.Web.Request(request);
         }
 
-        public RequestParameter CreateRequest(APIVersion version, string url, string method)
+        public SessionResponse Request(APIVersion version, string path, string method)
+        {
+            var request = this.CreateRequest(version, path, method);
+            return this.Web.Request(request);
+        }
+
+        public RequestParameter CreateRequest(string url, string method)
         {
             var request = new RequestParameter();
             request.URL = url;
             request.Method = method;
+            this.SetupRequest(request);
+
+            return request;
+        }
+
+        public RequestParameter CreateRequest(APIVersion version, string path, string method)
+        {
+            var url = this.GetRequestBaseURL(version) + path;
+            var request = this.CreateRequest(url, method);
+
             this.SetupRequest(request, version);
 
             return request;

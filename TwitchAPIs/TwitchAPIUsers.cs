@@ -18,9 +18,9 @@ namespace TwitchAPIs
 
         public TwitchUser UpdateUser(string description)
         {
-            var url = $"https://api.twitch.tv/helix/users?description={HttpUtility.UrlEncode(description)}";
+            var path = $"users?description={HttpUtility.UrlEncode(description)}";
 
-            using (var res = this.Parent.Request(APIVersion.New, url, "PUT"))
+            using (var res = this.Parent.Request(APIVersion.New, path, "PUT"))
             {
                 return this.ParseUsers(res.ReadAsJSON()).FirstOrDefault();
             }
@@ -34,14 +34,14 @@ namespace TwitchAPIs
 
         public TwitchUserFollows GetUserFollows(FollowsType type, string id, string cursor)
         {
-            var url = $"https://api.twitch.tv/helix/users/follows?{type.Request}_id={id}";
+            var path = $"users/follows?{type.Request}_id={id}";
 
             if (cursor != null)
             {
-                url += "&after=" + cursor;
+                path += "&after=" + cursor;
             }
 
-            using (var res = this.Parent.Request(APIVersion.New, url, "GET"))
+            using (var res = this.Parent.Request(APIVersion.New, path, "GET"))
             {
                 var jobj = this.Parent.EnsureNotError(res.ReadAsJSON());
                 var data = jobj.Value<JArray>("data");
@@ -72,9 +72,9 @@ namespace TwitchAPIs
 
         public TwitchUser[] GetUsers(IEnumerable<UserRequest> requests)
         {
-            var url = $"https://api.twitch.tv/helix/users?{string.Join("&", requests)}";
+            var path = $"users?{string.Join("&", requests)}";
 
-            using (var res = this.Parent.Request(APIVersion.New, url, "GET"))
+            using (var res = this.Parent.Request(APIVersion.New, path, "GET"))
             {
                 return this.ParseUsers(res.ReadAsJSON());
             }
