@@ -73,15 +73,11 @@ namespace TwitchAPIs
             return null;
         }
 
-        public void SetupRequest(RequestParameter request)
-        {
-            var headers = request.Headers;
-            headers["Client-Id"] = this.ClientId;
-        }
-
         public void SetupRequest(RequestParameter request, APIVersion version)
         {
             var headers = request.Headers;
+            headers["Client-Id"] = this.ClientId;
+
             var accessToken = this.AccessToken;
 
             if (accessToken != null)
@@ -121,7 +117,6 @@ namespace TwitchAPIs
             var request = new RequestParameter();
             request.URL = url;
             request.Method = method;
-            this.SetupRequest(request);
 
             return request;
         }
