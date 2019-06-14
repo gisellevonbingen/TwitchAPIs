@@ -15,7 +15,11 @@ namespace TwitchAPIs
 
         public TwitchChannel GetChannel()
         {
-            var jToken = this.Parent.Request(new TwitchAPIRequestParameter() { Method = "GET", Path = "channel", Version = APIVersion.V5});
+            var apiRequest = new TwitchAPIRequestParameter();
+            apiRequest.Version = APIVersion.V5;
+            apiRequest.Path = "channel";
+            apiRequest.Method = "GET";
+            var jToken = this.Parent.Request(apiRequest);
 
             var channel = new TwitchChannel();
             channel.Read(jToken);
@@ -25,7 +29,11 @@ namespace TwitchAPIs
 
         public TwitchChannel GetChannel(string id)
         {
-            var jToken = this.Parent.Request(new TwitchAPIRequestParameter() { Method = "GET", Path = $"channels/{id}", Version = APIVersion.V5 });
+            var apiRequest = new TwitchAPIRequestParameter();
+            apiRequest.Version = APIVersion.V5;
+            apiRequest.Path = $"channels/{id}";
+            apiRequest.Method = "GET";
+            var jToken = this.Parent.Request(apiRequest);
 
             var channel = new TwitchChannel();
             channel.Read(jToken);

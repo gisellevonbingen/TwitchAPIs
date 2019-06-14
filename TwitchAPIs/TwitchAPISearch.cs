@@ -16,21 +16,27 @@ namespace TwitchAPIs
 
         public TwitchGame[] SearchGames(string query, bool? live = null)
         {
-            var queryValues = new Dictionary<string, string>();
-            queryValues["query"] = query;
-            queryValues["live"] = live.ToString();
-            var jToken = this.Parent.Request(new TwitchAPIRequestParameter() { Method = "GET", Path = "search/games", QueryValues = queryValues, Version = APIVersion.V5 });
+            var apiRequest = new TwitchAPIRequestParameter();
+            apiRequest.Version = APIVersion.V5;
+            apiRequest.Path = "search/games";
+            apiRequest.Method = "GET";
+            apiRequest.AddQueryValue("query", query);
+            apiRequest.AddQueryValue("live", live.ToString());
+            var jToken = this.Parent.Request(apiRequest);
 
             return jToken.ReadArray("games", t => new TwitchGame().Read(t)) ?? new TwitchGame[0];
         }
 
         public TwitchChannel[] SearchChannels(string query, int? limit = null, int? offset = null)
         {
-            var queryValues = new Dictionary<string, string>();
-            queryValues["query"] = query;
-            queryValues["limit"] = limit.ToString();
-            queryValues["offset"] = offset.ToString();
-            var jToken = this.Parent.Request(new TwitchAPIRequestParameter() { Method = "GET", Path = "search/channels", QueryValues = queryValues, Version = APIVersion.V5 });
+            var apiRequest = new TwitchAPIRequestParameter();
+            apiRequest.Version = APIVersion.V5;
+            apiRequest.Path = "search/channels";
+            apiRequest.Method = "GET";
+            apiRequest.AddQueryValue("query", query);
+            apiRequest.AddQueryValue("limit", limit.ToString());
+            apiRequest.AddQueryValue("offset", offset.ToString());
+            var jToken = this.Parent.Request(apiRequest);
 
             return jToken.ReadArray("channels", t => new TwitchChannel().Read(t)) ?? new TwitchChannel[0];
         }

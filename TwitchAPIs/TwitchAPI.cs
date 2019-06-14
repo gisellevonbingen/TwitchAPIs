@@ -136,16 +136,16 @@ namespace TwitchAPIs
             return request;
         }
 
-        private Dictionary<string, string> MergeQuery(string query, Dictionary<string, string> queryValues)
+        private List<QueryValue> MergeQuery(string query, List<QueryValue> queryValues)
         {
-            var merged = new Dictionary<string, string>();
+            var merged = new List<QueryValue>();
 
             var originalQueryValues = HttpUtility.ParseQueryString(query);
 
             foreach (var key in originalQueryValues.AllKeys)
             {
                 var value = originalQueryValues[key];
-                merged[key] = value;
+                merged.Add(new QueryValue(key, value));
             }
 
             if (queryValues != null)
@@ -157,7 +157,7 @@ namespace TwitchAPIs
 
                     if (string.IsNullOrWhiteSpace(key) == false && string.IsNullOrWhiteSpace(value) == false)
                     {
-                        merged[pair.Key] = pair.Value;
+                        merged.Add(new QueryValue(key, value));
                     }
 
                 }

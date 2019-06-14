@@ -16,10 +16,13 @@ namespace TwitchAPIs
 
         public TwitchTopGames GetTopGames(int? limit = null, int? offset = null)
         {
-            var queryValues = new Dictionary<string, string>();
-            queryValues["limit"] = limit?.ToString();
-            queryValues["offset"] = offset?.ToString();
-            var jToken = this.Parent.Request(new TwitchAPIRequestParameter() { Method = "GET", Path = "games/top", Version = APIVersion.V5, QueryValues = queryValues });
+            var apiRequest = new TwitchAPIRequestParameter();
+            apiRequest.Version = APIVersion.V5;
+            apiRequest.Path = "games/top";
+            apiRequest.Method = "GET";
+            apiRequest.AddQueryValue("limit", limit?.ToString());
+            apiRequest.AddQueryValue("offset", offset?.ToString());
+            var jToken = this.Parent.Request(apiRequest);
 
             var value = new TwitchTopGames();
             value.Read(jToken);

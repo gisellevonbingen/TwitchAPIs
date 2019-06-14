@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Giselle.Commons;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,9 +18,12 @@ namespace TwitchAPIs
 
         public TwitchUser UpdateUser(string description)
         {
-            var queryValues = new Dictionary<string, string>();
-            queryValues["description"] = HttpUtility.UrlEncode(description);
-            var jToken = this.Parent.Request(new TwitchAPIRequestParameter() { Method = "PUT", Version = APIVersion.New, Path = "users", QueryValues = queryValues });
+            var apiRequest = new TwitchAPIRequestParameter();
+            apiRequest.Version = APIVersion.New;
+            apiRequest.Path = "users";
+            apiRequest.Method = "PUT";
+            apiRequest.AddQueryValue("description", HttpUtility.UrlEncode(description));
+            var jToken = this.Parent.Request(apiRequest);
 
             return this.ParseUsers(jToken).FirstOrDefault();
         }
@@ -31,11 +35,13 @@ namespace TwitchAPIs
 
         public TwitchUserFollows GetUserFollows(FollowsType type, string id, string cursor)
         {
-            var queryValues = new Dictionary<string, string>();
-            queryValues[$"{type.Request}_id"] = id;
-            queryValues[$"after"] = cursor;
-
-            var jToken = this.Parent.Request(new TwitchAPIRequestParameter() { Method = "GET", Version = APIVersion.New, Path = "users/follows", QueryValues = queryValues });
+            var apiRequest = new TwitchAPIRequestParameter();
+            apiRequest.Version = APIVersion.New;
+            apiRequest.Path = "users/follows";
+            apiRequest.Method = "GET";
+            apiRequest.AddQueryValue($"{type.Request}_id", id);
+            apiRequest.AddQueryValue($"after", cursor);
+            var jToken = this.Parent.Request(apiRequest);
 
             var uerFollows = new TwitchUserFollows();
             uerFollows.Total = jToken.Value<int>("total");
@@ -53,8 +59,12 @@ namespace TwitchAPIs
 
         public TwitchUser[] GetUsers(IEnumerable<UserRequest> requests)
         {
-            var queryValues = requests.ToDictionary(r => r.Type.ToString().ToLowerInvariant(), r => r.Value);
-            var jToken = this.Parent.Request(new TwitchAPIRequestParameter() { Method = "GET", Path = "users", QueryValues = queryValues, Version = APIVersion.New });
+            var apiRequest = new TwitchAPIRequestParameter();
+            apiRequest.Version = APIVersion.New;
+            apiRequest.Path = "users";
+            apiRequest.Method = "GET";
+            apiRequest.QueryValues.AddRange(requests.Select(r => new QueryValue(r.Type.ToString().ToLowerInvariant(), r.Value)));
+            var jToken = this.Parent.Request(apiRequest);
 
             return this.ParseUsers(jToken);
         }

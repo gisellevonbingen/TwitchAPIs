@@ -51,13 +51,14 @@ namespace TwitchAPIs
 
         public OAuthAuthorization RefreshOAuthAuthorization(string refreshToken, string clientSecret)
         {
-            var queryValues = new Dictionary<string, string>();
-            queryValues["grant_type"] = "refresh_token";
-            queryValues["refresh_token"] = refreshToken;
-            queryValues["client_id"] = this.Parent.ClientId;
-            queryValues["client_secret"] = clientSecret;
-
-            var jToken = this.Parent.Request(new TwitchAPIRequestParameter() { Method = "POST", BaseURL = "https://id.twitch.tv/oauth2/token", QueryValues = queryValues }, , "status");
+            var apiRequest = new TwitchAPIRequestParameter();
+            apiRequest.BaseURL = "https://id.twitch.tv/oauth2/token";
+            apiRequest.Method = "POST";
+            apiRequest.AddQueryValue("grant_type", "refresh_token");
+            apiRequest.AddQueryValue("refresh_token", refreshToken);
+            apiRequest.AddQueryValue("client_id", this.Parent.ClientId);
+            apiRequest.AddQueryValue("client_secret", clientSecret);
+            var jToken = this.Parent.Request(apiRequest, "status");
 
             var value = new OAuthAuthorization();
             value.Read(jToken);
@@ -85,13 +86,15 @@ namespace TwitchAPIs
 
         public OAuthAuthorization GetOAuthAuthorization(OAuthAccessTokenRequest request)
         {
-            var queryValues = new Dictionary<string, string>();
-            queryValues["client_id"] = this.Parent.ClientId;
-            queryValues["client_secret"] = request.ClientSecret;
-            queryValues["code"] = request.Code;
-            queryValues["grant_type"] = "authorization_code";
-            queryValues["redirect_uri"] = request.RedirectURI;
-            var jToken = this.Parent.Request(new TwitchAPIRequestParameter() { Method = "POST", BaseURL = "https://id.twitch.tv/oauth2/token", QueryValues = queryValues }, "status");
+            var apiRequest = new TwitchAPIRequestParameter();
+            apiRequest.BaseURL = "https://id.twitch.tv/oauth2/token";
+            apiRequest.Method = "POST";
+            apiRequest.AddQueryValue("client_id", this.Parent.ClientId);
+            apiRequest.AddQueryValue("client_secret", request.ClientSecret);
+            apiRequest.AddQueryValue("code", request.Code);
+            apiRequest.AddQueryValue("grant_type", "authorization_code");
+            apiRequest.AddQueryValue("redirect_uri", request.RedirectURI);
+            var jToken = this.Parent.Request(apiRequest, "status");
 
             var value = new OAuthAuthorization();
             value.Read(jToken);
