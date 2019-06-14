@@ -54,9 +54,9 @@ namespace TwitchAPIs
             return StringUtils.AddPrefix(string.Join(HttpUtility2.QueryValuesDelimiter, this), HttpUtility2.QuerySeparator);
         }
 
-        public void Add(string key, string value)
+        public void Add<T>(string key, T value)
         {
-            this.Add(new QueryValue(key, value));
+            this.Add(new QueryValue(key, string.Concat(value)));
         }
 
         public string Single(string key)
