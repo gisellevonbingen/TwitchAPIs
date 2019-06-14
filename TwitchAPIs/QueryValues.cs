@@ -19,22 +19,26 @@ namespace TwitchAPIs
 
             foreach (var pair in splits)
             {
-                var delimiterIndex = pair.IndexOf(valueDelimiter);
-                string key = null;
-                string value = null;
-
-                if (delimiterIndex == -1)
+                if (string.IsNullOrWhiteSpace(pair) == false)
                 {
-                    key = pair;
-                }
-                else
-                {
-                    key = pair.Substring(0, delimiterIndex);
-                    var valueStartIndex = delimiterIndex + valueDelimiter.Length;
-                    value = pair.Substring(valueStartIndex, pair.Length - valueStartIndex);
+                    var delimiterIndex = pair.IndexOf(valueDelimiter);
+                    string key = null;
+                    string value = null;
+
+                    if (delimiterIndex == -1)
+                    {
+                        key = pair;
+                    }
+                    else
+                    {
+                        key = pair.Substring(0, delimiterIndex);
+                        var valueStartIndex = delimiterIndex + valueDelimiter.Length;
+                        value = pair.Substring(valueStartIndex, pair.Length - valueStartIndex);
+                    }
+
+                    queryValues.Add(new QueryValue(key, value));
                 }
 
-                queryValues.Add(new QueryValue(key, value));
             }
 
             return queryValues;
