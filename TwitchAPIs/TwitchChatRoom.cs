@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TwitchAPIs
 {
-    public class TwtichChatRoom
+    public class TwitchChatRoom
     {
         public string Id { get; set; }
         public string OwnerId { get; set; }
@@ -16,12 +16,12 @@ namespace TwitchAPIs
         public bool Previewable { get; set; }
         public string MinimumAllowedRole { get; set; }
 
-        public TwtichChatRoom()
+        public TwitchChatRoom()
         {
 
         }
 
-        public TwtichChatRoom Read(JToken token)
+        public TwitchChatRoom Read(JToken token)
         {
             this.Id = token.Value<string>("_id");
             this.OwnerId = token.Value<string>("owner_id");

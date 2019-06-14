@@ -14,7 +14,7 @@ namespace TwitchAPIs
 
         }
 
-        public TwtichChatRoom[] GetChatRooms(string channelId)
+        public TwitchChatRoom[] GetChatRooms(string channelId)
         {
             var apiRequest = new TwitchAPIRequest();
             apiRequest.Version = APIVersion.V5;
@@ -22,7 +22,7 @@ namespace TwitchAPIs
             apiRequest.Method = "GET";
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
-            return jToken.ReadArray("rooms", t => new TwtichChatRoom().Read(t)) ?? new TwtichChatRoom[0];
+            return jToken.ReadArray("rooms", t => new TwitchChatRoom().Read(t)) ?? new TwitchChatRoom[0];
         }
 
     }
