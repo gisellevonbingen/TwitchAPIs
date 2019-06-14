@@ -120,7 +120,12 @@ namespace TwitchAPIs
         public JToken Request(TwitchAPIRequestParameter apiRequest, string errorKey = null)
         {
             var webRequest = this.CreateWebRequest(apiRequest);
-            return this.ReadAsJSONThrowIfError(this.Web.Request(webRequest), errorKey);
+
+            using (var response = this.Web.Request(webRequest))
+            {
+                return this.ReadAsJSONThrowIfError(response, errorKey);
+            }
+
         }
 
         public WebRequestParameter CreateWebRequest(TwitchAPIRequestParameter apiRequest)
