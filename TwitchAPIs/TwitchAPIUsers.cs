@@ -19,11 +19,7 @@ namespace TwitchAPIs
         {
             var path = $"users?description={HttpUtility.UrlEncode(description)}";
 
-            using (var res = this.Parent.Request(APIVersion.New, path, "PUT"))
-            {
-                return this.ParseUsers(res.ReadAsJSON()).FirstOrDefault();
-            }
-
+            return this.ParseUsers(this.Parent.Request(APIVersion.New, path, "PUT")).FirstOrDefault();
         }
 
         public TwitchUserFollows GetUserFollows(FollowsType type, string id)
@@ -40,27 +36,23 @@ namespace TwitchAPIs
                 path += "&after=" + cursor;
             }
 
-            using (var res = this.Parent.Request(APIVersion.New, path, "GET"))
+            var jobj = this.Parent.Request(APIVersion.New, path, "GET");
+            var data = jobj.Value<JArray>("data");
+
+            var uerFollows = new TwitchUserFollows();
+            uerFollows.Total = jobj.Value<int>("total");
+            uerFollows.Cursor = jobj["pagination"].Value<string>("cursor");
+
+            var follows = uerFollows.Follows = new TwitchFollow[data.Count];
+
+            for (int i = 0; i < data.Count; i++)
             {
-                var jobj = this.Parent.EnsureNotError(res.ReadAsJSON());
-                var data = jobj.Value<JArray>("data");
-
-                var uerFollows = new TwitchUserFollows();
-                uerFollows.Total = jobj.Value<int>("total");
-                uerFollows.Cursor = jobj["pagination"].Value<string>("cursor");
-
-                var follows = uerFollows.Follows = new TwitchFollow[data.Count];
-
-                for (int i = 0; i < data.Count; i++)
-                {
-                    var token = data[i];
-                    var follow = follows[i] = new TwitchFollow();
-                    follow.Read(token, type);
-                }
-
-                return uerFollows;
+                var token = data[i];
+                var follow = follows[i] = new TwitchFollow();
+                follow.Read(token, type);
             }
 
+            return uerFollows;
         }
 
         public TwitchUser GetUser(UserRequest request)
@@ -73,17 +65,11 @@ namespace TwitchAPIs
         {
             var path = $"users?{string.Join("&", requests)}";
 
-            using (var res = this.Parent.Request(APIVersion.New, path, "GET"))
-            {
-                return this.ParseUsers(res.ReadAsJSON());
-            }
-
+            return this.ParseUsers(this.Parent.Request(APIVersion.New, path, "GET"));
         }
 
         public TwitchUser[] ParseUsers(JToken token)
         {
-            this.Parent.EnsureNotError(token);
-
             var data = token["data"] as JArray;
 
             if (data == null)

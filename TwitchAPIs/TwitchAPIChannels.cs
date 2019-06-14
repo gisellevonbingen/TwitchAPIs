@@ -17,30 +17,22 @@ namespace TwitchAPIs
         {
             var path = "channel";
 
-            using (var res = this.Parent.Request(APIVersion.V5, path, "GET"))
-            {
-                var jToken = this.Parent.EnsureNotError(res.ReadAsJSON());
-                var channel = new TwitchChannel();
-                channel.Read(jToken);
+            var jToken = this.Parent.Request(APIVersion.V5, path, "GET");
+            var channel = new TwitchChannel();
+            channel.Read(jToken);
 
-                return channel;
-            }
-
+            return channel;
         }
 
         public TwitchChannel GetChannel(string id)
         {
             var path = $"channels/{id}";
 
-            using (var res = this.Parent.Request(APIVersion.V5, path, "GET"))
-            {
-                var jToken = this.Parent.EnsureNotError(res.ReadAsJSON());
-                var channel = new TwitchChannel();
-                channel.Read(jToken);
+            var jToken = this.Parent.Request(APIVersion.V5, path, "GET");
+            var channel = new TwitchChannel();
+            channel.Read(jToken);
 
-                return channel;
-            }
-
+            return channel;
         }
 
     }

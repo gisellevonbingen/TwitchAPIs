@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Giselle.Commons.Web;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -56,16 +57,12 @@ namespace TwitchAPIs
             url += $"&client_id={this.Parent.ClientId}";
             url += $"&client_secret={clientSecret}";
 
-            using (var res = this.Parent.Request(url, "POST"))
-            {
-                var jToken = res.ReadAsJSON();
-                this.Parent.EnsureNotError(jToken, "status", "message");
+            var jToken = this.Parent.Request(url, "POST", "status", "message");
 
-                var value = new OAuthAuthorization();
-                value.Read(jToken);
-                return value;
-            }
+            var value = new OAuthAuthorization();
+            value.Read(jToken);
 
+            return value;
         }
 
         public void EnsureOAuthStateEquals(NameValueCollection map, OAuthRequest request)
@@ -95,16 +92,12 @@ namespace TwitchAPIs
             url += $"&grant_type=authorization_code";
             url += $"&redirect_uri={request.RedirectURI}";
 
-            using (var res = this.Parent.Request(url, "POST"))
-            {
-                var jToken = res.ReadAsJSON();
-                this.Parent.EnsureNotError(jToken, "status", "message");
+            var jToken = this.Parent.Request(url, "POST", "status", "message");
 
-                var value = new OAuthAuthorization();
-                value.Read(jToken);
-                return value;
-            }
+            var value = new OAuthAuthorization();
+            value.Read(jToken);
 
+            return value;
         }
 
         public string GetOAuthURI(OAuthRequest request)
@@ -128,7 +121,11 @@ namespace TwitchAPIs
                 url += $"&state={state}";
             }
 
-            using (var res = this.Parent.Request(url, "GET"))
+            var req = new WebRequestParameter();
+            req.URL = url;
+            req.Method = "GET";
+
+            using (var res = this.Parent.Web.Request(req))
             {
                 return res.Impl.ResponseUri.AbsoluteUri;
             }

@@ -41,24 +41,6 @@ namespace TwitchAPIs
             this.AccessToken = null;
         }
 
-        public JToken EnsureNotError(JToken token, string checkKey, string messageKey)
-        {
-            var error = token.Value<string>(checkKey);
-
-            if (error != null)
-            {
-                var message = token.Value<string>(messageKey);
-                throw new TwitchException(error + " - " + message);
-            }
-
-            return token;
-        }
-
-        public JToken EnsureNotError(JToken token)
-        {
-            return this.EnsureNotError(token, "error", "message");
-        }
-
         public string GetRequestBaseURL(APIVersion version)
         {
             if (version == APIVersion.New)
@@ -100,16 +82,52 @@ namespace TwitchAPIs
 
         }
 
-        public WebResponse Request(string url, string method)
+        public void ThrowIfError(APIVersion? version, JToken jToken, string errorKey = null, string messageKey = null)
         {
-            var request = this.CreateRequest(url, method);
-            return this.Web.Request(request);
+            if (version == APIVersion.V5)
+            {
+                errorKey = errorKey ?? "error";
+                messageKey = messageKey ?? "message";
+            }
+
+            var error = errorKey != null ? jToken.Value<string>(errorKey) : null;
+
+            if (error != null)
+            {
+                string message = messageKey != null ? jToken.Value<string>(messageKey) : null;
+
+                if (message != null)
+                {
+                    throw new TwitchException($"{error} - {message}");
+                }
+                else
+                {
+                    throw new TwitchException($"{error}");
+                }
+
+            }
+
         }
 
-        public WebResponse Request(APIVersion version, string path, string method)
+        public JToken ReadAsJSON(APIVersion? version, WebResponse response, string errorKey = null, string messageKey = null)
+        {
+            var jToken = response.ReadAsJSON();
+
+            this.ThrowIfError(version, jToken, errorKey, messageKey);
+
+            return jToken;
+        }
+
+        public JToken Request(string url, string method, string errorKey = null, string messageKey = null)
+        {
+            var request = this.CreateRequest(url, method);
+            return this.ReadAsJSON(null, this.Web.Request(request), errorKey, messageKey);
+        }
+
+        public JToken Request(APIVersion version, string path, string method, string errorKey = null, string messageKey = null)
         {
             var request = this.CreateRequest(version, path, method);
-            return this.Web.Request(request);
+            return this.ReadAsJSON(version, this.Web.Request(request), errorKey, messageKey);
         }
 
         public WebRequestParameter CreateRequest(string url, string method)

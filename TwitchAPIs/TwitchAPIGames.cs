@@ -36,15 +36,11 @@ namespace TwitchAPIs
                 path += "?" + queryToString;
             }
 
-            using (var res = this.Parent.Request(APIVersion.V5, path, "GET"))
-            {
-                var jToken = res.ReadAsJSON();
-                var value = new TwitchTopGames();
-                value.Read(jToken);
+            var jToken = this.Parent.Request(APIVersion.V5, path, "GET");
+            var value = new TwitchTopGames();
+            value.Read(jToken);
 
-                return value;
-            }
-            
+            return value;
         }
 
     }

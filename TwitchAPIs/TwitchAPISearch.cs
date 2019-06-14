@@ -23,13 +23,8 @@ namespace TwitchAPIs
                 path += $"&live={live.Value}";
             }
 
-            using (var res = this.Parent.Request(APIVersion.V5, path, "GET"))
-            {
-                var token = res.ReadAsJSON();
-                this.Parent.EnsureNotError(token);
-                return this.ParseGames(token["games"] as JArray);
-            }
-
+            var token = this.Parent.Request(APIVersion.V5, path, "GET");
+            return this.ParseGames(token["games"] as JArray);
         }
 
         public TwitchGame[] ParseGames(JArray arrayToken)
@@ -64,12 +59,8 @@ namespace TwitchAPIs
                 path += $"&offset={offset.Value}";
             }
 
-            using (var res = this.Parent.Request(APIVersion.V5, path, "GET"))
-            {
-                var token = res.ReadAsJSON();
-                return this.ParseChannels(token["channels"] as JArray);
-            }
-
+            var token = this.Parent.Request(APIVersion.V5, path, "GET");
+            return this.ParseChannels(token["channels"] as JArray);
         }
 
         public TwitchChannel[] ParseChannels(JArray arrayToken)
