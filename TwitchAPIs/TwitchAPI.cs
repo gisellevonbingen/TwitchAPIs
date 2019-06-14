@@ -126,45 +126,16 @@ namespace TwitchAPIs
         public WebRequestParameter CreateWebRequest(TwitchAPIRequestParameter apiRequest)
         {
             var baseURI = this.GetBaseURI(apiRequest.BaseURL, apiRequest.Version, apiRequest.Path);
-            var mergedQuery = this.MergeQuery(baseURI.Query, apiRequest.QueryValues);
+            var queryValues = new QueryValues();
+            queryValues.AddRange(QueryValues.Parse(baseURI.Query));
+            queryValues.AddRange(apiRequest.QueryValues);
 
             var request = new WebRequestParameter();
-            request.URL = $"{baseURI.Scheme}{Uri.SchemeDelimiter}{baseURI.Host}{baseURI.LocalPath}?{string.Join("&", mergedQuery.Select(pair => $"{pair.Key}={pair.Value}"))}";
+            request.URL = $"{baseURI.Scheme}{Uri.SchemeDelimiter}{baseURI.Host}{baseURI.LocalPath}?{queryValues}";
             request.Method = apiRequest.Method;
             this.SetupRequest(request, apiRequest.Version);
 
             return request;
-        }
-
-        private List<QueryValue> MergeQuery(string query, List<QueryValue> queryValues)
-        {
-            var merged = new List<QueryValue>();
-
-            var originalQueryValues = HttpUtility.ParseQueryString(query);
-
-            foreach (var key in originalQueryValues.AllKeys)
-            {
-                var value = originalQueryValues[key];
-                merged.Add(new QueryValue(key, value));
-            }
-
-            if (queryValues != null)
-            {
-                foreach (var pair in queryValues)
-                {
-                    var key = pair.Key;
-                    var value = pair.Value;
-
-                    if (string.IsNullOrWhiteSpace(key) == false && string.IsNullOrWhiteSpace(value) == false)
-                    {
-                        merged.Add(new QueryValue(key, value));
-                    }
-
-                }
-
-            }
-
-            return merged;
         }
 
         private Uri GetBaseURI(string baseURL, APIVersion? version, string path)

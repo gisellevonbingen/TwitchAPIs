@@ -22,7 +22,7 @@ namespace TwitchAPIs
             apiRequest.Version = APIVersion.New;
             apiRequest.Path = "users";
             apiRequest.Method = "PUT";
-            apiRequest.AddQueryValue("description", HttpUtility.UrlEncode(description));
+            apiRequest.QueryValues.Add("description", HttpUtility.UrlEncode(description));
             var jToken = this.Parent.Request(apiRequest);
 
             return this.ParseUsers(jToken).FirstOrDefault();
@@ -39,8 +39,8 @@ namespace TwitchAPIs
             apiRequest.Version = APIVersion.New;
             apiRequest.Path = "users/follows";
             apiRequest.Method = "GET";
-            apiRequest.AddQueryValue($"{type.Request}_id", id);
-            apiRequest.AddQueryValue($"after", cursor);
+            apiRequest.QueryValues.Add($"{type.Request}_id", id);
+            apiRequest.QueryValues.Add($"after", cursor);
             var jToken = this.Parent.Request(apiRequest);
 
             var uerFollows = new TwitchUserFollows();

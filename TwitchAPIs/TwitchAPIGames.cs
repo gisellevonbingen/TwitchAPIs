@@ -20,8 +20,8 @@ namespace TwitchAPIs
             apiRequest.Version = APIVersion.V5;
             apiRequest.Path = "games/top";
             apiRequest.Method = "GET";
-            apiRequest.AddQueryValue("limit", limit?.ToString());
-            apiRequest.AddQueryValue("offset", offset?.ToString());
+            apiRequest.QueryValues.Add("limit", limit?.ToString());
+            apiRequest.QueryValues.Add("offset", offset?.ToString());
             var jToken = this.Parent.Request(apiRequest);
 
             var value = new TwitchTopGames();

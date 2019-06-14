@@ -11,17 +11,12 @@ namespace TwitchAPIs
         public APIVersion? Version { get; set; }
         public string BaseURL { get; set; }
         public string Path { get; set; }
-        public List<QueryValue> QueryValues { get; }
+        public QueryValues QueryValues { get; }
         public string Method { get; set; }
 
         public TwitchAPIRequestParameter()
         {
-            this.QueryValues = new List<QueryValue>();
-        }
-
-        public void AddQueryValue(string key, string value)
-        {
-            this.QueryValues.Add(new QueryValue(key, value));
+            this.QueryValues = new QueryValues();
         }
 
     }

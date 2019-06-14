@@ -20,8 +20,8 @@ namespace TwitchAPIs
             apiRequest.Version = APIVersion.V5;
             apiRequest.Path = "search/games";
             apiRequest.Method = "GET";
-            apiRequest.AddQueryValue("query", query);
-            apiRequest.AddQueryValue("live", live.ToString());
+            apiRequest.QueryValues.Add("query", query);
+            apiRequest.QueryValues.Add("live", live.ToString());
             var jToken = this.Parent.Request(apiRequest);
 
             return jToken.ReadArray("games", t => new TwitchGame().Read(t)) ?? new TwitchGame[0];
@@ -33,9 +33,9 @@ namespace TwitchAPIs
             apiRequest.Version = APIVersion.V5;
             apiRequest.Path = "search/channels";
             apiRequest.Method = "GET";
-            apiRequest.AddQueryValue("query", query);
-            apiRequest.AddQueryValue("limit", limit.ToString());
-            apiRequest.AddQueryValue("offset", offset.ToString());
+            apiRequest.QueryValues.Add("query", query);
+            apiRequest.QueryValues.Add("limit", limit.ToString());
+            apiRequest.QueryValues.Add("offset", offset.ToString());
             var jToken = this.Parent.Request(apiRequest);
 
             return jToken.ReadArray("channels", t => new TwitchChannel().Read(t)) ?? new TwitchChannel[0];

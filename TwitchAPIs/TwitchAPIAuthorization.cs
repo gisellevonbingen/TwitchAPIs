@@ -1,4 +1,5 @@
-﻿using Giselle.Commons.Web;
+﻿using Giselle.Commons;
+using Giselle.Commons.Web;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -19,27 +20,27 @@ namespace TwitchAPIs
         public OAuthAuthorization GetOAuthAuthorization(Uri responseURI, OAuthRequest request)
         {
             var responseType = request.ResponseType;
-            NameValueCollection query = null;
+            QueryValues queryValues = null;
             OAuthAuthorization authorization = null;
 
             if (request is OAuthRequestAuthorization auth)
             {
-                query = HttpUtility2.ParseQueryString(responseURI.Query, "?");
-                this.EnsureOAuthStateEquals(query, request);
+                queryValues = QueryValues.Parse(StringUtils.RemovePrefix(responseURI.Query, "?"));
+                this.EnsureOAuthStateEquals(queryValues, request);
 
                 var accessTokenRequest = new OAuthAccessTokenRequest();
                 accessTokenRequest.ClientSecret = auth.ClientSecret;
-                accessTokenRequest.Code = query["code"];
+                accessTokenRequest.Code = queryValues.Single("code");
                 accessTokenRequest.RedirectURI = auth.RedirectURI;
                 authorization = this.GetOAuthAuthorization(accessTokenRequest);
             }
             else if (request is OAuthRequestToken)
             {
-                query = HttpUtility2.ParseQueryString(responseURI.Fragment, "#");
-                this.EnsureOAuthStateEquals(query, request);
+                queryValues = QueryValues.Parse(StringUtils.RemovePrefix(responseURI.Fragment, "#"));
+                this.EnsureOAuthStateEquals(queryValues, request);
 
                 authorization = new OAuthAuthorization();
-                authorization.Read(query);
+                authorization.Read(queryValues);
             }
             else
             {
@@ -54,10 +55,10 @@ namespace TwitchAPIs
             var apiRequest = new TwitchAPIRequestParameter();
             apiRequest.BaseURL = "https://id.twitch.tv/oauth2/token";
             apiRequest.Method = "POST";
-            apiRequest.AddQueryValue("grant_type", "refresh_token");
-            apiRequest.AddQueryValue("refresh_token", refreshToken);
-            apiRequest.AddQueryValue("client_id", this.Parent.ClientId);
-            apiRequest.AddQueryValue("client_secret", clientSecret);
+            apiRequest.QueryValues.Add("grant_type", "refresh_token");
+            apiRequest.QueryValues.Add("refresh_token", refreshToken);
+            apiRequest.QueryValues.Add("client_id", this.Parent.ClientId);
+            apiRequest.QueryValues.Add("client_secret", clientSecret);
             var jToken = this.Parent.Request(apiRequest, "status");
 
             var value = new OAuthAuthorization();
@@ -66,7 +67,7 @@ namespace TwitchAPIs
             return value;
         }
 
-        public void EnsureOAuthStateEquals(NameValueCollection map, OAuthRequest request)
+        public void EnsureOAuthStateEquals(QueryValues queryValues, OAuthRequest request)
         {
             var requested = request.State;
 
@@ -75,7 +76,7 @@ namespace TwitchAPIs
                 return;
             }
 
-            var responsed = map["state"];
+            var responsed = queryValues.Single("state");
 
             if (requested.Equals(responsed) == false)
             {
@@ -89,11 +90,11 @@ namespace TwitchAPIs
             var apiRequest = new TwitchAPIRequestParameter();
             apiRequest.BaseURL = "https://id.twitch.tv/oauth2/token";
             apiRequest.Method = "POST";
-            apiRequest.AddQueryValue("client_id", this.Parent.ClientId);
-            apiRequest.AddQueryValue("client_secret", request.ClientSecret);
-            apiRequest.AddQueryValue("code", request.Code);
-            apiRequest.AddQueryValue("grant_type", "authorization_code");
-            apiRequest.AddQueryValue("redirect_uri", request.RedirectURI);
+            apiRequest.QueryValues.Add("client_id", this.Parent.ClientId);
+            apiRequest.QueryValues.Add("client_secret", request.ClientSecret);
+            apiRequest.QueryValues.Add("code", request.Code);
+            apiRequest.QueryValues.Add("grant_type", "authorization_code");
+            apiRequest.QueryValues.Add("redirect_uri", request.RedirectURI);
             var jToken = this.Parent.Request(apiRequest, "status");
 
             var value = new OAuthAuthorization();

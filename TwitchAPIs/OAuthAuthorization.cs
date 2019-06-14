@@ -26,14 +26,14 @@ namespace TwitchAPIs
 
         }
 
-        public OAuthAuthorization Read(NameValueCollection map)
+        public OAuthAuthorization Read(QueryValues values)
         {
-            this.AccessToken = map["access_token"];
-            this.RefreshToken = map["refresh_token"];
-            this.ExpiresIn = NumberUtils.ToInt(map["expires_in"]);
-            var scope = map["scope"];
+            this.AccessToken = values.Single("access_token");
+            this.RefreshToken = values.Single("refresh_token");
+            this.ExpiresIn = NumberUtils.ToInt(values.Single("expires_in"));
+            var scope = values.Single("scope");
             this.Scope = string.IsNullOrWhiteSpace(scope) ? null : scope.Split(' ');
-            this.TokenType = map["token_type"];
+            this.TokenType = values.Single("token_type");
 
             return this;
         }
