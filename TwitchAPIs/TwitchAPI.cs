@@ -22,6 +22,7 @@ namespace TwitchAPIs
         public TwitchAPIBadges Badges { get; }
         public TwitchAPIChat Chat { get; }
         public TwitchAPIClips Clips { get; }
+        public TwitchAPITags Tags { get; }
 
         public string ClientId { get; set; }
         public string AccessToken { get; set; }
@@ -38,6 +39,7 @@ namespace TwitchAPIs
             this.Channels = new TwitchAPIChannels(this);
             this.Chat = new TwitchAPIChat(this);
             this.Clips = new TwitchAPIClips(this);
+            this.Tags = new TwitchAPITags(this);
 
             this.ClientId = null;
             this.AccessToken = null;

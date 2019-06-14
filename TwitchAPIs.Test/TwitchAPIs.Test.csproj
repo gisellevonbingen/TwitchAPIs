@@ -56,6 +56,7 @@
     <Compile Include="InputEditType.cs" />
     <Compile Include="InputEditSnapshot.cs" />
     <Compile Include="PrintableLine.cs" />
+    <Compile Include="TestGetAllStreamTags.cs" />
     <Compile Include="TestGetChannel.cs" />
     <Compile Include="TestGetChatBadges.cs" />
     <Compile Include="TestGetChatRooms.cs" />

@@ -9,6 +9,30 @@ namespace TwitchAPIs
 {
     public static class JsonUtils
     {
+        public static Dictionary<K, V> ReadMap<K, V>(this JToken value, object key, Func<string, JToken, KeyValuePair<K, V>> func)
+        {
+            var jObject = value[key] as JObject;
+
+            if (jObject == null)
+            {
+                return null;
+            }
+
+
+            var map = new Dictionary<K, V>();
+
+            foreach (var pair in jObject)
+            {
+                var childKey = pair.Key;
+                var childValueToken = pair.Value;
+                var obj = func(childKey, childValueToken);
+
+                map[obj.Key] = obj.Value;
+            }
+
+            return map;
+        }
+
         public static T[] ReadArray<T>(this JToken value, object key, Func<JToken, T> func)
         {
             var jArray = value[key] as JArray;

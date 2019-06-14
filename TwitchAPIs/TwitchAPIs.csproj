@@ -77,6 +77,7 @@
     <Compile Include="TwitchAPIGames.cs" />
     <Compile Include="TwitchAPIPart.cs" />
     <Compile Include="TwitchAPISearch.cs" />
+    <Compile Include="TwitchAPITags.cs" />
     <Compile Include="TwitchAPIUsers.cs" />
     <Compile Include="TwitchBadge.cs" />
     <Compile Include="TwitchBadgeSet.cs" />
@@ -88,6 +89,8 @@
     <Compile Include="TwitchGame.cs" />
     <Compile Include="TwitchGetClipsOptions.cs" />
     <Compile Include="TwitchAPIRequest.cs" />
+    <Compile Include="TwitchStreamTag.cs" />
+    <Compile Include="TwitchStreamTags.cs" />
     <Compile Include="TwitchTopGame.cs" />
     <Compile Include="TwitchTopGames.cs" />
     <Compile Include="TwitchImageSet.cs" />
