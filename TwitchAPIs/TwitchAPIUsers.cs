@@ -18,8 +18,9 @@ namespace TwitchAPIs
         public TwitchUser UpdateUser(string description)
         {
             var path = $"users?description={HttpUtility.UrlEncode(description)}";
+            var token = this.Parent.Request(APIVersion.New, path, "PUT");
 
-            return this.ParseUsers(this.Parent.Request(APIVersion.New, path, "PUT")).FirstOrDefault();
+            return this.ParseUsers(token).FirstOrDefault();
         }
 
         public TwitchUserFollows GetUserFollows(FollowsType type, string id)
@@ -37,20 +38,11 @@ namespace TwitchAPIs
             }
 
             var jobj = this.Parent.Request(APIVersion.New, path, "GET");
-            var data = jobj.Value<JArray>("data");
 
             var uerFollows = new TwitchUserFollows();
             uerFollows.Total = jobj.Value<int>("total");
             uerFollows.Cursor = jobj["pagination"].Value<string>("cursor");
-
-            var follows = uerFollows.Follows = new TwitchFollow[data.Count];
-
-            for (int i = 0; i < data.Count; i++)
-            {
-                var token = data[i];
-                var follow = follows[i] = new TwitchFollow();
-                follow.Read(token, type);
-            }
+            uerFollows.Follows = jobj.ReadArray("data", t => new TwitchFollow().Read(t, type)) ?? new TwitchFollow[0];
 
             return uerFollows;
         }
@@ -64,30 +56,14 @@ namespace TwitchAPIs
         public TwitchUser[] GetUsers(IEnumerable<UserRequest> requests)
         {
             var path = $"users?{string.Join("&", requests)}";
+            var token = this.Parent.Request(APIVersion.New, path, "GET");
 
-            return this.ParseUsers(this.Parent.Request(APIVersion.New, path, "GET"));
+            return this.ParseUsers(token);
         }
 
-        public TwitchUser[] ParseUsers(JToken token)
+        private TwitchUser[] ParseUsers(JToken token)
         {
-            var data = token["data"] as JArray;
-
-            if (data == null)
-            {
-                return new TwitchUser[0];
-            }
-
-            var count = data.Count;
-            var users = new TwitchUser[count];
-
-            for (int i = 0; i < count; i++)
-            {
-                var itemToken = data[i];
-                var user = users[i] = new TwitchUser();
-                user.Read(itemToken);
-            }
-
-            return users;
+            return token.ReadArray("data", t => new TwitchUser().Read(t)) ?? new TwitchUser[0];
         }
 
     }
