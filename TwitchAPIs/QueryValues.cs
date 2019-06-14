@@ -51,7 +51,24 @@ namespace TwitchAPIs
 
         public override string ToString()
         {
-            return StringUtils.AddPrefix(string.Join(HttpUtility2.QueryValuesDelimiter, this), HttpUtility2.QuerySeparator);
+            return this.ToString(true);
+        }
+
+        public string ToString(bool containsNullOrWhiteSpace)
+        {
+            return StringUtils.AddPrefix(string.Join(HttpUtility2.QueryValuesDelimiter, this.Where(p =>
+            {
+                if (containsNullOrWhiteSpace == false)
+                {
+                    if (string.IsNullOrWhiteSpace(p.Key) == true || string.IsNullOrWhiteSpace(p.Value) == true)
+                    {
+                        return false;
+                    }
+
+                }
+
+                return true;
+            })), HttpUtility2.QuerySeparator);
         }
 
         public void Add<T>(string key, T value)
