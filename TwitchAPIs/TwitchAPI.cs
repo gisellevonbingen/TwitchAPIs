@@ -133,8 +133,6 @@ namespace TwitchAPIs
             request.Method = apiRequest.Method;
             this.SetupRequest(request, apiRequest.Version);
 
-            Console.WriteLine(request.URL);
-
             return request;
         }
 
