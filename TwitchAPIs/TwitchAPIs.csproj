@@ -84,7 +84,7 @@
     <Compile Include="TwitchFollow.cs" />
     <Compile Include="TwitchGame.cs" />
     <Compile Include="TwitchGetTopClipsOptions.cs" />
-    <Compile Include="TwitchAPIRequestParameter.cs" />
+    <Compile Include="TwitchAPIRequest.cs" />
     <Compile Include="TwitchTopGame.cs" />
     <Compile Include="TwitchTopGames.cs" />
     <Compile Include="TwitchImageSet.cs" />

@@ -117,7 +117,7 @@ namespace TwitchAPIs
             return jToken;
         }
 
-        public JToken RequestAsJson(TwitchAPIRequestParameter apiRequest, string errorKey = null)
+        public JToken RequestAsJson(TwitchAPIRequest apiRequest, string errorKey = null)
         {
             using (var response = this.Request(apiRequest))
             {
@@ -126,13 +126,13 @@ namespace TwitchAPIs
 
         }
 
-        public WebResponse Request(TwitchAPIRequestParameter apiRequest, string errorKey = null)
+        public WebResponse Request(TwitchAPIRequest apiRequest, string errorKey = null)
         {
             var webRequest = this.CreateWebRequest(apiRequest);
             return this.Web.Request(webRequest);
         }
 
-        public WebRequestParameter CreateWebRequest(TwitchAPIRequestParameter apiRequest)
+        public WebRequestParameter CreateWebRequest(TwitchAPIRequest apiRequest)
         {
             var baseURI = this.GetBaseURI(apiRequest.BaseURL, apiRequest.Version, apiRequest.Path);
             var queryValues = new QueryValues();

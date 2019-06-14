@@ -52,7 +52,7 @@ namespace TwitchAPIs
 
         public OAuthAuthorization RefreshOAuthAuthorization(string refreshToken, string clientSecret)
         {
-            var apiRequest = new TwitchAPIRequestParameter();
+            var apiRequest = new TwitchAPIRequest();
             apiRequest.BaseURL = "https://id.twitch.tv/oauth2/token";
             apiRequest.Method = "POST";
             apiRequest.QueryValues.Add("grant_type", "refresh_token");
@@ -87,7 +87,7 @@ namespace TwitchAPIs
 
         public OAuthAuthorization GetOAuthAuthorization(OAuthAccessTokenRequest request)
         {
-            var apiRequest = new TwitchAPIRequestParameter();
+            var apiRequest = new TwitchAPIRequest();
             apiRequest.BaseURL = "https://id.twitch.tv/oauth2/token";
             apiRequest.Method = "POST";
             apiRequest.QueryValues.Add("client_id", this.Parent.ClientId);
@@ -105,7 +105,7 @@ namespace TwitchAPIs
 
         public string GetOAuthURI(OAuthRequest request)
         {
-            var apiRequest = new TwitchAPIRequestParameter();
+            var apiRequest = new TwitchAPIRequest();
             apiRequest.BaseURL = "https://id.twitch.tv/oauth2/authorize";
             apiRequest.Method = "GET";
             apiRequest.QueryValues.Add("client_id", this.Parent.ClientId);
