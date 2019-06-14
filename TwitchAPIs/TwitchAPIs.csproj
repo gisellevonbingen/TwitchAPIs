@@ -70,6 +70,7 @@
     <Compile Include="TwitchAPIAuthorization.cs" />
     <Compile Include="TwitchAPIChannels.cs" />
     <Compile Include="TwitchAPIChat.cs" />
+    <Compile Include="TwitchAPIClips.cs" />
     <Compile Include="TwitchAPIGames.cs" />
     <Compile Include="TwitchAPIPart.cs" />
     <Compile Include="TwitchAPISearch.cs" />
@@ -80,6 +81,8 @@
     <Compile Include="TwitchException.cs" />
     <Compile Include="TwitchFollow.cs" />
     <Compile Include="TwitchGame.cs" />
+    <Compile Include="TwitchGetTopClipsOptions.cs" />
+    <Compile Include="TwitchAPIRequestParameter.cs" />
     <Compile Include="TwitchTopGame.cs" />
     <Compile Include="TwitchTopGames.cs" />
     <Compile Include="TwitchImageSet.cs" />

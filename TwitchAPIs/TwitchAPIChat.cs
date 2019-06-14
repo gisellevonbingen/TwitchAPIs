@@ -16,8 +16,7 @@ namespace TwitchAPIs
 
         public TwtichChatRoom[] GetChatRooms(string channelId)
         {
-            var path = $"chat/{channelId}/rooms";
-            var jToken = this.Parent.Request(APIVersion.V5, path, "GET");
+            var jToken = this.Parent.Request(new TwitchAPIRequestParameter() { Method ="GET", Version = APIVersion.V5, Path = $"chat/{channelId}/rooms" });
 
             return jToken.ReadArray("rooms", t => new TwtichChatRoom().Read(t)) ?? new TwtichChatRoom[0];
         }

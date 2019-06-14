@@ -17,8 +17,9 @@ namespace TwitchAPIs
 
         public TwitchUser UpdateUser(string description)
         {
-            var path = $"users?description={HttpUtility.UrlEncode(description)}";
-            var jToken = this.Parent.Request(APIVersion.New, path, "PUT");
+            var queryValues = new Dictionary<string, string>();
+            queryValues["description"] = HttpUtility.UrlEncode(description);
+            var jToken = this.Parent.Request(new TwitchAPIRequestParameter() { Method = "PUT", Version = APIVersion.New, Path = "users", QueryValues = queryValues });
 
             return this.ParseUsers(jToken).FirstOrDefault();
         }
@@ -30,14 +31,11 @@ namespace TwitchAPIs
 
         public TwitchUserFollows GetUserFollows(FollowsType type, string id, string cursor)
         {
-            var path = $"users/follows?{type.Request}_id={id}";
+            var queryValues = new Dictionary<string, string>();
+            queryValues[$"{type.Request}_id"] = id;
+            queryValues[$"after"] = cursor;
 
-            if (cursor != null)
-            {
-                path += "&after=" + cursor;
-            }
-
-            var jToken = this.Parent.Request(APIVersion.New, path, "GET");
+            var jToken = this.Parent.Request(new TwitchAPIRequestParameter() { Method = "GET", Version = APIVersion.New, Path = "users/follows", QueryValues = queryValues });
 
             var uerFollows = new TwitchUserFollows();
             uerFollows.Total = jToken.Value<int>("total");
@@ -55,8 +53,8 @@ namespace TwitchAPIs
 
         public TwitchUser[] GetUsers(IEnumerable<UserRequest> requests)
         {
-            var path = $"users?{string.Join("&", requests)}";
-            var jToken = this.Parent.Request(APIVersion.New, path, "GET");
+            var queryValues = requests.ToDictionary(r => r.Type.ToString().ToLowerInvariant(), r => r.Value);
+            var jToken = this.Parent.Request(new TwitchAPIRequestParameter() { Method = "GET", Path = "users", QueryValues = queryValues, Version = APIVersion.New });
 
             return this.ParseUsers(jToken);
         }

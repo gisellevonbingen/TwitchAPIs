@@ -57,7 +57,7 @@ namespace TwitchAPIs
             return null;
         }
 
-        public void SetupRequest(WebRequestParameter request, APIVersion version)
+        public void SetupRequest(WebRequestParameter request, APIVersion? version)
         {
             var headers = request.Headers;
             headers["Client-Id"] = this.ClientId;
@@ -117,35 +117,72 @@ namespace TwitchAPIs
             return jToken;
         }
 
-        public JToken Request(string url, string method, string errorKey = null)
+        public JToken Request(TwitchAPIRequestParameter apiRequest, string errorKey = null)
         {
-            var request = this.CreateRequest(url, method);
-            return this.ReadAsJSONThrowIfError(this.Web.Request(request), errorKey);
+            var webRequest = this.CreateWebRequest(apiRequest);
+            return this.ReadAsJSONThrowIfError(this.Web.Request(webRequest), errorKey);
         }
 
-        public JToken Request(APIVersion version, string path, string method, string errorKey = null)
+        public WebRequestParameter CreateWebRequest(TwitchAPIRequestParameter apiRequest)
         {
-            var request = this.CreateRequest(version, path, method);
-            return this.ReadAsJSONThrowIfError(this.Web.Request(request), errorKey);
-        }
+            var baseURI = this.GetBaseURI(apiRequest.BaseURL, apiRequest.Version, apiRequest.Path);
+            var mergedQuery = this.MergeQuery(baseURI.Query, apiRequest.QueryValues);
 
-        public WebRequestParameter CreateRequest(string url, string method)
-        {
             var request = new WebRequestParameter();
-            request.URL = url;
-            request.Method = method;
+            request.URL = $"{baseURI.Scheme}{Uri.SchemeDelimiter}{baseURI.Host}{baseURI.LocalPath}?{string.Join("&", mergedQuery.Select(pair => $"{pair.Key}={pair.Value}"))}";
+            request.Method = apiRequest.Method;
+            this.SetupRequest(request, apiRequest.Version);
+
+            Console.WriteLine(request.URL);
 
             return request;
         }
 
-        public WebRequestParameter CreateRequest(APIVersion version, string path, string method)
+        private Dictionary<string, string> MergeQuery(string query, Dictionary<string, string> queryValues)
         {
-            var url = this.GetRequestBaseURL(version) + path;
-            var request = this.CreateRequest(url, method);
+            var merged = new Dictionary<string, string>();
 
-            this.SetupRequest(request, version);
+            var originalQueryValues = HttpUtility.ParseQueryString(query);
 
-            return request;
+            foreach (var key in originalQueryValues.AllKeys)
+            {
+                var value = originalQueryValues[key];
+                merged[key] = value;
+            }
+
+            if (queryValues != null)
+            {
+                foreach (var pair in queryValues)
+                {
+                    var key = pair.Key;
+                    var value = pair.Value;
+
+                    if (string.IsNullOrWhiteSpace(key) == false && string.IsNullOrWhiteSpace(value) == false)
+                    {
+                        merged[pair.Key] = pair.Value;
+                    }
+
+                }
+
+            }
+
+            return merged;
+        }
+
+        private Uri GetBaseURI(string baseURL, APIVersion? version, string path)
+        {
+            Uri baseURI = null;
+
+            if (string.IsNullOrWhiteSpace(baseURL) == false)
+            {
+                baseURI = new Uri(baseURL);
+            }
+            else if (version.HasValue == true)
+            {
+                baseURI = new Uri($"{this.GetRequestBaseURL(version.Value)}{path}");
+            }
+
+            return baseURI ?? throw new TwitchException($"{nameof(baseURL)} or {nameof(version)} is not specificated");
         }
 
     }

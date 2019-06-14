@@ -16,32 +16,22 @@ namespace TwitchAPIs
 
         public TwitchGame[] SearchGames(string query, bool? live = null)
         {
-            var path = $"search/games?query={query}";
+            var queryValues = new Dictionary<string, string>();
+            queryValues["query"] = query;
+            queryValues["live"] = live.ToString();
+            var jToken = this.Parent.Request(new TwitchAPIRequestParameter() { Method = "GET", Path = "search/games", QueryValues = queryValues, Version = APIVersion.V5 });
 
-            if (live.HasValue == true)
-            {
-                path += $"&live={live.Value}";
-            }
-
-            var jToken = this.Parent.Request(APIVersion.V5, path, "GET");
             return jToken.ReadArray("games", t => new TwitchGame().Read(t)) ?? new TwitchGame[0];
         }
 
         public TwitchChannel[] SearchChannels(string query, int? limit = null, int? offset = null)
         {
-            var path = $"search/channels?query={query}";
+            var queryValues = new Dictionary<string, string>();
+            queryValues["query"] = query;
+            queryValues["limit"] = limit.ToString();
+            queryValues["offset"] = offset.ToString();
+            var jToken = this.Parent.Request(new TwitchAPIRequestParameter() { Method = "GET", Path = "search/channels", QueryValues = queryValues, Version = APIVersion.V5 });
 
-            if (limit.HasValue == true)
-            {
-                path += $"&limit={limit.Value}";
-            }
-
-            if (offset.HasValue == true)
-            {
-                path += $"&offset={offset.Value}";
-            }
-
-            var jToken = this.Parent.Request(APIVersion.V5, path, "GET");
             return jToken.ReadArray("channels", t => new TwitchChannel().Read(t)) ?? new TwitchChannel[0];
         }
 
