@@ -59,7 +59,7 @@ namespace TwitchAPIs
             apiRequest.QueryValues.Add("refresh_token", refreshToken);
             apiRequest.QueryValues.Add("client_id", this.Parent.ClientId);
             apiRequest.QueryValues.Add("client_secret", clientSecret);
-            var jToken = this.Parent.Request(apiRequest, "status");
+            var jToken = this.Parent.RequestAsJson(apiRequest, "status");
 
             var value = new OAuthAuthorization();
             value.Read(jToken);
@@ -95,7 +95,7 @@ namespace TwitchAPIs
             apiRequest.QueryValues.Add("code", request.Code);
             apiRequest.QueryValues.Add("grant_type", "authorization_code");
             apiRequest.QueryValues.Add("redirect_uri", request.RedirectURI);
-            var jToken = this.Parent.Request(apiRequest, "status");
+            var jToken = this.Parent.RequestAsJson(apiRequest, "status");
 
             var value = new OAuthAuthorization();
             value.Read(jToken);
@@ -105,32 +105,30 @@ namespace TwitchAPIs
 
         public string GetOAuthURI(OAuthRequest request)
         {
-            var url = "https://id.twitch.tv/oauth2/authorize";
-            url += $"?client_id={this.Parent.ClientId}";
-            url += $"&response_type={request.ResponseType}";
-            url += $"&redirect_uri={request.RedirectURI}";
-            url += $"&scope={request.Scope}";
+            var apiRequest = new TwitchAPIRequestParameter();
+            apiRequest.BaseURL = "https://id.twitch.tv/oauth2/authorize";
+            apiRequest.Method = "GET";
+            apiRequest.QueryValues.Add("client_id", this.Parent.ClientId);
+            apiRequest.QueryValues.Add("response_type", request.ResponseType);
+            apiRequest.QueryValues.Add("redirect_uri", request.RedirectURI);
+            apiRequest.QueryValues.Add("scope", request.Scope);
 
             var forceVerify = request.ForceVerify;
             var state = request.State;
 
             if (forceVerify == true)
             {
-                url += $"&force_verify={forceVerify.ToString().ToLowerInvariant()}";
+                apiRequest.QueryValues.Add("force_verify", forceVerify.ToString().ToLowerInvariant());
             }
 
             if (string.IsNullOrWhiteSpace(state) == false)
             {
-                url += $"&state={state}";
+                apiRequest.QueryValues.Add("state", state);
             }
 
-            var req = new WebRequestParameter();
-            req.URL = url;
-            req.Method = "GET";
-
-            using (var res = this.Parent.Web.Request(req))
+            using (var response = this.Parent.Request(apiRequest))
             {
-                return res.Impl.ResponseUri.AbsoluteUri;
+                return response.Impl.ResponseUri.AbsoluteUri;
             }
 
         }

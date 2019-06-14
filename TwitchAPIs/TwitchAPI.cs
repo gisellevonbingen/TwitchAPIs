@@ -108,24 +108,28 @@ namespace TwitchAPIs
 
         }
 
-        public JToken ReadAsJSONThrowIfError(WebResponse response, string errorKey = null)
+        public JToken ReadAsJsonThrowIfError(WebResponse response, string errorKey = null)
         {
-            var jToken = response.ReadAsJSON();
+            var jToken = response.ReadAsJson();
 
             this.ThrowIfError(jToken, errorKey);
 
             return jToken;
         }
 
-        public JToken Request(TwitchAPIRequestParameter apiRequest, string errorKey = null)
+        public JToken RequestAsJson(TwitchAPIRequestParameter apiRequest, string errorKey = null)
         {
-            var webRequest = this.CreateWebRequest(apiRequest);
-
-            using (var response = this.Web.Request(webRequest))
+            using (var response = this.Request(apiRequest))
             {
-                return this.ReadAsJSONThrowIfError(response, errorKey);
+                return this.ReadAsJsonThrowIfError(response, errorKey);
             }
 
+        }
+
+        public WebResponse Request(TwitchAPIRequestParameter apiRequest, string errorKey = null)
+        {
+            var webRequest = this.CreateWebRequest(apiRequest);
+            return this.Web.Request(webRequest);
         }
 
         public WebRequestParameter CreateWebRequest(TwitchAPIRequestParameter apiRequest)

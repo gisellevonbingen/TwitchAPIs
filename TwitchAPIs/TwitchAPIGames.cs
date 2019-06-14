@@ -22,7 +22,7 @@ namespace TwitchAPIs
             apiRequest.Method = "GET";
             apiRequest.QueryValues.Add("limit", limit?.ToString());
             apiRequest.QueryValues.Add("offset", offset?.ToString());
-            var jToken = this.Parent.Request(apiRequest);
+            var jToken = this.Parent.RequestAsJson(apiRequest);
 
             var value = new TwitchTopGames();
             value.Read(jToken);

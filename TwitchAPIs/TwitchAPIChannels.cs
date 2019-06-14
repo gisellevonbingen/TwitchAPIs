@@ -19,7 +19,7 @@ namespace TwitchAPIs
             apiRequest.Version = APIVersion.V5;
             apiRequest.Path = "channel";
             apiRequest.Method = "GET";
-            var jToken = this.Parent.Request(apiRequest);
+            var jToken = this.Parent.RequestAsJson(apiRequest);
 
             var channel = new TwitchChannel();
             channel.Read(jToken);
@@ -33,7 +33,7 @@ namespace TwitchAPIs
             apiRequest.Version = APIVersion.V5;
             apiRequest.Path = $"channels/{id}";
             apiRequest.Method = "GET";
-            var jToken = this.Parent.Request(apiRequest);
+            var jToken = this.Parent.RequestAsJson(apiRequest);
 
             var channel = new TwitchChannel();
             channel.Read(jToken);

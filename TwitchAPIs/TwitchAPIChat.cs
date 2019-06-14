@@ -20,7 +20,7 @@ namespace TwitchAPIs
             apiRequest.Version = APIVersion.V5;
             apiRequest.Path = $"chat/{channelId}/rooms";
             apiRequest.Method = "GET";
-            var jToken = this.Parent.Request(apiRequest);
+            var jToken = this.Parent.RequestAsJson(apiRequest);
 
             return jToken.ReadArray("rooms", t => new TwtichChatRoom().Read(t)) ?? new TwtichChatRoom[0];
         }
