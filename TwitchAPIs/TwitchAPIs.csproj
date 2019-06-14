@@ -89,12 +89,7 @@
     <Compile Include="TwtichChatRoom.cs" />
     <Compile Include="UserRequest.cs" />
     <Compile Include="UserType.cs" />
-    <Compile Include="Web\NetworkException.cs" />
-    <Compile Include="Web\ProxySettings.cs" />
-    <Compile Include="Web\RequestParameter.cs" />
-    <Compile Include="Web\RequestWriteEventArgs.cs" />
-    <Compile Include="Web\SessionResponse.cs" />
-    <Compile Include="Web\WebExplorer.cs" />
+    <Compile Include="WebExplorerExtenstions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
