@@ -51,7 +51,7 @@ namespace TwitchAPIs.Test
         public virtual int QueryInput<T>(string message, IEnumerable<T> collection, bool breakable, string breakInput, string breakMessage)
         {
             var arry = collection.ToArray();
-            int digits = (int)(Math.Log10(arry.Length) + 1);
+            int digits = (int)(Math.Log10(arry.Length - 1) + 1);
             var format = "D" + digits;
             breakInput = breakInput ?? this.BreakInput;
 
