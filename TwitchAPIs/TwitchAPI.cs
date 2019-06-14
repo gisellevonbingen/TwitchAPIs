@@ -82,18 +82,15 @@ namespace TwitchAPIs
 
         }
 
-        public void ThrowIfError(APIVersion? version, JToken jToken, string errorKey = null, string messageKey = null)
+        public void ThrowIfError(JToken jToken, string errorKey = null)
         {
-            if (version == APIVersion.V5)
-            {
-                errorKey = errorKey ?? "error";
-                messageKey = messageKey ?? "message";
-            }
+            errorKey = errorKey ?? "error";
 
             var error = errorKey != null ? jToken.Value<string>(errorKey) : null;
 
             if (error != null)
             {
+                var messageKey = "message";
                 string message = messageKey != null ? jToken.Value<string>(messageKey) : null;
 
                 if (message != null)
@@ -109,25 +106,25 @@ namespace TwitchAPIs
 
         }
 
-        public JToken ReadAsJSON(APIVersion? version, WebResponse response, string errorKey = null, string messageKey = null)
+        public JToken ReadAsJSONThrowIfError(WebResponse response, string errorKey = null)
         {
             var jToken = response.ReadAsJSON();
 
-            this.ThrowIfError(version, jToken, errorKey, messageKey);
+            this.ThrowIfError(jToken, errorKey);
 
             return jToken;
         }
 
-        public JToken Request(string url, string method, string errorKey = null, string messageKey = null)
+        public JToken Request(string url, string method, string errorKey = null)
         {
             var request = this.CreateRequest(url, method);
-            return this.ReadAsJSON(null, this.Web.Request(request), errorKey, messageKey);
+            return this.ReadAsJSONThrowIfError(this.Web.Request(request), errorKey);
         }
 
-        public JToken Request(APIVersion version, string path, string method, string errorKey = null, string messageKey = null)
+        public JToken Request(APIVersion version, string path, string method, string errorKey = null)
         {
             var request = this.CreateRequest(version, path, method);
-            return this.ReadAsJSON(version, this.Web.Request(request), errorKey, messageKey);
+            return this.ReadAsJSONThrowIfError(this.Web.Request(request), errorKey);
         }
 
         public WebRequestParameter CreateRequest(string url, string method)

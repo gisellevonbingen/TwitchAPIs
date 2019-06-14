@@ -57,7 +57,7 @@ namespace TwitchAPIs
             url += $"&client_id={this.Parent.ClientId}";
             url += $"&client_secret={clientSecret}";
 
-            var jToken = this.Parent.Request(url, "POST", "status", "message");
+            var jToken = this.Parent.Request(url, "POST", "status");
 
             var value = new OAuthAuthorization();
             value.Read(jToken);
@@ -92,7 +92,7 @@ namespace TwitchAPIs
             url += $"&grant_type=authorization_code";
             url += $"&redirect_uri={request.RedirectURI}";
 
-            var jToken = this.Parent.Request(url, "POST", "status", "message");
+            var jToken = this.Parent.Request(url, "POST", "status");
 
             var value = new OAuthAuthorization();
             value.Read(jToken);
