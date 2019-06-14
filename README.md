@@ -5,10 +5,12 @@
 * [Twitch Developers Reference](https://dev.twitch.tv/docs/api/reference/)
 
 ### Requires
+* [Giselle.Commons](https://github.com/gisellevonbingen/Giselle.Commons)
 * [Newtonsoft.Json](https://www.newtonsoft.com/json)
 * System.Web
 
 ### Test.Requires
+* [Giselle.Commons](https://github.com/gisellevonbingen/Giselle.Commons)
 * [Newtonsoft.Json](https://www.newtonsoft.com/json)
 * System.Web
 * System.Drawing
