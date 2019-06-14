@@ -18,7 +18,7 @@ namespace TwitchAPIs
 
         public TwitchUser UpdateUser(string description)
         {
-            var apiRequest = new TwitchAPIRequestParameter();
+            var apiRequest = new TwitchAPIRequest();
             apiRequest.Version = APIVersion.New;
             apiRequest.Path = "users";
             apiRequest.Method = "PUT";
@@ -35,7 +35,7 @@ namespace TwitchAPIs
 
         public TwitchUserFollows GetUserFollows(FollowsType type, string id, string cursor)
         {
-            var apiRequest = new TwitchAPIRequestParameter();
+            var apiRequest = new TwitchAPIRequest();
             apiRequest.Version = APIVersion.New;
             apiRequest.Path = "users/follows";
             apiRequest.Method = "GET";
@@ -59,7 +59,7 @@ namespace TwitchAPIs
 
         public TwitchUser[] GetUsers(IEnumerable<UserRequest> requests)
         {
-            var apiRequest = new TwitchAPIRequestParameter();
+            var apiRequest = new TwitchAPIRequest();
             apiRequest.Version = APIVersion.New;
             apiRequest.Path = "users";
             apiRequest.Method = "GET";

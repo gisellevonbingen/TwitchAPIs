@@ -16,7 +16,7 @@ namespace TwitchAPIs
 
         public TwitchGame[] SearchGames(string query, bool? live = null)
         {
-            var apiRequest = new TwitchAPIRequestParameter();
+            var apiRequest = new TwitchAPIRequest();
             apiRequest.Version = APIVersion.V5;
             apiRequest.Path = "search/games";
             apiRequest.Method = "GET";
@@ -29,7 +29,7 @@ namespace TwitchAPIs
 
         public TwitchChannel[] SearchChannels(string query, int? limit = null, int? offset = null)
         {
-            var apiRequest = new TwitchAPIRequestParameter();
+            var apiRequest = new TwitchAPIRequest();
             apiRequest.Version = APIVersion.V5;
             apiRequest.Path = "search/channels";
             apiRequest.Method = "GET";

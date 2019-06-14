@@ -16,7 +16,7 @@ namespace TwitchAPIs
 
         public TwitchTopGames GetTopGames(int? limit = null, int? offset = null)
         {
-            var apiRequest = new TwitchAPIRequestParameter();
+            var apiRequest = new TwitchAPIRequest();
             apiRequest.Version = APIVersion.V5;
             apiRequest.Path = "games/top";
             apiRequest.Method = "GET";

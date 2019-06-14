@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TwitchAPIs
 {
-    public class TwitchAPIRequestParameter
+    public class TwitchAPIRequest
     {
         public APIVersion? Version { get; set; }
         public string BaseURL { get; set; }
@@ -14,7 +14,7 @@ namespace TwitchAPIs
         public QueryValues QueryValues { get; }
         public string Method { get; set; }
 
-        public TwitchAPIRequestParameter()
+        public TwitchAPIRequest()
         {
             this.QueryValues = new QueryValues();
         }

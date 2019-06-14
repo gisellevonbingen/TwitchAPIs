@@ -15,7 +15,7 @@ namespace TwitchAPIs
 
         public TwitchChannel GetChannel()
         {
-            var apiRequest = new TwitchAPIRequestParameter();
+            var apiRequest = new TwitchAPIRequest();
             apiRequest.Version = APIVersion.V5;
             apiRequest.Path = "channel";
             apiRequest.Method = "GET";
@@ -29,7 +29,7 @@ namespace TwitchAPIs
 
         public TwitchChannel GetChannel(string id)
         {
-            var apiRequest = new TwitchAPIRequestParameter();
+            var apiRequest = new TwitchAPIRequest();
             apiRequest.Version = APIVersion.V5;
             apiRequest.Path = $"channels/{id}";
             apiRequest.Method = "GET";
