@@ -138,7 +138,6 @@ namespace TwitchAPIs.Test
                 var type = obj.GetType();
                 var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.GetProperty);
 
-                list.Add(new PrintableLine(level, $"Type.FullName = {type.FullName}"));
                 for (int i = 0; i < properties.Length; i++)
                 {
                     var property = properties[i];
