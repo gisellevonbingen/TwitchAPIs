@@ -28,3 +28,4 @@
 * Get Channel's Chat Rooms
 * Get Clips
 * Get All Stream Tags
+* Get Games
