@@ -9,6 +9,8 @@ using System.Web;
 using Giselle.Commons.Web;
 using Newtonsoft.Json.Linq;
 using TwitchAPIs.New;
+using TwitchAPIs.OAuth;
+using TwitchAPIs.Other;
 using TwitchAPIs.V5;
 
 namespace TwitchAPIs

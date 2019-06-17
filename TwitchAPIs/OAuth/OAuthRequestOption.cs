@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TwitchAPIs
+namespace TwitchAPIs.OAuth
 {
     public class OAuthRequestOption : OAuthRequest
     {
