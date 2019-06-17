@@ -90,7 +90,7 @@
     <Compile Include="TwitchEmoticon.cs" />
     <Compile Include="TwitchEmoticonSets.cs" />
     <Compile Include="TwitchException.cs" />
-    <Compile Include="TwitchFollow.cs" />
+    <Compile Include="TwitchFollowNew.cs" />
     <Compile Include="TwitchFollowV5.cs" />
     <Compile Include="TwitchGameNew.cs" />
     <Compile Include="TwitchGameV5.cs" />

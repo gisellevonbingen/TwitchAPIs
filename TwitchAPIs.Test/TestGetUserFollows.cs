@@ -34,7 +34,7 @@ namespace TwitchAPIs.Test
 
             while (true)
             {
-                var userFollows = api.Users.GetUserFollows(followsType, userId, cursor);
+                var userFollows = api.Users.GetUserFollowsNew(followsType, userId, cursor);
                 main.PrintReflection(user, "UserFollows", userFollows);
 
                 cursor = userFollows.Cursor;
