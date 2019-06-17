@@ -16,6 +16,42 @@ namespace TwitchAPIs
 
         }
 
+        public void UnFollowChannel(string userId, string channelId)
+        {
+            var apiRequest = new TwitchAPIRequest();
+            apiRequest.Version = APIVersion.V5;
+            apiRequest.Path = $"users/{userId}/follows/channels/{channelId}";
+            apiRequest.Method = "DELETE";
+
+            using (var response = this.Parent.Request(apiRequest))
+            {
+                if (response.Impl.StatusCode == System.Net.HttpStatusCode.NoContent)
+                {
+
+                }
+                else
+                {
+                    this.Parent.ReadAsJsonThrowIfError(response);
+                }
+
+            }
+
+        }
+
+        public TwitchFollowV5 FollowChannel(string userId, string channelId, bool? notifications = null)
+        {
+            var apiRequest = new TwitchAPIRequest();
+            apiRequest.Version = APIVersion.V5;
+            apiRequest.Path = $"users/{userId}/follows/channels/{channelId}";
+            apiRequest.Method = "PUT";
+            apiRequest.QueryValues.Add("notifications", notifications);
+            var jToken = this.Parent.RequestAsJson(apiRequest);
+
+            var follow = new TwitchFollowV5().Read(jToken);
+
+            return follow;
+        }
+
         public TwitchEmoticonSets GetUserEmotes(string userId)
         {
             var apiRequest = new TwitchAPIRequest();

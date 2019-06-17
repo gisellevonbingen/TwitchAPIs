@@ -75,6 +75,8 @@ namespace TwitchAPIs.Test
             tests.Add(new TestGetGames());
             tests.Add(new TestGetCheermotes());
             tests.Add(new TestGetUserEmotes());
+            tests.Add(new TestUserFollow());
+            tests.Add(new TestUserUnfollow());
 
             while (true)
             {
