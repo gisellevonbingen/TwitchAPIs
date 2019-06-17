@@ -16,7 +16,7 @@ namespace TwitchAPIs
 
         }
 
-        public void UnFollowChannel(string userId, string channelId)
+        public void UnfollowChannel(string userId, string channelId)
         {
             var apiRequest = new TwitchAPIRequest();
             apiRequest.Version = APIVersion.V5;
@@ -90,7 +90,7 @@ namespace TwitchAPIs
             var uerFollows = new TwitchUserFollows();
             uerFollows.Total = jToken.Value<int>("total");
             uerFollows.Cursor = this.Parent.GetPaination(jToken)?.Cursor;
-            uerFollows.Follows = jToken.ReadArray("data", t => new TwitchFollow().Read(t, type)) ?? new TwitchFollow[0];
+            uerFollows.Follows = jToken.ReadArray("data", t => new TwitchFollowNew().Read(t, type)) ?? new TwitchFollowNew[0];
 
             return uerFollows;
         }

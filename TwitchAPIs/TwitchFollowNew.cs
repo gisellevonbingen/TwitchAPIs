@@ -7,18 +7,18 @@ using Newtonsoft.Json.Linq;
 
 namespace TwitchAPIs
 {
-    public class TwitchFollow
+    public class TwitchFollowNew
     {
         public string Id { get; set; }
         public string DisplayName { get; set; }
         public DateTime FollowedAt { get; set; }
 
-        public TwitchFollow()
+        public TwitchFollowNew()
         {
 
         }
 
-        public TwitchFollow Read(JToken token, FollowsType type)
+        public TwitchFollowNew Read(JToken token, FollowsType type)
         {
             this.Id = token.Value<string>(type.Response + "_id");
             this.DisplayName = token.Value<string>(type.Response + "_name");

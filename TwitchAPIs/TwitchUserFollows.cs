@@ -11,7 +11,7 @@ namespace TwitchAPIs
     {
         public int Total { get; set; }
         public string Cursor { get; set; }
-        public TwitchFollow[] Follows { get; set; }
+        public TwitchFollowNew[] Follows { get; set; }
 
         public TwitchUserFollows()
         {

@@ -20,7 +20,7 @@ namespace TwitchAPIs.Test
 
             var userId = user.ReadInput("Enter UserId");
             var channelId = user.ReadInput("Enter ChannelId");
-            handler.API.Users.UnFollowChannel(userId, channelId);
+            handler.API.Users.UnfollowChannel(userId, channelId);
 
             user.SendMessage("Unfollowed");
         }
