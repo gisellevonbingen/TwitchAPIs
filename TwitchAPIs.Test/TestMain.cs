@@ -81,17 +81,19 @@ namespace TwitchAPIs.Test
             this.AddTestCase(testMap, "User", new TestUserUnfollow());
             this.AddTestCase(testMap, "User", new TestGetUserEmotes());
 
-            this.AddTestCase(testMap, "Search", new TestSearch());
-            this.AddTestCase(testMap, "Channel", new TestGetChannel());
-            this.AddTestCase(testMap, "Clip", new TestGetClips());
-            this.AddTestCase(testMap, "Tag", new TestGetAllStreamTags());
-            this.AddTestCase(testMap, "Bit", new TestGetCheermotes());
+            this.AddTestCase(testMap, "Search", new TestSearchChannels());
+            this.AddTestCase(testMap, "Search", new TestSearchGames());
 
             this.AddTestCase(testMap, "Game", new TestGetTopGames());
             this.AddTestCase(testMap, "Game", new TestGetGames());
 
             this.AddTestCase(testMap, "Chat", new TestGetChatBadges());
             this.AddTestCase(testMap, "Chat", new TestGetChatRooms());
+
+            this.AddTestCase(testMap, "Channel", new TestGetChannel());
+            this.AddTestCase(testMap, "Clip", new TestGetClips());
+            this.AddTestCase(testMap, "Tag", new TestGetAllStreamTags());
+            this.AddTestCase(testMap, "Bit", new TestGetCheermotes());
 
             while (true)
             {

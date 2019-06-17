@@ -56,6 +56,7 @@
     <Compile Include="InputEditType.cs" />
     <Compile Include="InputEditSnapshot.cs" />
     <Compile Include="PrintableLine.cs" />
+    <Compile Include="TestSearchGames.cs" />
     <Compile Include="TestUserFollow.cs" />
     <Compile Include="TestGetAllStreamTags.cs" />
     <Compile Include="TestGetChannel.cs" />
@@ -68,7 +69,7 @@
     <Compile Include="TestGetUser.cs" />
     <Compile Include="TestGetUserEmotes.cs" />
     <Compile Include="TestGetUserFollows.cs" />
-    <Compile Include="TestSearch.cs" />
+    <Compile Include="TestSearchChannels.cs" />
     <Compile Include="TestUserUnfollow.cs" />
     <Compile Include="TestUpdateUser.cs" />
     <Compile Include="TwitchAPIHandler.cs" />
