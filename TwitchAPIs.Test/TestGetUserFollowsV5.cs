@@ -19,9 +19,19 @@ namespace TwitchAPIs.Test
         {
             var type = typeof(T);
             var values = Enum.GetValues(type) as T[];
-            var index = user.QueryInput(message, values);
+            T defaultValues = values[0];
 
-            return values[index];
+            var index = user.QueryInput(message, values, true, null, $"Break to '{defaultValues.ToString()}'");
+
+            if (index == -1)
+            {
+                return defaultValues;
+            }
+            else
+            {
+                return values[index];
+            }
+
         }
 
         public override void Run(TestMain main)
