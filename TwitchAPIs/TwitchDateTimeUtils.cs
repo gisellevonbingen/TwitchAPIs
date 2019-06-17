@@ -20,6 +20,11 @@ namespace TwitchAPIs
             return dateTime.ToString(Format);
         }
 
+        public static string ToString(DateTime? dateTime)
+        {
+            return dateTime.HasValue ? ToString(dateTime.Value) : string.Empty;
+        }
+
     }
 
 }
