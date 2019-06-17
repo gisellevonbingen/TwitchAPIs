@@ -11,13 +11,22 @@ namespace TwitchAPIs
     {
         public static Dictionary<K, V> ReadMap<K, V>(this JToken value, object key, Func<string, JToken, KeyValuePair<K, V>> func)
         {
-            var jObject = value[key] as JObject;
+            if (value == null)
+            {
+                return default;
+            }
+
+            return value[key].ReadMap(func);
+        }
+
+        public static Dictionary<K, V> ReadMap<K, V>(this JToken value, Func<string, JToken, KeyValuePair<K, V>> func)
+        {
+            var jObject = value as JObject;
 
             if (jObject == null)
             {
                 return null;
             }
-
 
             var map = new Dictionary<K, V>();
 
@@ -35,7 +44,17 @@ namespace TwitchAPIs
 
         public static T[] ReadArray<T>(this JToken value, object key, Func<JToken, T> func)
         {
-            var jArray = value[key] as JArray;
+            if (value == null)
+            {
+                return default;
+            }
+
+            return value[key].ReadArray(func);
+        }
+
+        public static T[] ReadArray<T>(this JToken value, Func<JToken, T> func)
+        {
+            var jArray = value as JArray;
 
             if (jArray == null)
             {
@@ -55,14 +74,22 @@ namespace TwitchAPIs
 
         public static T ReadIfExist<T>(this JToken value, object key, Func<JToken, T> func)
         {
-            var token = value[key];
-
-            if (token != null)
+            if (value == null)
             {
-                return func(token);
+                return default;
             }
 
-            return default(T);
+            return value[key].ReadIfExist(func);
+        }
+
+        public static T ReadIfExist<T>(this JToken value, Func<JToken, T> func)
+        {
+            if (value != null)
+            {
+                return func(value);
+            }
+
+            return default;
         }
 
         public static IEnumerable<T> ArrayValues<T>(this JToken value, object key)
@@ -72,7 +99,17 @@ namespace TwitchAPIs
                 return null;
             }
 
-            if (value[key] is JArray array)
+            return value[key].ArrayValues<T>();
+        }
+
+        public static IEnumerable<T> ArrayValues<T>(this JToken value)
+        {
+            if (value == null)
+            {
+                return null;
+            }
+
+            if (value is JArray array)
             {
                 return array.Values<T>();
             }
