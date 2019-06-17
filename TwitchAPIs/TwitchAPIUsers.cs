@@ -16,6 +16,19 @@ namespace TwitchAPIs
 
         }
 
+        public TwitchEmoticonSets GetUserEmotes(string userId)
+        {
+            var apiRequest = new TwitchAPIRequest();
+            apiRequest.Version = APIVersion.V5;
+            apiRequest.Path = $"users/{userId}/emotes";
+            apiRequest.Method = "GET";
+            var jToken = this.Parent.RequestAsJson(apiRequest);
+
+            var set = new TwitchEmoticonSets().Read(jToken);
+
+            return set;
+        }
+
         public TwitchUser UpdateUser(string description)
         {
             var apiRequest = new TwitchAPIRequest();

@@ -65,6 +65,7 @@
     <Compile Include="TestGetGames.cs" />
     <Compile Include="TestGetTopGames.cs" />
     <Compile Include="TestGetUser.cs" />
+    <Compile Include="TestGetUserEmotes.cs" />
     <Compile Include="TestGetUserFollows.cs" />
     <Compile Include="TestSearch.cs" />
     <Compile Include="TestUpdateUser.cs" />
