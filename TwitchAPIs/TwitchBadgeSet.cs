@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Giselle.Commons;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,27 +24,14 @@ namespace TwitchAPIs
 
             var setToken = token.Value<JObject>("badge_sets");
 
+
             if (setToken != null)
             {
-                foreach (var pair in setToken)
-                {
-                    var name = pair.Key.ToLowerInvariant();
-                    var versions = new Dictionary<string, TwitchBadge>();
-                    set[name] = versions;
+                var parseds = setToken.ReadMap((name, nt) =>
+                    new KeyValuePair<string, Dictionary<string, TwitchBadge>>(name.ToLowerInvariant(), nt["versions"].ReadMap((version, vt) =>
+                        new KeyValuePair<string, TwitchBadge>(version.ToLowerInvariant(), new TwitchBadge().Read(vt)))));
 
-                    var versionsToken = pair.Value.Value<JObject>("versions");
-
-                    foreach (var pair2 in versionsToken)
-                    {
-                        var version = pair2.Key.ToLowerInvariant();
-                        var badge = new TwitchBadge();
-                        badge.Read(pair2.Value);
-
-                        versions[version] = badge;
-                    }
-
-                }
-
+                DictionaryUtils.PutAll(set, parseds);
             }
 
             return this;
