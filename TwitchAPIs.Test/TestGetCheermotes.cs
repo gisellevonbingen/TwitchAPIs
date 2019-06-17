@@ -20,7 +20,7 @@ namespace TwitchAPIs.Test
 
             var channelId = user.ReadInput("Enter ChannelId (Empty is global)");
 
-            var actions = handler.API.Bits.GetCheermotes(channelId);
+            var actions = handler.API.V5.Bits.GetCheermotes(channelId);
             main.PrintReflection(user, "Actions", actions);
         }
 

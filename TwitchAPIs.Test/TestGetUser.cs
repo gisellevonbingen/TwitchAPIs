@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TwitchAPIs.New;
 
 namespace TwitchAPIs.Test
 {
@@ -38,7 +39,7 @@ namespace TwitchAPIs.Test
             }
 
             var api = handler.API;
-            var tusers = api.Users.GetUsers(requests);
+            var tusers = api.New.Users.GetUsers(requests);
             main.PrintReflection(user, $"TwitchUsers", tusers);
         }
 

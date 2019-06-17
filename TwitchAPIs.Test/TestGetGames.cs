@@ -21,7 +21,7 @@ namespace TwitchAPIs.Test
             var id = user.ReadInput("Enter Id");
             var name = user.ReadInput("Enter Name");
 
-            var games = handler.API.Games.GetGames(id, name);
+            var games = handler.API.New.Games.GetGames(id, name);
 
             main.PrintReflection(user, "Games", games);
         }

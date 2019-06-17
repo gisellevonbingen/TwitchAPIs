@@ -19,7 +19,7 @@ namespace TwitchAPIs.Test
             var handler = main.TwitchAPIHandler;
 
             var channelId = user.ReadInput("Enter Channel-Id");
-            var rooms = handler.API.Chat.GetChatRooms(channelId);
+            var rooms = handler.API.V5.Chat.GetChatRooms(channelId);
 
             main.PrintReflection(user, $"{channelId}'s Rooms", rooms);
         }

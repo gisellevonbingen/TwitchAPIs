@@ -22,7 +22,7 @@ namespace TwitchAPIs.Test
             string query = user.ReadInput("Enter Query");
             bool? live = NumberUtils.ToBoolNullable(user.ReadInput("Enter Live"));
 
-            var games = handler.API.Search.SearchGames(query, live);
+            var games = handler.API.V5.Search.SearchGames(query, live);
             main.PrintReflection(user, $"TwitchGames", games);
         }
 

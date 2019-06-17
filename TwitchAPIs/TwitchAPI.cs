@@ -8,22 +8,20 @@ using System.Threading.Tasks;
 using System.Web;
 using Giselle.Commons.Web;
 using Newtonsoft.Json.Linq;
+using TwitchAPIs.New;
+using TwitchAPIs.V5;
 
 namespace TwitchAPIs
 {
     public class TwitchAPI
     {
         public WebExplorer Web { get; }
-        public TwitchAPIUsers Users { get; }
         public TwitchAPIAuthorization Authorization { get; }
-        public TwitchAPISearch Search { get; }
-        public TwitchAPIChannels Channels { get; }
-        public TwitchAPIGames Games { get; }
         public TwitchAPIBadges Badges { get; }
-        public TwitchAPIChat Chat { get; }
-        public TwitchAPIClips Clips { get; }
-        public TwitchAPITags Tags { get; }
-        public TwitchAPIBits Bits { get; }
+
+        public TwitchAPINew New { get;  }
+        public TwitchAPIV5 V5 { get;  }
+
 
         public string ClientId { get; set; }
         public string AccessToken { get; set; }
@@ -31,17 +29,11 @@ namespace TwitchAPIs
         public TwitchAPI()
         {
             this.Web = new WebExplorer();
-            this.Users = new TwitchAPIUsers(this);
             this.Authorization = new TwitchAPIAuthorization(this);
-            this.Search = new TwitchAPISearch(this);
-            this.Channels = new TwitchAPIChannels(this);
-            this.Games = new TwitchAPIGames(this);
             this.Badges = new TwitchAPIBadges(this);
-            this.Channels = new TwitchAPIChannels(this);
-            this.Chat = new TwitchAPIChat(this);
-            this.Clips = new TwitchAPIClips(this);
-            this.Tags = new TwitchAPITags(this);
-            this.Bits = new TwitchAPIBits(this);
+
+            this.New = new TwitchAPINew(this);
+            this.V5 = new TwitchAPIV5(this);
 
             this.ClientId = null;
             this.AccessToken = null;

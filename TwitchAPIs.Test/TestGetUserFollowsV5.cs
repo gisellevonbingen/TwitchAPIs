@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using TwitchAPIs.V5;
 
 namespace TwitchAPIs.Test
 {
@@ -44,7 +45,7 @@ namespace TwitchAPIs.Test
             var offset = NumberUtils.ToIntNullable(user.ReadInput("Enter Offset as int"));
             var direction = this.QueryEnum<FollowSortDirection>(user, "Enter Direction as int");
             var sortby = this.QueryEnum<FollowSortMode>(user, "Enter Sortby as int");
-            var userFollows = handler.API.Users.GetUserFollowsV5(userId, limit, offset, direction, sortby);
+            var userFollows = handler.API.V5.Users.GetUserFollowsV5(userId, limit, offset, direction, sortby);
 
             main.PrintReflection(user, "UserFollows", userFollows);
         }

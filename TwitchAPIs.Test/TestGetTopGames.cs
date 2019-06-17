@@ -22,7 +22,7 @@ namespace TwitchAPIs.Test
             int? limit = NumberUtils.ToIntNullable(user.ReadInput("Enter Limit"));
             int? offset = NumberUtils.ToIntNullable(user.ReadInput("Enter Offset"));
 
-            var topGames = handler.API.Games.GetTopGames(limit, offset);
+            var topGames = handler.API.V5.Games.GetTopGames(limit, offset);
             main.PrintReflection(user, $"Twitch Top Games", topGames);
         }
 

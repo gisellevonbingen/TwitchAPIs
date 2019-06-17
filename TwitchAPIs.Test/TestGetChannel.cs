@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TwitchAPIs.V5;
 
 namespace TwitchAPIs.Test
 {
@@ -24,11 +25,11 @@ namespace TwitchAPIs.Test
 
             if (string.IsNullOrWhiteSpace(id) == true)
             {
-                channel = api.Channels.GetChannel();
+                channel = api.V5.Channels.GetChannel();
             }
             else
             {
-                channel = api.Channels.GetChannel(id);
+                channel = api.V5.Channels.GetChannel(id);
             }
 
             main.PrintReflection(user, "TwitchChannel", channel);

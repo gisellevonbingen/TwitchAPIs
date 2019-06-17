@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using TwitchAPIs.New;
 
 namespace TwitchAPIs.Test
 {
@@ -45,7 +46,7 @@ namespace TwitchAPIs.Test
             while (true)
             {
                 options.After = cursor;
-                var clips = handler.API.Clips.GetClips(options);
+                var clips = handler.API.New.Clips.GetClips(options);
                 main.PrintReflection(user, "Clips", clips);
 
                 cursor = clips.Cursor;

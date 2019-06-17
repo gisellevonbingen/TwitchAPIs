@@ -39,7 +39,7 @@ namespace TwitchAPIs.Test
 
             while (true)
             {
-                var tags = handler.API.Tags.GetAllStreamTags(cursor, first, tagIds);
+                var tags = handler.API.New.Tags.GetAllStreamTags(cursor, first, tagIds);
 
                 foreach (var tag in tags.Tags)
                 {

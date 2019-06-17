@@ -23,7 +23,7 @@ namespace TwitchAPIs.Test
             int? limit = NumberUtils.ToIntNullable(user.ReadInput("Enter Limit"));
             int? offset = NumberUtils.ToIntNullable(user.ReadInput("Enter Offset"));
 
-            var channels = handler.API.Search.SearchChannels(query, limit, offset);
+            var channels = handler.API.V5.Search.SearchChannels(query, limit, offset);
             main.PrintReflection(user, $"TwitchChannels", channels);
         }
 
