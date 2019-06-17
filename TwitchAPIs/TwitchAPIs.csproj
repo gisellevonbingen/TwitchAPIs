@@ -86,6 +86,7 @@
     <Compile Include="TwitchChannel.cs" />
     <Compile Include="TwitchClip.cs" />
     <Compile Include="TwitchClips.cs" />
+    <Compile Include="TwitchDateTimeUtils.cs" />
     <Compile Include="TwitchEmoticon.cs" />
     <Compile Include="TwitchEmoticonSets.cs" />
     <Compile Include="TwitchException.cs" />
