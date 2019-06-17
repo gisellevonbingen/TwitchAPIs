@@ -54,6 +54,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FollowSortDirection.cs" />
+    <Compile Include="FollowSortMode.cs" />
     <Compile Include="HttpUtility2.cs" />
     <Compile Include="OAuthAccessTokenRequest.cs" />
     <Compile Include="OAuthAuthorization.cs" />
@@ -101,7 +103,8 @@
     <Compile Include="TwitchTopGame.cs" />
     <Compile Include="TwitchTopGames.cs" />
     <Compile Include="TwitchImageSet.cs" />
-    <Compile Include="TwitchUserFollows.cs" />
+    <Compile Include="TwitchUserFollowsV5.cs" />
+    <Compile Include="TwitchUserFollowsNew.cs" />
     <Compile Include="TwitchUser.cs" />
     <Compile Include="TwitchAPIBadges.cs" />
     <Compile Include="TwitchChatRoom.cs" />

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace TwitchAPIs.Test
 {
-    public class TestGetUserFollows : TestAbstract
+    public class TestGetUserFollowsNew : TestAbstract
     {
-        public TestGetUserFollows()
+        public TestGetUserFollowsNew()
         {
 
         }

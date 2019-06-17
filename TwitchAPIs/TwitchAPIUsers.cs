@@ -16,6 +16,25 @@ namespace TwitchAPIs
 
         }
 
+        public TwitchUserFollowsV5 GetUserFollowsV5(string userId, int? limit = null, int? offset = null, FollowSortDirection? direction = null, FollowSortMode? sortby = null)
+        {
+            var apiRequest = new TwitchAPIRequest();
+            apiRequest.Version = APIVersion.V5;
+            apiRequest.Path = $"users/{userId}/follows/channels";
+            apiRequest.Method = "GET";
+            apiRequest.QueryValues.Add("limit", limit);
+            apiRequest.QueryValues.Add("offset", offset);
+            apiRequest.QueryValues.Add("direction", direction);
+            apiRequest.QueryValues.Add("sortby", sortby);
+            var jToken = this.Parent.RequestAsJson(apiRequest);
+
+            var follows = new TwitchUserFollowsV5();
+            follows.Total = jToken.Value<int>("_total");
+            follows.Follows = jToken["follows"].ReadArray(t => new TwitchFollowV5().Read(t)) ?? new TwitchFollowV5[0];
+
+            return follows;
+        }
+
         public void UnfollowChannel(string userId, string channelId)
         {
             var apiRequest = new TwitchAPIRequest();
@@ -77,7 +96,7 @@ namespace TwitchAPIs
             return this.ParseUsers(jToken).FirstOrDefault();
         }
 
-        public TwitchUserFollows GetUserFollowsNew(FollowsType type, string id, string cursor = null)
+        public TwitchUserFollowsNew GetUserFollowsNew(FollowsType type, string id, string cursor = null)
         {
             var apiRequest = new TwitchAPIRequest();
             apiRequest.Version = APIVersion.New;
@@ -87,7 +106,7 @@ namespace TwitchAPIs
             apiRequest.QueryValues.Add($"after", cursor);
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
-            var uerFollows = new TwitchUserFollows();
+            var uerFollows = new TwitchUserFollowsNew();
             uerFollows.Total = jToken.Value<int>("total");
             uerFollows.Cursor = this.Parent.GetPaination(jToken)?.Cursor;
             uerFollows.Follows = jToken.ReadArray("data", t => new TwitchFollowNew().Read(t, type)) ?? new TwitchFollowNew[0];

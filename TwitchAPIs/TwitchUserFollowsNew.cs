@@ -7,13 +7,13 @@ using Newtonsoft.Json.Linq;
 
 namespace TwitchAPIs
 {
-    public class TwitchUserFollows
+    public class TwitchUserFollowsNew
     {
         public int Total { get; set; }
         public string Cursor { get; set; }
         public TwitchFollowNew[] Follows { get; set; }
 
-        public TwitchUserFollows()
+        public TwitchUserFollowsNew()
         {
 
         }

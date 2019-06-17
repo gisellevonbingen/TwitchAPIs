@@ -76,7 +76,8 @@ namespace TwitchAPIs.Test
 
             this.AddTestCase(testMap, "User", new TestGetUser());
             this.AddTestCase(testMap, "User", new TestUpdateUser());
-            this.AddTestCase(testMap, "User", new TestGetUserFollows());
+            this.AddTestCase(testMap, "User", new TestGetUserFollowsNew());
+            this.AddTestCase(testMap, "User", new TestGetUserFollowsV5());
             this.AddTestCase(testMap, "User", new TestUserFollow());
             this.AddTestCase(testMap, "User", new TestUserUnfollow());
             this.AddTestCase(testMap, "User", new TestGetUserEmotes());
