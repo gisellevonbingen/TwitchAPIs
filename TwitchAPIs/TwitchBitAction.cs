@@ -14,7 +14,7 @@ namespace TwitchAPIs
         public string[] Backgrounds { get; set; }
         public string[] States { get; set; }
         public string Type { get; set; }
-        public string UpdatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
         public int Priority { get; set; }
         public TwitchBitTier[] Tiers { get; set; }
 
@@ -30,7 +30,7 @@ namespace TwitchAPIs
             this.Backgrounds = jToken.ReadArray("backgrounds", t => t.Value<string>());
             this.States = jToken.ReadArray("states", t => t.Value<string>());
             this.Type = jToken.Value<string>("type");
-            this.UpdatedAt = jToken.Value<string>("updated_at");
+            this.UpdatedAt = jToken.Value<DateTime>("updated_at");
             this.Priority = jToken.Value<int>("priority");
             this.Tiers = jToken.ReadArray("tiers", t => new TwitchBitTier().Read(t));
 

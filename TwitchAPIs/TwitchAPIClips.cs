@@ -24,9 +24,9 @@ namespace TwitchAPIs
             apiRequest.QueryValues.AddRange("id", options.Ids);
             apiRequest.QueryValues.Add("after", options.After);
             apiRequest.QueryValues.Add("before", options.Before);
-            apiRequest.QueryValues.Add("ended_at", options.EndedAt);
+            apiRequest.QueryValues.Add("ended_at", TwitchDateTimeUtils.ToString(options.EndedAt));
             apiRequest.QueryValues.Add("first", options.First);
-            apiRequest.QueryValues.Add("started_at", options.StartedAt);
+            apiRequest.QueryValues.Add("started_at", TwitchDateTimeUtils.ToString(options.StartedAt));
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
             var clips = new TwitchClips();

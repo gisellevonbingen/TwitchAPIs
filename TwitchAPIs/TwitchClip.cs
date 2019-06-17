@@ -11,7 +11,7 @@ namespace TwitchAPIs
     {
         public string BroadcasterId { get; set; }
         public string BroadcasterName { get; set; }
-        public string CreatedAt { get; set; }
+        public DateTime CreatedAt { get; set; }
         public string CreatorId { get; set; }
         public string CreatorName { get; set; }
         public string EmbedUrl { get; set; }
@@ -33,7 +33,7 @@ namespace TwitchAPIs
         {
             this.BroadcasterId = jToken.Value<string>("broadcaster_id");
             this.BroadcasterName = jToken.Value<string>("broadcaster_name");
-            this.CreatedAt = jToken.Value<string>("created_at");
+            this.CreatedAt = jToken.Value<DateTime>("created_at");
             this.CreatorId = jToken.Value<string>("creator_id");
             this.CreatorName = jToken.Value<string>("creator_name");
             this.EmbedUrl = jToken.Value<string>("embed_url");
