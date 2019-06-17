@@ -13,7 +13,7 @@ namespace TwitchAPIs
 
         }
 
-        public TwitchStreamTags GetAllStreamTags(string after, int? first, List<string> tagIds = null)
+        public TwitchStreamTags GetAllStreamTags(string after = null, int? first = null, List<string> tagIds = null)
         {
             var apiRequest = new TwitchAPIRequest();
             apiRequest.Version = APIVersion.New;
