@@ -56,46 +56,68 @@ namespace TwitchAPIs.Test
 
         }
 
+        private void AddTestCase(Dictionary<string, List<TestAbstract>> tests, string category, TestAbstract test)
+        {
+            if (tests.TryGetValue(category, out var list) == false)
+            {
+                list = new List<TestAbstract>();
+                tests[category] = list;
+            }
+
+            list.Add(test);
+        }
+
         private void RunTest()
         {
             var user = this.User;
 
-            var tests = new List<TestAbstract>();
-            tests.Add(new TestGetUser());
-            tests.Add(new TestUpdateUser());
-            tests.Add(new TestGetUserFollows());
-            tests.Add(new TestRefreshOAuthAuthorization());
-            tests.Add(new TestSearch());
-            tests.Add(new TestGetChannel());
-            tests.Add(new TestGetTopGames());
-            tests.Add(new TestGetChatBadges());
-            tests.Add(new TestGetChatRooms());
-            tests.Add(new TestGetClips());
-            tests.Add(new TestGetAllStreamTags());
-            tests.Add(new TestGetGames());
-            tests.Add(new TestGetCheermotes());
-            tests.Add(new TestGetUserEmotes());
-            tests.Add(new TestUserFollow());
-            tests.Add(new TestUserUnfollow());
+            var testMap = new Dictionary<string, List<TestAbstract>>();
+            this.AddTestCase(testMap, "Authorization", new TestRefreshOAuthAuthorization());
+
+            this.AddTestCase(testMap, "User", new TestGetUser());
+            this.AddTestCase(testMap, "User", new TestUpdateUser());
+            this.AddTestCase(testMap, "User", new TestGetUserFollows());
+            this.AddTestCase(testMap, "User", new TestUserFollow());
+            this.AddTestCase(testMap, "User", new TestUserUnfollow());
+            this.AddTestCase(testMap, "User", new TestGetUserEmotes());
+
+            this.AddTestCase(testMap, "Search", new TestSearch());
+            this.AddTestCase(testMap, "Channel", new TestGetChannel());
+            this.AddTestCase(testMap, "Clip", new TestGetClips());
+            this.AddTestCase(testMap, "Tag", new TestGetAllStreamTags());
+            this.AddTestCase(testMap, "Bit", new TestGetCheermotes());
+
+            this.AddTestCase(testMap, "Game", new TestGetTopGames());
+            this.AddTestCase(testMap, "Game", new TestGetGames());
+
+            this.AddTestCase(testMap, "Chat", new TestGetChatBadges());
+            this.AddTestCase(testMap, "Chat", new TestGetChatRooms());
 
             while (true)
             {
                 user.SendMessage();
                 user.SendMessage();
 
-                var input = user.QueryInput("Enter Test number", tests.Select(t => t.GetType().Name).ToArray(), true);
+                var categories = testMap.Select(pair => pair.Key).ToArray();
+                var categoryIndex = user.QueryInput("Enter Category", categories, true);
 
-                if (input != -1)
-                {
-                    var test = tests[input];
-                    user.SendMessage("Test - " + test.GetType().Name);
-                    test.Run(this);
-                }
-                else
+                if (categoryIndex == -1)
                 {
                     break;
                 }
 
+                var testList = testMap[categories[categoryIndex]];
+                var testIndex = user.QueryInput("Enter Test", testList.Select(t => t.GetType().Name), true);
+
+                if (testIndex == -1)
+                {
+                    continue;
+                }
+
+                var test = testList[testIndex];
+                user.SendMessage("Test - " + test.GetType().Name);
+
+                test.Run(this);
             }
 
         }
