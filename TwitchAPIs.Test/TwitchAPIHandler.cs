@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Windows.Forms;
+using TwitchAPIs.OAuth;
 
 namespace TwitchAPIs.Test
 {
