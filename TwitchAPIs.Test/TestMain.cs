@@ -73,6 +73,7 @@ namespace TwitchAPIs.Test
             tests.Add(new TestGetClips());
             tests.Add(new TestGetAllStreamTags());
             tests.Add(new TestGetGames());
+            tests.Add(new TestGetCheermotes());
 
             while (true)
             {

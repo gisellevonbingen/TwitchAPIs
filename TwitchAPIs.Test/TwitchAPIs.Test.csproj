@@ -60,6 +60,7 @@
     <Compile Include="TestGetChannel.cs" />
     <Compile Include="TestGetChatBadges.cs" />
     <Compile Include="TestGetChatRooms.cs" />
+    <Compile Include="TestGetCheermotes.cs" />
     <Compile Include="TestGetClips.cs" />
     <Compile Include="TestGetGames.cs" />
     <Compile Include="TestGetTopGames.cs" />

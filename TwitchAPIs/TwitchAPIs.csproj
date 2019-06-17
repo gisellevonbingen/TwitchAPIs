@@ -71,6 +71,7 @@
     <Compile Include="QueryValues.cs" />
     <Compile Include="TwitchAPI.cs" />
     <Compile Include="TwitchAPIAuthorization.cs" />
+    <Compile Include="TwitchAPIBits.cs" />
     <Compile Include="TwitchAPIChannels.cs" />
     <Compile Include="TwitchAPIChat.cs" />
     <Compile Include="TwitchAPIClips.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="TwitchAPIUsers.cs" />
     <Compile Include="TwitchBadge.cs" />
     <Compile Include="TwitchBadgeSet.cs" />
+    <Compile Include="TwitchBitTier.cs" />
     <Compile Include="TwitchChannel.cs" />
     <Compile Include="TwitchClip.cs" />
     <Compile Include="TwitchClips.cs" />
@@ -99,6 +101,7 @@
     <Compile Include="TwitchUser.cs" />
     <Compile Include="TwitchAPIBadges.cs" />
     <Compile Include="TwitchChatRoom.cs" />
+    <Compile Include="TwitchBitAction.cs" />
     <Compile Include="UserRequest.cs" />
     <Compile Include="UserType.cs" />
     <Compile Include="WebExplorerExtenstions.cs" />
