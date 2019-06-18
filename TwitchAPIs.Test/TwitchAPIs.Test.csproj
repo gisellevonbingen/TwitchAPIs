@@ -74,6 +74,7 @@
     <Compile Include="V5\TestUsersGetUserEmotes.cs" />
     <Compile Include="New\TestUsersGetUserFollows.cs" />
     <Compile Include="V5\TestSearchChannels.cs" />
+    <Compile Include="V5\TestUsersGetUsers.cs" />
     <Compile Include="V5\TestUsersUnfollowChannel.cs" />
     <Compile Include="New\TestUsersUpdateUser.cs" />
     <Compile Include="TwitchAPIHandler.cs" />
