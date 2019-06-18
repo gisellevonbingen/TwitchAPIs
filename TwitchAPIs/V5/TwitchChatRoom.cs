@@ -21,14 +21,14 @@ namespace TwitchAPIs.V5
 
         }
 
-        public TwitchChatRoom Read(JToken token)
+        public TwitchChatRoom Read(JToken jToken)
         {
-            this.Id = token.Value<string>("_id");
-            this.OwnerId = token.Value<string>("owner_id");
-            this.Name = token.Value<string>("name");
-            this.Topic = token.Value<string>("topic");
-            this.Previewable = token.Value<bool>("is_previewable");
-            this.MinimumAllowedRole = token.Value<string>("minimum_allowed_role");
+            this.Id = jToken.Value<string>("_id");
+            this.OwnerId = jToken.Value<string>("owner_id");
+            this.Name = jToken.Value<string>("name");
+            this.Topic = jToken.Value<string>("topic");
+            this.Previewable = jToken.Value<bool>("is_previewable");
+            this.MinimumAllowedRole = jToken.Value<string>("minimum_allowed_role");
 
             return this;
         }

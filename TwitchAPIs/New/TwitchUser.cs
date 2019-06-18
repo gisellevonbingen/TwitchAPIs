@@ -25,18 +25,18 @@ namespace TwitchAPIs.New
 
         }
 
-        public TwitchUser Read(JToken token)
+        public TwitchUser Read(JToken jToken)
         {
-            this.BroadcasterType = token.Value<string>("broadcaster_type");
-            this.Description = token.Value<string>("description");
-            this.DisplayName = token.Value<string>("display_name");
-            this.Email = token.Value<string>("email");
-            this.Id = token.Value<string>("id");
-            this.Login = token.Value<string>("login");
-            this.OfflineImageUrl = token.Value<string>("offline_image_url");
-            this.ProfileImageUrl = token.Value<string>("profile_image_url");
-            this.Type = token.Value<string>("type");
-            this.ViewCount = token.Value<int>("view_count");
+            this.BroadcasterType = jToken.Value<string>("broadcaster_type");
+            this.Description = jToken.Value<string>("description");
+            this.DisplayName = jToken.Value<string>("display_name");
+            this.Email = jToken.Value<string>("email");
+            this.Id = jToken.Value<string>("id");
+            this.Login = jToken.Value<string>("login");
+            this.OfflineImageUrl = jToken.Value<string>("offline_image_url");
+            this.ProfileImageUrl = jToken.Value<string>("profile_image_url");
+            this.Type = jToken.Value<string>("type");
+            this.ViewCount = jToken.Value<int>("view_count");
 
             return this;
         }

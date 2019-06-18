@@ -63,9 +63,9 @@ namespace TwitchAPIs.New
             return this.ParseUsers(jToken);
         }
 
-        private TwitchUser[] ParseUsers(JToken token)
+        private TwitchUser[] ParseUsers(JToken jToken)
         {
-            return token.ReadArray("data", t => new TwitchUser().Read(t)) ?? new TwitchUser[0];
+            return jToken.ReadArray("data", t => new TwitchUser().Read(t)) ?? new TwitchUser[0];
         }
 
     }

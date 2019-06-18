@@ -36,29 +36,29 @@ namespace TwitchAPIs.V5
 
         }
 
-        public TwitchChannel Read(JToken token)
+        public TwitchChannel Read(JToken jToken)
         {
-            this.Mature = token.Value<bool>("mature");
-            this.Status = token.Value<string>("status");
-            this.BroadcasterLanguage = token.Value<string>("broadcaster_language");
-            this.DisplayName = token.Value<string>("display_name");
-            this.Game = token.Value<string>("game");
-            this.Language = token.Value<string>("language");
-            this.Id = token.Value<string>("_id");
-            this.Name = token.Value<string>("name");
-            this.CreatedAt = token.Value<DateTime>("created_at");
-            this.UpdatedAt = token.Value<DateTime>("updated_at");
-            this.Partner = token.Value<bool>("partner");
-            this.Logo = token.Value<string>("logo");
-            this.VideoBanner = token.Value<string>("video_banner");
-            this.ProfileBanner = token.Value<string>("profile_banner");
-            this.ProfileBannerBackgroundColor = token.Value<string>("profile_banner_background_color");
-            this.Url = token.Value<string>("url");
-            this.Views = token.Value<int>("views");
-            this.Followers = token.Value<int>("followers");
-            this.BroadcasterType = token.Value<string>("broadcaster_type");
-            this.StreamKey = token.Value<string>("stream_key");
-            this.Email = token.Value<string>("email");
+            this.Mature = jToken.Value<bool>("mature");
+            this.Status = jToken.Value<string>("status");
+            this.BroadcasterLanguage = jToken.Value<string>("broadcaster_language");
+            this.DisplayName = jToken.Value<string>("display_name");
+            this.Game = jToken.Value<string>("game");
+            this.Language = jToken.Value<string>("language");
+            this.Id = jToken.Value<string>("_id");
+            this.Name = jToken.Value<string>("name");
+            this.CreatedAt = jToken.Value<DateTime>("created_at");
+            this.UpdatedAt = jToken.Value<DateTime>("updated_at");
+            this.Partner = jToken.Value<bool>("partner");
+            this.Logo = jToken.Value<string>("logo");
+            this.VideoBanner = jToken.Value<string>("video_banner");
+            this.ProfileBanner = jToken.Value<string>("profile_banner");
+            this.ProfileBannerBackgroundColor = jToken.Value<string>("profile_banner_background_color");
+            this.Url = jToken.Value<string>("url");
+            this.Views = jToken.Value<int>("views");
+            this.Followers = jToken.Value<int>("followers");
+            this.BroadcasterType = jToken.Value<string>("broadcaster_type");
+            this.StreamKey = jToken.Value<string>("stream_key");
+            this.Email = jToken.Value<string>("email");
 
             return this;
         }

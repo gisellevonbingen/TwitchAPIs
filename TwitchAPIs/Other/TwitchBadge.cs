@@ -22,15 +22,15 @@ namespace TwitchAPIs.Other
 
         }
 
-        public TwitchBadge Read(JToken token)
+        public TwitchBadge Read(JToken jToken)
         {
-            this.ImageUrl1x = token.Value<string>("image_url_1x");
-            this.ImageUrl2x = token.Value<string>("image_url_2x");
-            this.ImageUrl4x = token.Value<string>("image_url_4x");
-            this.Description = token.Value<string>("description");
-            this.Title = token.Value<string>("title");
-            this.ClickAction = token.Value<string>("click_action");
-            this.ClickUrl = token.Value<string>("click_url");
+            this.ImageUrl1x = jToken.Value<string>("image_url_1x");
+            this.ImageUrl2x = jToken.Value<string>("image_url_2x");
+            this.ImageUrl4x = jToken.Value<string>("image_url_4x");
+            this.Description = jToken.Value<string>("description");
+            this.Title = jToken.Value<string>("title");
+            this.ClickAction = jToken.Value<string>("click_action");
+            this.ClickUrl = jToken.Value<string>("click_url");
 
             return this;
         }

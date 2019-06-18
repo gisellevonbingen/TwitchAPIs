@@ -17,12 +17,12 @@ namespace TwitchAPIs.Other
             this.Set = new Dictionary<string, Dictionary<string, TwitchBadge>>();
         }
 
-        public TwitchBadgeSet Read(JToken token)
+        public TwitchBadgeSet Read(JToken jToken)
         {
             var set = this.Set;
             set.Clear();
 
-            var setToken = token.Value<JObject>("badge_sets");
+            var setToken = jToken.Value<JObject>("badge_sets");
 
 
             if (setToken != null)
