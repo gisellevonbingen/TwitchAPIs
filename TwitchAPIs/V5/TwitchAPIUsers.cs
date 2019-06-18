@@ -115,6 +115,23 @@ namespace TwitchAPIs.V5
             return jToken.ReadArray("users", t => new TwitchUser().Read(t)) ?? new TwitchUser[0];
         }
 
+        public TwitchUserBlockList GetUserBlockList(string userId, int? limit = null, int? offset = null)
+        {
+            var apiRequest = new TwitchAPIRequest();
+            apiRequest.Version = APIVersion.V5;
+            apiRequest.Path = $"users/{userId}/blocks";
+            apiRequest.Method = "GET";
+            apiRequest.QueryValues.Add("limit", limit);
+            apiRequest.QueryValues.Add("offset", offset);
+            var jToken = this.Parent.RequestAsJson(apiRequest);
+
+            var blockList = new TwitchUserBlockList();
+            blockList.Total = jToken.Value<int>("_total");
+            blockList.Blocks = jToken.ReadArray("blocks", t => new TwitchUser().Read(t["user"])) ?? new TwitchUser[0];
+
+            return blockList;
+        }
+
     }
 
 }

@@ -106,6 +106,7 @@
     <Compile Include="V5\TwitchTopGames.cs" />
     <Compile Include="V5\TwitchImageSet.cs" />
     <Compile Include="V5\TwitchUser.cs" />
+    <Compile Include="V5\TwitchUserBlockList.cs" />
     <Compile Include="V5\TwitchUserFollows.cs" />
     <Compile Include="New\TwitchUserFollows.cs" />
     <Compile Include="New\TwitchUser.cs" />
