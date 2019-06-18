@@ -17,24 +17,6 @@ namespace TwitchAPIs.Test.V5
 
         }
 
-        private Nullable<T> QueryEnum<T>(UserAbstract user, string message) where T : struct, Enum
-        {
-            var type = typeof(T);
-            var values = Enum.GetValues(type) as T[];
-
-            var index = user.QueryInput(message, values, true);
-
-            if (index == -1)
-            {
-                return null;
-            }
-            else
-            {
-                return new Nullable<T>(values[index]);
-            }
-
-        }
-
         public override void Run(TestMain main)
         {
             var user = main.User;
@@ -43,7 +25,7 @@ namespace TwitchAPIs.Test.V5
             var channelId = user.ReadInput("Enter Channel Id");
             var limit = NumberUtils.ToIntNullable(user.ReadInput("Enter Limit as int"));
             var offset = NumberUtils.ToIntNullable(user.ReadInput("Enter Offset as int"));
-            var direction = this.QueryEnum<SortDirection>(user, "Enter Direction as int");
+            var direction = user.QueryInput("Enter Direction", EnumUtils.GetNullableValues<SortDirection>(), true).Value;
 
             string cursor = null;
 

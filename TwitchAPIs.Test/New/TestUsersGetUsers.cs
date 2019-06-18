@@ -25,7 +25,7 @@ namespace TwitchAPIs.Test.New
 
             while (true)
             {
-                var typeIndex = user.QueryInput("Enter UserType", userTypes.Select(v => v.ToString()), true);
+                var typeIndex = user.QueryInput("Enter UserType", userTypes.Select(v => v.ToString()), true).Index;
 
                 if (typeIndex == -1)
                 {

@@ -52,35 +52,35 @@ namespace TwitchAPIs.Test
             return this.ReadInput();
         }
 
-        public virtual int QueryInput<T>(string message, IEnumerable<T> collection)
+        public virtual QueryResult<T> QueryInput<T>(string message, IEnumerable<T> collection)
         {
             return this.QueryInput(message, collection, false);
         }
 
-        public virtual int QueryInput<T>(string message, IEnumerable<T> collection, bool breakable)
+        public virtual QueryResult<T> QueryInput<T>(string message, IEnumerable<T> collection, bool breakable)
         {
             var breakInput = this.BreakInput;
             return this.QueryInput(message, collection, breakable, $"Break to '{breakInput}'", breakInput);
         }
 
-        public virtual int QueryInput<T>(string message, IEnumerable<T> collection, bool breakable, string breakMessage)
+        public virtual QueryResult<T> QueryInput<T>(string message, IEnumerable<T> collection, bool breakable, string breakMessage)
         {
             var breakInput = this.BreakInput;
             return this.QueryInput(message, collection, breakable, breakMessage, breakInput);
         }
 
-        public virtual int QueryInput<T>(string message, IEnumerable<T> collection, bool breakable, string breakMessage, string breakInput)
+        public virtual QueryResult<T> QueryInput<T>(string message, IEnumerable<T> collection, bool breakable, string breakMessage, string breakInput)
         {
-            var arry = collection.ToArray();
-            int digits = Math.Max((int)(Math.Log10(arry.Length - 1) + 1), 0);
+            var array = collection.ToArray();
+            int digits = Math.Max((int)(Math.Log10(array.Length - 1) + 1), 0);
             var format = "D" + digits;
             breakInput = breakInput ?? this.BreakInput;
 
             while (true)
             {
-                for (int i = 0; i < arry.Length; i++)
+                for (int i = 0; i < array.Length; i++)
                 {
-                    var value = arry[i];
+                    var value = array[i];
                     this.SendMessage($"{i.ToString(format)} - {value}");
                 }
 
@@ -95,13 +95,13 @@ namespace TwitchAPIs.Test
                 {
                     if (breakable == true)
                     {
-                        return -1;
+                        return new QueryResult<T>(-1, default, true);
                     }
 
                 }
-                else if (int.TryParse(input, out int index) == true && 0 <= index && index < arry.Length)
+                else if (int.TryParse(input, out int index) == true && 0 <= index && index < array.Length)
                 {
-                    return index;
+                    return new QueryResult<T>(index, array[index], false);
                 }
 
                 this.SendMessage();

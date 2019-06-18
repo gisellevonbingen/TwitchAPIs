@@ -17,25 +17,6 @@ namespace TwitchAPIs.Test.V5
 
         }
 
-        private T QueryEnum<T>(UserAbstract user, string message) where T : Enum
-        {
-            var type = typeof(T);
-            var values = Enum.GetValues(type) as T[];
-            T defaultValues = values[0];
-
-            var index = user.QueryInput(message, values, true, null, $"Break to '{defaultValues.ToString()}'");
-
-            if (index == -1)
-            {
-                return defaultValues;
-            }
-            else
-            {
-                return values[index];
-            }
-
-        }
-
         public override void Run(TestMain main)
         {
             var user = main.User;
@@ -44,8 +25,8 @@ namespace TwitchAPIs.Test.V5
             var userId = user.ReadInput("Enter UserId");
             var limit = NumberUtils.ToIntNullable(user.ReadInput("Enter Limit as int"));
             var offset = NumberUtils.ToIntNullable(user.ReadInput("Enter Offset as int"));
-            var direction = this.QueryEnum<SortDirection>(user, "Enter Direction as int");
-            var sortby = this.QueryEnum<FollowSortMode>(user, "Enter Sortby as int");
+            var direction = user.QueryInput("Enter Direction", EnumUtils.GetNullableValues<SortDirection>(), true).Value;
+            var sortby = user.QueryInput("Enter Sortby", EnumUtils.GetNullableValues<FollowSortMode>()).Value;
             var userFollows = handler.API.V5.Users.GetUserFollows(userId, limit, offset, direction, sortby);
 
             main.PrintReflection(user, "UserFollows", userFollows);

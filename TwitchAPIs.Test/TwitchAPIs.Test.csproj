@@ -51,12 +51,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EnumUtils.cs" />
     <Compile Include="History.cs" />
     <Compile Include="InputEditHistory.cs" />
     <Compile Include="InputEditType.cs" />
     <Compile Include="InputEditSnapshot.cs" />
     <Compile Include="New\TestGamesGetTopGames.cs" />
     <Compile Include="PrintableLine.cs" />
+    <Compile Include="QueryResult.cs" />
     <Compile Include="TwitchAPITestAttribute.cs" />
     <Compile Include="UserInputReturnException.cs" />
     <Compile Include="V5\TestChannelsGetChannelFollowers.cs" />
