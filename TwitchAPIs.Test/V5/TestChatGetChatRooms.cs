@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace TwitchAPIs.Test.V5
 {
-    [TwitchAPITest("V5", "Users")]
-    public class TestGetUserEmotes : TestAbstract
+    [TwitchAPITest("V5", "Chat")]
+    public class TestChatGetChatRooms : TestAbstract
     {
-        public TestGetUserEmotes()
+        public TestChatGetChatRooms()
         {
 
         }
@@ -19,10 +19,10 @@ namespace TwitchAPIs.Test.V5
             var user = main.User;
             var handler = main.TwitchAPIHandler;
 
-            var userId = user.ReadInput("Enter UserId");
-            var set = handler.API.V5.Users.GetUserEmotes(userId);
+            var channelId = user.ReadInput("Enter Channel-Id");
+            var rooms = handler.API.V5.Chat.GetChatRooms(channelId);
 
-            main.PrintReflection(user, "EmoticonSet", set);
+            main.PrintReflection(user, $"{channelId}'s Rooms", rooms);
         }
 
     }

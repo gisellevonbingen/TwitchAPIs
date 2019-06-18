@@ -1,5 +1,4 @@
-﻿using Giselle.Commons;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +7,9 @@ using System.Threading.Tasks;
 namespace TwitchAPIs.Test.V5
 {
     [TwitchAPITest("V5", "Users")]
-    public class TestUserFollow : TestAbstract
+    public class TestUsersUnfollowChannel : TestAbstract
     {
-        public TestUserFollow()
+        public TestUsersUnfollowChannel()
         {
 
         }
@@ -22,10 +21,9 @@ namespace TwitchAPIs.Test.V5
 
             var userId = user.ReadInput("Enter UserId");
             var channelId = user.ReadInput("Enter ChannelId");
-            var notifications = NumberUtils.ToBoolNullable(user.ReadInput("Enter Notifications as bool"));
-            var follow = handler.API.V5.Users.FollowChannel(userId, channelId, notifications);
+            handler.API.V5.Users.UnfollowChannel(userId, channelId);
 
-            main.PrintReflection(user, "Follow", follow);
+            user.SendMessage("Unfollowed");
         }
 
     }

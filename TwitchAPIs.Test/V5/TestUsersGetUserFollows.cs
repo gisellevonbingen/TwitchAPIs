@@ -10,9 +10,9 @@ using TwitchAPIs.V5;
 namespace TwitchAPIs.Test.V5
 {
     [TwitchAPITest("V5", "Users")]
-    public class TestGetUserFollows : TestAbstract
+    public class TestUsersGetUserFollows : TestAbstract
     {
-        public TestGetUserFollows()
+        public TestUsersGetUserFollows()
         {
 
         }

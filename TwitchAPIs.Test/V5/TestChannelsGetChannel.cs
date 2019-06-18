@@ -8,9 +8,9 @@ using TwitchAPIs.V5;
 namespace TwitchAPIs.Test.V5
 {
     [TwitchAPITest("V5", "Channels")]
-    public class TestGetChannel : TestAbstract
+    public class TestChannelsGetChannel : TestAbstract
     {
-        public TestGetChannel()
+        public TestChannelsGetChannel()
         {
 
         }

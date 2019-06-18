@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 namespace TwitchAPIs.Test.V5
 {
     [TwitchAPITest("V5", "Games")]
-    public class TestGetTopGames : TestAbstract
+    public class TestGamesGetTopGames : TestAbstract
     {
-        public TestGetTopGames()
+        public TestGamesGetTopGames()
         {
 
         }

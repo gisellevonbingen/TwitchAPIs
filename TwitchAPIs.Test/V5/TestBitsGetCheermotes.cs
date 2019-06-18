@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace TwitchAPIs.Test.V5
 {
     [TwitchAPITest("V5", "Bits")]
-    public class TestGetCheermotes : TestAbstract
+    public class TestBitsGetCheermotes : TestAbstract
     {
-        public TestGetCheermotes()
+        public TestBitsGetCheermotes()
         {
 
         }
