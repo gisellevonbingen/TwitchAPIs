@@ -13,6 +13,24 @@ namespace TwitchAPIs.New
 
         }
 
+        public TwitchTopGames GetTopGames(string after = null, string before = null, int? first = null)
+        {
+            var apiRequest = new TwitchAPIRequest();
+            apiRequest.Version = APIVersion.New;
+            apiRequest.Path = "games/top";
+            apiRequest.Method = "GET";
+            apiRequest.QueryValues.Add("after", after);
+            apiRequest.QueryValues.Add("before", before);
+            apiRequest.QueryValues.Add("first", first);
+            var jToken = this.Parent.RequestAsJson(apiRequest);
+
+            var topGames = new TwitchTopGames();
+            topGames.Games = jToken.ReadArray("data", t => new TwitchGame().Read(t)) ?? new TwitchGame[0];
+            topGames.Cursor = this.Parent.GetPaination(jToken)?.Cursor;
+
+            return topGames;
+        }
+
         public TwitchGame[] GetGames(string id, string name)
         {
             var apiRequest = new TwitchAPIRequest();

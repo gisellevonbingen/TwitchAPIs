@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="New\TwitchTopGames.cs" />
     <Compile Include="V5\FollowSortDirection.cs" />
     <Compile Include="V5\FollowSortMode.cs" />
     <Compile Include="HttpUtility2.cs" />
