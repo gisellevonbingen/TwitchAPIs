@@ -13,9 +13,9 @@ namespace TwitchAPIs.New
         public List<string> Ids { get; } = new List<string>();
         public string After { get; set; } = null;
         public string Before { get; set; } = null;
-        public DateTime EndedAt { get; set; } = default;
+        public DateTime? EndedAt { get; set; } = null;
         public int? First { get; set; } = null;
-        public DateTime StartedAt { get; set; } = default;
+        public DateTime? StartedAt { get; set; } = null;
     }
 
 }

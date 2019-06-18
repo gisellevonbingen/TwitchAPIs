@@ -39,8 +39,8 @@ namespace TwitchAPIs.Test.New
             }
 
             options.First = NumberUtils.ToIntNullable(user.ReadInput("Enter First as int"));
-            options.StartedAt = TwitchDateTimeUtils.Parse(user.ReadInput("Enter StartedAt as TwtichDateTime"));
-            options.EndedAt = TwitchDateTimeUtils.Parse(user.ReadInput("Enter EndedAt as TwtichDateTime"));
+            options.StartedAt = TwitchDateTimeUtils.ToDatetime(user.ReadInput("Enter StartedAt as TwtichDateTime"));
+            options.EndedAt = TwitchDateTimeUtils.ToDatetime(user.ReadInput("Enter EndedAt as TwtichDateTime"));
 
             string cursor = null;
 

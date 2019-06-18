@@ -173,6 +173,10 @@ namespace TwitchAPIs.Test
             {
                 list.Add(new PrintableLine(level, "{null}"));
             }
+            else if (obj is DateTime dt)
+            {
+                list.Add(new PrintableLine(level, $"'{TwitchDateTimeUtils.ToString(dt)}'"));
+            }
             else if (obj is IConvertible convertible)
             {
                 list.Add(new PrintableLine(level, $"'{convertible}'"));

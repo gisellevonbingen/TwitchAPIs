@@ -10,19 +10,14 @@ namespace TwitchAPIs
     {
         public static string Format { get; } = "yyyy-MM-dd'T'HH:mm:ss'Z'";
 
-        public static DateTime Parse(string s)
+        public static DateTime? ToDatetime(string s)
         {
-            return DateTime.ParseExact(s, Format, null);
+            return DateTime.TryParseExact(s, Format, null, System.Globalization.DateTimeStyles.None, out var result) ? result : new DateTime?();
         }
 
-        public static string ToString(DateTime dateTime)
+        public static string ToString(DateTime? value)
         {
-            return dateTime.ToString(Format);
-        }
-
-        public static string ToString(DateTime? dateTime)
-        {
-            return dateTime.HasValue ? ToString(dateTime.Value) : string.Empty;
+            return value?.ToString(Format);
         }
 
     }
