@@ -55,7 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="New\TwitchTopGames.cs" />
-    <Compile Include="V5\FollowSortDirection.cs" />
+    <Compile Include="V5\SortDirection.cs" />
     <Compile Include="V5\FollowSortMode.cs" />
     <Compile Include="HttpUtility2.cs" />
     <Compile Include="New\TwitchAPIGames.cs" />
@@ -92,6 +92,8 @@
     <Compile Include="New\TwitchClip.cs" />
     <Compile Include="New\TwitchClips.cs" />
     <Compile Include="TwitchDateTimeUtils.cs" />
+    <Compile Include="V5\TwitchChannelFollow.cs" />
+    <Compile Include="V5\TwitchChannelFollowers.cs" />
     <Compile Include="V5\TwitchEmoticon.cs" />
     <Compile Include="V5\TwitchEmoticonSets.cs" />
     <Compile Include="TwitchException.cs" />

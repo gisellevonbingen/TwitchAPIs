@@ -60,7 +60,7 @@ namespace TwitchAPIs.V5
             return set;
         }
 
-        public TwitchUserFollows GetUserFollows(string userId, int? limit = null, int? offset = null, FollowSortDirection? direction = null, FollowSortMode? sortby = null)
+        public TwitchUserFollows GetUserFollows(string userId, int? limit = null, int? offset = null, SortDirection? direction = null, FollowSortMode? sortby = null)
         {
             var apiRequest = new TwitchAPIRequest();
             apiRequest.Version = APIVersion.V5;

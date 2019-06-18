@@ -59,6 +59,7 @@
     <Compile Include="PrintableLine.cs" />
     <Compile Include="TwitchAPITestAttribute.cs" />
     <Compile Include="UserInputReturnException.cs" />
+    <Compile Include="V5\TestChannelsGetChannelFollowers.cs" />
     <Compile Include="V5\TestChannelsGetChannelByID.cs" />
     <Compile Include="V5\TestChannelsGetChannelEditors.cs" />
     <Compile Include="V5\TestUsersUnblockUser.cs" />

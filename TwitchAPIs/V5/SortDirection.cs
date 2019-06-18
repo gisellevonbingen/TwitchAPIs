@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TwitchAPIs.V5
 {
-    public enum FollowSortDirection : byte
+    public enum SortDirection : byte
     {
         desc = 0,
         asc = 1,

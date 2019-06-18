@@ -52,6 +52,21 @@ namespace TwitchAPIs.V5
             return jToken.ReadArray("users", t => new TwitchUser().Read(t)) ?? new TwitchUser[0];
         }
 
+        public TwitchChannelFollowers GetChannelFollowers(string channelId, int? limit = null, int? offset = null, string cursor = null, SortDirection? direction = null)
+        {
+            var apiRequest = new TwitchAPIRequest();
+            apiRequest.Version = APIVersion.V5;
+            apiRequest.Path = $"channels/{channelId}/follows";
+            apiRequest.Method = "GET";
+            apiRequest.QueryValues.Add("limit", limit);
+            apiRequest.QueryValues.Add("offset", offset);
+            apiRequest.QueryValues.Add("cursor", cursor);
+            apiRequest.QueryValues.Add("direction", direction);
+            var jToken = this.Parent.RequestAsJson(apiRequest);
+
+            return new TwitchChannelFollowers().Read(jToken);
+        }
+
     }
 
 }
