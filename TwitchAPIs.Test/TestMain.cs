@@ -82,7 +82,7 @@ namespace TwitchAPIs.Test
                         continue;
                     }
 
-                    var testInput = user.QueryInput("Enter Resource", reosurceInput.Value.Value, t=> t.GetType().Name, true);
+                    var testInput = user.QueryInput("Enter Resource", reosurceInput.Value.Value, t => t.GetType().Name, true);
 
                     if (testInput.Breaked == true)
                     {
@@ -188,10 +188,19 @@ namespace TwitchAPIs.Test
             {
                 var array = enumerable.OfType<object>().ToArray();
 
-                for (int i = 0; i < array.Length; i++)
+                if (array.Length == 0)
                 {
-                    list.Add(new PrintableLine(level, $"{i}/{array.Length}"));
-                    list.AddRange(ToString(array[i], level + 1));
+                    list.Add(new PrintableLine(level, "{empty}"));
+                }
+                else
+                {
+
+                    for (int i = 0; i < array.Length; i++)
+                    {
+                        list.Add(new PrintableLine(level, $"{i}/{array.Length}"));
+                        list.AddRange(ToString(array[i], level + 1));
+                    }
+
                 }
 
             }
