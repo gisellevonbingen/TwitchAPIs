@@ -52,24 +52,24 @@ namespace TwitchAPIs.Test
             return this.ReadInput();
         }
 
-        public virtual QueryResult<T> QueryInput<T>(string message, IEnumerable<T> collection)
+        public virtual QueryResult<T> QueryInput<T>(string message, IEnumerable<T> collection, Func<T, string> func)
         {
-            return this.QueryInput(message, collection, false);
+            return this.QueryInput(message, collection, func, false);
         }
 
-        public virtual QueryResult<T> QueryInput<T>(string message, IEnumerable<T> collection, bool breakable)
-        {
-            var breakInput = this.BreakInput;
-            return this.QueryInput(message, collection, breakable, $"Break to '{breakInput}'", breakInput);
-        }
-
-        public virtual QueryResult<T> QueryInput<T>(string message, IEnumerable<T> collection, bool breakable, string breakMessage)
+        public virtual QueryResult<T> QueryInput<T>(string message, IEnumerable<T> collection, Func<T, string> func, bool breakable)
         {
             var breakInput = this.BreakInput;
-            return this.QueryInput(message, collection, breakable, breakMessage, breakInput);
+            return this.QueryInput(message, collection, func, breakable, $"Break to '{breakInput}'", breakInput);
         }
 
-        public virtual QueryResult<T> QueryInput<T>(string message, IEnumerable<T> collection, bool breakable, string breakMessage, string breakInput)
+        public virtual QueryResult<T> QueryInput<T>(string message, IEnumerable<T> collection, Func<T, string> func, bool breakable, string breakMessage)
+        {
+            var breakInput = this.BreakInput;
+            return this.QueryInput(message, collection, func, breakable, breakMessage, breakInput);
+        }
+
+        public virtual QueryResult<T> QueryInput<T>(string message, IEnumerable<T> collection, Func<T, string> func, bool breakable, string breakMessage, string breakInput)
         {
             var array = collection.ToArray();
             int digits = Math.Max((int)(Math.Log10(array.Length - 1) + 1), 0);
@@ -81,7 +81,8 @@ namespace TwitchAPIs.Test
                 for (int i = 0; i < array.Length; i++)
                 {
                     var value = array[i];
-                    this.SendMessage($"{i.ToString(format)} - {value}");
+                    var text = func?.Invoke(value) ?? string.Concat(value);
+                    this.SendMessage($"{i.ToString(format)} - {text}");
                 }
 
                 if (breakable == true)

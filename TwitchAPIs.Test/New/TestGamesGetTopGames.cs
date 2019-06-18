@@ -32,7 +32,7 @@ namespace TwitchAPIs.Test.New
 
                 after = null;
                 before = null;
-                var index = user.QueryInput("Select Direction", new string[] { "after", "before" }, true).Index;
+                var index = user.QueryInput("Select Direction", new string[] { "after", "before" }, null, true).Index;
 
                 if (index == -1)
                 {

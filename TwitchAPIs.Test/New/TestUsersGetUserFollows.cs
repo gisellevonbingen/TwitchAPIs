@@ -25,11 +25,10 @@ namespace TwitchAPIs.Test.New
             {
                 { FollowsType.From ,"XXX followed from id, Followings" },
                 { FollowsType.To , "XXX follow to id, Followers" }
-            }.ToArray();
+            };
 
             var userId = user.ReadInput("UserId");
-            var input = user.QueryInput("Enter FollowsType", followsTypes.Select(pair => pair.Value)).Index;
-            var followsType = followsTypes[input].Key;
+            var followsType = user.QueryInput("Enter FollowsType", followsTypes, pair => $"{pair.Key} = {pair.Value}").Value.Key;
 
             var api = handler.API;
             string cursor = null;

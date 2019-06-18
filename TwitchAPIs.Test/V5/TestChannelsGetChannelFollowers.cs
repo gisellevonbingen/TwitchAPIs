@@ -25,7 +25,7 @@ namespace TwitchAPIs.Test.V5
             var channelId = user.ReadInput("Enter Channel Id");
             var limit = NumberUtils.ToIntNullable(user.ReadInput("Enter Limit as int"));
             var offset = NumberUtils.ToIntNullable(user.ReadInput("Enter Offset as int"));
-            var direction = user.QueryInput("Enter Direction", EnumUtils.GetNullableValues<SortDirection>(), true).Value;
+            var direction = user.QueryInput("Enter Direction", EnumUtils.GetNullableValues<SortDirection>(), null, true).Value;
 
             string cursor = null;
 

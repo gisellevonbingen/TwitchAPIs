@@ -56,8 +56,7 @@ namespace TwitchAPIs.Test
             list.Add(new OAuthRequestToken());
             list.Add(new OAuthRequestAuthorization());
 
-            var input = user.QueryInput("Enter RequestType", list.Select(req => req.GetType().Name)).Index;
-            var request = list[input];
+            var request = user.QueryInput("Enter RequestType", list, req => req.GetType().Name).Value;
 
             if (request is OAuthRequestAuthorization auth)
             {

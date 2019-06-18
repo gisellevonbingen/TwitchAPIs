@@ -68,31 +68,28 @@ namespace TwitchAPIs.Test
                     user.SendMessage();
                     user.SendMessage();
 
-                    var versions = testMap.OrderBy(pair => pair.Key).ToArray();
-                    var versionIndex = user.QueryInput("Enter Version", versions.Select(pair => pair.Key), true).Index;
+                    var versionInput = user.QueryInput("Enter Version", testMap.OrderBy(pair => pair.Key), pair => pair.Key, true);
 
-                    if (versionIndex == -1)
+                    if (versionInput.Breaked == true)
                     {
                         break;
                     }
 
-                    var reources = versions[versionIndex].Value.OrderBy(pair => pair.Key).ToArray();
-                    var reosurceIndex = user.QueryInput("Enter Resource", reources.Select(pair => pair.Key), true).Index;
+                    var reosurceInput = user.QueryInput("Enter Resource", versionInput.Value.Value.OrderBy(pair => pair.Key), pair => pair.Key, true);
 
-                    if (reosurceIndex == -1)
+                    if (reosurceInput.Breaked == true)
                     {
                         continue;
                     }
 
-                    var tests = reources[reosurceIndex].Value.ToArray();
-                    var testsIndex = user.QueryInput("Enter Resource", tests.Select(t => t.GetType().Name), true).Index;
+                    var testInput = user.QueryInput("Enter Resource", reosurceInput.Value.Value, t=> t.GetType().Name, true);
 
-                    if (testsIndex == -1)
+                    if (testInput.Breaked == true)
                     {
                         continue;
                     }
 
-                    var test = tests[testsIndex];
+                    var test = testInput.Value;
                     user.SendMessage("Test - " + test.GetType().Name);
 
                     test.Run(this);

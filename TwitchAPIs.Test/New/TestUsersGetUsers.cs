@@ -21,19 +21,18 @@ namespace TwitchAPIs.Test.New
             var handler = main.TwitchAPIHandler;
 
             var requests = new List<UserRequest>();
-            var userTypes = (UserType[])Enum.GetValues(typeof(UserType));
 
             while (true)
             {
-                var typeIndex = user.QueryInput("Enter UserType", userTypes.Select(v => v.ToString()), true).Index;
+                var typeInput = user.QueryInput("Enter UserType", EnumUtils.GetValues<UserType>(), null, true);
 
-                if (typeIndex == -1)
+                if (typeInput.Breaked == true)
                 {
                     break;
                 }
 
                 var request = new UserRequest();
-                request.Type = userTypes[typeIndex];
+                request.Type = typeInput.Value;
                 request.Value = user.ReadInput("Enter User" + request.Type);
 
                 requests.Add(request);
