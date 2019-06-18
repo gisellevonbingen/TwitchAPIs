@@ -8,9 +8,9 @@ using TwitchAPIs.V5;
 namespace TwitchAPIs.Test.V5
 {
     [TwitchAPITest("V5", "Channels")]
-    public class TestChannelsGetChannel : TestAbstract
+    public class TestChannelsGetChannelByID : TestAbstract
     {
-        public TestChannelsGetChannel()
+        public TestChannelsGetChannelByID()
         {
 
         }
@@ -21,7 +21,8 @@ namespace TwitchAPIs.Test.V5
             var handler = main.TwitchAPIHandler;
 
             var api = handler.API;
-            var channel = api.V5.Channels.GetChannel();
+            var id = user.ReadInput("Enter Channel Id");
+            var channel = api.V5.Channels.GetChannelByID(id);
 
             main.PrintReflection(user, "TwitchChannel", channel);
         }

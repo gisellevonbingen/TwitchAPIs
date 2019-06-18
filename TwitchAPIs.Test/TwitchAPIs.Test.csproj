@@ -58,6 +58,7 @@
     <Compile Include="New\TestGamesGetTopGames.cs" />
     <Compile Include="PrintableLine.cs" />
     <Compile Include="TwitchAPITestAttribute.cs" />
+    <Compile Include="V5\TestChannelsGetChannelByID.cs" />
     <Compile Include="V5\TestUsersUnblockUser.cs" />
     <Compile Include="V5\TestUsersBlockUser.cs" />
     <Compile Include="V5\TestUsersGetUser.cs" />

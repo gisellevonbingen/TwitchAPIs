@@ -27,11 +27,11 @@ namespace TwitchAPIs.V5
             return channel;
         }
 
-        public TwitchChannel GetChannel(string id)
+        public TwitchChannel GetChannelByID(string channelId)
         {
             var apiRequest = new TwitchAPIRequest();
             apiRequest.Version = APIVersion.V5;
-            apiRequest.Path = $"channels/{id}";
+            apiRequest.Path = $"channels/{channelId}";
             apiRequest.Method = "GET";
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
