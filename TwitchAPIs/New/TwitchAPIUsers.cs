@@ -27,14 +27,14 @@ namespace TwitchAPIs.New
             return this.ParseUsers(jToken).FirstOrDefault();
         }
 
-        public TwitchUserFollows GetUserFollows(FollowsType type, string id, string cursor = null)
+        public TwitchUserFollows GetUserFollows(FollowsType type, string id, string after = null)
         {
             var apiRequest = new TwitchAPIRequest();
             apiRequest.Version = APIVersion.New;
             apiRequest.Path = "users/follows";
             apiRequest.Method = "GET";
             apiRequest.QueryValues.Add($"{type.Request}_id", id);
-            apiRequest.QueryValues.Add($"after", cursor);
+            apiRequest.QueryValues.Add($"after", after);
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
             var uerFollows = new TwitchUserFollows();
