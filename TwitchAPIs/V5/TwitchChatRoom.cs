@@ -21,7 +21,7 @@ namespace TwitchAPIs.V5
 
         }
 
-        public TwitchChatRoom Read(JToken jToken)
+        public TwitchChatRoom(JToken jToken)
         {
             this.Id = jToken.Value<string>("_id");
             this.OwnerId = jToken.Value<string>("owner_id");
@@ -29,8 +29,6 @@ namespace TwitchAPIs.V5
             this.Topic = jToken.Value<string>("topic");
             this.Previewable = jToken.Value<bool>("is_previewable");
             this.MinimumAllowedRole = jToken.Value<string>("minimum_allowed_role");
-
-            return this;
         }
 
     }

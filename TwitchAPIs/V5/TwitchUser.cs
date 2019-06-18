@@ -23,7 +23,7 @@ namespace TwitchAPIs.V5
 
         }
 
-        public virtual TwitchUser Read(JToken jToken)
+        public TwitchUser(JToken jToken)
         {
             this.Id = jToken.Value<string>("_id");
             this.BIO = jToken.Value<string>("bio");
@@ -33,8 +33,6 @@ namespace TwitchAPIs.V5
             this.Name = jToken.Value<string>("name");
             this.Type = jToken.Value<string>("type");
             this.UpdatedAt = jToken.Value<DateTime>("updated_at");
-
-            return this;
         }
 
     }

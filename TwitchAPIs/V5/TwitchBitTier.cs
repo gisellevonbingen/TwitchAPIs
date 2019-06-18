@@ -21,16 +21,14 @@ namespace TwitchAPIs.V5
             this.Images = new Dictionary<string, Dictionary<string, Dictionary<string, string>>>();
         }
 
-        public TwitchBitTier Read(JToken jToken)
+        public TwitchBitTier(JToken jToken)
         {
             this.MinBits = jToken.Value<int>("min_bits");
             this.Id = jToken.Value<string>("id");
             this.Color = jToken.Value<string>("color");
             this.CanCheer = jToken.Value<bool>("can_cheer");
 
-            DictionaryUtils.ClearAndPutAll(this.Images, jToken.ReadMap("images", (bk, bt) => new KeyValuePair<string, Dictionary<string, Dictionary<string, string>>>(bk, bt.ReadMap((sk, st) => new KeyValuePair<string, Dictionary<string, string>>(sk, st.ReadMap((s2k, s2t) => new KeyValuePair<string, string>(s2k, s2t.Value<string>())))))));
-
-            return this;
+            this.Images = jToken.ReadMap("images", (bk, bt) => new KeyValuePair<string, Dictionary<string, Dictionary<string, string>>>(bk, bt.ReadMap((sk, st) => new KeyValuePair<string, Dictionary<string, string>>(sk, st.ReadMap((s2k, s2t) => new KeyValuePair<string, string>(s2k, s2t.Value<string>()))))));
         }
 
         public string GetImage(string background, string state, string scale)

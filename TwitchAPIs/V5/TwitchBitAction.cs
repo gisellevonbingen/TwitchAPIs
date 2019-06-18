@@ -23,7 +23,7 @@ namespace TwitchAPIs.V5
 
         }
 
-        public TwitchBitAction Read(JToken jToken)
+        public TwitchBitAction(JToken jToken)
         {
             this.Prefix = jToken.Value<string>("prefix");
             this.Scales = jToken.ReadArray("scales", t => t.Value<string>());
@@ -32,9 +32,7 @@ namespace TwitchAPIs.V5
             this.Type = jToken.Value<string>("type");
             this.UpdatedAt = jToken.Value<DateTime>("updated_at");
             this.Priority = jToken.Value<int>("priority");
-            this.Tiers = jToken.ReadArray("tiers", t => new TwitchBitTier().Read(t));
-
-            return this;
+            this.Tiers = jToken.ReadArray("tiers", t => new TwitchBitTier(t));
         }
 
     }

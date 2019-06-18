@@ -18,13 +18,12 @@ namespace TwitchAPIs.V5
 
         }
 
-        public TwitchFollow Read(JToken jToken)
+
+        public TwitchFollow(JToken jToken)
         {
-            this.Channel = new TwitchChannel().Read(jToken["channel"]);
+            this.Channel = new TwitchChannel(jToken["channel"]);
             this.CreatedAt = jToken.Value<DateTime>("created_at");
             this.Notifications = jToken.Value<bool>("notifications");
-
-            return this;
         }
 
     }

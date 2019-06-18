@@ -21,16 +21,14 @@ namespace TwitchAPIs.V5
 
         }
 
-        public TwitchGame Read(JToken jToken)
+        public TwitchGame(JToken jToken)
         {
             this.Id = jToken.Value<string>("_id");
-            this.Box = jToken.ReadIfExist("box", t => new TwitchImageSet().Read(t));
+            this.Box = jToken.ReadIfExist("box", t => new TwitchImageSet(t));
             this.GiantBombId = jToken.Value<string>("giantbomb_id");
-            this.Logo = jToken.ReadIfExist("logo", t => new TwitchImageSet().Read(t));
+            this.Logo = jToken.ReadIfExist("logo", t => new TwitchImageSet(t));
             this.Name = jToken.Value<string>("name");
             this.Popularity = jToken.Value<int>("popularity");
-
-            return this;
         }
 
     }

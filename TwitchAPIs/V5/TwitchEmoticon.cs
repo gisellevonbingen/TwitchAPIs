@@ -18,12 +18,10 @@ namespace TwitchAPIs.V5
 
         }
 
-        public TwitchEmoticon Read(JToken jToken)
+        public TwitchEmoticon(JToken jToken)
         {
             this.Code = jToken.Value<string>("code");
             this.Id = jToken.Value<int>("id");
-
-            return this;
         }
 
     }

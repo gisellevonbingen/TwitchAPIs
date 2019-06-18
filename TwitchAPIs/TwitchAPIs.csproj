@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="New\Pagination.cs" />
     <Compile Include="New\TwitchTopGames.cs" />
     <Compile Include="V5\SortDirection.cs" />
     <Compile Include="V5\FollowSortMode.cs" />
@@ -70,7 +71,6 @@
     <Compile Include="OAuth\OAuthRequestOption.cs" />
     <Compile Include="OAuth\OAuthRequestToken.cs" />
     <Compile Include="OAuth\OAuthResponseType.cs" />
-    <Compile Include="Pagination.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="APIVersion.cs" />
     <Compile Include="QueryValue.cs" />

@@ -9,7 +9,7 @@ namespace TwitchAPIs.New
     public class TwitchTopGames
     {
         public TwitchGame[] Games { get; set; }
-        public string Cursor { get; set; }
+        public Pagination Pagination { get; set; }
     }
 
 }

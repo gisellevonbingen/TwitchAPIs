@@ -50,7 +50,7 @@ namespace TwitchAPIs.Test.New
                 var clips = handler.API.New.Clips.GetClips(options);
                 main.PrintReflection(user, "Clips", clips);
 
-                cursor = clips.Cursor;
+                cursor = clips.Pagination.Cursor;
 
                 if (cursor == null)
                 {

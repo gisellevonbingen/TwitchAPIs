@@ -26,7 +26,8 @@ namespace TwitchAPIs.OAuth
 
         }
 
-        public OAuthAuthorization Read(QueryValues values)
+
+        public OAuthAuthorization(QueryValues values)
         {
             this.AccessToken = values.Single("access_token");
             this.RefreshToken = values.Single("refresh_token");
@@ -34,19 +35,15 @@ namespace TwitchAPIs.OAuth
             var scope = values.Single("scope");
             this.Scope = string.IsNullOrWhiteSpace(scope) ? null : scope.Split(' ');
             this.TokenType = values.Single("token_type");
-
-            return this;
         }
 
-        public OAuthAuthorization Read(JToken jToken)
+        public OAuthAuthorization(JToken jToken)
         {
             this.AccessToken = jToken.Value<string>("access_token");
             this.RefreshToken = jToken.Value<string>("refresh_token");
             this.ExpiresIn = jToken.Value<int>("expires_in");
             this.Scope = jToken.ArrayValues<string>("scope")?.ToArray();
             this.TokenType = jToken.Value<string>("token_type");
-
-            return this;
         }
 
     }

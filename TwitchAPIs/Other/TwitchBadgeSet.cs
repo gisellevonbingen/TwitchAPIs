@@ -17,24 +17,12 @@ namespace TwitchAPIs.Other
             this.Set = new Dictionary<string, Dictionary<string, TwitchBadge>>();
         }
 
-        public TwitchBadgeSet Read(JToken jToken)
+        public TwitchBadgeSet(JToken jToken)
         {
-            var set = this.Set;
-            set.Clear();
-
             var setToken = jToken.Value<JObject>("badge_sets");
-
-
-            if (setToken != null)
-            {
-                var parseds = setToken.ReadMap((name, nt) =>
-                    new KeyValuePair<string, Dictionary<string, TwitchBadge>>(name.ToLowerInvariant(), nt["versions"].ReadMap((version, vt) =>
-                        new KeyValuePair<string, TwitchBadge>(version.ToLowerInvariant(), new TwitchBadge().Read(vt)))));
-
-                DictionaryUtils.PutAll(set, parseds);
-            }
-
-            return this;
+            this.Set = setToken.ReadMap((name, nt) =>
+                new KeyValuePair<string, Dictionary<string, TwitchBadge>>(name.ToLowerInvariant(), nt["versions"].ReadMap((version, vt) =>
+                    new KeyValuePair<string, TwitchBadge>(version.ToLowerInvariant(), new TwitchBadge(vt)))));
         }
 
         public TwitchBadge Get(string name, string version)

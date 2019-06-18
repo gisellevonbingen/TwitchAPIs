@@ -18,13 +18,11 @@ namespace TwitchAPIs.V5
 
         }
 
-        public TwitchChannelFollowers Read(JToken jToken)
+        public TwitchChannelFollowers(JToken jToken)
         {
             this.Cursor = jToken.Value<string>("_cursor");
             this.Total = jToken.Value<int>("_total");
-            this.Follows = jToken.ReadArray("follows", t => new TwitchChannelFollow().Read(t));
-
-            return this;
+            this.Follows = jToken.ReadArray("follows", t => new TwitchChannelFollow(t));
         }
 
     }

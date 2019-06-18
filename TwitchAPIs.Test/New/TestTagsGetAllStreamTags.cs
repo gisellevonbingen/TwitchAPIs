@@ -51,7 +51,7 @@ namespace TwitchAPIs.Test.New
                     user.SendMessage($"    Description={(tag.LocalizationDescriptions.TryGetValue("ko-kr", out var description) ? description : null)}");
                 }
 
-                cursor = tags.Cursor;
+                cursor = tags.Pagination.Cursor;
 
                 if (cursor == null)
                 {

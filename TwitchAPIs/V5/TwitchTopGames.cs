@@ -13,12 +13,15 @@ namespace TwitchAPIs.V5
 
         public TwitchTopGame[] Top { get; set; }
 
-        public TwitchTopGames Read(JToken jToken)
+        public TwitchTopGames()
+        {
+
+        }
+
+        public TwitchTopGames(JToken jToken)
         {
             this.Total = jToken.Value<int>("_total");
-            this.Top = jToken.ReadArray("top", t => new TwitchTopGame().Read(t)) ?? new TwitchTopGame[0];
-
-            return this;
+            this.Top = jToken.ReadArray("top", t => new TwitchTopGame(t)) ?? new TwitchTopGame[0];
         }
 
     }

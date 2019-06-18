@@ -23,10 +23,7 @@ namespace TwitchAPIs.V5
             apiRequest.QueryValues.Add("offset", offset);
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
-            var value = new TwitchTopGames();
-            value.Read(jToken);
-
-            return value;
+            return new TwitchTopGames(jToken);
         }
 
     }

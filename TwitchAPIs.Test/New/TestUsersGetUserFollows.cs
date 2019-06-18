@@ -28,7 +28,7 @@ namespace TwitchAPIs.Test.New
             };
 
             var userId = user.ReadInput("UserId");
-            var followsType = user.QueryInput("Enter FollowsType", followsTypes, pair => $"{pair.Key} = {pair.Value}").Value.Key;
+            var followsType = user.QueryInput("Enter FollowsType", followsTypes, pair => $"{pair.Key.Request} = {pair.Value}").Value.Key;
 
             var api = handler.API;
             string cursor = null;
@@ -38,7 +38,7 @@ namespace TwitchAPIs.Test.New
                 var userFollows = api.New.Users.GetUserFollows(followsType, userId, cursor);
                 main.PrintReflection(user, "UserFollows", userFollows);
 
-                cursor = userFollows.Cursor;
+                cursor = userFollows.Pagination.Cursor;
 
                 if (cursor == null)
                 {

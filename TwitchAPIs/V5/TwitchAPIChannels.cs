@@ -21,10 +21,7 @@ namespace TwitchAPIs.V5
             apiRequest.Method = "GET";
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
-            var channel = new TwitchChannel();
-            channel.Read(jToken);
-
-            return channel;
+            return new TwitchChannel(jToken);
         }
 
         public TwitchChannel GetChannelByID(string channelId)
@@ -35,10 +32,7 @@ namespace TwitchAPIs.V5
             apiRequest.Method = "GET";
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
-            var channel = new TwitchChannel();
-            channel.Read(jToken);
-
-            return channel;
+            return new TwitchChannel(jToken);
         }
 
         public TwitchUser[] GetChannelEditors(string channelId)
@@ -49,7 +43,7 @@ namespace TwitchAPIs.V5
             apiRequest.Method = "GET";
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
-            return jToken.ReadArray("users", t => new TwitchUser().Read(t)) ?? new TwitchUser[0];
+            return jToken.ReadArray("users", t => new TwitchUser(t)) ?? new TwitchUser[0];
         }
 
         public TwitchChannelFollowers GetChannelFollowers(string channelId, int? limit = null, int? offset = null, string cursor = null, SortDirection? direction = null)
@@ -64,7 +58,7 @@ namespace TwitchAPIs.V5
             apiRequest.QueryValues.Add("direction", direction);
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
-            return new TwitchChannelFollowers().Read(jToken);
+            return new TwitchChannelFollowers(jToken);
         }
 
     }

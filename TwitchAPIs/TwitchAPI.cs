@@ -55,20 +55,6 @@ namespace TwitchAPIs
             return null;
         }
 
-        public Pagination GetPaination(JToken jToken, string key = "pagination")
-        {
-            var paginationToken = jToken[key];
-
-            if (paginationToken != null)
-            {
-                var pagination = new Pagination();
-                pagination.Read(paginationToken);
-                return pagination;
-            }
-
-            return null;
-        }
-
         public void SetupRequest(WebRequestParameter request, APIVersion? version)
         {
             var headers = request.Headers;

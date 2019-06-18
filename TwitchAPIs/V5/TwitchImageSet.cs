@@ -19,14 +19,12 @@ namespace TwitchAPIs.V5
 
         }
 
-        public TwitchImageSet Read(JToken jToken)
+        public TwitchImageSet(JToken jToken)
         {
             this.Larage = jToken.Value<string>("large");
             this.Medium = jToken.Value<string>("medium");
             this.Small = jToken.Value<string>("small");
             this.Template = jToken.Value<string>("template");
-
-            return this;
         }
 
     }

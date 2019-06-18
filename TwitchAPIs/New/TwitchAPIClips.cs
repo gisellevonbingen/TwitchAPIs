@@ -30,8 +30,8 @@ namespace TwitchAPIs.New
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
             var clips = new TwitchClips();
-            clips.Clips = jToken.ReadArray("data", t => new TwitchClip().Read(t)) ?? new TwitchClip[0];
-            clips.Cursor = this.Parent.GetPaination(jToken)?.Cursor;
+            clips.Clips = jToken.ReadArray("data", t => new TwitchClip(t)) ?? new TwitchClip[0];
+            clips.Pagination = new Pagination(jToken["pagination"]);
 
             return clips;
         }

@@ -23,10 +23,7 @@ namespace TwitchAPIs.Other
 
             using (var res = this.Parent.Web.Request(req))
             {
-                var set = new TwitchBadgeSet();
-                set.Read(res.ReadAsJson());
-
-                return set;
+                return new TwitchBadgeSet(res.ReadAsJson());
             }
 
         }
@@ -39,10 +36,7 @@ namespace TwitchAPIs.Other
 
             using (var res = this.Parent.Web.Request(req))
             {
-                var set = new TwitchBadgeSet();
-                set.Read(res.ReadAsJson());
-
-                return set;
+                return new TwitchBadgeSet(res.ReadAsJson());
             }
 
         }
@@ -55,10 +49,7 @@ namespace TwitchAPIs.Other
 
             using (var res = this.Parent.Web.Request(req))
             {
-                var set = new TwitchBadgeSet();
-                set.Read(res.ReadAsJson());
-
-                return set;
+                return new TwitchBadgeSet(res.ReadAsJson());
             }
 
         }

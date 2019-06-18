@@ -13,13 +13,16 @@ namespace TwitchAPIs.V5
         public int Viewers { get; set; }
         public TwitchGame Game { get; set; }
 
-        public TwitchTopGame Read(JToken jToken)
+        public TwitchTopGame()
+        {
+
+        }
+
+        public TwitchTopGame(JToken jToken)
         {
             this.Channels = jToken.Value<int>("channels");
             this.Viewers = jToken.Value<int>("viewers");
-            this.Game = jToken.ReadIfExist("game", t => new TwitchGame().Read(t));
-
-            return this;
+            this.Game = jToken.ReadIfExist("game", t => new TwitchGame(t));
         }
 
     }

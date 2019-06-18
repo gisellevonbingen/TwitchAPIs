@@ -17,12 +17,10 @@ namespace TwitchAPIs.V5
 
         }
 
-        public TwitchUserNotifications Read(JToken jToken)
+        public TwitchUserNotifications(JToken jToken)
         {
             this.Email = jToken.Value<bool>("email");
             this.Push = jToken.Value<bool>("push");
-
-            return this;
         }
 
     }

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TwitchAPIs
+namespace TwitchAPIs.New
 {
     public class Pagination
     {
@@ -16,11 +16,9 @@ namespace TwitchAPIs
 
         }
 
-        public Pagination Read(JToken jToken)
+        public Pagination(JToken jToken)
         {
             this.Cursor = jToken.Value<string>("cursor");
-
-            return this;
         }
 
     }

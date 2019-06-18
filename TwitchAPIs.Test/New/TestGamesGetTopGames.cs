@@ -40,11 +40,11 @@ namespace TwitchAPIs.Test.New
                 }
                 else if (index == 0)
                 {
-                    after = topGames.Cursor;
+                    after = topGames.Pagination.Cursor;
                 }
                 else
                 {
-                    before = topGames.Cursor;
+                    before = topGames.Pagination.Cursor;
                 }
 
             }

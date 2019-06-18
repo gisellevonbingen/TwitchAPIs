@@ -18,13 +18,11 @@ namespace TwitchAPIs.New
 
         }
 
-        public TwitchGame Read(JToken jToken)
+        public TwitchGame(JToken jToken)
         {
             this.Id = jToken.Value<string>("id");
             this.Name = jToken.Value<string>("name");
             this.BoxArtUrl = jToken.Value<string>("box_art_url");
-
-            return this;
         }
 
     }

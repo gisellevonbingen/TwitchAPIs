@@ -13,8 +13,7 @@ namespace TwitchAPIs
         public string Key { get; set; }
         public string Value { get; set; }
 
-        public QueryValue(string key, string value)
-            : this()
+        public QueryValue(string key, string value) : this()
         {
             this.Key = key;
             this.Value = value;

@@ -21,7 +21,7 @@ namespace TwitchAPIs.V5
             apiRequest.Method = "GET";
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
-            return new TwitchUserOwn().Read(jToken);
+            return new TwitchUserOwn(jToken);
         }
 
         public TwitchUser GetUserByID(string userId)
@@ -32,7 +32,7 @@ namespace TwitchAPIs.V5
             apiRequest.Method = "GET";
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
-            return new TwitchUser().Read(jToken);
+            return new TwitchUser(jToken);
         }
 
         public TwitchUser[] GetUsers(IEnumerable<string> logins)
@@ -44,7 +44,7 @@ namespace TwitchAPIs.V5
             apiRequest.QueryValues.Add("login", string.Join(",", logins));
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
-            return jToken.ReadArray("users", t => new TwitchUser().Read(t)) ?? new TwitchUser[0];
+            return jToken.ReadArray("users", t => new TwitchUser(t)) ?? new TwitchUser[0];
         }
 
         public TwitchEmoticonSets GetUserEmotes(string userId)
@@ -55,9 +55,7 @@ namespace TwitchAPIs.V5
             apiRequest.Method = "GET";
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
-            var set = new TwitchEmoticonSets().Read(jToken);
-
-            return set;
+            return new TwitchEmoticonSets(jToken);
         }
 
         public TwitchUserFollows GetUserFollows(string userId, int? limit = null, int? offset = null, SortDirection? direction = null, FollowSortMode? sortby = null)
@@ -74,7 +72,7 @@ namespace TwitchAPIs.V5
 
             var follows = new TwitchUserFollows();
             follows.Total = jToken.Value<int>("_total");
-            follows.Follows = jToken.ReadArray("follows", t => new TwitchFollow().Read(t)) ?? new TwitchFollow[0];
+            follows.Follows = jToken.ReadArray("follows", t => new TwitchFollow(t)) ?? new TwitchFollow[0];
 
             return follows;
         }
@@ -88,9 +86,7 @@ namespace TwitchAPIs.V5
             apiRequest.QueryValues.Add("notifications", notifications);
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
-            var follow = new TwitchFollow().Read(jToken);
-
-            return follow;
+            return new TwitchFollow(jToken);
         }
 
         public void UnfollowChannel(string userId, string channelId)
@@ -123,7 +119,7 @@ namespace TwitchAPIs.V5
 
             var blockList = new TwitchUserBlockList();
             blockList.Total = jToken.Value<int>("_total");
-            blockList.Blocks = jToken.ReadArray("blocks", t => new TwitchUser().Read(t["user"])) ?? new TwitchUser[0];
+            blockList.Blocks = jToken.ReadArray("blocks", t => new TwitchUser(t["user"])) ?? new TwitchUser[0];
 
             return blockList;
         }
@@ -136,7 +132,7 @@ namespace TwitchAPIs.V5
             apiRequest.Method = "PUT";
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
-            return new TwitchUser().Read(jToken["user"]);
+            return new TwitchUser(jToken["user"]);
         }
 
         public void UnblockUser(string sourceUserId, string targetUserId)

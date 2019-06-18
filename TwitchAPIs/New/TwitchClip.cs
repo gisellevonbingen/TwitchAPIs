@@ -29,7 +29,7 @@ namespace TwitchAPIs.New
 
         }
 
-        public TwitchClip Read(JToken jToken)
+        public TwitchClip(JToken jToken)
         {
             this.BroadcasterId = jToken.Value<string>("broadcaster_id");
             this.BroadcasterName = jToken.Value<string>("broadcaster_name");
@@ -45,8 +45,6 @@ namespace TwitchAPIs.New
             this.Url = jToken.Value<string>("url");
             this.VideoId = jToken.Value<string>("video_id");
             this.ViewCount = jToken.Value<int>("view_count");
-
-            return this;
         }
 
     }

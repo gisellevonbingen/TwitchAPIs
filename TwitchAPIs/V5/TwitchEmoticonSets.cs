@@ -17,14 +17,10 @@ namespace TwitchAPIs.V5
             this.Set = new Dictionary<string, TwitchEmoticon[]>();
         }
 
-        public TwitchEmoticonSets Read(JToken jToken)
+        public TwitchEmoticonSets(JToken jToken)
         {
             var setToken = jToken.Value<JObject>("emoticon_sets");
-            var set = setToken.ReadMap((k, v) => new KeyValuePair<string, TwitchEmoticon[]>(k, v.ReadArray(at => new TwitchEmoticon().Read(at))));
-
-            DictionaryUtils.ClearAndPutAll(this.Set, set);
-
-            return this;
+            this.Set = setToken.ReadMap((k, v) => new KeyValuePair<string, TwitchEmoticon[]>(k, v.ReadArray(at => new TwitchEmoticon(at))));
         }
 
     }

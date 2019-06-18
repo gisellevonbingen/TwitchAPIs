@@ -20,17 +20,13 @@ namespace TwitchAPIs.V5
 
         }
 
-        public override TwitchUser Read(JToken jToken)
+        public TwitchUserOwn(JToken jToken) : base(jToken)
         {
-            base.Read(jToken);
-
             this.Email = jToken.Value<string>("email");
             this.EmailVerified = jToken.Value<bool>("email_verified");
-            this.Notifications = jToken.ReadIfExist("notifications", t => new TwitchUserNotifications().Read(t));
+            this.Notifications = jToken.ReadIfExist("notifications", t => new TwitchUserNotifications(t));
             this.Partnered = jToken.Value<bool>("partnered");
             this.TwitterConnected = jToken.Value<bool>("twitter_connected");
-
-            return this;
         }
 
     }

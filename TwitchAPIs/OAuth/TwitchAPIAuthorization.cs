@@ -39,8 +39,7 @@ namespace TwitchAPIs.OAuth
                 queryValues = QueryValues.Parse(StringUtils.RemovePrefix(responseURI.Fragment, "#"));
                 this.EnsureOAuthStateEquals(queryValues, request);
 
-                authorization = new OAuthAuthorization();
-                authorization.Read(queryValues);
+                authorization = new OAuthAuthorization(queryValues);
             }
             else
             {
@@ -61,10 +60,7 @@ namespace TwitchAPIs.OAuth
             apiRequest.QueryValues.Add("client_secret", clientSecret);
             var jToken = this.Parent.RequestAsJson(apiRequest, "status");
 
-            var value = new OAuthAuthorization();
-            value.Read(jToken);
-
-            return value;
+            return new OAuthAuthorization(jToken);
         }
 
         public void EnsureOAuthStateEquals(QueryValues queryValues, OAuthRequest request)
@@ -97,10 +93,7 @@ namespace TwitchAPIs.OAuth
             apiRequest.QueryValues.Add("redirect_uri", request.RedirectURI);
             var jToken = this.Parent.RequestAsJson(apiRequest, "status");
 
-            var value = new OAuthAuthorization();
-            value.Read(jToken);
-
-            return value;
+            return new OAuthAuthorization(jToken);
         }
 
         public string GetOAuthURI(OAuthRequest request)

@@ -21,18 +21,12 @@ namespace TwitchAPIs.New
             this.LocalizationDescriptions = new Dictionary<string, string>();
         }
 
-        public TwitchStreamTag Read(JToken jToken)
+        public TwitchStreamTag(JToken jToken)
         {
             this.Id = jToken.Value<string>("tag_id");
             this.IsAuto = jToken.Value<bool>("is_auto");
-
-            var names = jToken.ReadMap("localization_names", (key, t) => new KeyValuePair<string, string>(key, t.Value<string>()));
-            DictionaryUtils.ClearAndPutAll(this.LocalizationNames, names);
-
-            var descriptions = jToken.ReadMap("localization_descriptions", (key, t) => new KeyValuePair<string, string>(key, t.Value<string>()));
-            DictionaryUtils.ClearAndPutAll(this.LocalizationDescriptions, descriptions);
-
-            return this;
+            this.LocalizationNames = jToken.ReadMap("localization_names", (key, t) => new KeyValuePair<string, string>(key, t.Value<string>()));
+            this.LocalizationDescriptions = jToken.ReadMap("localization_descriptions", (key, t) => new KeyValuePair<string, string>(key, t.Value<string>()));
         }
 
     }

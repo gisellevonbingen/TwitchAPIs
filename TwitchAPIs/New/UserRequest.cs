@@ -12,8 +12,7 @@ namespace TwitchAPIs.New
 
         public string Value { get; set; }
 
-        public UserRequest(UserType type, string value)
-            : this()
+        public UserRequest(UserType type, string value) : this()
         {
             this.Type = type;
             this.Value = value;

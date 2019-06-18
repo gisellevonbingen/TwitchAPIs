@@ -10,7 +10,7 @@ namespace TwitchAPIs.New
     public class TwitchClips
     {
         public TwitchClip[] Clips { get; set; }
-        public string Cursor { get; set; }
+        public Pagination Pagination { get; set; }
 
         public TwitchClips()
         {
