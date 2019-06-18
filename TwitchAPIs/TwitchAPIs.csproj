@@ -105,6 +105,7 @@
     <Compile Include="V5\TwitchTopGame.cs" />
     <Compile Include="V5\TwitchTopGames.cs" />
     <Compile Include="V5\TwitchImageSet.cs" />
+    <Compile Include="V5\TwitchUser.cs" />
     <Compile Include="V5\TwitchUserFollows.cs" />
     <Compile Include="New\TwitchUserFollows.cs" />
     <Compile Include="New\TwitchUser.cs" />
@@ -115,6 +116,7 @@
     <Compile Include="New\UserType.cs" />
     <Compile Include="V5\TwitchAPIUsers.cs" />
     <Compile Include="V5\TwitchAPIV5.cs" />
+    <Compile Include="V5\TwitchUserNotifications.cs" />
     <Compile Include="WebExplorerExtenstions.cs" />
   </ItemGroup>
   <ItemGroup>
