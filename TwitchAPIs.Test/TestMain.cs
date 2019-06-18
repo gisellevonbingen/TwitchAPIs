@@ -68,7 +68,7 @@ namespace TwitchAPIs.Test
                     user.SendMessage();
                     user.SendMessage();
 
-                    var versions = testMap.ToArray();
+                    var versions = testMap.OrderBy(pair => pair.Key).ToArray();
                     var versionIndex = user.QueryInput("Enter Version", versions.Select(pair => pair.Key), true);
 
                     if (versionIndex == -1)
@@ -76,7 +76,7 @@ namespace TwitchAPIs.Test
                         break;
                     }
 
-                    var reources = versions[versionIndex].Value.ToArray();
+                    var reources = versions[versionIndex].Value.OrderBy(pair => pair.Key).ToArray();
                     var reosurceIndex = user.QueryInput("Enter Resource", reources.Select(pair => pair.Key), true);
 
                     if (reosurceIndex == -1)
@@ -84,7 +84,7 @@ namespace TwitchAPIs.Test
                         continue;
                     }
 
-                    var tests = reources[reosurceIndex].Value.ToArray();
+                    var tests = reources[reosurceIndex].Value.OrderBy(t => t).ToArray();
                     var testsIndex = user.QueryInput("Enter Resource", tests.Select(t => t.GetType().Name), true);
 
                     if (testsIndex == -1)
