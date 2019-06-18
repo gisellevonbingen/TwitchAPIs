@@ -61,38 +61,31 @@ namespace TwitchAPIs.Test
             var user = this.User;
             var testMap = this.GetTestMap();
 
+            user.SendMessage();
+            user.SendMessage();
+            user.SendMessage($"Return to '{user.ReturnInput}'");
+
             while (true)
             {
                 try
                 {
                     user.SendMessage();
-                    user.SendMessage();
 
-                    var versionInput = user.QueryInput("Enter Version", testMap.OrderBy(pair => pair.Key), pair => pair.Key, true);
+                    var versions = testMap.OrderBy(pair => pair.Key);
+                    var versionInput = user.QueryInput("Enter Version", versions, pair => pair.Key);
 
-                    if (versionInput.Breaked == true)
-                    {
-                        break;
-                    }
+                    var resources = versionInput.Value.Value.OrderBy(pair => pair.Key);
+                    var reosurceInput = user.QueryInput("Enter Resource", resources, pair => pair.Key);
 
-                    var reosurceInput = user.QueryInput("Enter Resource", versionInput.Value.Value.OrderBy(pair => pair.Key), pair => pair.Key, true);
-
-                    if (reosurceInput.Breaked == true)
-                    {
-                        continue;
-                    }
-
-                    var testInput = user.QueryInput("Enter Test", reosurceInput.Value.Value, t => t.GetType().Name, true);
-
-                    if (testInput.Breaked == true)
-                    {
-                        continue;
-                    }
+                    var tests = reosurceInput.Value.Value;
+                    var testInput = user.QueryInput("Enter Test", tests, t => t.GetType().Name);
 
                     var test = testInput.Value;
                     user.SendMessage("Test - " + test.GetType().Name);
 
                     test.Run(this);
+
+                    user.SendMessage();
                 }
                 catch (UserInputReturnException)
                 {
@@ -194,7 +187,6 @@ namespace TwitchAPIs.Test
                 }
                 else
                 {
-
                     for (int i = 0; i < array.Length; i++)
                     {
                         list.Add(new PrintableLine(level, $"{i}/{array.Length}"));
