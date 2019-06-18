@@ -27,7 +27,7 @@ namespace TwitchAPIs.V5
             return jToken.ReadArray("games", t => new TwitchGame().Read(t)) ?? new TwitchGame[0];
         }
 
-        public TwitchChannel[] SearchChannels(string query, int? limit = null, int? offset = null)
+        public TwitchSearchChannels SearchChannels(string query, int? limit = null, int? offset = null)
         {
             var apiRequest = new TwitchAPIRequest();
             apiRequest.Version = APIVersion.V5;
@@ -38,7 +38,11 @@ namespace TwitchAPIs.V5
             apiRequest.QueryValues.Add("offset", offset);
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
-            return jToken.ReadArray("channels", t => new TwitchChannel().Read(t)) ?? new TwitchChannel[0];
+            var searchChannels = new TwitchSearchChannels();
+            searchChannels.Total = jToken.Value<int>("_total");
+            searchChannels.Channels = jToken.ReadArray("channels", t => new TwitchChannel().Read(t)) ?? new TwitchChannel[0];
+
+            return searchChannels;
         }
 
     }

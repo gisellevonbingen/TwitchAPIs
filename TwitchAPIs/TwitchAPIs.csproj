@@ -103,6 +103,7 @@
     <Compile Include="TwitchAPIRequest.cs" />
     <Compile Include="New\TwitchStreamTag.cs" />
     <Compile Include="New\TwitchStreamTags.cs" />
+    <Compile Include="V5\TwitchSearchChannels.cs" />
     <Compile Include="V5\TwitchTopGame.cs" />
     <Compile Include="V5\TwitchTopGames.cs" />
     <Compile Include="V5\TwitchImageSet.cs" />
