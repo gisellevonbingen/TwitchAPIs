@@ -5,9 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using TwitchAPIs.OAuth;
 
-namespace TwitchAPIs.Test
+namespace TwitchAPIs.Test.OAuth
 {
-    public class TestRefreshOAuthAuthorization : TestAbstract
+    [TwitchAPITestAttribute("OAuth", "Authorization")]
+    public class TestOAuthRefreshOAuthAuthorization : TestAbstract
     {
         public override void Run(TestMain main)
         {

@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TwitchAPIs.Test
+namespace TwitchAPIs.Test.New
 {
-    public class TestGetGames : TestAbstract
+    [TwitchAPITestAttribute("New", "Games")]
+    public class TestGamesGetGames : TestAbstract
     {
-        public TestGetGames()
+        public TestGamesGetGames()
         {
 
         }

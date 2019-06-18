@@ -5,8 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TwitchAPIs.Test
+namespace TwitchAPIs.Test.V5
 {
+    [TwitchAPITest("V5", "Search")]
     public class TestSearchGames : TestAbstract
     {
         public TestSearchGames()

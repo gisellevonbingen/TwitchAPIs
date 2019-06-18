@@ -6,11 +6,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using TwitchAPIs.New;
 
-namespace TwitchAPIs.Test
+namespace TwitchAPIs.Test.New
 {
-    public class TestGetUserFollowsNew : TestAbstract
+    [TwitchAPITestAttribute("New", "Users")]
+    public class TestUsersGetUserFollows : TestAbstract
     {
-        public TestGetUserFollowsNew()
+        public TestUsersGetUserFollows()
         {
 
         }

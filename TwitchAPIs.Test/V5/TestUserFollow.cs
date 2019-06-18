@@ -5,8 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TwitchAPIs.Test
+namespace TwitchAPIs.Test.V5
 {
+    [TwitchAPITest("V5", "Users")]
     public class TestUserFollow : TestAbstract
     {
         public TestUserFollow()

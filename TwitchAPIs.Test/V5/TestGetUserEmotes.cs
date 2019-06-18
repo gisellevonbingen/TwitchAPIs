@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TwitchAPIs.Test
+namespace TwitchAPIs.Test.V5
 {
-    public class TestUserUnfollow : TestAbstract
+    [TwitchAPITest("V5", "Users")]
+    public class TestGetUserEmotes : TestAbstract
     {
-        public TestUserUnfollow()
+        public TestGetUserEmotes()
         {
 
         }
@@ -19,10 +20,9 @@ namespace TwitchAPIs.Test
             var handler = main.TwitchAPIHandler;
 
             var userId = user.ReadInput("Enter UserId");
-            var channelId = user.ReadInput("Enter ChannelId");
-            handler.API.V5.Users.UnfollowChannel(userId, channelId);
+            var set = handler.API.V5.Users.GetUserEmotes(userId);
 
-            user.SendMessage("Unfollowed");
+            main.PrintReflection(user, "EmoticonSet", set);
         }
 
     }

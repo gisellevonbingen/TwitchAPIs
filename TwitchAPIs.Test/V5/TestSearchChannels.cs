@@ -5,11 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TwitchAPIs.Test
+namespace TwitchAPIs.Test.V5
 {
-    public class TestGetTopGames : TestAbstract
+    [TwitchAPITest("V5", "Search")]
+    public class TestSearchChannels : TestAbstract
     {
-        public TestGetTopGames()
+        public TestSearchChannels()
         {
 
         }
@@ -19,11 +20,12 @@ namespace TwitchAPIs.Test
             var user = main.User;
             var handler = main.TwitchAPIHandler;
 
+            string query = user.ReadInput("Enter Query");
             int? limit = NumberUtils.ToIntNullable(user.ReadInput("Enter Limit"));
             int? offset = NumberUtils.ToIntNullable(user.ReadInput("Enter Offset"));
 
-            var topGames = handler.API.V5.Games.GetTopGames(limit, offset);
-            main.PrintReflection(user, $"Twitch Top Games", topGames);
+            var channels = handler.API.V5.Search.SearchChannels(query, limit, offset);
+            main.PrintReflection(user, $"TwitchChannels", channels);
         }
 
     }

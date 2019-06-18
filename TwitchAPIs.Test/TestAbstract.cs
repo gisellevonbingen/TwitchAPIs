@@ -8,6 +8,11 @@ namespace TwitchAPIs.Test
 {
     public abstract class TestAbstract
     {
+        public TestAbstract()
+        {
+
+        }
+
         public abstract void Run(TestMain main);
 
     }

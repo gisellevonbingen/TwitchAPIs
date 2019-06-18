@@ -7,11 +7,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using TwitchAPIs.V5;
 
-namespace TwitchAPIs.Test
+namespace TwitchAPIs.Test.V5
 {
-    public class TestGetUserFollowsV5 : TestAbstract
+    [TwitchAPITest("V5", "Users")]
+    public class TestGetUserFollows : TestAbstract
     {
-        public TestGetUserFollowsV5()
+        public TestGetUserFollows()
         {
 
         }

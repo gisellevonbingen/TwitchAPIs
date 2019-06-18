@@ -56,73 +56,93 @@ namespace TwitchAPIs.Test
 
         }
 
-        private void AddTestCase(Dictionary<string, List<TestAbstract>> tests, string category, TestAbstract test)
-        {
-            if (tests.TryGetValue(category, out var list) == false)
-            {
-                list = new List<TestAbstract>();
-                tests[category] = list;
-            }
-
-            list.Add(test);
-        }
-
         private void RunTest()
         {
             var user = this.User;
-
-            var testMap = new Dictionary<string, List<TestAbstract>>();
-            this.AddTestCase(testMap, "Authorization", new TestRefreshOAuthAuthorization());
-
-            this.AddTestCase(testMap, "User", new TestGetUser());
-            this.AddTestCase(testMap, "User", new TestUpdateUser());
-            this.AddTestCase(testMap, "User", new TestGetUserFollowsNew());
-            this.AddTestCase(testMap, "User", new TestGetUserFollowsV5());
-            this.AddTestCase(testMap, "User", new TestUserFollow());
-            this.AddTestCase(testMap, "User", new TestUserUnfollow());
-            this.AddTestCase(testMap, "User", new TestGetUserEmotes());
-
-            this.AddTestCase(testMap, "Search", new TestSearchChannels());
-            this.AddTestCase(testMap, "Search", new TestSearchGames());
-
-            this.AddTestCase(testMap, "Game", new TestGetTopGames());
-            this.AddTestCase(testMap, "Game", new TestGetGames());
-
-            this.AddTestCase(testMap, "Chat", new TestGetChatBadges());
-            this.AddTestCase(testMap, "Chat", new TestGetChatRooms());
-
-            this.AddTestCase(testMap, "Channel", new TestGetChannel());
-            this.AddTestCase(testMap, "Clip", new TestGetClips());
-            this.AddTestCase(testMap, "Tag", new TestGetAllStreamTags());
-            this.AddTestCase(testMap, "Bit", new TestGetCheermotes());
+            var testMap = this.NewMethod();
 
             while (true)
             {
                 user.SendMessage();
                 user.SendMessage();
 
-                var categories = testMap.Select(pair => pair.Key).ToArray();
-                var categoryIndex = user.QueryInput("Enter Category", categories, true);
+                var versions = testMap.ToArray();
+                var versionIndex = user.QueryInput("Enter Version", versions.Select(pair => pair.Key), true);
 
-                if (categoryIndex == -1)
+                if (versionIndex == -1)
                 {
                     break;
                 }
 
-                var testList = testMap[categories[categoryIndex]];
-                var testIndex = user.QueryInput("Enter Test", testList.Select(t => t.GetType().Name), true);
+                var reources = versions[versionIndex].Value.ToArray();
+                var reosurceIndex = user.QueryInput("Enter Resource", reources.Select(pair => pair.Key), true);
 
-                if (testIndex == -1)
+                if (reosurceIndex == -1)
                 {
                     continue;
                 }
 
-                var test = testList[testIndex];
+                var tests = reources[reosurceIndex].Value.ToArray();
+                var testsIndex = user.QueryInput("Enter Resource", tests.Select(t => t.GetType().Name), true);
+
+                if (testsIndex == -1)
+                {
+                    continue;
+                }
+
+                var test = tests[reosurceIndex];
                 user.SendMessage("Test - " + test.GetType().Name);
 
                 test.Run(this);
             }
 
+        }
+
+        private Dictionary<string, Dictionary<string, List<TestAbstract>>> NewMethod()
+        {
+            var testMap = new Dictionary<string, Dictionary<string, List<TestAbstract>>>();
+
+            var testType = typeof(TestAbstract);
+            var types = this.GetType().Assembly.GetTypes();
+
+            foreach (var type in types)
+            {
+                if (testType.IsAssignableFrom(type) == true && type.Equals(testType) == false)
+                {
+                    var testAttribute = type.GetCustomAttribute<TwitchAPITestAttribute>();
+
+                    if (testAttribute != null)
+                    {
+                        var testObject = type.GetConstructor(new Type[0]).Invoke(new object[0]) as TestAbstract;
+                        this.AddTestCase(testMap, testAttribute.Version, testAttribute.Resource, testObject);
+                    }
+                    else
+                    {
+                        throw new TwitchException($"{type.FullName} not have {nameof(TwitchAPITestAttribute)}");
+                    }
+
+                }
+
+            }
+
+            return testMap;
+        }
+
+        private void AddTestCase(Dictionary<string, Dictionary<string, List<TestAbstract>>> tests, string version, string resrouce, TestAbstract test)
+        {
+            if (tests.TryGetValue(version, out var versionMap) == false)
+            {
+                versionMap = new Dictionary<string, List<TestAbstract>>();
+                tests[version] = versionMap;
+            }
+
+            if (versionMap.TryGetValue(resrouce, out var resourceList) == false)
+            {
+                resourceList = new List<TestAbstract>();
+                versionMap[resrouce] = resourceList;
+            }
+
+            resourceList.Add(test);
         }
 
         public void PrintReflection<T>(UserAbstract user, string name, T value)

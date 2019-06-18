@@ -7,11 +7,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using TwitchAPIs.New;
 
-namespace TwitchAPIs.Test
+namespace TwitchAPIs.Test.New
 {
-    public class TestGetClips : TestAbstract
+    [TwitchAPITestAttribute("New", "Clips")]
+    public class TestClipsGetClips : TestAbstract
     {
-        public TestGetClips()
+        public TestClipsGetClips()
         {
 
         }

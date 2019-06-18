@@ -6,11 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 using TwitchAPIs.Other;
 
-namespace TwitchAPIs.Test
+namespace TwitchAPIs.Test.Other
 {
-    public class TestGetChatBadges : TestAbstract
+    [TwitchAPITestAttribute("Other", "Badges")]
+    public class TestBadgesGetBadges : TestAbstract
     {
-        public TestGetChatBadges()
+        public TestBadgesGetBadges()
         {
 
         }

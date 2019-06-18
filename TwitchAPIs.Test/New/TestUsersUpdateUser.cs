@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TwitchAPIs.Test
+namespace TwitchAPIs.Test.New
 {
-    public class TestUpdateUser : TestAbstract
+    [TwitchAPITestAttribute("New", "Users")]
+    public class TestUsersUpdateUser : TestAbstract
     {
-        public TestUpdateUser()
+        public TestUsersUpdateUser()
         {
 
         }

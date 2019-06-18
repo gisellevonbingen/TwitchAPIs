@@ -5,11 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using TwitchAPIs.New;
 
-namespace TwitchAPIs.Test
+namespace TwitchAPIs.Test.New
 {
-    public class TestGetUser : TestAbstract
+    [TwitchAPITestAttribute("New", "Users")]
+    public class TestUsersGetUser : TestAbstract
     {
-        public TestGetUser()
+        public TestUsersGetUser()
         {
 
         }

@@ -6,11 +6,12 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace TwitchAPIs.Test
+namespace TwitchAPIs.Test.New
 {
-    public class TestGetAllStreamTags : TestAbstract
+    [TwitchAPITestAttribute("New", "Tags")]
+    public class TestTagsGetAllStreamTags : TestAbstract
     {
-        public TestGetAllStreamTags()
+        public TestTagsGetAllStreamTags()
         {
 
         }

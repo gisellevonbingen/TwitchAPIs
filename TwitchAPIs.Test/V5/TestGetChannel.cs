@@ -5,8 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using TwitchAPIs.V5;
 
-namespace TwitchAPIs.Test
+namespace TwitchAPIs.Test.V5
 {
+    [TwitchAPITest("V5", "Channels")]
     public class TestGetChannel : TestAbstract
     {
         public TestGetChannel()
