@@ -30,7 +30,20 @@ namespace TwitchAPIs.Test
 
         }
 
-        public abstract string ReadInput();
+        protected abstract string OnReadInput();
+
+        public virtual string ReadInput()
+        {
+            var input = this.OnReadInput();
+            var returnInput = this.ReturnInput;
+
+            if (input.Equals(returnInput) == true)
+            {
+                throw new UserInputReturnException();
+            }
+
+            return input;
+        }
 
         public virtual string ReadInput(string message)
         {

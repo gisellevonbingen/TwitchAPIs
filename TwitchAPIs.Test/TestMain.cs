@@ -97,6 +97,10 @@ namespace TwitchAPIs.Test
 
                     test.Run(this);
                 }
+                catch (UserInputReturnException)
+                {
+                    user.SendMessage("Returned");
+                }
                 catch (Exception e)
                 {
                     user.SendMessage("===== Exception Start =====");

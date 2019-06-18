@@ -26,7 +26,7 @@ namespace TwitchAPIs.Test
             return this.Lines[pos];
         }
 
-        public override string ReadInput()
+        protected override string OnReadInput()
         {
             return this.NextLine();
         }

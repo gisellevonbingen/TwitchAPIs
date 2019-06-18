@@ -197,7 +197,7 @@ namespace TwitchAPIs.Test
             this.WriteLine();
         }
 
-        public override string ReadInput()
+        protected override string OnReadInput()
         {
             var editHistory = this.InputEditHistory;
             var buffer = this.InputBuffer;
