@@ -59,7 +59,7 @@ namespace TwitchAPIs.Test
         private void RunTest()
         {
             var user = this.User;
-            var testMap = this.NewMethod();
+            var testMap = this.GetTestMap();
 
             while (true)
             {
@@ -109,7 +109,7 @@ namespace TwitchAPIs.Test
 
         }
 
-        private Dictionary<string, Dictionary<string, List<TestAbstract>>> NewMethod()
+        private Dictionary<string, Dictionary<string, List<TestAbstract>>> GetTestMap()
         {
             var testMap = new Dictionary<string, Dictionary<string, List<TestAbstract>>>();
 
