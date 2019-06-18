@@ -57,6 +57,8 @@
     <Compile Include="InputEditSnapshot.cs" />
     <Compile Include="PrintableLine.cs" />
     <Compile Include="TwitchAPITestAttribute.cs" />
+    <Compile Include="V5\TestUsersUnblockUser.cs" />
+    <Compile Include="V5\TestUsersBlockUser.cs" />
     <Compile Include="V5\TestUsersGetUser.cs" />
     <Compile Include="V5\TestUsersGetUserBlockList.cs" />
     <Compile Include="V5\TestUsersGetUserByID.cs" />

@@ -41,11 +41,7 @@ namespace TwitchAPIs.V5
 
             using (var response = this.Parent.Request(apiRequest))
             {
-                if (response.Impl.StatusCode == System.Net.HttpStatusCode.NoContent)
-                {
-
-                }
-                else
+                if (response.Impl.StatusCode != System.Net.HttpStatusCode.NoContent)
                 {
                     this.Parent.ReadAsJsonThrowIfError(response);
                 }
@@ -130,6 +126,35 @@ namespace TwitchAPIs.V5
             blockList.Blocks = jToken.ReadArray("blocks", t => new TwitchUser().Read(t["user"])) ?? new TwitchUser[0];
 
             return blockList;
+        }
+
+        public TwitchUser BlockUser(string sourceUserId, string targetUserId)
+        {
+            var apiRequest = new TwitchAPIRequest();
+            apiRequest.Version = APIVersion.V5;
+            apiRequest.Path = $"users/{sourceUserId}/blocks/{targetUserId}";
+            apiRequest.Method = "PUT";
+            var jToken = this.Parent.RequestAsJson(apiRequest);
+
+            return new TwitchUser().Read(jToken["user"]);
+        }
+
+        public void UnblockUser(string sourceUserId, string targetUserId)
+        {
+            var apiRequest = new TwitchAPIRequest();
+            apiRequest.Version = APIVersion.V5;
+            apiRequest.Path = $"users/{sourceUserId}/blocks/{targetUserId}";
+            apiRequest.Method = "DELETE";
+
+            using (var response = this.Parent.Request(apiRequest))
+            {
+                if (response.Impl.StatusCode != System.Net.HttpStatusCode.NoContent)
+                {
+                    this.Parent.ReadAsJsonThrowIfError(response);
+                }
+
+            }
+
         }
 
     }
