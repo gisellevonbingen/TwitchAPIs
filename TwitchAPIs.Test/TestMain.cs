@@ -90,7 +90,7 @@ namespace TwitchAPIs.Test
                     continue;
                 }
 
-                var test = tests[reosurceIndex];
+                var test = tests[testsIndex];
                 user.SendMessage("Test - " + test.GetType().Name);
 
                 test.Run(this);
