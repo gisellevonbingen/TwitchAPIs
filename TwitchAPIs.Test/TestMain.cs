@@ -63,37 +63,47 @@ namespace TwitchAPIs.Test
 
             while (true)
             {
-                user.SendMessage();
-                user.SendMessage();
-
-                var versions = testMap.ToArray();
-                var versionIndex = user.QueryInput("Enter Version", versions.Select(pair => pair.Key), true);
-
-                if (versionIndex == -1)
+                try
                 {
-                    break;
+                    user.SendMessage();
+                    user.SendMessage();
+
+                    var versions = testMap.ToArray();
+                    var versionIndex = user.QueryInput("Enter Version", versions.Select(pair => pair.Key), true);
+
+                    if (versionIndex == -1)
+                    {
+                        break;
+                    }
+
+                    var reources = versions[versionIndex].Value.ToArray();
+                    var reosurceIndex = user.QueryInput("Enter Resource", reources.Select(pair => pair.Key), true);
+
+                    if (reosurceIndex == -1)
+                    {
+                        continue;
+                    }
+
+                    var tests = reources[reosurceIndex].Value.ToArray();
+                    var testsIndex = user.QueryInput("Enter Resource", tests.Select(t => t.GetType().Name), true);
+
+                    if (testsIndex == -1)
+                    {
+                        continue;
+                    }
+
+                    var test = tests[testsIndex];
+                    user.SendMessage("Test - " + test.GetType().Name);
+
+                    test.Run(this);
+                }
+                catch (Exception e)
+                {
+                    user.SendMessage("===== Exception Start =====");
+                    user.SendMessage(e.ToString());
+                    user.SendMessage("===== Exception End =====");
                 }
 
-                var reources = versions[versionIndex].Value.ToArray();
-                var reosurceIndex = user.QueryInput("Enter Resource", reources.Select(pair => pair.Key), true);
-
-                if (reosurceIndex == -1)
-                {
-                    continue;
-                }
-
-                var tests = reources[reosurceIndex].Value.ToArray();
-                var testsIndex = user.QueryInput("Enter Resource", tests.Select(t => t.GetType().Name), true);
-
-                if (testsIndex == -1)
-                {
-                    continue;
-                }
-
-                var test = tests[testsIndex];
-                user.SendMessage("Test - " + test.GetType().Name);
-
-                test.Run(this);
             }
 
         }
