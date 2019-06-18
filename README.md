@@ -30,6 +30,7 @@
     * [Get Clips](https://dev.twitch.tv/docs/api/reference/#get-clips)
   * Games
     * [Get Games](https://dev.twitch.tv/docs/api/reference/#get-games)
+    * [Get Top Games](https://dev.twitch.tv/docs/api/reference/#get-top-games)
   * Tags
     * [Get All Stream Tags](https://dev.twitch.tv/docs/api/reference/#get-all-stream-tags)
   * Users
