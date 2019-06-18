@@ -9,10 +9,12 @@ namespace TwitchAPIs.Test
     public abstract class UserAbstract
     {
         public string BreakInput { get; set; }
+        public string ReturnInput { get; set; }
 
         public UserAbstract()
         {
             this.BreakInput = ":break";
+            this.ReturnInput = ":return";
         }
 
         public abstract void SendMessage();
@@ -45,10 +47,16 @@ namespace TwitchAPIs.Test
         public virtual int QueryInput<T>(string message, IEnumerable<T> collection, bool breakable)
         {
             var breakInput = this.BreakInput;
-            return this.QueryInput(message, collection, breakable, breakInput, $"Break to '{breakInput}'");
+            return this.QueryInput(message, collection, breakable, $"Break to '{breakInput}'", breakInput);
         }
 
-        public virtual int QueryInput<T>(string message, IEnumerable<T> collection, bool breakable, string breakInput, string breakMessage)
+        public virtual int QueryInput<T>(string message, IEnumerable<T> collection, bool breakable, string breakMessage)
+        {
+            var breakInput = this.BreakInput;
+            return this.QueryInput(message, collection, breakable, breakMessage, breakInput);
+        }
+
+        public virtual int QueryInput<T>(string message, IEnumerable<T> collection, bool breakable, string breakMessage, string breakInput)
         {
             var arry = collection.ToArray();
             int digits = Math.Max((int)(Math.Log10(arry.Length - 1) + 1), 0);
