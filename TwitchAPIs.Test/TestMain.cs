@@ -82,7 +82,7 @@ namespace TwitchAPIs.Test
                         continue;
                     }
 
-                    var testInput = user.QueryInput("Enter Resource", reosurceInput.Value.Value, t => t.GetType().Name, true);
+                    var testInput = user.QueryInput("Enter Test", reosurceInput.Value.Value, t => t.GetType().Name, true);
 
                     if (testInput.Breaked == true)
                     {
