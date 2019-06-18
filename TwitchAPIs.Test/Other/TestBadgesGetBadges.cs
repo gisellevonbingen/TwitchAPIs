@@ -8,7 +8,7 @@ using TwitchAPIs.Other;
 
 namespace TwitchAPIs.Test.Other
 {
-    [TwitchAPITestAttribute("Other", "Badges")]
+    [TwitchAPITest("Other", "Badges")]
     public class TestBadgesGetBadges : TestAbstract
     {
         public TestBadgesGetBadges()

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TwitchAPIs.Test.New
 {
-    [TwitchAPITestAttribute("New", "Users")]
+    [TwitchAPITest("New", "Users")]
     public class TestUsersUpdateUser : TestAbstract
     {
         public TestUsersUpdateUser()

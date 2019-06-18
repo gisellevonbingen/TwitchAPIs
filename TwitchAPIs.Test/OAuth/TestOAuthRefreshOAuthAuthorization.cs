@@ -7,7 +7,7 @@ using TwitchAPIs.OAuth;
 
 namespace TwitchAPIs.Test.OAuth
 {
-    [TwitchAPITestAttribute("OAuth", "Authorization")]
+    [TwitchAPITest("OAuth", "Authorization")]
     public class TestOAuthRefreshOAuthAuthorization : TestAbstract
     {
         public override void Run(TestMain main)

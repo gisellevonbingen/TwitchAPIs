@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TwitchAPIs.Test.New
 {
-    [TwitchAPITestAttribute("New", "Games")]
+    [TwitchAPITest("New", "Games")]
     public class TestGamesGetTopGames : TestAbstract
     {
         public TestGamesGetTopGames()

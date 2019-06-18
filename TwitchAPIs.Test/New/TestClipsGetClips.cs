@@ -9,7 +9,7 @@ using TwitchAPIs.New;
 
 namespace TwitchAPIs.Test.New
 {
-    [TwitchAPITestAttribute("New", "Clips")]
+    [TwitchAPITest("New", "Clips")]
     public class TestClipsGetClips : TestAbstract
     {
         public TestClipsGetClips()

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace TwitchAPIs.Test.New
 {
-    [TwitchAPITestAttribute("New", "Tags")]
+    [TwitchAPITest("New", "Tags")]
     public class TestTagsGetAllStreamTags : TestAbstract
     {
         public TestTagsGetAllStreamTags()
