@@ -84,7 +84,7 @@ namespace TwitchAPIs.Test
                         continue;
                     }
 
-                    var tests = reources[reosurceIndex].Value.OrderBy(t => t).ToArray();
+                    var tests = reources[reosurceIndex].Value.ToArray();
                     var testsIndex = user.QueryInput("Enter Resource", tests.Select(t => t.GetType().Name), true);
 
                     if (testsIndex == -1)
