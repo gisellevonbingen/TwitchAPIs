@@ -117,6 +117,7 @@
     <Compile Include="V5\TwitchAPIUsers.cs" />
     <Compile Include="V5\TwitchAPIV5.cs" />
     <Compile Include="V5\TwitchUserNotifications.cs" />
+    <Compile Include="V5\TwitchUserOwn.cs" />
     <Compile Include="WebExplorerExtenstions.cs" />
   </ItemGroup>
   <ItemGroup>

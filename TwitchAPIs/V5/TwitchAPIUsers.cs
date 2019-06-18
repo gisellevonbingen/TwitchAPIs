@@ -89,7 +89,7 @@ namespace TwitchAPIs.V5
             apiRequest.Method = "GET";
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
-            return new TwitchUser().Read(jToken);
+            return new TwitchUserOwn().Read(jToken);
         }
 
         public TwitchUser GetUserByID(string userId)
