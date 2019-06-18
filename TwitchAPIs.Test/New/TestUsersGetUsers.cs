@@ -8,9 +8,9 @@ using TwitchAPIs.New;
 namespace TwitchAPIs.Test.New
 {
     [TwitchAPITestAttribute("New", "Users")]
-    public class TestUsersGetUser : TestAbstract
+    public class TestUsersGetUsers : TestAbstract
     {
-        public TestUsersGetUser()
+        public TestUsersGetUsers()
         {
 
         }

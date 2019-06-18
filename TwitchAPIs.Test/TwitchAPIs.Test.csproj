@@ -68,7 +68,7 @@
     <Compile Include="New\TestClipsGetClips.cs" />
     <Compile Include="New\TestGamesGetGames.cs" />
     <Compile Include="V5\TestGamesGetTopGames.cs" />
-    <Compile Include="New\TestUsersGetUser.cs" />
+    <Compile Include="New\TestUsersGetUsers.cs" />
     <Compile Include="V5\TestUsersGetUserEmotes.cs" />
     <Compile Include="New\TestUsersGetUserFollows.cs" />
     <Compile Include="V5\TestSearchChannels.cs" />
