@@ -46,7 +46,7 @@ namespace TwitchAPIs.Test.V5
             var offset = NumberUtils.ToIntNullable(user.ReadInput("Enter Offset as int"));
             var direction = this.QueryEnum<FollowSortDirection>(user, "Enter Direction as int");
             var sortby = this.QueryEnum<FollowSortMode>(user, "Enter Sortby as int");
-            var userFollows = handler.API.V5.Users.GetUserFollowsV5(userId, limit, offset, direction, sortby);
+            var userFollows = handler.API.V5.Users.GetUserFollows(userId, limit, offset, direction, sortby);
 
             main.PrintReflection(user, "UserFollows", userFollows);
         }

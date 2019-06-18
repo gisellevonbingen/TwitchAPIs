@@ -27,7 +27,7 @@ namespace TwitchAPIs.New
             return this.ParseUsers(jToken).FirstOrDefault();
         }
 
-        public TwitchUserFollows GetUserFollowsNew(FollowsType type, string id, string cursor = null)
+        public TwitchUserFollows GetUserFollows(FollowsType type, string id, string cursor = null)
         {
             var apiRequest = new TwitchAPIRequest();
             apiRequest.Version = APIVersion.New;
