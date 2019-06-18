@@ -60,6 +60,7 @@
     <Compile Include="TwitchAPITestAttribute.cs" />
     <Compile Include="UserInputReturnException.cs" />
     <Compile Include="V5\TestChannelsGetChannelByID.cs" />
+    <Compile Include="V5\TestChannelsGetChannelEditors.cs" />
     <Compile Include="V5\TestUsersUnblockUser.cs" />
     <Compile Include="V5\TestUsersBlockUser.cs" />
     <Compile Include="V5\TestUsersGetUser.cs" />

@@ -41,6 +41,17 @@ namespace TwitchAPIs.V5
             return channel;
         }
 
+        public TwitchUser[] GetChannelEditors(string channelId)
+        {
+            var apiRequest = new TwitchAPIRequest();
+            apiRequest.Version = APIVersion.V5;
+            apiRequest.Path = $"channels/{channelId}/editors";
+            apiRequest.Method = "GET";
+            var jToken = this.Parent.RequestAsJson(apiRequest);
+
+            return jToken.ReadArray("users", t => new TwitchUser().Read(t)) ?? new TwitchUser[0];
+        }
+
     }
 
 }
