@@ -28,14 +28,14 @@ namespace TwitchAPIs.Test.New
 
             while (true)
             {
-                var item = user.ReadInput("Enter Id (Emtpy is break)");
+                var id = user.ReadInput("Enter Id, breakable");
 
-                if (string.IsNullOrWhiteSpace(item) == true)
+                if (user.IsBreak(id) == true)
                 {
                     break;
                 }
 
-                options.Ids.Add(item);
+                options.Ids.Add(id);
             }
 
             options.First = NumberUtils.ToIntNullable(user.ReadInput("Enter First as int"));
