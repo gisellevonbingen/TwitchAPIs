@@ -45,19 +45,31 @@
     * [Get Channel by ID](https://dev.twitch.tv/docs/v5/reference/channels/#get-channel-by-id)
     * [Get Channel Editors](https://dev.twitch.tv/docs/v5/reference/channels/#get-channel-editors)
     * [Get Channel Followers](https://dev.twitch.tv/docs/v5/reference/channels/#get-channel-followers)
+    * [Get Channel Teams](https://dev.twitch.tv/docs/v5/reference/channels/#get-channel-teams)
+    * [Get Channel Subscribers](https://dev.twitch.tv/docs/v5/reference/channels/#get-channel-subscribers)
+    * [Check Channel Subscription by User](https://dev.twitch.tv/docs/v5/reference/channels/#check-channel-subscription-by-user)
   * Chat
     * [Get Chat Rooms by Channel](https://dev.twitch.tv/docs/v5/reference/chat/#get-chat-rooms-by-channel)
+  * Clips
+    * [Get Clip](https://dev.twitch.tv/docs/v5/reference/clips/#get-clip)
+    * [Get Top Clips](https://dev.twitch.tv/docs/v5/reference/clips/#get-top-clips)
+    * [Get Followed Clips](https://dev.twitch.tv/docs/v5/reference/clips/#get-followed-clips)
   * Games
     * [Get Top Games](https://dev.twitch.tv/docs/v5/reference/games/#get-top-games)
   * Search
     * [Search Channels](https://dev.twitch.tv/docs/v5/reference/search/#search-channels)
     * [Search Games](https://dev.twitch.tv/docs/v5/reference/search/#search-games)
+  * Teams
+    * [Get All Teams](https://dev.twitch.tv/docs/v5/reference/teams/#get-all-teams)
+    * [Get Team](https://dev.twitch.tv/docs/v5/reference/teams/#get-team)
   * Users
     * [Get User](https://dev.twitch.tv/docs/v5/reference/users/#get-user)
     * [Get User by ID](https://dev.twitch.tv/docs/v5/reference/users/#get-user-by-id)
     * [Get Users](https://dev.twitch.tv/docs/v5/reference/users/#get-users)
     * [Get User Emotes](https://dev.twitch.tv/docs/v5/reference/users/#get-user-emotes)
+    * [Check User Subscription by Channel](https://dev.twitch.tv/docs/v5/reference/users/#check-user-subscription-by-channel)
     * [Get User Follows](https://dev.twitch.tv/docs/v5/reference/users/#get-user-follows)
+    * [Check User Follows by Channel](https://dev.twitch.tv/docs/v5/reference/users/#check-user-follows-by-channel)
     * [Follow Channel](https://dev.twitch.tv/docs/v5/reference/users/#follow-channel)
     * [Unfollow Channel](https://dev.twitch.tv/docs/v5/reference/users/#unfollow-channel)
     * [Get User Block List](https://dev.twitch.tv/docs/v5/reference/users/#get-user-block-list)
