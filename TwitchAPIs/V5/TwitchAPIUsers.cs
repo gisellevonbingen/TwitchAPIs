@@ -118,6 +118,17 @@ namespace TwitchAPIs.V5
 
         }
 
+        public TwitchFollow CheckUserFollowsByChannel(string userId, string channelId)
+        {
+            var apiRequest = new TwitchAPIRequest();
+            apiRequest.Version = APIVersion.V5;
+            apiRequest.Path = $"users/{userId}/follows/channels/{channelId}";
+            apiRequest.Method = "GET";
+            var jToken = this.Parent.RequestAsJson(apiRequest);
+
+            return new TwitchFollow(jToken);
+        }
+
         public TwitchUserBlockList GetUserBlockList(string userId, int? limit = null, int? offset = null)
         {
             var apiRequest = new TwitchAPIRequest();
