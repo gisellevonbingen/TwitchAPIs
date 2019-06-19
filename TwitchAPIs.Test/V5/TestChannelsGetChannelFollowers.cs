@@ -37,7 +37,7 @@ namespace TwitchAPIs.Test.V5
                 offset = null;
                 cursor = channelFollowers.Cursor;
 
-                if (cursor == null)
+                if (string.IsNullOrWhiteSpace(cursor) == true)
                 {
                     break;
                 }

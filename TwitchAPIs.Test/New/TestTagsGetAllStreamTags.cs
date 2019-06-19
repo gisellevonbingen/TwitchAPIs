@@ -53,7 +53,7 @@ namespace TwitchAPIs.Test.New
 
                 cursor = tags.Pagination.Cursor;
 
-                if (cursor == null)
+                if (string.IsNullOrWhiteSpace(cursor) == true)
                 {
                     break;
                 }
