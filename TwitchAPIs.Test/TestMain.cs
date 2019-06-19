@@ -77,7 +77,7 @@ namespace TwitchAPIs.Test
                     var resources = versionInput.Value.Value.OrderBy(pair => pair.Key);
                     var reosurceInput = user.QueryInput("Enter Resource", resources, pair => pair.Key);
 
-                    var tests = reosurceInput.Value.Value;
+                    var tests = reosurceInput.Value.Value.OrderBy(t => t.GetType().FullName);
                     var testInput = user.QueryInput("Enter Test", tests, t => t.GetType().Name);
 
                     var test = testInput.Value;
