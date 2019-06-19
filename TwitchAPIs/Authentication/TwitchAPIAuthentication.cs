@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TwitchAPIs.OAuth
+namespace TwitchAPIs.Authentication
 {
     public class TwitchAPIAuthentication : TwitchAPIPart
     {

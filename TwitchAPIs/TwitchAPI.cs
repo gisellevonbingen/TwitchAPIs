@@ -10,7 +10,7 @@ using Giselle.Commons;
 using Giselle.Commons.Web;
 using Newtonsoft.Json.Linq;
 using TwitchAPIs.New;
-using TwitchAPIs.OAuth;
+using TwitchAPIs.Authentication;
 using TwitchAPIs.Other;
 using TwitchAPIs.V5;
 
