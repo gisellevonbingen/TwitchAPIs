@@ -124,7 +124,7 @@ namespace TwitchAPIs
 
         }
 
-        public WebResponse Request(TwitchAPIRequest apiRequest, string errorKey = null)
+        public WebResponse Request(TwitchAPIRequest apiRequest)
         {
             var webRequest = this.CreateWebRequest(apiRequest);
             return this.Web.Request(webRequest);
