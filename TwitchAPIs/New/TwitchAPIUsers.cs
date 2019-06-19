@@ -27,20 +27,21 @@ namespace TwitchAPIs.New
             return this.ParseUsers(jToken).FirstOrDefault();
         }
 
-        public TwitchUserFollows GetUserFollows(FollowsType type, string id, string after = null)
+        public TwitchUserFollows GetUserFollows(string fromId = null, string toId = null, string after = null)
         {
             var apiRequest = new TwitchAPIRequest();
             apiRequest.Version = APIVersion.New;
             apiRequest.Path = "users/follows";
             apiRequest.Method = "GET";
-            apiRequest.QueryValues.Add($"{type.Request}_id", id);
-            apiRequest.QueryValues.Add($"after", after);
+            apiRequest.QueryValues.Add("from_id", fromId);
+            apiRequest.QueryValues.Add("to_id", toId);
+            apiRequest.QueryValues.Add("after", after);
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
             var uerFollows = new TwitchUserFollows();
             uerFollows.Total = jToken.Value<int>("total");
             uerFollows.Pagination = jToken.ReadIfExist("pagination", t => new Pagination(t));
-            uerFollows.Follows = jToken.ReadArray("data", t => new TwitchFollow(t, type)) ?? new TwitchFollow[0];
+            uerFollows.Follows = jToken.ReadArray("data", t => new TwitchFollow(t)) ?? new TwitchFollow[0];
 
             return uerFollows;
         }

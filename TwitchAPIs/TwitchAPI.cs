@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using Giselle.Commons;
 using Giselle.Commons.Web;
 using Newtonsoft.Json.Linq;
 using TwitchAPIs.New;
@@ -127,7 +128,15 @@ namespace TwitchAPIs
         public WebResponse Request(TwitchAPIRequest apiRequest)
         {
             var webRequest = this.CreateWebRequest(apiRequest);
-            return this.Web.Request(webRequest);
+            var response = this.Web.Request(webRequest);
+            var headers = response.Impl.Headers;
+
+            Console.WriteLine("===========");
+            Console.WriteLine($"Ratelimit-Limit = {headers["Ratelimit-Limit"]}");
+            Console.WriteLine($"Ratelimit-Remaining = {headers["Ratelimit-Remaining"]}");
+            Console.WriteLine($"Ratelimit-Reset = {DateTimeOffset.FromUnixTimeSeconds(NumberUtils.ToInt(headers["Ratelimit-Reset"])).LocalDateTime}");
+
+            return response;
         }
 
         public WebRequestParameter CreateWebRequest(TwitchAPIRequest apiRequest)

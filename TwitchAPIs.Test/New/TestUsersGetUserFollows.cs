@@ -21,21 +21,15 @@ namespace TwitchAPIs.Test.New
             var user = main.User;
             var handler = main.TwitchAPIHandler;
 
-            var followsTypes = new Dictionary<FollowsType, string>
-            {
-                { FollowsType.From ,"XXX followed from id, Followings" },
-                { FollowsType.To , "XXX follow to id, Followers" }
-            };
-
-            var userId = user.ReadInput("UserId");
-            var followsType = user.QueryInput("Enter FollowsType", followsTypes, pair => $"{pair.Key.Request} = {pair.Value}").Value.Key;
+            var fromId = user.ReadInput("Enter From Id, show followings");
+            var toId = user.ReadInput("Enter To Id, show followers");
 
             var api = handler.API;
             string cursor = null;
 
             while (true)
             {
-                var userFollows = api.New.Users.GetUserFollows(followsType, userId, cursor);
+                var userFollows = api.New.Users.GetUserFollows(fromId, toId, cursor);
                 main.PrintReflection(user, "UserFollows", userFollows);
 
                 cursor = userFollows.Pagination.Cursor;
@@ -45,7 +39,7 @@ namespace TwitchAPIs.Test.New
                     break;
                 }
 
-                Thread.Sleep(1000);
+                //Thread.Sleep(1000);
             }
 
         }

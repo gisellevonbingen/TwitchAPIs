@@ -9,8 +9,10 @@ namespace TwitchAPIs.New
 {
     public class TwitchFollow
     {
-        public string Id { get; set; }
-        public string DisplayName { get; set; }
+        public string FromId { get; set; }
+        public string FromName { get; set; }
+        public string ToId { get; set; }
+        public string ToName { get; set; }
         public DateTime FollowedAt { get; set; }
 
         public TwitchFollow()
@@ -18,10 +20,12 @@ namespace TwitchAPIs.New
 
         }
 
-        public TwitchFollow(JToken jToken, FollowsType type)
+        public TwitchFollow(JToken jToken)
         {
-            this.Id = jToken.Value<string>(type.Response + "_id");
-            this.DisplayName = jToken.Value<string>(type.Response + "_name");
+            this.FromId = jToken.Value<string>("from_id");
+            this.FromName = jToken.Value<string>("from_name");
+            this.ToId = jToken.Value<string>("to_id");
+            this.ToName = jToken.Value<string>("to_name");
             this.FollowedAt = jToken.Value<DateTime>("followed_at");
         }
 

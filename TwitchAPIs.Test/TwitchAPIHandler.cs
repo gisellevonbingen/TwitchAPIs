@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Giselle.Commons;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
@@ -31,21 +32,29 @@ namespace TwitchAPIs.Test
             var api = this.API = new TwitchAPI();
             api.ClientId = clientId;
 
-            using (var authHandler = new TwitchAuthHandler(api))
+            if (NumberUtils.ToBool(user.ReadInput("Enter Authentication Whether as bool")) == true)
             {
-                var authRequest = this.OAuthRequest = this.CreateOAuthRequest(user);
-                var oAuth = this.OAuthAuthorization = authHandler.Auth(authRequest);
-
-                if (oAuth != null)
+                using (var authHandler = new TwitchAuthHandler(api))
                 {
-                    api.AccessToken = oAuth.AccessToken;
-                    return true;
-                }
-                else
-                {
-                    return false;
+                    var authRequest = this.OAuthRequest = this.CreateOAuthRequest(user);
+                    var oAuth = this.OAuthAuthorization = authHandler.Auth(authRequest);
+
+                    if (oAuth != null)
+                    {
+                        api.AccessToken = oAuth.AccessToken;
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+
                 }
 
+            }
+            else
+            {
+                return true;
             }
 
         }
