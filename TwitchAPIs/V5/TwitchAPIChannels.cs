@@ -86,6 +86,17 @@ namespace TwitchAPIs.V5
             return new TwitchChannelSubscriptions(jToken);
         }
 
+        public TwitchChannelSubscription CheckChannelSubscriptionByUser(string channelId, string userId)
+        {
+            var apiRequest = new TwitchAPIRequest();
+            apiRequest.Version = APIVersion.V5;
+            apiRequest.Path = $"channels/{channelId}/subscriptions/{userId}";
+            apiRequest.Method = "GET";
+            var jToken = this.Parent.RequestAsJson(apiRequest);
+
+            return new TwitchChannelSubscription(jToken);
+        }
+
     }
 
 }
