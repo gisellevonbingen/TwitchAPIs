@@ -67,6 +67,7 @@
     <Compile Include="V5\TestChannelsGetChannelTeam.cs" />
     <Compile Include="V5\TestTeamsGetAllTeams.cs" />
     <Compile Include="V5\TestTeamsGetTeam.cs" />
+    <Compile Include="V5\TestUsersCheckUserSubscriptionByChannel.cs" />
     <Compile Include="V5\TestUsersUnblockUser.cs" />
     <Compile Include="V5\TestUsersBlockUser.cs" />
     <Compile Include="V5\TestUsersGetUser.cs" />

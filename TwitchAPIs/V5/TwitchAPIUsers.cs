@@ -58,6 +58,17 @@ namespace TwitchAPIs.V5
             return new TwitchEmoticonSets(jToken);
         }
 
+        public TwitchUserSubscription CheckUserSubscriptionByChannel(string userId, string channelId)
+        {
+            var apiRequest = new TwitchAPIRequest();
+            apiRequest.Version = APIVersion.V5;
+            apiRequest.Path = $"users/{userId}/subscriptions/{channelId}";
+            apiRequest.Method = "GET";
+            var jToken = this.Parent.RequestAsJson(apiRequest);
+
+            return new TwitchUserSubscription(jToken);
+        }
+
         public TwitchUserFollows GetUserFollows(string userId, int? limit = null, int? offset = null, SortDirection? direction = null, FollowSortMode? sortby = null)
         {
             var apiRequest = new TwitchAPIRequest();

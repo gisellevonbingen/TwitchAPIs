@@ -94,6 +94,7 @@
     <Compile Include="TwitchDateTimeUtils.cs" />
     <Compile Include="V5\TwitchChannelFollow.cs" />
     <Compile Include="V5\TwitchChannelFollowers.cs" />
+    <Compile Include="V5\TwitchChannelSubscription.cs" />
     <Compile Include="V5\TwitchEmoticon.cs" />
     <Compile Include="V5\TwitchEmoticonSets.cs" />
     <Compile Include="TwitchException.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="New\TwitchStreamTag.cs" />
     <Compile Include="New\TwitchStreamTags.cs" />
     <Compile Include="V5\TwitchSearchChannels.cs" />
+    <Compile Include="V5\TwitchSubscription.cs" />
     <Compile Include="V5\TwitchTeam.cs" />
     <Compile Include="V5\TwitchTeamAndChannels.cs" />
     <Compile Include="V5\TwitchTopGame.cs" />
@@ -126,6 +128,7 @@
     <Compile Include="V5\TwitchUserNotifications.cs" />
     <Compile Include="V5\TwitchUserOwn.cs" />
     <Compile Include="V5\TwitchAPITeam.cs" />
+    <Compile Include="V5\TwitchUserSubscription.cs" />
     <Compile Include="WebExplorerExtenstions.cs" />
   </ItemGroup>
   <ItemGroup>
