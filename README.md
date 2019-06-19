@@ -22,8 +22,9 @@
 
 # Support functions
 * Authentication
-  * [OAuth Implicit Code Flow](https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/#oauth-implicit-code-flow)
-  * [OAuth Authorization Code Flow](https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/#oauth-authorization-code-flow)
+  * Getting Tokens: OAuth
+    * [OAuth Implicit Code Flow](https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/#oauth-implicit-code-flow)
+    * [OAuth Authorization Code Flow](https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/#oauth-authorization-code-flow)
   * [Refreshing Access Tokens](https://dev.twitch.tv/docs/authentication/#refreshing-access-tokens)
 * New
   * Clips
