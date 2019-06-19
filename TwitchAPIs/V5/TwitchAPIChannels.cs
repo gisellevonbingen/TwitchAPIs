@@ -61,6 +61,17 @@ namespace TwitchAPIs.V5
             return new TwitchChannelFollowers(jToken);
         }
 
+        public TwitchTeam[] GetChannelTeams(string channelId)
+        {
+            var apiRequest = new TwitchAPIRequest();
+            apiRequest.Version = APIVersion.V5;
+            apiRequest.Path = $"channels/{channelId}/teams";
+            apiRequest.Method = "GET";
+            var jToken = this.Parent.RequestAsJson(apiRequest);
+
+            return jToken.ReadArray("teams", t => new TwitchTeam(t)) ?? new TwitchTeam[0];
+        }
+
     }
 
 }
