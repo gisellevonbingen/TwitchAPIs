@@ -141,7 +141,7 @@ namespace TwitchAPIs.V5
 
             var blockList = new TwitchUserBlockList();
             blockList.Total = jToken.Value<int>("_total");
-            blockList.Blocks = jToken.ReadArray("blocks", t => new TwitchUser(t["user"])) ?? new TwitchUser[0];
+            blockList.Blocks = jToken.ReadArray("blocks", t => t.ReadIfExist("user", t2 => new TwitchUser(t2))) ?? new TwitchUser[0];
 
             return blockList;
         }
@@ -154,7 +154,7 @@ namespace TwitchAPIs.V5
             apiRequest.Method = "PUT";
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
-            return new TwitchUser(jToken["user"]);
+            return jToken.ReadIfExist("user", t => new TwitchUser(t));
         }
 
         public void UnblockUser(string sourceUserId, string targetUserId)

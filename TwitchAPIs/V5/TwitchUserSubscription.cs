@@ -17,7 +17,7 @@ namespace TwitchAPIs.V5
 
         public TwitchUserSubscription(JToken jToken) : base(jToken)
         {
-            this.Channel = new TwitchChannel(jToken["channel"]);
+            this.Channel = jToken.ReadIfExist("channel", t => new TwitchChannel(t));
         }
 
     }

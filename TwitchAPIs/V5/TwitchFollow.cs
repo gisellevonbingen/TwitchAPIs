@@ -21,7 +21,7 @@ namespace TwitchAPIs.V5
 
         public TwitchFollow(JToken jToken)
         {
-            this.Channel = new TwitchChannel(jToken["channel"]);
+            this.Channel = jToken.ReadIfExist("channel", t => new TwitchChannel(t));
             this.CreatedAt = jToken.Value<DateTime>("created_at");
             this.Notifications = jToken.Value<bool>("notifications");
         }

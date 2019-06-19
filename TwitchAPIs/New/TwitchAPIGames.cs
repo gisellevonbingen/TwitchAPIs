@@ -26,7 +26,7 @@ namespace TwitchAPIs.New
 
             var topGames = new TwitchTopGames();
             topGames.Games = jToken.ReadArray("data", t => new TwitchGame(t)) ?? new TwitchGame[0];
-            topGames.Pagination = new Pagination(jToken["pagination"]);
+            topGames.Pagination = jToken.ReadIfExist("pagination", t => new Pagination(t));
 
             return topGames;
         }

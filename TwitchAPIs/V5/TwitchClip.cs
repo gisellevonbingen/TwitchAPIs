@@ -37,16 +37,16 @@ namespace TwitchAPIs.V5
             this.Url = jToken.Value<string>("url");
             this.EmbedUrl = jToken.Value<string>("embed_url");
             this.EmbedHtml = jToken.Value<string>("embed_html");
-            this.Broadcaster = new TwitchClipUser(jToken["broadcaster"]);
-            this.Curator = new TwitchClipUser(jToken["curator"]);
-            this.Vod = new TwitchClipVod(jToken["vod"]);
+            this.Broadcaster = jToken.ReadIfExist("broadcaster", t => new TwitchClipUser(t));
+            this.Curator = jToken.ReadIfExist("curator", t => new TwitchClipUser(t));
+            this.Vod = jToken.ReadIfExist("vod", t => new TwitchClipVod(t));
             this.Game = jToken.Value<string>("game");
             this.Language = jToken.Value<string>("language");
             this.Title = jToken.Value<string>("title");
             this.Views = jToken.Value<int>("views");
             this.Duration = jToken.Value<double>("duration");
             this.CreatedAt = jToken.Value<DateTime>("created_at");
-            this.Thumbnails = new TwitchClipThumbnails(jToken["thumbnails"]);
+            this.Thumbnails = jToken.ReadIfExist("thumbnails", t => new TwitchClipThumbnails(t));
         }
 
     }

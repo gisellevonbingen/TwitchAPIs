@@ -9,77 +9,67 @@ namespace TwitchAPIs
 {
     public static class JsonUtils
     {
-        public static Dictionary<K, V> ReadMap<K, V>(this JToken value, object key, Func<string, JToken, KeyValuePair<K, V>> func)
+        public static Dictionary<K, V> ReadMap<K, V>(this JToken value, string propertyName, Func<string, JToken, KeyValuePair<K, V>> func)
         {
-            if (value == null)
-            {
-                return default;
-            }
-
-            return value[key].ReadMap(func);
+            return value.ReadIfExist(propertyName, t => ReadMap(t, func));
         }
 
         public static Dictionary<K, V> ReadMap<K, V>(this JToken value, Func<string, JToken, KeyValuePair<K, V>> func)
         {
-            var jObject = value as JObject;
-
-            if (jObject == null)
+            if (value is JObject jObject)
             {
-                return null;
+                var map = new Dictionary<K, V>();
+
+                foreach (var pair in jObject)
+                {
+                    var childKey = pair.Key;
+                    var childValueToken = pair.Value;
+                    var obj = func(childKey, childValueToken);
+
+                    map[obj.Key] = obj.Value;
+                }
+
+                return map;
             }
 
-            var map = new Dictionary<K, V>();
-
-            foreach (var pair in jObject)
-            {
-                var childKey = pair.Key;
-                var childValueToken = pair.Value;
-                var obj = func(childKey, childValueToken);
-
-                map[obj.Key] = obj.Value;
-            }
-
-            return map;
+            return null;
         }
 
-        public static T[] ReadArray<T>(this JToken value, object key, Func<JToken, T> func)
+        public static T[] ReadArray<T>(this JToken value, string propertyName, Func<JToken, T> func)
         {
-            if (value == null)
-            {
-                return default;
-            }
-
-            return value[key].ReadArray(func);
+            return value.ReadIfExist(propertyName, t => ReadArray(t, func));
         }
 
         public static T[] ReadArray<T>(this JToken value, Func<JToken, T> func)
         {
-            var jArray = value as JArray;
-
-            if (jArray == null)
+            if (value is JArray jArray)
             {
-                return null;
+                var array = new T[jArray.Count];
+
+                for (int i = 0; i < jArray.Count; i++)
+                {
+                    var token = jArray[i];
+                    array[i] = func(token);
+                }
+
+                return array;
             }
 
-            var array = new T[jArray.Count];
-
-            for (int i = 0; i < jArray.Count; i++)
-            {
-                var token = jArray[i];
-                array[i] = func(token);
-            }
-
-            return array;
+            return null;
         }
 
-        public static T ReadIfExist<T>(this JToken value, object key, Func<JToken, T> func)
+        public static T ReadIfExist<T>(this JToken value, string propertyName, Func<JToken, T> func)
         {
-            if (value == null)
+            if (value is JObject jObject)
             {
-                return default;
+                if (jObject.ContainsKey(propertyName) == true)
+                {
+                    return jObject[propertyName].ReadIfExist(func);
+                }
+
             }
 
-            return value[key].ReadIfExist(func);
+            return default;
         }
 
         public static T ReadIfExist<T>(this JToken value, Func<JToken, T> func)
@@ -92,26 +82,16 @@ namespace TwitchAPIs
             return default;
         }
 
-        public static IEnumerable<T> ArrayValues<T>(this JToken value, object key)
+        public static IEnumerable<T> ArrayValues<T>(this JToken value, string propertyName)
         {
-            if (value == null)
-            {
-                return null;
-            }
-
-            return value[key].ArrayValues<T>();
+            return value.ReadIfExist(propertyName, t => ArrayValues<T>(t));
         }
 
         public static IEnumerable<T> ArrayValues<T>(this JToken value)
         {
-            if (value == null)
+            if (value is JArray jArray)
             {
-                return null;
-            }
-
-            if (value is JArray array)
-            {
-                return array.Values<T>();
+                return jArray.Values<T>();
             }
 
             return null;

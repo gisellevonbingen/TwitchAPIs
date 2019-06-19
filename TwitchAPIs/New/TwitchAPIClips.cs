@@ -31,7 +31,7 @@ namespace TwitchAPIs.New
 
             var clips = new TwitchClips();
             clips.Clips = jToken.ReadArray("data", t => new TwitchClip(t)) ?? new TwitchClip[0];
-            clips.Pagination = new Pagination(jToken["pagination"]);
+            clips.Pagination = jToken.ReadIfExist("pagination", t => new Pagination(t));
 
             return clips;
         }

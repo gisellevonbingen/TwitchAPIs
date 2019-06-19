@@ -22,7 +22,7 @@ namespace TwitchAPIs.V5
         {
             this.CreatedAt = jToken.Value<DateTime>("created_at");
             this.Notifications = jToken.Value<bool>("notifications");
-            this.User = new TwitchUser(jToken["user"]);
+            this.User = jToken.ReadIfExist("user", t => new TwitchUser(t));
         }
 
     }

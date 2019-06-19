@@ -26,7 +26,7 @@ namespace TwitchAPIs.New
 
             var tags = new TwitchStreamTags();
             tags.Tags = jToken.ReadArray("data", t => new TwitchStreamTag(t));
-            tags.Pagination =  new Pagination(jToken["pagination"]);
+            tags.Pagination = jToken.ReadIfExist("pagination", t => new Pagination(t));
 
             return tags;
         }

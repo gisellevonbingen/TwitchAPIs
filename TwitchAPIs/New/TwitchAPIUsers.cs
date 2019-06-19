@@ -39,7 +39,7 @@ namespace TwitchAPIs.New
 
             var uerFollows = new TwitchUserFollows();
             uerFollows.Total = jToken.Value<int>("total");
-            uerFollows.Pagination = new Pagination(jToken["pagination"]);
+            uerFollows.Pagination = jToken.ReadIfExist("pagination", t => new Pagination(t));
             uerFollows.Follows = jToken.ReadArray("data", t => new TwitchFollow(t, type)) ?? new TwitchFollow[0];
 
             return uerFollows;

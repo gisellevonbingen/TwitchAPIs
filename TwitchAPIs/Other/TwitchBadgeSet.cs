@@ -21,7 +21,7 @@ namespace TwitchAPIs.Other
         {
             var setToken = jToken.Value<JObject>("badge_sets");
             this.Set = setToken.ReadMap((name, nt) =>
-                new KeyValuePair<string, Dictionary<string, TwitchBadge>>(name.ToLowerInvariant(), nt["versions"].ReadMap((version, vt) =>
+                new KeyValuePair<string, Dictionary<string, TwitchBadge>>(name.ToLowerInvariant(), nt.ReadMap("versions", (version, vt) =>
                     new KeyValuePair<string, TwitchBadge>(version.ToLowerInvariant(), new TwitchBadge(vt)))));
         }
 
