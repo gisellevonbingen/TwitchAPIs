@@ -64,6 +64,7 @@
     <Compile Include="V5\TestChannelsGetChannelFollowers.cs" />
     <Compile Include="V5\TestChannelsGetChannelByID.cs" />
     <Compile Include="V5\TestChannelsGetChannelEditors.cs" />
+    <Compile Include="V5\TestTeamsGetAllTeams.cs" />
     <Compile Include="V5\TestUsersUnblockUser.cs" />
     <Compile Include="V5\TestUsersBlockUser.cs" />
     <Compile Include="V5\TestUsersGetUser.cs" />

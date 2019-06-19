@@ -14,6 +14,7 @@ namespace TwitchAPIs.V5
         public TwitchAPIGames Games { get; }
         public TwitchAPIChat Chat { get; }
         public TwitchAPIBits Bits { get; }
+        public TwitchAPITeam Teams { get; }
 
         public TwitchAPIV5(TwitchAPI parent)
         {
@@ -23,6 +24,7 @@ namespace TwitchAPIs.V5
             this.Games = new TwitchAPIGames(parent);
             this.Chat = new TwitchAPIChat(parent);
             this.Bits = new TwitchAPIBits(parent);
+            this.Teams = new TwitchAPITeam(parent);
         }
 
     }
