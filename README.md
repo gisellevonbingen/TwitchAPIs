@@ -43,6 +43,8 @@
   * Channels
     * [Get Channel](https://dev.twitch.tv/docs/v5/reference/channels/#get-channel)
     * [Get Channel by ID](https://dev.twitch.tv/docs/v5/reference/channels/#get-channel-by-id)
+    * [Get Channel Editors](https://dev.twitch.tv/docs/v5/reference/channels/#get-channel-editors)
+    * [Get Channel Followers](https://dev.twitch.tv/docs/v5/reference/channels/#get-channel-followers)
   * Chat
     * [Get Chat Rooms by Channel](https://dev.twitch.tv/docs/v5/reference/chat/#get-chat-rooms-by-channel)
   * Games
