@@ -26,6 +26,17 @@ namespace TwitchAPIs.V5
             return jToken.ReadArray("teams", t => new TwitchTeam(t)) ?? new TwitchTeam[0];
         }
 
+        public TwitchTeamAndChannels GetTeam(string teamName)
+        {
+            var apiRequest = new TwitchAPIRequest();
+            apiRequest.Version = APIVersion.V5;
+            apiRequest.Path = $"teams/{teamName}";
+            apiRequest.Method = "GET";
+            var jToken = this.Parent.RequestAsJson(apiRequest);
+
+            return new TwitchTeamAndChannels(jToken);
+        }
+
     }
 
 }
