@@ -69,6 +69,16 @@ namespace TwitchAPIs.Test
         public virtual bool ReadBreak(string breakMessage, string breakInput)
         {
             var input = this.ReadInput(breakMessage);
+            return this.IsBreak(breakInput, input);
+        }
+
+        public virtual bool IsBreak(string input)
+        {
+            return this.IsBreak(input, this.BreakInput);
+        }
+
+        public virtual bool IsBreak(string input, string breakInput)
+        {
             return input.Equals(breakInput, StringComparison.OrdinalIgnoreCase);
         }
 

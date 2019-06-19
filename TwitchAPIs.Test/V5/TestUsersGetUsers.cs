@@ -25,7 +25,7 @@ namespace TwitchAPIs.Test.V5
             {
                 var login = user.ReadInput("Enter User Login while break");
 
-                if (login.Equals(user.BreakInput, StringComparison.OrdinalIgnoreCase) == true)
+                if (user.IsBreak(login) == true)
                 {
                     break;
                 }
