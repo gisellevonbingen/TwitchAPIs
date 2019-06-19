@@ -18,7 +18,7 @@ namespace TwitchAPIs.Test
 
         public TwitchAPI API { get; private set; }
         public OAuthRequest OAuthRequest { get; private set; }
-        public OAuthAuthorization OAuthAuthorization { get; set; }
+        public AuthenticationResult OAuthAuthorization { get; set; }
 
         public TwitchAPIHandler(UserAbstract user)
         {

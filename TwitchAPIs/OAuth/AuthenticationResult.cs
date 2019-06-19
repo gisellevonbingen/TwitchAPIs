@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace TwitchAPIs.OAuth
 {
-    public class OAuthAuthorization
+    public class AuthenticationResult
     {
         public string AccessToken { get; set; }
 
@@ -21,13 +21,13 @@ namespace TwitchAPIs.OAuth
 
         public string TokenType { get; set; }
 
-        public OAuthAuthorization()
+        public AuthenticationResult()
         {
 
         }
 
 
-        public OAuthAuthorization(QueryValues values)
+        public AuthenticationResult(QueryValues values)
         {
             this.AccessToken = values.Single("access_token");
             this.RefreshToken = values.Single("refresh_token");
@@ -37,7 +37,7 @@ namespace TwitchAPIs.OAuth
             this.TokenType = values.Single("token_type");
         }
 
-        public OAuthAuthorization(JToken jToken)
+        public AuthenticationResult(JToken jToken)
         {
             this.AccessToken = jToken.Value<string>("access_token");
             this.RefreshToken = jToken.Value<string>("refresh_token");

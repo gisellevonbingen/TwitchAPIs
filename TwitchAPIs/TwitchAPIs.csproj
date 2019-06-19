@@ -64,7 +64,7 @@
     <Compile Include="New\TwitchAPIUsers.cs" />
     <Compile Include="New\TwitchAPINew.cs" />
     <Compile Include="OAuth\OAuthAccessTokenRequest.cs" />
-    <Compile Include="OAuth\OAuthAuthorization.cs" />
+    <Compile Include="OAuth\AuthenticationResult.cs" />
     <Compile Include="OAuth\OAuthRequest.cs" />
     <Compile Include="JsonUtils.cs" />
     <Compile Include="OAuth\OAuthRequestAuthorization.cs" />
