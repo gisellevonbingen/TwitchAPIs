@@ -72,6 +72,20 @@ namespace TwitchAPIs.V5
             return jToken.ReadArray("teams", t => new TwitchTeam(t)) ?? new TwitchTeam[0];
         }
 
+        public TwitchChannelSubscriptions GetChannelSubscribers(string channelId, int? limit = null, int? offset = null, SortDirection? direction = null)
+        {
+            var apiRequest = new TwitchAPIRequest();
+            apiRequest.Version = APIVersion.V5;
+            apiRequest.Path = $"channels/{channelId}/subscriptions";
+            apiRequest.Method = "GET";
+            apiRequest.QueryValues.Add("limit", limit);
+            apiRequest.QueryValues.Add("offset", offset);
+            apiRequest.QueryValues.Add("direction", direction);
+            var jToken = this.Parent.RequestAsJson(apiRequest);
+
+            return new TwitchChannelSubscriptions(jToken);
+        }
+
     }
 
 }
