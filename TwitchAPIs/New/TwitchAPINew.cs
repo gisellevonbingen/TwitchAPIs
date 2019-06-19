@@ -8,17 +8,17 @@ namespace TwitchAPIs.New
 {
     public class TwitchAPINew
     {
-        public TwitchAPIUsers Users { get; }
-        public TwitchAPIGames Games { get; }
         public TwitchAPIClips Clips { get; }
+        public TwitchAPIGames Games { get; }
         public TwitchAPITags Tags { get; }
+        public TwitchAPIUsers Users { get; }
 
         public TwitchAPINew(TwitchAPI parent)
         {
-            this.Users = new TwitchAPIUsers(parent);
-            this.Games = new TwitchAPIGames(parent);
             this.Clips = new TwitchAPIClips(parent);
+            this.Games = new TwitchAPIGames(parent);
             this.Tags = new TwitchAPITags(parent);
+            this.Users = new TwitchAPIUsers(parent);
         }
 
     }
