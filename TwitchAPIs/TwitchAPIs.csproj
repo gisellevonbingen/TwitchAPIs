@@ -76,7 +76,7 @@
     <Compile Include="QueryValue.cs" />
     <Compile Include="QueryValues.cs" />
     <Compile Include="TwitchAPI.cs" />
-    <Compile Include="OAuth\TwitchAPIAuthorization.cs" />
+    <Compile Include="OAuth\TwitchAPIAuthentication.cs" />
     <Compile Include="V5\TwitchAPIBits.cs" />
     <Compile Include="V5\TwitchAPIChannels.cs" />
     <Compile Include="V5\TwitchAPIChat.cs" />

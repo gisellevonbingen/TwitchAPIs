@@ -51,7 +51,7 @@ namespace TwitchAPIs.Test
         public OAuthAuthorization Auth(OAuthRequest request)
         {
             var api = this.API;
-            var authUri = api.Authorization.GetOAuthURI(request);
+            var authUri = api.Authentication.GetOAuthURI(request);
 
             this.Request = request;
             this.Browser.Navigate(authUri);
@@ -62,7 +62,7 @@ namespace TwitchAPIs.Test
 
             if (responseURI != null)
             {
-                var oAuth = api.Authorization.GetOAuthAuthorization(responseURI, request);
+                var oAuth = api.Authentication.GetOAuthAuthorization(responseURI, request);
                 return oAuth;
             }
 

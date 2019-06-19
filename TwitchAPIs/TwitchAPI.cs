@@ -19,7 +19,7 @@ namespace TwitchAPIs
     public class TwitchAPI
     {
         public WebExplorer Web { get; }
-        public TwitchAPIAuthorization Authorization { get; }
+        public TwitchAPIAuthentication Authentication { get; }
         public TwitchAPIBadges Badges { get; }
 
         public TwitchAPINew New { get;  }
@@ -32,7 +32,7 @@ namespace TwitchAPIs
         public TwitchAPI()
         {
             this.Web = new WebExplorer();
-            this.Authorization = new TwitchAPIAuthorization(this);
+            this.Authentication = new TwitchAPIAuthentication(this);
             this.Badges = new TwitchAPIBadges(this);
 
             this.New = new TwitchAPINew(this);

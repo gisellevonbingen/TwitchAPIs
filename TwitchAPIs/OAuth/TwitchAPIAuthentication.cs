@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace TwitchAPIs.OAuth
 {
-    public class TwitchAPIAuthorization : TwitchAPIPart
+    public class TwitchAPIAuthentication : TwitchAPIPart
     {
-        public TwitchAPIAuthorization(TwitchAPI parent) : base(parent)
+        public TwitchAPIAuthentication(TwitchAPI parent) : base(parent)
         {
 
         }
