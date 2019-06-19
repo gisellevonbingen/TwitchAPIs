@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="New\Pagination.cs" />
     <Compile Include="New\TwitchTopGames.cs" />
+    <Compile Include="V5\GetTopClipsPeriod.cs" />
     <Compile Include="V5\SortDirection.cs" />
     <Compile Include="V5\FollowSortMode.cs" />
     <Compile Include="HttpUtility2.cs" />
@@ -116,6 +117,8 @@
     <Compile Include="V5\TwitchSubscription.cs" />
     <Compile Include="V5\TwitchTeam.cs" />
     <Compile Include="V5\TwitchTeamAndChannels.cs" />
+    <Compile Include="V5\TwitchTopClips.cs" />
+    <Compile Include="V5\TwitchGetTopClipsOptions.cs" />
     <Compile Include="V5\TwitchTopGame.cs" />
     <Compile Include="V5\TwitchTopGames.cs" />
     <Compile Include="V5\TwitchImageSet.cs" />

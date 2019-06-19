@@ -24,6 +24,24 @@ namespace TwitchAPIs.V5
             return new TwitchClip(jToken);
         }
 
+        public TwitchTopClips GetTopClips(TwitchGetTopClipsOptions options)
+        {
+            var apiRequest = new TwitchAPIRequest();
+            apiRequest.Version = APIVersion.V5;
+            apiRequest.Path = $"clips/top";
+            apiRequest.Method = "GET";
+            apiRequest.QueryValues.Add("channel", options.Channel);
+            apiRequest.QueryValues.Add("cursor", options.Cursor);
+            apiRequest.QueryValues.Add("game", options.Game);
+            apiRequest.QueryValues.Add("language", string.Join(TwitchGetTopClipsOptions.LanguageDelimiter, options.Languages));
+            apiRequest.QueryValues.Add("limit", options.Limit);
+            apiRequest.QueryValues.Add("period", options.Period);
+            apiRequest.QueryValues.Add("trending", options.Trending);
+            var jToken = this.Parent.RequestAsJson(apiRequest);
+
+            return new TwitchTopClips(jToken);
+        }
+
     }
 
 }
