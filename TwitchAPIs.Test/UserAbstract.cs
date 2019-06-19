@@ -45,6 +45,33 @@ namespace TwitchAPIs.Test
             return input;
         }
 
+        public virtual string GetBreakMessage()
+        {
+            return this.GetBreakMessage(this.BreakInput);
+        }
+
+        public virtual string GetBreakMessage(string breakInput)
+        {
+            return $"Break to '{breakInput}'";
+        }
+
+        public virtual bool ReadBreak()
+        {
+            var breakInput = this.BreakInput;
+            return this.ReadBreak(this.GetBreakMessage(breakInput), breakInput);
+        }
+
+        public virtual bool ReadBreak(string breakMessage)
+        {
+            return this.ReadBreak(breakMessage, this.BreakInput);
+        }
+
+        public virtual bool ReadBreak(string breakMessage, string breakInput)
+        {
+            var input = this.ReadInput(breakMessage);
+            return input.Equals(breakInput, StringComparison.OrdinalIgnoreCase);
+        }
+
         public virtual string ReadInput(string message)
         {
             this.SendMessage(message);
@@ -60,7 +87,7 @@ namespace TwitchAPIs.Test
         public virtual QueryResult<T> QueryInput<T>(string message, IEnumerable<T> collection, Func<T, string> func, bool breakable)
         {
             var breakInput = this.BreakInput;
-            return this.QueryInput(message, collection, func, breakable, $"Break to '{breakInput}'", breakInput);
+            return this.QueryInput(message, collection, func, breakable, this.GetBreakMessage(breakInput), breakInput);
         }
 
         public virtual QueryResult<T> QueryInput<T>(string message, IEnumerable<T> collection, Func<T, string> func, bool breakable, string breakMessage)
