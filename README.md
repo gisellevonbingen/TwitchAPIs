@@ -76,6 +76,7 @@
     * [Block User](https://dev.twitch.tv/docs/v5/reference/users/#block-user)
     * [Unblock User](https://dev.twitch.tv/docs/v5/reference/users/#unblock-user)
 * Other
-  * Get Global Badges
-  * Get Channel Badges
-  * Get Integration(Global+Channel) Badges
+  * Badges
+    * Get Global Badges
+    * Get Channel Badges
+    * Get Integration(Global+Channel) Badges
