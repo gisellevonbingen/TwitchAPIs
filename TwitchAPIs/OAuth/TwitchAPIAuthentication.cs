@@ -26,7 +26,7 @@ namespace TwitchAPIs.OAuth
             if (request is OAuthRequestAuthorization auth)
             {
                 queryValues = QueryValues.Parse(StringUtils.RemovePrefix(responseURI.Query, "?"));
-                this.EnsureOAuthStateEquals(queryValues, request);
+                this.EnsureStateEquals(queryValues, request);
 
                 var accessTokenRequest = new OAuthAccessTokenRequest();
                 accessTokenRequest.ClientSecret = auth.ClientSecret;
@@ -37,7 +37,7 @@ namespace TwitchAPIs.OAuth
             else if (request is OAuthRequestToken)
             {
                 queryValues = QueryValues.Parse(StringUtils.RemovePrefix(responseURI.Fragment, "#"));
-                this.EnsureOAuthStateEquals(queryValues, request);
+                this.EnsureStateEquals(queryValues, request);
 
                 result = new AuthenticationResult(queryValues);
             }
@@ -49,7 +49,7 @@ namespace TwitchAPIs.OAuth
             return result;
         }
 
-        public AuthenticationResult RefreshOAuthAuthorization(string refreshToken, string clientSecret)
+        public AuthenticationResult RefreshAccessTokens(string refreshToken, string clientSecret)
         {
             var apiRequest = new TwitchAPIRequest();
             apiRequest.BaseURL = "https://id.twitch.tv/oauth2/token";
@@ -63,7 +63,7 @@ namespace TwitchAPIs.OAuth
             return new AuthenticationResult(jToken);
         }
 
-        public void EnsureOAuthStateEquals(QueryValues queryValues, OAuthRequest request)
+        public void EnsureStateEquals(QueryValues queryValues, OAuthRequest request)
         {
             var requested = request.State;
 
