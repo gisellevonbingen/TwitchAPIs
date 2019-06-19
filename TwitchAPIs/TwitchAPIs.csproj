@@ -108,6 +108,7 @@
     <Compile Include="New\TwitchFollow.cs" />
     <Compile Include="V5\TwitchFollow.cs" />
     <Compile Include="New\TwitchGame.cs" />
+    <Compile Include="V5\TwitchFollowedClips.cs" />
     <Compile Include="V5\TwitchGame.cs" />
     <Compile Include="New\TwitchGetClipsOptions.cs" />
     <Compile Include="TwitchAPIRequest.cs" />

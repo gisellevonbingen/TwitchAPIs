@@ -42,6 +42,20 @@ namespace TwitchAPIs.V5
             return new TwitchTopClips(jToken);
         }
 
+        public TwitchFollowedClips GetFollowedClips(long? limit, string cursor, bool? trending)
+        {
+            var apiRequest = new TwitchAPIRequest();
+            apiRequest.Version = APIVersion.V5;
+            apiRequest.Path = $"clips/followed";
+            apiRequest.Method = "GET";
+            apiRequest.QueryValues.Add("limit", limit);
+            apiRequest.QueryValues.Add("cursor", cursor);
+            apiRequest.QueryValues.Add("trending", trending);
+            var jToken = this.Parent.RequestAsJson(apiRequest);
+
+            return new TwitchFollowedClips(jToken);
+        }
+
     }
 
 }
