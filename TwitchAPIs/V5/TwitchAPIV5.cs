@@ -11,6 +11,7 @@ namespace TwitchAPIs.V5
         public TwitchAPIBits Bits { get; }
         public TwitchAPIChannels Channels { get; }
         public TwitchAPIChat Chat { get; }
+        public TwitchAPIClips Clips { get; }
         public TwitchAPIGames Games { get; }
         public TwitchAPISearch Search { get; }
         public TwitchAPITeam Teams { get; }
@@ -21,6 +22,7 @@ namespace TwitchAPIs.V5
             this.Bits = new TwitchAPIBits(parent);
             this.Channels = new TwitchAPIChannels(parent);
             this.Chat = new TwitchAPIChat(parent);
+            this.Clips = new TwitchAPIClips(parent);
             this.Games = new TwitchAPIGames(parent);
             this.Search = new TwitchAPISearch(parent);
             this.Teams = new TwitchAPITeam(parent);

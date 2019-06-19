@@ -82,6 +82,7 @@
     <Compile Include="V5\TwitchAPIChat.cs" />
     <Compile Include="New\TwitchAPIClips.cs" />
     <Compile Include="TwitchAPIPart.cs" />
+    <Compile Include="V5\TwitchAPIClips.cs" />
     <Compile Include="V5\TwitchAPIGames.cs" />
     <Compile Include="V5\TwitchAPISearch.cs" />
     <Compile Include="New\TwitchAPITags.cs" />
@@ -96,6 +97,10 @@
     <Compile Include="V5\TwitchChannelFollowers.cs" />
     <Compile Include="V5\TwitchChannelSubscription.cs" />
     <Compile Include="V5\TwitchChannelSubscriptions.cs" />
+    <Compile Include="V5\TwitchClip.cs" />
+    <Compile Include="V5\TwitchClipThumbnails.cs" />
+    <Compile Include="V5\TwitchClipUser.cs" />
+    <Compile Include="V5\TwitchClipVod.cs" />
     <Compile Include="V5\TwitchEmoticon.cs" />
     <Compile Include="V5\TwitchEmoticonSets.cs" />
     <Compile Include="TwitchException.cs" />
