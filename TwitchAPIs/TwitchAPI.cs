@@ -22,8 +22,8 @@ namespace TwitchAPIs
         public TwitchAPIAuthentication Authentication { get; }
         public TwitchAPIBadges Badges { get; }
 
-        public TwitchAPINew New { get;  }
-        public TwitchAPIV5 V5 { get;  }
+        public TwitchAPINew New { get; }
+        public TwitchAPIV5 V5 { get; }
 
 
         public string ClientId { get; set; }
@@ -59,7 +59,11 @@ namespace TwitchAPIs
         public void SetupRequest(WebRequestParameter request, APIVersion? version)
         {
             var headers = request.Headers;
-            headers["Client-Id"] = this.ClientId;
+
+            if (version.HasValue == true)
+            {
+                headers["Client-Id"] = this.ClientId;
+            }
 
             var accessToken = this.AccessToken;
 
