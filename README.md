@@ -98,54 +98,54 @@ foreach (var namePair in badges.Set)
 [STAThread]
 public static void Main(string[] args)
 {
-	var twitchAPI = new TwitchAPI();
-	twitchAPI.ClientId = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+    var twitchAPI = new TwitchAPI();
+    twitchAPI.ClientId = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
 
-	var authRequest = new OAuthRequestTokenCode();
-	authRequest.RedirectURI = "Your Application's Redirect URI";
-	authRequest.State = Guid.NewGuid().ToString();
-	authRequest.Scope = "scope1+scope2+scope3";
-	var authUri = twitchAPI.Authentication.GetCodeAuthorizeUri(authRequest);
+    var authRequest = new OAuthRequestTokenCode();
+    authRequest.RedirectURI = "Your Application's Redirect URI";
+    authRequest.State = Guid.NewGuid().ToString();
+    authRequest.Scope = "scope1+scope2+scope3";
+    var authUri = twitchAPI.Authentication.GetCodeAuthorizeUri(authRequest);
 
-	Uri responseUri = null;
+    Uri responseUri = null;
 
-	Application.EnableVisualStyles();
-	Application.SetCompatibleTextRenderingDefault(false);
+    Application.EnableVisualStyles();
+    Application.SetCompatibleTextRenderingDefault(false);
 
-	var form = new Form();
+    var form = new Form();
 
-	var browser = new WebBrowser();
-	browser.Size = form.ClientSize;
-	browser.Navigated += (sender, e) =>
+    var browser = new WebBrowser();
+    browser.Size = form.ClientSize;
+    browser.Navigated += (sender, e) =>
+    {
+	var url = browser.Url;
+
+	if (url.AbsoluteUri.StartsWith(authRequest.RedirectURI) == true)
 	{
-		var url = browser.Url;
-
-		if (url.AbsoluteUri.StartsWith(authRequest.RedirectURI) == true)
-		{
-			responseUri = url;
-			form.Close();
-		}
-
-	};
-
-	form.Controls.Add(browser);
-	form.SizeChanged += (sender, e) => { browser.Size = form.ClientSize; };
-
-	browser.Navigate(authUri);
-
-	Application.Run(form);
-
-	if (responseUri == null)
-	{
-		Console.WriteLine("Authentication Fail");
+	    responseUri = url;
+	    form.Close();
 	}
-	else
-	{
-		var result = twitchAPI.Authentication.GetAuthenticationResult(responseUri, authRequest);
-		Console.WriteLine($"Access Token = {result.AccessToken}");
 
-		twitchAPI.AccessToken = result.AccessToken;
-	}
+    };
+
+    form.Controls.Add(browser);
+    form.SizeChanged += (sender, e) => { browser.Size = form.ClientSize; };
+
+    browser.Navigate(authUri);
+
+    Application.Run(form);
+
+    if (responseUri == null)
+    {
+	Console.WriteLine("Authentication Fail");
+    }
+    else
+    {
+	var result = twitchAPI.Authentication.GetAuthenticationResult(responseUri, authRequest);
+	Console.WriteLine($"Access Token = {result.AccessToken}");
+
+	twitchAPI.AccessToken = result.AccessToken;
+    }
 
 }
 ```
