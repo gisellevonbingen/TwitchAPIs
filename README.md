@@ -20,6 +20,10 @@
 * System.Drawing
 * System.Windows.Forms
 
+# TwitchAPIs.WebhooksTest.Requires
+* [Newtonsoft.Json](https://www.newtonsoft.com/json)
+* [uHttpSharp](https://github.com/Code-Sharp/uHttpSharp)
+
 # Support functions
 * Authentication
   * Getting Tokens: OAuth
@@ -38,6 +42,9 @@
     * [Get Users](https://dev.twitch.tv/docs/api/reference/#get-users)
     * [Get Users Follows](https://dev.twitch.tv/docs/api/reference/#get-users-follows)
     * [Update User](https://dev.twitch.tv/docs/api/reference/#update-user)
+  * Webhooks
+    * [Get Webhook Subscriptions](https://dev.twitch.tv/docs/api/reference/#get-webhook-subscriptions)
+    * [Subscribe To/Unsubscribe From Events](https://dev.twitch.tv/docs/api/webhooks-reference/#subscribe-tounsubscribe-from-events)
 * V5
   * Bits
     * [Get Cheermotes](https://dev.twitch.tv/docs/v5/reference/bits/#get-cheermotes)
