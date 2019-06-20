@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{599D4821-4CDA-4404-A6D8-1E97459B5784}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>TwitchAPIs.Webhooks</RootNamespace>
-    <AssemblyName>TwitchAPIs.Webhooks</AssemblyName>
+    <RootNamespace>TwitchAPIs.WebhooksTest</RootNamespace>
+    <AssemblyName>TwitchAPIs.WebhooksTest</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

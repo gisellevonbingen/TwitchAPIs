@@ -12,7 +12,7 @@ using uhttpsharp.Handlers;
 using uhttpsharp.Listeners;
 using uhttpsharp.RequestProviders;
 
-namespace TwitchAPIs.Webhooks
+namespace TwitchAPIs.WebhooksTest
 {
     public class Program : IHttpRequestHandler
     {
