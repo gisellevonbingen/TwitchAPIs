@@ -96,6 +96,6 @@ Include all functions of TwitchAPIs
 
 test, example for Webhooks functions
 
-# .Requires
+# #Requires
 * [Newtonsoft.Json](https://www.newtonsoft.com/json)
 * [uHttpSharp](https://github.com/Code-Sharp/uHttpSharp)
