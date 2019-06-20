@@ -57,6 +57,8 @@
     <Compile Include="InputEditType.cs" />
     <Compile Include="InputEditSnapshot.cs" />
     <Compile Include="New\TestGamesGetTopGames.cs" />
+    <Compile Include="New\TestWebhooksGetWebhookSubscriptions.cs" />
+    <Compile Include="New\TestWebhooksPostHub.cs" />
     <Compile Include="PrintableLine.cs" />
     <Compile Include="QueryResult.cs" />
     <Compile Include="TwitchAPITestAttribute.cs" />
