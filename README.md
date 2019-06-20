@@ -1,30 +1,20 @@
-# Twitch API (New, V5) C# Wrapper
-'Test' project has simple example
+# TwitchAPIs
 
-# Reference
+Twithc API(New, V5)'s C# Wrapper
+
+## Reference
 * [Twitch Developers Reference](https://dev.twitch.tv/docs/api/reference/)
 * [Badge API](https://discuss.dev.twitch.tv/t/beta-badge-api/6388)
   * Global - https://badges.twitch.tv/v1/badges/global/display
   * Channel - https://badges.twitch.tv/v1/badges/channels/{channelId}/display
   * Integration(Global+Channel) - https://cbenni.com/api/badges/{channelName}
 
-# Requires
+## Requires
 * [Giselle.Commons](https://github.com/gisellevonbingen/Giselle.Commons)
 * [Newtonsoft.Json](https://www.newtonsoft.com/json)
 * System.Web
 
-# Test.Requires
-* [Giselle.Commons](https://github.com/gisellevonbingen/Giselle.Commons)
-* [Newtonsoft.Json](https://www.newtonsoft.com/json)
-* System.Web
-* System.Drawing
-* System.Windows.Forms
-
-# TwitchAPIs.WebhooksTest.Requires
-* [Newtonsoft.Json](https://www.newtonsoft.com/json)
-* [uHttpSharp](https://github.com/Code-Sharp/uHttpSharp)
-
-# Support functions
+## Support functions
 * Authentication
   * Getting Tokens: OAuth
     * [OAuth Implicit Code Flow](https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/#oauth-implicit-code-flow)
@@ -88,3 +78,24 @@
     * Get Global Badges
     * Get Channel Badges
     * Get Integration(Global+Channel) Badges
+
+# TwitchAPIs.Test
+
+Function test and example
+
+Include all functions of TwitchAPIs
+
+## Requires
+* [Giselle.Commons](https://github.com/gisellevonbingen/Giselle.Commons)
+* [Newtonsoft.Json](https://www.newtonsoft.com/json)
+* System.Web
+* System.Drawing
+* System.Windows.Forms
+
+# TwitchAPIs.WebhooksTest
+
+test, example for Webhooks functions
+
+# .Requires
+* [Newtonsoft.Json](https://www.newtonsoft.com/json)
+* [uHttpSharp](https://github.com/Code-Sharp/uHttpSharp)
