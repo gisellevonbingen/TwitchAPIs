@@ -2,6 +2,79 @@
 
 Twithc API(New, V5)'s C# Wrapper
 
+## Example
+
+### Get User Information
+
+```CSharp
+var twitchAPI = new TwitchAPI();
+twitchAPI.ClientId = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+
+var userRequests = new List<UserRequest>();
+userRequests.Add(new UserRequest(UserType.Login, "loginid, email"));
+
+var users = twitchAPI.New.Users.GetUsers(userRequests);
+
+foreach (var user in users)
+{
+    Console.WriteLine();
+    Console.WriteLine($"Id = {user.Id}");
+    Console.WriteLine($"Login = {user.Login}");
+    Console.WriteLine($"DisplayName = {user.DisplayName}");
+}
+```
+
+### Get User Followings
+
+```CSharp
+var twitchAPI = new TwitchAPI();
+twitchAPI.ClientId = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+
+var userId = "zzzzzzzzz";
+var follows = twitchAPI.V5.Users.GetUserFollows(userId);
+
+foreach (var follow in follows.Follows)
+{
+    Console.WriteLine();
+    Console.WriteLine($"Channel = {follow.Channel.DisplayName}({follow.Channel.Name})");
+    Console.WriteLine($"FollowedAt = {follow.CreatedAt}");
+}
+```
+
+### Get Global+Channel Badges
+
+```CSharp
+var twitchAPI = new TwitchAPI();
+var channelName = "xxxxxxx";
+var badges = twitchAPI.Badges.GetIntegrationBadges(channelName);
+
+var broadcasterBadge = badges.Get("broadcaster", "1");
+var moderatorBadge = badges.Get("moderator", "1");
+var subscriberBadge1 = badges.Get("subscriber", "6"); // 6-Month Subscriber
+var subscriberBadge2 = badges.Get("subscriber", "12"); // 1-Year Subscriber
+
+foreach (var namePair in badges.Set)
+{
+    var name = namePair.Key;
+    var versionSet = namePair.Value;
+    
+    Console.WriteLine();
+    Console.WriteLine($"Name = {name}");
+    
+    foreach (var versionPair in versionSet)
+    {
+        var key = versionPair.Key;
+        var badge = versionPair.Value;
+        
+        Console.WriteLine();
+        Console.WriteLine($"    Version = {key}");
+        Console.WriteLine($"    Title = {badge.Title}");
+        Console.WriteLine($"    Url = {badge.ImageUrl1x}");
+    }
+
+}
+```
+
 ## Reference
 * [Twitch Developers Reference](https://dev.twitch.tv/docs/api/reference/)
 * [Badge API](https://discuss.dev.twitch.tv/t/beta-badge-api/6388)
@@ -9,7 +82,7 @@ Twithc API(New, V5)'s C# Wrapper
   * Channel - https://badges.twitch.tv/v1/badges/channels/{channelId}/display
   * Integration(Global+Channel) - https://cbenni.com/api/badges/{channelName}
 
-## Requires
+## Dependencies
 * [Giselle.Commons](https://github.com/gisellevonbingen/Giselle.Commons)
 * [Newtonsoft.Json](https://www.newtonsoft.com/json)
 * System.Web
@@ -85,7 +158,7 @@ Function test and example
 
 Include all functions of TwitchAPIs
 
-## Requires
+## Dependencies
 * [Giselle.Commons](https://github.com/gisellevonbingen/Giselle.Commons)
 * [Newtonsoft.Json](https://www.newtonsoft.com/json)
 * System.Web
@@ -96,6 +169,6 @@ Include all functions of TwitchAPIs
 
 test, example for Webhooks functions
 
-# #Requires
+## Dependencies
 * [Newtonsoft.Json](https://www.newtonsoft.com/json)
 * [uHttpSharp](https://github.com/Code-Sharp/uHttpSharp)
