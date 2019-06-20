@@ -17,11 +17,11 @@ namespace TwitchAPIs.Test.OAuth
 
             var api = handler.API;
             var authRequest = handler.OAuthRequest;
-            var authorization = handler.OAuthAuthorization;
+            var authorization = handler.AuthenticationResult;
 
-            if (authorization.RefreshToken != null && authRequest is OAuthRequestAuthorization auth)
+            if (authorization.RefreshToken != null && authRequest is OAuthRequestAuthorizationCode auth)
             {
-                var oAuth = handler.OAuthAuthorization = api.Authentication.RefreshAccessTokens(authorization.RefreshToken, auth.ClientSecret);
+                var oAuth = handler.AuthenticationResult = api.Authentication.RefreshAccessTokens(authorization.RefreshToken, auth.ClientSecret);
                 api.AccessToken = oAuth.AccessToken;
 
                 main.PrintReflection(user, "Refreshed OAuthAuthorization", oAuth);

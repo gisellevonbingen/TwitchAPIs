@@ -16,7 +16,7 @@ namespace TwitchAPIs.Test
         private Form Form;
         private WebBrowser Browser;
 
-        private OAuthRequest Request;
+        private OAuthRequestCode CodeRequest;
         private Uri ResponseURI;
 
         public TwitchAuthHandler(TwitchAPI api)
@@ -51,19 +51,27 @@ namespace TwitchAPIs.Test
         public AuthenticationResult Auth(OAuthRequest request)
         {
             var api = this.API;
-            var authUri = api.Authentication.GetOAuthURI(request);
 
-            this.Request = request;
-            this.Browser.Navigate(authUri);
-
-            Application.Run(this.Form);
-
-            var responseURI = this.ResponseURI;
-
-            if (responseURI != null)
+            if (request is OAuthRequestCode code)
             {
-                var oAuth = api.Authentication.GetAuthenticationResult(responseURI, request);
-                return oAuth;
+                var codeAuthorizeUri = api.Authentication.GetCodeAuthorizeUri(code);
+
+                this.CodeRequest = code;
+                this.Browser.Navigate(codeAuthorizeUri);
+
+                Application.Run(this.Form);
+
+                var responseURI = this.ResponseURI;
+
+                if (responseURI != null)
+                {
+                    return api.Authentication.GetAuthenticationResult(responseURI, code);
+                }
+
+            }
+            else if (request is OAuthRequestClientCredentials client)
+            {
+                return api.Authentication.GetAuthenticationResult(client);
             }
 
             return null;
@@ -84,7 +92,7 @@ namespace TwitchAPIs.Test
             var browser = sender as WebBrowser;
             var url = browser.Url;
 
-            if (url.AbsoluteUri.StartsWith(this.Request.RedirectURI) == true)
+            if (url.AbsoluteUri.StartsWith(this.CodeRequest.RedirectURI) == true)
             {
                 this.ResponseURI = url;
                 this.Form.Close();

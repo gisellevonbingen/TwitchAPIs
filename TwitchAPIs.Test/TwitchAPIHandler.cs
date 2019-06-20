@@ -18,7 +18,7 @@ namespace TwitchAPIs.Test
 
         public TwitchAPI API { get; private set; }
         public OAuthRequest OAuthRequest { get; private set; }
-        public AuthenticationResult OAuthAuthorization { get; set; }
+        public AuthenticationResult AuthenticationResult { get; set; }
 
         public TwitchAPIHandler(UserAbstract user)
         {
@@ -32,16 +32,17 @@ namespace TwitchAPIs.Test
             var api = this.API = new TwitchAPI();
             api.ClientId = clientId;
 
-            if (NumberUtils.ToBool(user.ReadInput("Enter Authentication Whether as bool")) == true)
+            var authRequest = this.OAuthRequest = this.CreateOAuthRequest(user);
+
+            if (authRequest != null)
             {
                 using (var authHandler = new TwitchAuthHandler(api))
                 {
-                    var authRequest = this.OAuthRequest = this.CreateOAuthRequest(user);
-                    var oAuth = this.OAuthAuthorization = authHandler.Auth(authRequest);
+                    var result = this.AuthenticationResult = authHandler.Auth(authRequest);
 
-                    if (oAuth != null)
+                    if (result != null)
                     {
-                        api.AccessToken = oAuth.AccessToken;
+                        api.AccessToken = result.AccessToken;
                         return true;
                     }
                     else
@@ -62,20 +63,35 @@ namespace TwitchAPIs.Test
         private OAuthRequest CreateOAuthRequest(UserAbstract user)
         {
             var list = new List<OAuthRequest>();
-            list.Add(new OAuthRequestToken());
-            list.Add(new OAuthRequestAuthorization());
+            list.Add(null);
+            list.Add(new OAuthRequestTokenCode());
+            list.Add(new OAuthRequestAuthorizationCode());
+            list.Add(new OAuthRequestClientCredentials());
 
-            var request = user.QueryInput("Enter RequestType", list, req => req.GetType().Name).Value;
+            var request = user.QueryInput("Enter RequestType", list, req => req == null ? "Not Auth" : req.GetType().Name).Value;
 
-            if (request is OAuthRequestAuthorization auth)
+            if (request == null)
+            {
+                return null;
+            }
+
+            request.Scope = user.ReadInput("Enter Scope");
+
+            if (request is OAuthRequestAuthorizationCode auth)
             {
                 auth.ClientSecret = user.ReadInput("Enter Client-Secret");
             }
+            else if (request is OAuthRequestClientCredentials client)
+            {
+                client.ClientSecret = user.ReadInput("Enter Client-Secret");
+            }
 
-            request.RedirectURI = user.ReadInput("Enter RedirectURI");
-            request.Scope = user.ReadInput("Enter Scope");
-            request.ForceVerify = false;
-            request.State = Guid.NewGuid().ToString().Replace("-", "");
+            if (request is OAuthRequestCode code)
+            {
+                code.RedirectURI = user.ReadInput("Enter RedirectURI");
+                code.ForceVerify = false;
+                code.State = Guid.NewGuid().ToString().Replace("-", "");
+            }
 
             return request;
         }

@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace TwitchAPIs.Authentication
 {
-    public class OAuthAccessTokenRequest
+    public abstract class OAuthRequestCode : OAuthRequest
     {
-        public string ClientSecret { get; set; }
-        public string Code { get; set; }
         public string RedirectURI { get; set; }
+        public bool? ForceVerify { get; set; }
+        public string State { get; set; }
+
+        public abstract string ResponseType { get; }
     }
 
 }

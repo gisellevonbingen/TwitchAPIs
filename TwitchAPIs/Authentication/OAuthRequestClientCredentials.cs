@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace TwitchAPIs.Authentication
 {
-    public abstract class OAuthRequest
+    public class OAuthRequestClientCredentials : OAuthRequest
     {
-        public string Scope { get; set; }
+        public string ClientSecret { get; set; }
     }
 
 }

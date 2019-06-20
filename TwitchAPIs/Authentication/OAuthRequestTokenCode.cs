@@ -6,13 +6,8 @@ using System.Threading.Tasks;
 
 namespace TwitchAPIs.Authentication
 {
-    public class OAuthRequestToken : OAuthRequest
+    public class OAuthRequestTokenCode : OAuthRequestCode
     {
-        public OAuthRequestToken()
-        {
-
-        }
-
         public override string ResponseType => OAuthResponseType.Token;
     }
 

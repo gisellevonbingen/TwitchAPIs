@@ -39,7 +39,7 @@ namespace TwitchAPIs.Test
                 return;
             }
 
-            this.PrintReflection(user, "Current OAuthAuthorization", handler.OAuthAuthorization);
+            this.PrintReflection(user, "Current OAuthAuthorization", handler.AuthenticationResult);
             this.RunTest();
         }
 

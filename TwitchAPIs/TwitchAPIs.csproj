@@ -54,6 +54,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authentication\OAuthRequestClientCredentials.cs" />
+    <Compile Include="Authentication\OAuthRequestCode.cs" />
     <Compile Include="New\Pagination.cs" />
     <Compile Include="New\TwitchAPIWebhooks.cs" />
     <Compile Include="New\TwitchTopGames.cs" />
@@ -66,13 +68,12 @@
     <Compile Include="New\TwitchAPIGames.cs" />
     <Compile Include="New\TwitchAPIUsers.cs" />
     <Compile Include="New\TwitchAPINew.cs" />
-    <Compile Include="Authentication\OAuthAccessTokenRequest.cs" />
+    <Compile Include="Authentication\OAuthTokenRequest.cs" />
     <Compile Include="Authentication\AuthenticationResult.cs" />
     <Compile Include="Authentication\OAuthRequest.cs" />
     <Compile Include="JsonUtils.cs" />
-    <Compile Include="Authentication\OAuthRequestAuthorization.cs" />
-    <Compile Include="Authentication\OAuthRequestOption.cs" />
-    <Compile Include="Authentication\OAuthRequestToken.cs" />
+    <Compile Include="Authentication\OAuthRequestAuthorizationCode.cs" />
+    <Compile Include="Authentication\OAuthRequestTokenCode.cs" />
     <Compile Include="Authentication\OAuthResponseType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="APIVersion.cs" />
