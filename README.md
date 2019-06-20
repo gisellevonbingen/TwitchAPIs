@@ -41,6 +41,23 @@ foreach (var follow in follows.Follows)
 }
 ```
 
+### Get User BlockList
+
+```CSharp
+var twitchAPI = new TwitchAPI();
+twitchAPI.ClientId = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+twitchAPI.AccessToken = "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyy";
+
+var userId = "zzzzzzzzz";
+var blockList = twitchAPI.V5.Users.GetUserBlockList(userId);
+
+foreach (var block in blockList.Blocks)
+{
+    Console.WriteLine();
+    Console.WriteLine($"Blocked User = {block.DisplayName}({block.Name})");
+}
+```
+
 ### Get Global+Channel Badges
 
 ```CSharp
