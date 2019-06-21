@@ -110,6 +110,7 @@
     <Compile Include="TestMain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="OAuth\TestOAuthRefreshOAuthAuthorization.cs" />
+    <Compile Include="V5\TestStreamsGetLiveStreams.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
