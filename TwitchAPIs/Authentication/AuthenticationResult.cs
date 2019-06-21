@@ -26,7 +26,6 @@ namespace TwitchAPIs.Authentication
 
         }
 
-
         public AuthenticationResult(QueryValues values)
         {
             this.AccessToken = values.Single("access_token");
