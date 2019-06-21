@@ -4,8 +4,21 @@ Twithc API(New, V5)'s C# Wrapper
 
 ## Example
 
-### Get User Information
+### Get Own User Information
+```CSharp
+var twitchAPI = new TwitchAPI();
+twitchAPI.ClientId = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+twitchAPI.AccessToken = "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyy";
 
+var user = twitchAPI.New.Users.GetUser();
+
+Console.WriteLine();
+Console.WriteLine($"Id = {user.Id}");
+Console.WriteLine($"Login = {user.Login}");
+Console.WriteLine($"DisplayName = {user.DisplayName}");
+```
+
+### Get Other User Information
 ```CSharp
 var twitchAPI = new TwitchAPI();
 twitchAPI.ClientId = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
@@ -25,7 +38,6 @@ foreach (var user in users)
 ```
 
 ### Get User Followings
-
 ```CSharp
 var twitchAPI = new TwitchAPI();
 twitchAPI.ClientId = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
@@ -42,7 +54,6 @@ foreach (var follow in follows.Follows)
 ```
 
 ### Get User BlockList
-
 ```CSharp
 var twitchAPI = new TwitchAPI();
 twitchAPI.ClientId = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
@@ -59,7 +70,6 @@ foreach (var block in blockList.Blocks)
 ```
 
 ### Get Global+Channel Badges
-
 ```CSharp
 var twitchAPI = new TwitchAPI();
 var channelName = "xxxxxxx";
@@ -93,7 +103,6 @@ foreach (var namePair in badges.Set)
 ```
 
 ### OAuth Implicit Code Flow
-
 ```CSharp
 [STAThread]
 public static void Main(string[] args)
@@ -102,7 +111,7 @@ public static void Main(string[] args)
     twitchAPI.ClientId = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
 
     var authRequest = new OAuthRequestTokenCode();
-    authRequest.RedirectURI = "Your Application's Redirect URI";
+    authRequest.RedirectUri = "Your Application's Redirect URI";
     authRequest.State = Guid.NewGuid().ToString();
     authRequest.Scope = "scope1+scope2+scope3";
 
@@ -137,7 +146,7 @@ private static Uri GetResponseUri(OAuthRequestTokenCode authRequest, string auth
     {
 	var url = browser.Url;
 
-	if (url.AbsoluteUri.StartsWith(authRequest.RedirectURI) == true)
+	if (url.AbsoluteUri.StartsWith(authRequest.RedirectUri) == true)
 	{
 	    responseUri = url;
 	    form.Close();
