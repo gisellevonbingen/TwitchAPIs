@@ -102,7 +102,7 @@ public static void Main(string[] args)
     twitchAPI.ClientId = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
 
     var authRequest = new OAuthRequestTokenCode();
-    authRequest.RedirectURI = "Your Application's Redirect URI";
+    authRequest.RedirectUri = "Your Application's Redirect URI";
     authRequest.State = Guid.NewGuid().ToString();
     authRequest.Scope = "scope1+scope2+scope3";
 
@@ -137,7 +137,7 @@ private static Uri GetResponseUri(OAuthRequestTokenCode authRequest, string auth
     {
 	var url = browser.Url;
 
-	if (url.AbsoluteUri.StartsWith(authRequest.RedirectURI) == true)
+	if (url.AbsoluteUri.StartsWith(authRequest.RedirectUri) == true)
 	{
 	    responseUri = url;
 	    form.Close();
