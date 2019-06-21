@@ -14,6 +14,7 @@ namespace TwitchAPIs.V5
         public TwitchAPIClips Clips { get; }
         public TwitchAPIGames Games { get; }
         public TwitchAPISearch Search { get; }
+        public TwitchAPIStreams Streams { get; }
         public TwitchAPITeam Teams { get; }
         public TwitchAPIUsers Users { get; }
 
@@ -25,6 +26,7 @@ namespace TwitchAPIs.V5
             this.Clips = new TwitchAPIClips(parent);
             this.Games = new TwitchAPIGames(parent);
             this.Search = new TwitchAPISearch(parent);
+            this.Streams = new TwitchAPIStreams(parent);
             this.Teams = new TwitchAPITeam(parent);
             this.Users = new TwitchAPIUsers(parent);
         }
