@@ -82,6 +82,7 @@
     <Compile Include="QueryValues.cs" />
     <Compile Include="TwitchAPI.cs" />
     <Compile Include="Authentication\TwitchAPIAuthentication.cs" />
+    <Compile Include="V5\StreamType.cs" />
     <Compile Include="V5\TwitchAPIBits.cs" />
     <Compile Include="V5\TwitchAPIChannels.cs" />
     <Compile Include="V5\TwitchAPIChat.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="New\TwitchAPITags.cs" />
     <Compile Include="Other\TwitchBadge.cs" />
     <Compile Include="Other\TwitchBadgeSet.cs" />
+    <Compile Include="V5\TwitchAPIStreams.cs" />
     <Compile Include="V5\TwitchBitTier.cs" />
     <Compile Include="V5\TwitchChannel.cs" />
     <Compile Include="New\TwitchClip.cs" />
@@ -119,6 +121,7 @@
     <Compile Include="New\TwitchStreamTag.cs" />
     <Compile Include="New\TwitchStreamTags.cs" />
     <Compile Include="V5\TwitchSearchChannels.cs" />
+    <Compile Include="V5\TwitchStream.cs" />
     <Compile Include="V5\TwitchSubscription.cs" />
     <Compile Include="V5\TwitchTeam.cs" />
     <Compile Include="V5\TwitchTeamAndChannels.cs" />

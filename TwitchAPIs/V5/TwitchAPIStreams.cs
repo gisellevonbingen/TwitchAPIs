@@ -13,6 +13,18 @@ namespace TwitchAPIs.V5
 
         }
 
+        public TwitchStream GetStreamByUser(string channelId, StreamType? type)
+        {
+            var apiRequest = new TwitchAPIRequest();
+            apiRequest.Version = APIVersion.V5;
+            apiRequest.Path = $"streams/{channelId}";
+            apiRequest.Method = "GET";
+            apiRequest.QueryValues.Add("stream_type", type?.ToString().ToLowerInvariant());
+            var jToken = this.Parent.RequestAsJson(apiRequest);
+
+            return jToken.ReadIfExist("stream", t => new TwitchStream(t));
+        }
+
     }
 
 }
