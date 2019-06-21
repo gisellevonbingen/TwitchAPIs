@@ -220,6 +220,12 @@ private static Uri GetResponseUri(OAuthRequestTokenCode authRequest, string auth
   * Search
     * [Search Channels](https://dev.twitch.tv/docs/v5/reference/search/#search-channels)
     * [Search Games](https://dev.twitch.tv/docs/v5/reference/search/#search-games)
+  * Streams
+    * [Get Stream by User](https://dev.twitch.tv/docs/v5/reference/streams/#get-stream-by-user)
+    * [Get Live Streams](https://dev.twitch.tv/docs/v5/reference/streams/#get-live-streams)
+    * [Get Streams Summary](https://dev.twitch.tv/docs/v5/reference/streams/#get-streams-summary)
+    * [Get Featured Streams](https://dev.twitch.tv/docs/v5/reference/streams/#get-featured-streams)
+    * [Get Followed Streams](https://dev.twitch.tv/docs/v5/reference/streams/#get-followed-streams)
   * Teams
     * [Get All Teams](https://dev.twitch.tv/docs/v5/reference/teams/#get-all-teams)
     * [Get Team](https://dev.twitch.tv/docs/v5/reference/teams/#get-team)
