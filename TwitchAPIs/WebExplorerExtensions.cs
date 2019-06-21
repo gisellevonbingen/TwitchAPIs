@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace TwitchAPIs
 {
-    public static class WebExplorerExtenstions
+    public static class WebExplorerExtensions
     {
         public static JToken ReadAsJson(this WebResponse session)
         {
