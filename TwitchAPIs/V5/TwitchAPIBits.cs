@@ -27,7 +27,7 @@ namespace TwitchAPIs.V5
             apiRequest.QueryValues.Add("channel_id", channelId);
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
-            var array = jToken.ReadArray("actions", t => new TwitchBitAction(t)) ?? new TwitchBitAction[0];
+            var array = jToken.ReadArray("actions", t => new TwitchBitAction(t));
             return array;
         }
 

@@ -60,7 +60,7 @@ namespace TwitchAPIs.New
 
             var subscriptions = new TwitchWebhookSubscriptions();
             subscriptions.Total = jToken.Value<int>("total");
-            subscriptions.Subscriptions = jToken.ReadArray("data", t => new TwitchWebhookSubscription(t)) ?? new TwitchWebhookSubscription[0];
+            subscriptions.Subscriptions = jToken.ReadArray("data", t => new TwitchWebhookSubscription(t));
             subscriptions.Pagination = jToken.ReadIfExist("pagination", t => new Pagination(t));
 
             return subscriptions;

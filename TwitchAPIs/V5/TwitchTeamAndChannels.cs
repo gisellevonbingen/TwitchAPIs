@@ -18,7 +18,7 @@ namespace TwitchAPIs.V5
 
         public TwitchTeamAndChannels(JToken jToken) : base(jToken)
         {
-            this.Channels = jToken.ReadArray("users", t => new TwitchChannel(t)) ?? new TwitchChannel[0];
+            this.Channels = jToken.ReadArray("users", t => new TwitchChannel(t));
         }
 
     }

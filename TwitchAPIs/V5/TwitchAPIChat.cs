@@ -22,7 +22,7 @@ namespace TwitchAPIs.V5
             apiRequest.Method = "GET";
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
-            return jToken.ReadArray("rooms", t => new TwitchChatRoom(t)) ?? new TwitchChatRoom[0];
+            return jToken.ReadArray("rooms", t => new TwitchChatRoom(t));
         }
 
     }

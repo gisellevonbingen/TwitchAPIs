@@ -19,7 +19,7 @@ namespace TwitchAPIs.V5
 
         public TwitchFollowedClips(JToken jToken)
         {
-            this.Clips = jToken.ReadArray("clips", t => new TwitchClip(t)) ?? new TwitchClip[0];
+            this.Clips = jToken.ReadArray("clips", t => new TwitchClip(t));
             this.Cursor = jToken.Value<string>("_cursor");
         }
 

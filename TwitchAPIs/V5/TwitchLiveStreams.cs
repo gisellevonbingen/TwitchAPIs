@@ -20,7 +20,7 @@ namespace TwitchAPIs.V5
         public TwitchLiveStreams(JToken jToken)
         {
             this.Total = jToken.Value<int>("_total");
-            this.Streams = jToken.ReadArray("streams", t => new TwitchStream(t)) ?? new TwitchStream[0];
+            this.Streams = jToken.ReadArray("streams", t => new TwitchStream(t));
         }
 
     }

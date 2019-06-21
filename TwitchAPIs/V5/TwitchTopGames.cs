@@ -21,7 +21,7 @@ namespace TwitchAPIs.V5
         public TwitchTopGames(JToken jToken)
         {
             this.Total = jToken.Value<int>("_total");
-            this.Top = jToken.ReadArray("top", t => new TwitchTopGame(t)) ?? new TwitchTopGame[0];
+            this.Top = jToken.ReadArray("top", t => new TwitchTopGame(t));
         }
 
     }

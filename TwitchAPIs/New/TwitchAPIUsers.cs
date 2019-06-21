@@ -41,7 +41,7 @@ namespace TwitchAPIs.New
             var uerFollows = new TwitchUserFollows();
             uerFollows.Total = jToken.Value<int>("total");
             uerFollows.Pagination = jToken.ReadIfExist("pagination", t => new Pagination(t));
-            uerFollows.Follows = jToken.ReadArray("data", t => new TwitchFollow(t)) ?? new TwitchFollow[0];
+            uerFollows.Follows = jToken.ReadArray("data", t => new TwitchFollow(t));
 
             return uerFollows;
         }
@@ -72,7 +72,7 @@ namespace TwitchAPIs.New
 
         private TwitchUser[] ParseUsers(JToken jToken)
         {
-            return jToken.ReadArray("data", t => new TwitchUser(t)) ?? new TwitchUser[0];
+            return jToken.ReadArray("data", t => new TwitchUser(t));
         }
 
     }

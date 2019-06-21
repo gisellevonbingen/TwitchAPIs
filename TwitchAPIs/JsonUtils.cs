@@ -11,15 +11,15 @@ namespace TwitchAPIs
     {
         public static Dictionary<K, V> ReadMap<K, V>(this JToken value, string propertyName, Func<string, JToken, KeyValuePair<K, V>> func)
         {
-            return value.ReadIfExist(propertyName, t => ReadMap(t, func));
+            return value.ReadIfExist(propertyName, t => ReadMap(t, func)) ?? new Dictionary<K, V>();
         }
 
         public static Dictionary<K, V> ReadMap<K, V>(this JToken value, Func<string, JToken, KeyValuePair<K, V>> func)
         {
+            var map = new Dictionary<K, V>();
+
             if (value is JObject jObject)
             {
-                var map = new Dictionary<K, V>();
-
                 foreach (var pair in jObject)
                 {
                     var childKey = pair.Key;
@@ -29,33 +29,33 @@ namespace TwitchAPIs
                     map[obj.Key] = obj.Value;
                 }
 
-                return map;
             }
 
-            return null;
+            return map;
         }
 
         public static T[] ReadArray<T>(this JToken value, string propertyName, Func<JToken, T> func)
         {
-            return value.ReadIfExist(propertyName, t => ReadArray(t, func));
+            return value.ReadIfExist(propertyName, t => ReadArray(t, func)) ?? new T[0];
         }
 
         public static T[] ReadArray<T>(this JToken value, Func<JToken, T> func)
         {
+            var list = new List<T>();
+
             if (value is JArray jArray)
             {
-                var array = new T[jArray.Count];
-
                 for (int i = 0; i < jArray.Count; i++)
                 {
                     var token = jArray[i];
-                    array[i] = func(token);
+                    var v = func(token);
+
+                    list.Add(v);
                 }
 
-                return array;
             }
 
-            return null;
+            return list.ToArray();
         }
 
         public static T ReadIfExist<T>(this JToken value, string propertyName, Func<JToken, T> func)

@@ -20,7 +20,7 @@ namespace TwitchAPIs.V5
         public TwitchChannelSubscriptions(JToken jToken)
         {
             this.Total = jToken.Value<int>("_total");
-            this.Subscriptions = jToken.ReadArray("subscriptions", t => new TwitchChannelSubscription(t)) ?? new TwitchChannelSubscription[0];
+            this.Subscriptions = jToken.ReadArray("subscriptions", t => new TwitchChannelSubscription(t));
         }
 
     }

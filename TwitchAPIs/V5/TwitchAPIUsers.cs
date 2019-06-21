@@ -44,7 +44,7 @@ namespace TwitchAPIs.V5
             apiRequest.QueryValues.Add("login", string.Join(",", logins));
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
-            return jToken.ReadArray("users", t => new TwitchUser(t)) ?? new TwitchUser[0];
+            return jToken.ReadArray("users", t => new TwitchUser(t));
         }
 
         public TwitchEmoticonSets GetUserEmotes(string userId)
@@ -83,7 +83,7 @@ namespace TwitchAPIs.V5
 
             var follows = new TwitchUserFollows();
             follows.Total = jToken.Value<int>("_total");
-            follows.Follows = jToken.ReadArray("follows", t => new TwitchFollow(t)) ?? new TwitchFollow[0];
+            follows.Follows = jToken.ReadArray("follows", t => new TwitchFollow(t));
 
             return follows;
         }
@@ -141,7 +141,7 @@ namespace TwitchAPIs.V5
 
             var blockList = new TwitchUserBlockList();
             blockList.Total = jToken.Value<int>("_total");
-            blockList.Blocks = jToken.ReadArray("blocks", t => t.ReadIfExist("user", t2 => new TwitchUser(t2))) ?? new TwitchUser[0];
+            blockList.Blocks = jToken.ReadArray("blocks", t => t.ReadIfExist("user", t2 => new TwitchUser(t2)));
 
             return blockList;
         }

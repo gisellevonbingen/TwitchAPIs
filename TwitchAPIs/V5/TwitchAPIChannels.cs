@@ -43,7 +43,7 @@ namespace TwitchAPIs.V5
             apiRequest.Method = "GET";
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
-            return jToken.ReadArray("users", t => new TwitchUser(t)) ?? new TwitchUser[0];
+            return jToken.ReadArray("users", t => new TwitchUser(t));
         }
 
         public TwitchChannelFollowers GetChannelFollowers(string channelId, int? limit = null, int? offset = null, string cursor = null, SortDirection? direction = null)
@@ -69,7 +69,7 @@ namespace TwitchAPIs.V5
             apiRequest.Method = "GET";
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
-            return jToken.ReadArray("teams", t => new TwitchTeam(t)) ?? new TwitchTeam[0];
+            return jToken.ReadArray("teams", t => new TwitchTeam(t));
         }
 
         public TwitchChannelSubscriptions GetChannelSubscribers(string channelId, int? limit = null, int? offset = null, SortDirection? direction = null)

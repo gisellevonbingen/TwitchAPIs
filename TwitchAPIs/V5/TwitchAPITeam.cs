@@ -23,7 +23,7 @@ namespace TwitchAPIs.V5
             apiRequest.QueryValues.Add("offset", offset);
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
-            return jToken.ReadArray("teams", t => new TwitchTeam(t)) ?? new TwitchTeam[0];
+            return jToken.ReadArray("teams", t => new TwitchTeam(t));
         }
 
         public TwitchTeamAndChannels GetTeam(string teamName)

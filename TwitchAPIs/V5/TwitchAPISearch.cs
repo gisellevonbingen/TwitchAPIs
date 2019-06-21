@@ -24,7 +24,7 @@ namespace TwitchAPIs.V5
             apiRequest.QueryValues.Add("live", live);
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
-            return jToken.ReadArray("games", t => new TwitchGame(t)) ?? new TwitchGame[0];
+            return jToken.ReadArray("games", t => new TwitchGame(t));
         }
 
         public TwitchSearchChannels SearchChannels(string query, int? limit = null, int? offset = null)
@@ -40,7 +40,7 @@ namespace TwitchAPIs.V5
 
             var searchChannels = new TwitchSearchChannels();
             searchChannels.Total = jToken.Value<int>("_total");
-            searchChannels.Channels = jToken.ReadArray("channels", t => new TwitchChannel(t)) ?? new TwitchChannel[0];
+            searchChannels.Channels = jToken.ReadArray("channels", t => new TwitchChannel(t));
 
             return searchChannels;
         }

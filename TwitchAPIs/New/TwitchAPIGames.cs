@@ -25,7 +25,7 @@ namespace TwitchAPIs.New
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
             var topGames = new TwitchTopGames();
-            topGames.Games = jToken.ReadArray("data", t => new TwitchGame(t)) ?? new TwitchGame[0];
+            topGames.Games = jToken.ReadArray("data", t => new TwitchGame(t));
             topGames.Pagination = jToken.ReadIfExist("pagination", t => new Pagination(t));
 
             return topGames;
@@ -41,7 +41,7 @@ namespace TwitchAPIs.New
             apiRequest.QueryValues.Add("name", name);
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
-            var games = jToken.ReadArray("data", t => new TwitchGame(t)) ?? new TwitchGame[0];
+            var games = jToken.ReadArray("data", t => new TwitchGame(t));
 
             return games;
         }
