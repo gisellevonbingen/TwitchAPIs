@@ -24,7 +24,7 @@ namespace TwitchAPIs.Test.V5
             var type = user.QueryInput("Enter StremType", EnumUtils.GetNullableValues<StreamType>(), null, true).Value;
             var stream = handler.API.V5.Streams.GetStreamByUser(channelId, type);
 
-            main.PrintReflection(user, "TwitchStream", stream);
+            user.SendMessageAsReflection("TwitchStream", stream);
         }
 
     }

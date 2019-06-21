@@ -22,7 +22,7 @@ namespace TwitchAPIs.Test.V5
             var channelId = user.ReadInput("Enter Channel Id");
             var teams = handler.API.V5.Channels.GetChannelTeams(channelId);
 
-            main.PrintReflection(user, "TwtichTeams", teams);
+            user.SendMessageAsReflection("TwtichTeams", teams);
         }
 
     }

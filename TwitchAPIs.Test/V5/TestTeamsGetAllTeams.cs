@@ -28,7 +28,7 @@ namespace TwitchAPIs.Test.V5
             while (true)
             {
                 var teams = handler.API.V5.Teams.GetAllTeams(limit, offset);
-                main.PrintReflection(user, $"TwitchTeams {position}~{(position + teams.Length)}", teams);
+                user.SendMessageAsReflection($"TwitchTeams {position}~{(position + teams.Length)}", teams);
 
                 position += teams.Length;
                 offset = position;

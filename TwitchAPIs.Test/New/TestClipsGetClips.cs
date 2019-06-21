@@ -48,7 +48,7 @@ namespace TwitchAPIs.Test.New
             {
                 options.After = cursor;
                 var clips = handler.API.New.Clips.GetClips(options);
-                main.PrintReflection(user, "Clips", clips);
+                user.SendMessageAsReflection("Clips", clips);
 
                 cursor = clips.Pagination.Cursor;
 

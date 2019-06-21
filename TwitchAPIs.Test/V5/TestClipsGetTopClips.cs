@@ -46,7 +46,7 @@ namespace TwitchAPIs.Test.V5
                 var clips = handler.API.V5.Clips.GetTopClips(options);
                 options.Cursor = clips.Cursor;
 
-                main.PrintReflection(user, "TwitchTopClips", clips);
+                user.SendMessageAsReflection("TwitchTopClips", clips);
 
                 if (string.IsNullOrWhiteSpace(options.Cursor) == true)
                 {

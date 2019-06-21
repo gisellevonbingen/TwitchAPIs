@@ -25,7 +25,7 @@ namespace TwitchAPIs.Test.V5
             int? offset = NumberUtils.ToIntNullable(user.ReadInput("Enter Offset"));
 
             var channels = handler.API.V5.Search.SearchChannels(query, limit, offset);
-            main.PrintReflection(user, $"TwitchChannels", channels);
+            user.SendMessageAsReflection($"TwitchChannels", channels);
         }
 
     }

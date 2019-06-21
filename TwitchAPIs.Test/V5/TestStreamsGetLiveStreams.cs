@@ -41,7 +41,7 @@ namespace TwitchAPIs.Test.V5
             options.Offset = NumberUtils.ToIntNullable(user.ReadInput("Enter Offset as int"));
             var liveStreams = handler.API.V5.Streams.GetLiveStreams(options);
 
-            main.PrintReflection(user, "TwitchLiveStreams", liveStreams);
+            user.SendMessageAsReflection("TwitchLiveStreams", liveStreams);
         }
 
     }

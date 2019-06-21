@@ -29,7 +29,7 @@ namespace TwitchAPIs.Test.V5
             var sortby = user.QueryInput("Enter Sortby", EnumUtils.GetNullableValues<FollowSortMode>(), null, true).Value;
             var userFollows = handler.API.V5.Users.GetUserFollows(userId, limit, offset, direction, sortby);
 
-            main.PrintReflection(user, "UserFollows", userFollows);
+            user.SendMessageAsReflection("UserFollows", userFollows);
         }
 
     }

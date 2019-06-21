@@ -22,7 +22,7 @@ namespace TwitchAPIs.Test.V5
             var channelid = user.ReadInput("Enter ChannelId");
             var users = handler.API.V5.Channels.GetChannelEditors(channelid);
 
-            main.PrintReflection(user, "ChannelEditors", users);
+            user.SendMessageAsReflection("ChannelEditors", users);
         }
 
     }

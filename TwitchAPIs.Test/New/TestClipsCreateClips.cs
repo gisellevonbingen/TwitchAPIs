@@ -24,7 +24,7 @@ namespace TwitchAPIs.Test.New
             var hasDelay = NumberUtils.ToBoolNullable(user.ReadInput("Enter Has Delay"));
             var clipEdit = handler.API.New.Clips.CreateClip(broadcasterId, hasDelay);
 
-            main.PrintReflection(user, "TwitchClipEdit", clipEdit);
+            user.SendMessageAsReflection("TwitchClipEdit", clipEdit);
         }
 
     }

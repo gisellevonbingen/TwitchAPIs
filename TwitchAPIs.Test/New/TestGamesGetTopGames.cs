@@ -28,7 +28,7 @@ namespace TwitchAPIs.Test.New
             while (true)
             {
                 var topGames = handler.API.New.Games.GetTopGames(after, before, first);
-                main.PrintReflection(user, "TopGames", topGames);
+                user.SendMessageAsReflection("TopGames", topGames);
 
                 after = null;
                 before = null;

@@ -23,7 +23,7 @@ namespace TwitchAPIs.Test.V5
             var targetUserId = user.ReadInput("Enter Target User Id");
             var tuser = handler.API.V5.Users.BlockUser(sourceUserId, targetUserId);
 
-            main.PrintReflection(user, "BlockUser", tuser);
+            user.SendMessageAsReflection("BlockUser", tuser);
         }
 
     }

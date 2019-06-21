@@ -30,7 +30,7 @@ namespace TwitchAPIs.Test.New
             while (true)
             {
                 var userFollows = api.New.Users.GetUserFollows(fromId, toId, cursor);
-                main.PrintReflection(user, "UserFollows", userFollows);
+                user.SendMessageAsReflection("UserFollows", userFollows);
 
                 cursor = userFollows.Pagination.Cursor;
 

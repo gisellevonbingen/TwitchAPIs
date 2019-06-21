@@ -25,7 +25,7 @@ namespace TwitchAPIs.Test.V5
             var offset = NumberUtils.ToIntNullable(user.ReadInput("Enter Offset as int"));
             var blockList = handler.API.V5.Users.GetUserBlockList(userId, limit, offset);
 
-            main.PrintReflection(user, "TwitchUserBlockList", blockList);
+            user.SendMessageAsReflection("TwitchUserBlockList", blockList);
         }
 
     }

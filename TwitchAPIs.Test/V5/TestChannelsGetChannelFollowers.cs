@@ -32,7 +32,7 @@ namespace TwitchAPIs.Test.V5
             while (true)
             {
                 var channelFollowers = handler.API.V5.Channels.GetChannelFollowers(channelId, limit, offset, cursor, direction);
-                main.PrintReflection(user, "ChannelFollowers", channelFollowers);
+                user.SendMessageAsReflection("ChannelFollowers", channelFollowers);
 
                 offset = null;
                 cursor = channelFollowers.Cursor;

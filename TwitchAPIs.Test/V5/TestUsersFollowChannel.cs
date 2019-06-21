@@ -25,7 +25,7 @@ namespace TwitchAPIs.Test.V5
             var notifications = NumberUtils.ToBoolNullable(user.ReadInput("Enter Notifications as bool"));
             var follow = handler.API.V5.Users.FollowChannel(userId, channelId, notifications);
 
-            main.PrintReflection(user, "Follow", follow);
+            user.SendMessageAsReflection("Follow", follow);
         }
 
     }

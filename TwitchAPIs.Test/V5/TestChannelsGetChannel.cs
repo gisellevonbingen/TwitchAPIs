@@ -23,7 +23,7 @@ namespace TwitchAPIs.Test.V5
             var api = handler.API;
             var channel = api.V5.Channels.GetChannel();
 
-            main.PrintReflection(user, "TwitchChannel", channel);
+            user.SendMessageAsReflection("TwitchChannel", channel);
         }
 
     }

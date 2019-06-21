@@ -40,7 +40,7 @@ namespace TwitchAPIs.Test.New
 
             var api = handler.API;
             var tusers = api.New.Users.GetUsers(requests);
-            main.PrintReflection(user, $"TwitchUsers", tusers);
+            user.SendMessageAsReflection($"TwitchUsers", tusers);
         }
 
     }

@@ -24,7 +24,7 @@ namespace TwitchAPIs.Test.New
 
             var games = handler.API.New.Games.GetGames(id, name);
 
-            main.PrintReflection(user, "Games", games);
+            user.SendMessageAsReflection("Games", games);
         }
 
     }

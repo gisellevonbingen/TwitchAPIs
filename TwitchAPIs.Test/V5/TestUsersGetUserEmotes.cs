@@ -22,7 +22,7 @@ namespace TwitchAPIs.Test.V5
             var userId = user.ReadInput("Enter UserId");
             var set = handler.API.V5.Users.GetUserEmotes(userId);
 
-            main.PrintReflection(user, "EmoticonSet", set);
+            user.SendMessageAsReflection("EmoticonSet", set);
         }
 
     }

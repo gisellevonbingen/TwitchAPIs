@@ -38,7 +38,7 @@ namespace TwitchAPIs.Test.V5
 
             var users = handler.API.V5.Users.GetUsers(loginList);
 
-            main.PrintReflection(user, "TwtichUsers", users);
+            user.SendMessageAsReflection("TwtichUsers", users);
         }
 
     }

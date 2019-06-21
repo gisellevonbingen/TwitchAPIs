@@ -23,7 +23,7 @@ namespace TwitchAPIs.Test.V5
             var channelId = user.ReadInput("Enter Channel Id");
             var subscription = handler.API.V5.Users.CheckUserSubscriptionByChannel(userId, channelId);
 
-            main.PrintReflection(user, "TwitchUserSubscription", subscription);
+            user.SendMessageAsReflection("TwitchUserSubscription", subscription);
 
         }
 

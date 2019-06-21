@@ -22,7 +22,7 @@ namespace TwitchAPIs.Test.V5
             var teamName = user.ReadInput("Enter TeamName");
             var teamAndChannels = handler.API.V5.Teams.GetTeam(teamName);
 
-            main.PrintReflection(user, "TwitchTeamAndChannels", teamAndChannels);
+            user.SendMessageAsReflection("TwitchTeamAndChannels", teamAndChannels);
         }
 
     }

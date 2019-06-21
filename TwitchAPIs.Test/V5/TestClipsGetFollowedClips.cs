@@ -29,7 +29,7 @@ namespace TwitchAPIs.Test.V5
             {
                 var clips = handler.API.V5.Clips.GetFollowedClips(limit, cursor, trending);
                 cursor = clips.Cursor;
-                main.PrintReflection(user, "TwitchFollowedClips", clips);
+                user.SendMessageAsReflection("TwitchFollowedClips", clips);
 
                 if (string.IsNullOrWhiteSpace(cursor) == true || user.ReadBreak() == true)
                 {

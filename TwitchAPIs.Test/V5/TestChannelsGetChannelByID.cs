@@ -24,7 +24,7 @@ namespace TwitchAPIs.Test.V5
             var id = user.ReadInput("Enter Channel Id");
             var channel = api.V5.Channels.GetChannelByID(id);
 
-            main.PrintReflection(user, "TwitchChannel", channel);
+            user.SendMessageAsReflection("TwitchChannel", channel);
         }
 
     }

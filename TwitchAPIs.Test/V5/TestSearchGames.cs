@@ -24,7 +24,7 @@ namespace TwitchAPIs.Test.V5
             bool? live = NumberUtils.ToBoolNullable(user.ReadInput("Enter Live"));
 
             var games = handler.API.V5.Search.SearchGames(query, live);
-            main.PrintReflection(user, $"TwitchGames", games);
+            user.SendMessageAsReflection($"TwitchGames", games);
         }
 
     }

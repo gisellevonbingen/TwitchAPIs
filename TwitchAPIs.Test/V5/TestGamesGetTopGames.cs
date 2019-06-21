@@ -24,7 +24,7 @@ namespace TwitchAPIs.Test.V5
             int? offset = NumberUtils.ToIntNullable(user.ReadInput("Enter Offset"));
 
             var topGames = handler.API.V5.Games.GetTopGames(limit, offset);
-            main.PrintReflection(user, $"Twitch Top Games", topGames);
+            user.SendMessageAsReflection($"Twitch Top Games", topGames);
         }
 
     }
