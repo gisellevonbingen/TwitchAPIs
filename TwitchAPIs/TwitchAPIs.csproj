@@ -124,6 +124,7 @@
     <Compile Include="V5\TwitchSearchChannels.cs" />
     <Compile Include="V5\TwitchStream.cs" />
     <Compile Include="V5\TwitchLiveStreams.cs" />
+    <Compile Include="V5\TwitchStreamsSummary.cs" />
     <Compile Include="V5\TwitchSubscription.cs" />
     <Compile Include="V5\TwitchTeam.cs" />
     <Compile Include="V5\TwitchTeamAndChannels.cs" />

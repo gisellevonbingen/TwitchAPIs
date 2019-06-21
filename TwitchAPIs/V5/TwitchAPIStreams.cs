@@ -42,6 +42,18 @@ namespace TwitchAPIs.V5
             return new TwitchLiveStreams(jToken);
         }
 
+        public TwitchStreamsSummary GetStreamsSummary(string game = null)
+        {
+            var apiRequest = new TwitchAPIRequest();
+            apiRequest.Version = APIVersion.V5;
+            apiRequest.Path = $"streams/summary";
+            apiRequest.Method = "GET";
+            apiRequest.QueryValues.Add("game", game);
+            var jToken = this.Parent.RequestAsJson(apiRequest);
+
+            return new TwitchStreamsSummary(jToken);
+        }
+
     }
 
 }

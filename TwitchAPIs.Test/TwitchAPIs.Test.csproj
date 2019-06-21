@@ -75,6 +75,7 @@
     <Compile Include="V5\TestClipsGetClip.cs" />
     <Compile Include="V5\TestClipsGetFollowedClips.cs" />
     <Compile Include="V5\TestClipsGetTopClips.cs" />
+    <Compile Include="V5\TestStreamsGetStreamsSummary.cs" />
     <Compile Include="V5\TestStreamsGetStreamByUser.cs" />
     <Compile Include="V5\TestUsersCheckUserFollowsByChannel.cs" />
     <Compile Include="V5\TestTeamsGetAllTeams.cs" />
