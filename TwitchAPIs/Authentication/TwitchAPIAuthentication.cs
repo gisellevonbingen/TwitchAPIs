@@ -7,6 +7,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace TwitchAPIs.Authentication
 {
@@ -55,7 +56,7 @@ namespace TwitchAPIs.Authentication
             }
             else if (request is OAuthRequestTokenCode)
             {
-                queryValues = QueryValues.Parse(StringUtils.RemovePrefix(responseUri.Fragment, "#"));
+                queryValues = QueryValues.Parse(HttpUtility.UrlDecode(StringUtils.RemovePrefix(responseUri.Fragment, "#")));
                 this.EnsureStateEquals(queryValues, request);
 
                 result = new AuthenticationResult(queryValues);
