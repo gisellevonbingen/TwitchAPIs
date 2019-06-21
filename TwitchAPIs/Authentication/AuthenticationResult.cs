@@ -32,8 +32,7 @@ namespace TwitchAPIs.Authentication
             this.AccessToken = values.Single("access_token");
             this.RefreshToken = values.Single("refresh_token");
             this.ExpiresIn = NumberUtils.ToInt(values.Single("expires_in"));
-            var scope = values.Single("scope");
-            this.Scopes = scope.Split(OAuthRequest.ScopeSeparater, StringSplitOptions.RemoveEmptyEntries);
+            this.Scopes = values.Single("scope").Split(OAuthRequest.ScopeSeparater, StringSplitOptions.RemoveEmptyEntries);
             this.TokenType = values.Single("token_type");
         }
 
