@@ -46,6 +46,12 @@ namespace TwitchAPIs.New
             return uerFollows;
         }
 
+        public TwitchUser GetUser()
+        {
+            var users = this.GetUsers(new UserRequest[0]);
+            return users.FirstOrDefault();
+        }
+
         public TwitchUser GetUser(UserRequest request)
         {
             var users = this.GetUsers(new UserRequest[] { request });
