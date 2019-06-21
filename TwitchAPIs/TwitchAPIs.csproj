@@ -148,7 +148,7 @@
     <Compile Include="V5\TwitchUserOwn.cs" />
     <Compile Include="V5\TwitchAPITeam.cs" />
     <Compile Include="V5\TwitchUserSubscription.cs" />
-    <Compile Include="WebExplorerExtenstions.cs" />
+    <Compile Include="WebExplorerExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
