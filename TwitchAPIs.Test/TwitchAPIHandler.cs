@@ -88,7 +88,7 @@ namespace TwitchAPIs.Test
 
             if (request is OAuthRequestCode code)
             {
-                code.RedirectURI = user.ReadInput("Enter RedirectURI");
+                code.RedirectUri = user.ReadInput("Enter Redirect Uri");
                 code.ForceVerify = false;
                 code.State = Guid.NewGuid().ToString().Replace("-", "");
             }

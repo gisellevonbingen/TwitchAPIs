@@ -42,7 +42,7 @@ namespace TwitchAPIs
             this.AccessToken = null;
         }
 
-        public string GetRequestBaseURL(APIVersion version)
+        public string GetRequestBaseUrl(APIVersion version)
         {
             if (version == APIVersion.New)
             {
@@ -137,33 +137,33 @@ namespace TwitchAPIs
 
         public WebRequestParameter CreateWebRequest(TwitchAPIRequest apiRequest)
         {
-            var baseURI = this.GetBaseURI(apiRequest.BaseURL, apiRequest.Version, apiRequest.Path);
+            var baseUri = this.GetBaseUri(apiRequest.BaseUrl, apiRequest.Version, apiRequest.Path);
             var queryValues = new QueryValues();
-            queryValues.AddRange(QueryValues.Parse(baseURI.Query));
+            queryValues.AddRange(QueryValues.Parse(baseUri.Query));
             queryValues.AddRange(apiRequest.QueryValues);
 
             var request = new WebRequestParameter();
-            request.URL = $"{baseURI.Scheme}{Uri.SchemeDelimiter}{baseURI.Host}{baseURI.LocalPath}{queryValues.ToString(false)}";
+            request.URL = $"{baseUri.Scheme}{Uri.SchemeDelimiter}{baseUri.Host}{baseUri.LocalPath}{queryValues.ToString(false)}";
             request.Method = apiRequest.Method;
             this.SetupRequest(request, apiRequest.Version);
 
             return request;
         }
 
-        private Uri GetBaseURI(string baseURL, APIVersion? version, string path)
+        private Uri GetBaseUri(string baseUrl, APIVersion? version, string path)
         {
-            Uri baseURI = null;
+            Uri baseUri = null;
 
-            if (string.IsNullOrWhiteSpace(baseURL) == false)
+            if (string.IsNullOrWhiteSpace(baseUrl) == false)
             {
-                baseURI = new Uri(baseURL);
+                baseUri = new Uri(baseUrl);
             }
             else if (version.HasValue == true)
             {
-                baseURI = new Uri($"{this.GetRequestBaseURL(version.Value)}{path}");
+                baseUri = new Uri($"{this.GetRequestBaseUrl(version.Value)}{path}");
             }
 
-            return baseURI ?? throw new TwitchException($"{nameof(baseURL)} or {nameof(version)}, {nameof(path)} is not specificated");
+            return baseUri ?? throw new TwitchException($"{nameof(baseUrl)} or {nameof(version)}, {nameof(path)} is not specificated");
         }
 
     }

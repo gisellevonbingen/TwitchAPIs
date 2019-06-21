@@ -8,7 +8,7 @@ namespace TwitchAPIs.Authentication
 {
     public abstract class OAuthRequestCode : OAuthRequest
     {
-        public string RedirectURI { get; set; }
+        public string RedirectUri { get; set; }
         public bool? ForceVerify { get; set; }
         public string State { get; set; }
 

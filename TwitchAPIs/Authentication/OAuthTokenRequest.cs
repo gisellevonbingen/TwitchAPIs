@@ -11,7 +11,7 @@ namespace TwitchAPIs.Authentication
         public string ClientSecret { get; set; }
         public string Code { get; set; }
         public string GrantType { get; set; }
-        public string RedirectURI { get; set; }
+        public string RedirectUri { get; set; }
         public string Scope { get; set; }
     }
 

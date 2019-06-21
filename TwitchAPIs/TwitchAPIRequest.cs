@@ -9,7 +9,7 @@ namespace TwitchAPIs
     public class TwitchAPIRequest
     {
         public APIVersion? Version { get; set; }
-        public string BaseURL { get; set; }
+        public string BaseUrl { get; set; }
         public string Path { get; set; }
         public QueryValues QueryValues { get; }
         public string Method { get; set; }

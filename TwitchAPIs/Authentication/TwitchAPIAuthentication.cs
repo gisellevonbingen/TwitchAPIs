@@ -20,11 +20,11 @@ namespace TwitchAPIs.Authentication
         public string GetCodeAuthorizeUri(OAuthRequestCode request)
         {
             var apiRequest = new TwitchAPIRequest();
-            apiRequest.BaseURL = "https://id.twitch.tv/oauth2/authorize";
+            apiRequest.BaseUrl = "https://id.twitch.tv/oauth2/authorize";
             apiRequest.Method = "GET";
             apiRequest.QueryValues.Add("client_id", this.Parent.ClientId);
             apiRequest.QueryValues.Add("response_type", request.ResponseType);
-            apiRequest.QueryValues.Add("redirect_uri", request.RedirectURI);
+            apiRequest.QueryValues.Add("redirect_uri", request.RedirectUri);
             apiRequest.QueryValues.Add("scope", request.Scope);
             apiRequest.QueryValues.Add("force_verify", request.ForceVerify);
             apiRequest.QueryValues.Add("state", request.State);
@@ -36,26 +36,26 @@ namespace TwitchAPIs.Authentication
 
         }
 
-        public AuthenticationResult GetAuthenticationResult(Uri responseURI, OAuthRequestCode request)
+        public AuthenticationResult GetAuthenticationResult(Uri responseUri, OAuthRequestCode request)
         {
             QueryValues queryValues = null;
             AuthenticationResult result = null;
 
             if (request is OAuthRequestAuthorizationCode auth)
             {
-                queryValues = QueryValues.Parse(StringUtils.RemovePrefix(responseURI.Query, "?"));
+                queryValues = QueryValues.Parse(StringUtils.RemovePrefix(responseUri.Query, "?"));
                 this.EnsureStateEquals(queryValues, request);
 
                 var accessTokenRequest = new OAuthTokenRequest();
                 accessTokenRequest.ClientSecret = auth.ClientSecret;
                 accessTokenRequest.Code = queryValues.Single("code");
                 accessTokenRequest.GrantType = "authorization_code";
-                accessTokenRequest.RedirectURI = auth.RedirectURI;
+                accessTokenRequest.RedirectUri = auth.RedirectUri;
                 result = this.GetAuthenticationResult(accessTokenRequest);
             }
             else if (request is OAuthRequestTokenCode)
             {
-                queryValues = QueryValues.Parse(StringUtils.RemovePrefix(responseURI.Fragment, "#"));
+                queryValues = QueryValues.Parse(StringUtils.RemovePrefix(responseUri.Fragment, "#"));
                 this.EnsureStateEquals(queryValues, request);
 
                 result = new AuthenticationResult(queryValues);
@@ -99,13 +99,13 @@ namespace TwitchAPIs.Authentication
         public AuthenticationResult GetAuthenticationResult(OAuthTokenRequest request)
         {
             var apiRequest = new TwitchAPIRequest();
-            apiRequest.BaseURL = "https://id.twitch.tv/oauth2/token";
+            apiRequest.BaseUrl = "https://id.twitch.tv/oauth2/token";
             apiRequest.Method = "POST";
             apiRequest.QueryValues.Add("client_id", this.Parent.ClientId);
             apiRequest.QueryValues.Add("client_secret", request.ClientSecret);
             apiRequest.QueryValues.Add("code", request.Code);
             apiRequest.QueryValues.Add("grant_type", request.GrantType);
-            apiRequest.QueryValues.Add("redirect_uri", request.RedirectURI);
+            apiRequest.QueryValues.Add("redirect_uri", request.RedirectUri);
             apiRequest.QueryValues.Add("scope", request.Scope);
             var jToken = this.Parent.RequestAsJson(apiRequest, "status");
 
@@ -115,7 +115,7 @@ namespace TwitchAPIs.Authentication
         public AuthenticationResult RefreshAccessTokens(string refreshToken, string clientSecret)
         {
             var apiRequest = new TwitchAPIRequest();
-            apiRequest.BaseURL = "https://id.twitch.tv/oauth2/token";
+            apiRequest.BaseUrl = "https://id.twitch.tv/oauth2/token";
             apiRequest.Method = "POST";
             apiRequest.QueryValues.Add("grant_type", "refresh_token");
             apiRequest.QueryValues.Add("refresh_token", refreshToken);
