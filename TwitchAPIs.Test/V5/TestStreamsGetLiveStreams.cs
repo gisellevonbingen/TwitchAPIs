@@ -21,19 +21,7 @@ namespace TwitchAPIs.Test.V5
             var handler = main.TwitchAPIHandler;
 
             var options = new TwitchGetLiveStreamsOptions();
-
-            while (true)
-            {
-                var channel = user.ReadInput("Enter ChannelId, breakable");
-
-                if (user.IsBreak(channel) == true)
-                {
-                    break;
-                }
-
-                options.Channels.Add(channel);
-            }
-
+            options.Channels.AddRange(user.ReadInputWhileBreak("Enter ChannelId"));
             options.Game = user.ReadInput("Enter Game");
             options.Language = user.ReadInput("Enter Language");
             options.StreamType = user.QueryInput("Enter StremType", EnumUtils.GetNullableValues<StreamType>(), null, true).Value;

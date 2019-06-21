@@ -24,19 +24,7 @@ namespace TwitchAPIs.Test.V5
             var options = new TwitchGetTopClipsOptions();
             options.Channel = user.ReadInput("Enter Channel");
             options.Game = user.ReadInput("Enter Game");
-
-            while (true)
-            {
-                var language = user.ReadInput("Enter Language, breakable");
-
-                if (user.IsBreak(language) == true)
-                {
-                    break;
-                }
-
-                options.Languages.Add(language);
-            }
-
+            options.Languages.AddRange(user.ReadInputWhileBreak("Enter Language"));
             options.Limit = NumberUtils.ToLongNullable(user.ReadInput("Enter Limit as long"));
             options.Period = user.QueryInput("Enter Channel", EnumUtils.GetNullableValues<GetTopClipsPeriod>(), null, true).Value;
             options.Trending = NumberUtils.ToBoolNullable(user.ReadInput("Enter Trending as bool"));

@@ -64,7 +64,7 @@
     <Compile Include="PrintableLine.cs" />
     <Compile Include="QueryResult.cs" />
     <Compile Include="TwitchAPITestAttribute.cs" />
-    <Compile Include="UserExtenstions.cs" />
+    <Compile Include="UserExtensions.cs" />
     <Compile Include="UserInputReturnException.cs" />
     <Compile Include="V5\TestChannelsCheckChannelSubscriptionByUser.cs" />
     <Compile Include="V5\TestChannelsGetChannelFollowers.cs" />

@@ -8,6 +8,37 @@ namespace TwitchAPIs.Test
 {
     public static class UserExtensions
     {
+        public static List<string> ReadInputWhileBreak(this UserAbstract user, string message)
+        {
+            return ReadInputWhileBreak(user, message, (u, s) => s);
+        }
+
+        public static List<T> ReadInputWhileBreak<T>(this UserAbstract user, string message, Func<UserAbstract, string, T> func)
+        {
+            var list = new List<T>();
+
+            while (true)
+            {
+                user.SendMessage(message);
+                user.SendMessage(user.GetBreakMessage());
+
+                var input = user.ReadInput();
+
+                if (user.IsBreak(input) == true)
+                {
+                    break;
+                }
+                else
+                {
+                    var v = func(user, input);
+                    list.Add(v);
+                }
+
+            }
+
+            return list;
+        }
+
         public static void SendMessageAsReflection<T>(this UserAbstract user, string name, T value)
         {
             var lines = ObjectUtils2.ToPrintableLines(value);

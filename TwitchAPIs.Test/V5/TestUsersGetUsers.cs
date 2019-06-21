@@ -19,23 +19,7 @@ namespace TwitchAPIs.Test.V5
             var user = main.User;
             var handler = main.TwitchAPIHandler;
 
-            var loginList = new List<string>();
-
-            while (true)
-            {
-                var login = user.ReadInput("Enter User Login while break");
-
-                if (user.IsBreak(login) == true)
-                {
-                    break;
-                }
-                else
-                {
-                    loginList.Add(login);
-                }
-
-            }
-
+            var loginList = user.ReadInputWhileBreak("Enter User Login");
             var users = handler.API.V5.Users.GetUsers(loginList);
 
             user.SendMessageAsReflection("TwtichUsers", users);

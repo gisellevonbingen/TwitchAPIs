@@ -25,19 +25,7 @@ namespace TwitchAPIs.Test.New
             var options = new TwitchGetClipsOptions();
             options.BroadcasterId = user.ReadInput("Enter BroadcasterId");
             options.GameId = user.ReadInput("Enter GameId");
-
-            while (true)
-            {
-                var id = user.ReadInput("Enter Id, breakable");
-
-                if (user.IsBreak(id) == true)
-                {
-                    break;
-                }
-
-                options.Ids.Add(id);
-            }
-
+            options.Ids.AddRange(user.ReadInputWhileBreak("Enter Id"));
             options.First = NumberUtils.ToIntNullable(user.ReadInput("Enter First as int"));
             options.StartedAt = TwitchDateTimeUtils.ToDatetime(user.ReadInput("Enter StartedAt as TwtichDateTime"));
             options.EndedAt = TwitchDateTimeUtils.ToDatetime(user.ReadInput("Enter EndedAt as TwtichDateTime"));
