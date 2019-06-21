@@ -8,7 +8,15 @@ namespace TwitchAPIs.Authentication
 {
     public abstract class OAuthRequest
     {
-        public string Scope { get; set; }
+        public static string ScopeSeparater { get; } = "+";
+
+        public List<string> Scopes { get;  }
+
+        public OAuthRequest()
+        {
+            this.Scopes = new List<string>();
+        }
+
     }
 
 }

@@ -25,7 +25,7 @@ namespace TwitchAPIs.Authentication
             apiRequest.QueryValues.Add("client_id", this.Parent.ClientId);
             apiRequest.QueryValues.Add("response_type", request.ResponseType);
             apiRequest.QueryValues.Add("redirect_uri", request.RedirectUri);
-            apiRequest.QueryValues.Add("scope", request.Scope);
+            apiRequest.QueryValues.Add("scope", string.Join(OAuthRequest.ScopeSeparater, request.Scopes));
             apiRequest.QueryValues.Add("force_verify", request.ForceVerify);
             apiRequest.QueryValues.Add("state", request.State);
 
@@ -91,7 +91,7 @@ namespace TwitchAPIs.Authentication
             var tokenRequest = new OAuthTokenRequest();
             tokenRequest.ClientSecret = request.ClientSecret;
             tokenRequest.GrantType = "client_credentials";
-            tokenRequest.Scope = request.Scope;
+            tokenRequest.Scopes.AddRange(request.Scopes);
 
             return this.GetAuthenticationResult(tokenRequest);
         }
@@ -106,7 +106,7 @@ namespace TwitchAPIs.Authentication
             apiRequest.QueryValues.Add("code", request.Code);
             apiRequest.QueryValues.Add("grant_type", request.GrantType);
             apiRequest.QueryValues.Add("redirect_uri", request.RedirectUri);
-            apiRequest.QueryValues.Add("scope", request.Scope);
+            apiRequest.QueryValues.Add("scope", string.Join(OAuthRequest.ScopeSeparater, request.Scopes));
             var jToken = this.Parent.RequestAsJson(apiRequest, "status");
 
             return new AuthenticationResult(jToken);

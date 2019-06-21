@@ -17,7 +17,7 @@ namespace TwitchAPIs.Authentication
 
         public int ExpiresIn { get; set; }
 
-        public string[] Scope { get; set; }
+        public string[] Scopes { get; set; }
 
         public string TokenType { get; set; }
 
@@ -33,7 +33,7 @@ namespace TwitchAPIs.Authentication
             this.RefreshToken = values.Single("refresh_token");
             this.ExpiresIn = NumberUtils.ToInt(values.Single("expires_in"));
             var scope = values.Single("scope");
-            this.Scope = string.IsNullOrWhiteSpace(scope) ? null : scope.Split(' ');
+            this.Scopes = string.IsNullOrWhiteSpace(scope) ? null : scope.Split(' ');
             this.TokenType = values.Single("token_type");
         }
 
@@ -42,7 +42,7 @@ namespace TwitchAPIs.Authentication
             this.AccessToken = jToken.Value<string>("access_token");
             this.RefreshToken = jToken.Value<string>("refresh_token");
             this.ExpiresIn = jToken.Value<int>("expires_in");
-            this.Scope = jToken.ArrayValues<string>("scope")?.ToArray();
+            this.Scopes = jToken.ArrayValues<string>("scope")?.ToArray();
             this.TokenType = jToken.Value<string>("token_type");
         }
 

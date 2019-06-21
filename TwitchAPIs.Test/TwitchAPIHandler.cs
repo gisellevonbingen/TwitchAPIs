@@ -75,7 +75,7 @@ namespace TwitchAPIs.Test
                 return null;
             }
 
-            request.Scope = user.ReadInput("Enter Scope");
+            request.Scopes.AddRange(user.ReadInput($"Enter Scopes, '{OAuthRequest.ScopeSeparater}' separated").Split(OAuthRequest.ScopeSeparater));
 
             if (request is OAuthRequestAuthorizationCode auth)
             {
