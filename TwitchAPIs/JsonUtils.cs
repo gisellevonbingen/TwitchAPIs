@@ -78,8 +78,7 @@ namespace TwitchAPIs
             {
                 return default;
             }
-
-            if (value is JValue jValue)
+            else if (value is JValue jValue)
             {
                 if (jValue.Value == null)
                 {
