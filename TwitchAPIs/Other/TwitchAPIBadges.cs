@@ -18,7 +18,7 @@ namespace TwitchAPIs.Other
         public TwitchBadgeSet GetIntegrationBadges(string channelName)
         {
             var req = new WebRequestParameter();
-            req.URL = $"https://cbenni.com/api/badges/{channelName}";
+            req.Uri = $"https://cbenni.com/api/badges/{channelName}";
             req.Method = "GET";
 
             using (var res = this.Parent.Web.Request(req))
@@ -31,7 +31,7 @@ namespace TwitchAPIs.Other
         public TwitchBadgeSet GetGlobalBadges()
         {
             var req = new WebRequestParameter();
-            req.URL = $"https://badges.twitch.tv/v1/badges/global/display";
+            req.Uri = $"https://badges.twitch.tv/v1/badges/global/display";
             req.Method = "GET";
 
             using (var res = this.Parent.Web.Request(req))
@@ -44,7 +44,7 @@ namespace TwitchAPIs.Other
         public TwitchBadgeSet GetChannelBadges(string channelId)
         {
             var req = new WebRequestParameter();
-            req.URL = $"https://badges.twitch.tv/v1/badges/channels/{channelId}/display";
+            req.Uri = $"https://badges.twitch.tv/v1/badges/channels/{channelId}/display";
             req.Method = "GET";
 
             using (var res = this.Parent.Web.Request(req))

@@ -143,7 +143,7 @@ namespace TwitchAPIs
             queryValues.AddRange(apiRequest.QueryValues);
 
             var request = new WebRequestParameter();
-            request.URL = $"{baseUri.Scheme}{Uri.SchemeDelimiter}{baseUri.Host}{baseUri.LocalPath}{queryValues.ToString(false)}";
+            request.Uri = $"{baseUri.Scheme}{Uri.SchemeDelimiter}{baseUri.Host}{baseUri.LocalPath}{queryValues.ToString(false)}";
             request.Method = apiRequest.Method;
             this.SetupRequest(request, apiRequest.Version);
 
