@@ -62,9 +62,9 @@ namespace TwitchAPIs
         {
             if (value is JObject jObject)
             {
-                if (jObject.ContainsKey(propertyName) == true)
+                if (jObject.TryGetValue(propertyName, out var jToken) == true)
                 {
-                    return jObject[propertyName].ReadIfExist(func);
+                    return jToken.ReadIfExist(func);
                 }
 
             }
@@ -74,12 +74,20 @@ namespace TwitchAPIs
 
         public static T ReadIfExist<T>(this JToken value, Func<JToken, T> func)
         {
-            if (value != null)
+            if (value == null)
             {
-                return func(value);
+                return default;
+            }
+            if (value is JValue jValue)
+            {
+                if (jValue.Value == null)
+                {
+                    return default;
+                }
+
             }
 
-            return default;
+            return func(value);
         }
 
         public static IEnumerable<T> ArrayValues<T>(this JToken value, string propertyName)
