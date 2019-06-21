@@ -67,6 +67,17 @@ namespace TwitchAPIs.V5
             return jToken.ReadArray("featured", t => new TwitchFeaturedStream(t));
         }
 
+        public TwitchFollowedStreams GetFollowedStreams()
+        {
+            var apiRequest = new TwitchAPIRequest();
+            apiRequest.Version = APIVersion.V5;
+            apiRequest.Path = $"streams/followed";
+            apiRequest.Method = "GET";
+            var jToken = this.Parent.RequestAsJson(apiRequest);
+
+            return new TwitchFollowedStreams(jToken);
+        }
+
     }
 
 }
