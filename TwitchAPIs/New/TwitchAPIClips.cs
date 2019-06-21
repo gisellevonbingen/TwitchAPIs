@@ -13,6 +13,19 @@ namespace TwitchAPIs.New
 
         }
 
+        public TwitchClipEdit CreateClip(string broadcasterId, bool? hasDelay = null)
+        {
+            var apiRequest = new TwitchAPIRequest();
+            apiRequest.Version = APIVersion.New;
+            apiRequest.Path = "clips";
+            apiRequest.Method = "POST";
+            apiRequest.QueryValues.Add("broadcaster_id", broadcasterId);
+            apiRequest.QueryValues.Add("has_delay", hasDelay);
+            var jToken = this.Parent.RequestAsJson(apiRequest);
+
+            return jToken.ReadArray("data", t => new TwitchClipEdit(t)).FirstOrDefault();
+        }
+
         public TwitchClips GetClips(TwitchGetClipsOptions options)
         {
             var apiRequest = new TwitchAPIRequest();
