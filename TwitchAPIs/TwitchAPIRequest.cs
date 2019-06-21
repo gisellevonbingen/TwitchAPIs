@@ -13,6 +13,7 @@ namespace TwitchAPIs
         public string Path { get; set; }
         public QueryValues QueryValues { get; }
         public string Method { get; set; }
+        public object PostData { get; set; }
 
         public TwitchAPIRequest()
         {

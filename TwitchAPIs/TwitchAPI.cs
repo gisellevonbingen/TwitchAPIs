@@ -146,6 +146,7 @@ namespace TwitchAPIs
             request.RetryCount = 0;
             request.Uri = $"{baseUri.Scheme}{Uri.SchemeDelimiter}{baseUri.Host}{baseUri.LocalPath}{queryValues.ToString(false)}";
             request.Method = apiRequest.Method;
+            request.WriteParameter = apiRequest.PostData;
             this.SetupRequest(request, apiRequest.Version);
 
             return request;
