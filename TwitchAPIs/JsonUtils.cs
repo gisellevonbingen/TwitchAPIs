@@ -90,19 +90,19 @@ namespace TwitchAPIs
             return func(value);
         }
 
-        public static IEnumerable<T> ArrayValues<T>(this JToken value, string propertyName)
+        public static T[] ArrayValues<T>(this JToken value, string propertyName)
         {
-            return value.ReadIfExist(propertyName, t => ArrayValues<T>(t));
+            return value.ReadIfExist(propertyName, t => ArrayValues<T>(t)) ?? new T[0];
         }
 
-        public static IEnumerable<T> ArrayValues<T>(this JToken value)
+        public static T[] ArrayValues<T>(this JToken value)
         {
             if (value is JArray jArray)
             {
-                return jArray.Values<T>();
+                return jArray.Values<T>().ToArray();
             }
 
-            return null;
+            return new T[0];
         }
 
     }
