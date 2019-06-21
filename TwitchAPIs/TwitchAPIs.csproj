@@ -112,6 +112,7 @@
     <Compile Include="V5\TwitchEmoticonSets.cs" />
     <Compile Include="TwitchException.cs" />
     <Compile Include="New\TwitchFollow.cs" />
+    <Compile Include="V5\TwitchFeaturedStream.cs" />
     <Compile Include="V5\TwitchFollow.cs" />
     <Compile Include="New\TwitchGame.cs" />
     <Compile Include="V5\TwitchFollowedClips.cs" />

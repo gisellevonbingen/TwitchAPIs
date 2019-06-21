@@ -54,6 +54,19 @@ namespace TwitchAPIs.V5
             return new TwitchStreamsSummary(jToken);
         }
 
+        public TwitchFeaturedStream[] GetFeaturedStreams(int? limit = null, int? offset = null)
+        {
+            var apiRequest = new TwitchAPIRequest();
+            apiRequest.Version = APIVersion.V5;
+            apiRequest.Path = $"streams/featured";
+            apiRequest.Method = "GET";
+            apiRequest.QueryValues.Add("limit", limit);
+            apiRequest.QueryValues.Add("offset", offset);
+            var jToken = this.Parent.RequestAsJson(apiRequest);
+
+            return jToken.ReadArray("featured", t => new TwitchFeaturedStream(t));
+        }
+
     }
 
 }
