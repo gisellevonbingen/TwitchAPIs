@@ -25,7 +25,7 @@ namespace TwitchAPIs.Test.New
             options.CommunityId = user.ReadInput("Enter Community Id");
             options.First = NumberUtils.ToIntNullable(user.ReadInput("Enter First as int"));
             options.GameId = user.ReadInput("Enter Game Id");
-            options.Language = user.ReadInput("Enter Language");
+            options.Languages.AddRange(user.ReadInputWhileBreak("Enter Language, breakable"));
             options.UserId = user.ReadInput("Enter User Id");
             options.UserLogin = user.ReadInput("Enter User Login");
 

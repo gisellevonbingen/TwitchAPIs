@@ -24,7 +24,7 @@ namespace TwitchAPIs.New
             apiRequest.QueryValues.Add("community_id", options.CommunityId);
             apiRequest.QueryValues.Add("first", options.First);
             apiRequest.QueryValues.Add("game_id", options.GameId);
-            apiRequest.QueryValues.Add("language", options.Language);
+            apiRequest.QueryValues.AddRange("language", options.Languages);
             apiRequest.QueryValues.Add("user_id", options.UserId);
             apiRequest.QueryValues.Add("user_login", options.UserLogin);
             var jToken = this.Parent.RequestAsJson(apiRequest);
@@ -43,7 +43,7 @@ namespace TwitchAPIs.New
             apiRequest.QueryValues.Add("community_id", options.CommunityId);
             apiRequest.QueryValues.Add("first", options.First);
             apiRequest.QueryValues.Add("game_id", options.GameId);
-            apiRequest.QueryValues.Add("language", options.Language);
+            apiRequest.QueryValues.AddRange("language", options.Languages);
             apiRequest.QueryValues.Add("user_id", options.UserId);
             apiRequest.QueryValues.Add("user_login", options.UserLogin);
             var jToken = this.Parent.RequestAsJson(apiRequest);

@@ -13,13 +13,13 @@ namespace TwitchAPIs.New
         public string CommunityId { get; set; }
         public int? First { get; set; }
         public string GameId { get; set; }
-        public string Language { get; set; }
+        public List<string> Languages { get; }
         public string UserId { get; set; }
         public string UserLogin { get; set; }
 
         public TwitchGetStreamsOptions()
         {
-
+            this.Languages = new List<string>();
         }
 
     }
