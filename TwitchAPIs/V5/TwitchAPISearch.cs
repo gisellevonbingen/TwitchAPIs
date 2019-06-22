@@ -38,11 +38,7 @@ namespace TwitchAPIs.V5
             apiRequest.QueryValues.Add("offset", offset);
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
-            var searchChannels = new TwitchSearchChannels();
-            searchChannels.Total = jToken.Value<int>("_total");
-            searchChannels.Channels = jToken.ReadArray("channels", t => new TwitchChannel(t));
-
-            return searchChannels;
+            return new TwitchSearchChannels(jToken);
         }
 
         public TwitchSearchStreams SearchStreams(string query, int? limit = null, int? offset = null, HLSMode hls = null)
