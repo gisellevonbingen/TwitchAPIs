@@ -59,6 +59,7 @@
     <Compile Include="New\TestClipsCreateClips.cs" />
     <Compile Include="New\TestGamesGetTopGames.cs" />
     <Compile Include="New\TestStreamsGetStreamsMetadata.cs" />
+    <Compile Include="New\TestTagsReplaceStreamTags.cs" />
     <Compile Include="New\TestTagsGetStreamTags.cs" />
     <Compile Include="New\TestWebhooksGetWebhookSubscriptions.cs" />
     <Compile Include="New\TestWebhooksPostHub.cs" />
