@@ -31,6 +31,18 @@ namespace TwitchAPIs.New
             return tags;
         }
 
+        public TwitchStreamTag[] GetStreamTags(string broadcasterId)
+        {
+            var apiRequest = new TwitchAPIRequest();
+            apiRequest.Version = APIVersion.New;
+            apiRequest.Path = "streams/tags";
+            apiRequest.Method = "GET";
+            apiRequest.QueryValues.Add("broadcaster_id", broadcasterId);
+            var jToken = this.Parent.RequestAsJson(apiRequest);
+
+            return jToken.ReadArray("data", t => new TwitchStreamTag(t));
+        }
+
     }
 
 }
