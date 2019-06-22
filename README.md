@@ -194,6 +194,8 @@ private static Uri GetResponseUri(OAuthRequestTokenCode authRequest, string auth
     * [Get Streams Metadata](https://dev.twitch.tv/docs/api/reference/#get-streams-metadata)
   * Tags
     * [Get All Stream Tags](https://dev.twitch.tv/docs/api/reference/#get-all-stream-tags)
+    * [Get Stream Tags](https://dev.twitch.tv/docs/api/reference/#get-stream-tags)
+    * [Replace Stream Tags](https://dev.twitch.tv/docs/api/reference/#replace-stream-tags)
   * Users
     * [Get Users](https://dev.twitch.tv/docs/api/reference/#get-users)
     * [Get Users Follows](https://dev.twitch.tv/docs/api/reference/#get-users-follows)
@@ -223,6 +225,7 @@ private static Uri GetResponseUri(OAuthRequestTokenCode authRequest, string auth
   * Search
     * [Search Channels](https://dev.twitch.tv/docs/v5/reference/search/#search-channels)
     * [Search Games](https://dev.twitch.tv/docs/v5/reference/search/#search-games)
+    * [Search Streams](https://dev.twitch.tv/docs/v5/reference/search/#search-streams)
   * Streams
     * [Get Stream by User](https://dev.twitch.tv/docs/v5/reference/streams/#get-stream-by-user)
     * [Get Live Streams](https://dev.twitch.tv/docs/v5/reference/streams/#get-live-streams)
