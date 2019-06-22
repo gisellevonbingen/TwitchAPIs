@@ -56,13 +56,22 @@
   <ItemGroup>
     <Compile Include="Authentication\OAuthRequestClientCredentials.cs" />
     <Compile Include="Authentication\OAuthRequestCode.cs" />
+    <Compile Include="New\HearthstoneHero.cs" />
+    <Compile Include="New\HearthstonePlayer.cs" />
+    <Compile Include="New\OverwatchHero.cs" />
+    <Compile Include="New\OverwatchPlayer.cs" />
+    <Compile Include="New\StreamMetadataHearthstone.cs" />
+    <Compile Include="New\StreamMetadataOverwatch.cs" />
     <Compile Include="New\Pagination.cs" />
+    <Compile Include="New\StreamMetadataAbstract.cs" />
     <Compile Include="New\TwitchAPIStreams.cs" />
     <Compile Include="New\TwitchAPIWebhooks.cs" />
     <Compile Include="New\TwitchClipEdit.cs" />
     <Compile Include="New\TwitchGetStreamsOptions.cs" />
     <Compile Include="New\TwitchStream.cs" />
+    <Compile Include="New\TwitchStreamMetadata.cs" />
     <Compile Include="New\TwitchStreams.cs" />
+    <Compile Include="New\TwitchStreamsMetadata.cs" />
     <Compile Include="New\TwitchTopGames.cs" />
     <Compile Include="New\TwitchWebhookSubscription.cs" />
     <Compile Include="New\TwitchWebhookSubscriptions.cs" />

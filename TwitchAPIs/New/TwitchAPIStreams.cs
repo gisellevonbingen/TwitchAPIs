@@ -32,6 +32,25 @@ namespace TwitchAPIs.New
             return new TwitchStreams(jToken);
         }
 
+        public TwitchStreamsMetadata GetStreamsMetadata(TwitchGetStreamsOptions options)
+        {
+            var apiRequest = new TwitchAPIRequest();
+            apiRequest.Version = APIVersion.New;
+            apiRequest.Path = "streams/metadata";
+            apiRequest.Method = "GET";
+            apiRequest.QueryValues.Add("after", options.After);
+            apiRequest.QueryValues.Add("before", options.Before);
+            apiRequest.QueryValues.Add("community_id", options.CommunityId);
+            apiRequest.QueryValues.Add("first", options.First);
+            apiRequest.QueryValues.Add("game_id", options.GameId);
+            apiRequest.QueryValues.Add("language", options.Language);
+            apiRequest.QueryValues.Add("user_id", options.UserId);
+            apiRequest.QueryValues.Add("user_login", options.UserLogin);
+            var jToken = this.Parent.RequestAsJson(apiRequest);
+
+            return new TwitchStreamsMetadata(jToken);
+        }
+
     }
 
 }
