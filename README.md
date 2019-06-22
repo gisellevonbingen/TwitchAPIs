@@ -189,6 +189,9 @@ private static Uri GetResponseUri(OAuthRequestTokenCode authRequest, string auth
   * Games
     * [Get Games](https://dev.twitch.tv/docs/api/reference/#get-games)
     * [Get Top Games](https://dev.twitch.tv/docs/api/reference/#get-top-games)
+  * Streams
+    * [Get Streams](https://dev.twitch.tv/docs/api/reference/#get-streams)
+    * [Get Streams Metadata](https://dev.twitch.tv/docs/api/reference/#get-streams-metadata)
   * Tags
     * [Get All Stream Tags](https://dev.twitch.tv/docs/api/reference/#get-all-stream-tags)
   * Users
