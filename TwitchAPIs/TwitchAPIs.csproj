@@ -57,6 +57,7 @@
     <Compile Include="Authentication\OAuthRequestClientCredentials.cs" />
     <Compile Include="Authentication\OAuthRequestCode.cs" />
     <Compile Include="New\Pagination.cs" />
+    <Compile Include="New\TwitchAPIStreams.cs" />
     <Compile Include="New\TwitchAPIWebhooks.cs" />
     <Compile Include="New\TwitchClipEdit.cs" />
     <Compile Include="New\TwitchTopGames.cs" />
