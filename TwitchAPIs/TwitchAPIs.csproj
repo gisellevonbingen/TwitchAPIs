@@ -76,6 +76,7 @@
     <Compile Include="New\TwitchWebhookSubscription.cs" />
     <Compile Include="New\TwitchWebhookSubscriptions.cs" />
     <Compile Include="V5\GetTopClipsPeriod.cs" />
+    <Compile Include="V5\HLSMode.cs" />
     <Compile Include="V5\SortDirection.cs" />
     <Compile Include="V5\FollowSortMode.cs" />
     <Compile Include="HttpUtility2.cs" />
@@ -137,6 +138,7 @@
     <Compile Include="New\TwitchAllStreamTags.cs" />
     <Compile Include="V5\TwitchGetLiveStreamsOptions.cs" />
     <Compile Include="V5\TwitchSearchChannels.cs" />
+    <Compile Include="V5\TwitchSearchStreams.cs" />
     <Compile Include="V5\TwitchStream.cs" />
     <Compile Include="V5\TwitchLiveStreams.cs" />
     <Compile Include="V5\TwitchStreamsSummary.cs" />
