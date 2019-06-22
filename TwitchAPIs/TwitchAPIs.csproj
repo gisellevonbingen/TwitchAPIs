@@ -65,6 +65,7 @@
     <Compile Include="New\Pagination.cs" />
     <Compile Include="New\StreamMetadataAbstract.cs" />
     <Compile Include="New\TwitchAPIStreams.cs" />
+    <Compile Include="New\TwitchAPISubscriptions.cs" />
     <Compile Include="New\TwitchAPIWebhooks.cs" />
     <Compile Include="New\TwitchClipEdit.cs" />
     <Compile Include="New\TwitchGetStreamsOptions.cs" />
