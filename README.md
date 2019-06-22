@@ -2,7 +2,7 @@
 
 Twithc API(New, V5)'s C# Wrapper
 
-## Example
+## Examples
 
 ### Get Own User Information
 ```CSharp
@@ -164,7 +164,7 @@ private static Uri GetResponseUri(OAuthRequestTokenCode authRequest, string auth
 }
 ```
 
-## Reference
+## References
 * [Twitch Developers Reference](https://dev.twitch.tv/docs/api/reference/)
 * [Badge API](https://discuss.dev.twitch.tv/t/beta-badge-api/6388)
   * Global - https://badges.twitch.tv/v1/badges/global/display
