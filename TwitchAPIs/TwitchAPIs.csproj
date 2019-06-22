@@ -60,6 +60,9 @@
     <Compile Include="New\TwitchAPIStreams.cs" />
     <Compile Include="New\TwitchAPIWebhooks.cs" />
     <Compile Include="New\TwitchClipEdit.cs" />
+    <Compile Include="New\TwitchGetStreamsOptions.cs" />
+    <Compile Include="New\TwitchStream.cs" />
+    <Compile Include="New\TwitchStreams.cs" />
     <Compile Include="New\TwitchTopGames.cs" />
     <Compile Include="New\TwitchWebhookSubscription.cs" />
     <Compile Include="New\TwitchWebhookSubscriptions.cs" />

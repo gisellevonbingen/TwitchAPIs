@@ -60,6 +60,7 @@
     <Compile Include="New\TestGamesGetTopGames.cs" />
     <Compile Include="New\TestWebhooksGetWebhookSubscriptions.cs" />
     <Compile Include="New\TestWebhooksPostHub.cs" />
+    <Compile Include="New\TestStreamsGetStreams.cs" />
     <Compile Include="ObjectUtils2.cs" />
     <Compile Include="PrintableLine.cs" />
     <Compile Include="QueryResult.cs" />
