@@ -13,7 +13,7 @@ namespace TwitchAPIs.New
 
         }
 
-        public TwitchStreamTags GetAllStreamTags(string after = null, int? first = null, List<string> tagIds = null)
+        public TwitchAllStreamTags GetAllStreamTags(string after = null, int? first = null, List<string> tagIds = null)
         {
             var apiRequest = new TwitchAPIRequest();
             apiRequest.Version = APIVersion.New;
@@ -24,7 +24,7 @@ namespace TwitchAPIs.New
             apiRequest.QueryValues.AddRange("tag_id", tagIds);
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
-            var tags = new TwitchStreamTags();
+            var tags = new TwitchAllStreamTags();
             tags.Tags = jToken.ReadArray("data", t => new TwitchStreamTag(t));
             tags.Pagination = jToken.ReadIfExist("pagination", t => new Pagination(t));
 

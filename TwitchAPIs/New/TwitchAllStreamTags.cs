@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace TwitchAPIs.New
 {
-    public class TwitchStreamTags
+    public class TwitchAllStreamTags
     {
         public TwitchStreamTag[] Tags { get; set; }
         public Pagination Pagination { get; set; }
 
-        public TwitchStreamTags()
+        public TwitchAllStreamTags()
         {
 
         }

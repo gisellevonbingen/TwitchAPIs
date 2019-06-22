@@ -134,7 +134,7 @@
     <Compile Include="New\TwitchGetClipsOptions.cs" />
     <Compile Include="TwitchAPIRequest.cs" />
     <Compile Include="New\TwitchStreamTag.cs" />
-    <Compile Include="New\TwitchStreamTags.cs" />
+    <Compile Include="New\TwitchAllStreamTags.cs" />
     <Compile Include="V5\TwitchGetLiveStreamsOptions.cs" />
     <Compile Include="V5\TwitchSearchChannels.cs" />
     <Compile Include="V5\TwitchStream.cs" />
