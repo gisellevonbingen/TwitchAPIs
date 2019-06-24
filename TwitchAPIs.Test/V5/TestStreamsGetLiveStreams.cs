@@ -24,7 +24,7 @@ namespace TwitchAPIs.Test.V5
             options.Channels.AddRange(user.ReadInputWhileBreak("Enter ChannelId"));
             options.Game = user.ReadInput("Enter Game");
             options.Language = user.ReadInput("Enter Language");
-            options.StreamType = user.QueryInput("Enter StremType", EnumUtils.GetNullableValues<StreamType>(), null, true).Value;
+            options.StreamType = user.QueryInput("Enter StremType", StreamType.Values, v => v.Name, true).Value;
             options.Limit = NumberUtils.ToIntNullable(user.ReadInput("Enter Limit as int"));
             options.Offset = NumberUtils.ToIntNullable(user.ReadInput("Enter Offset as int"));
             var liveStreams = handler.API.V5.Streams.GetLiveStreams(options);

@@ -6,11 +6,26 @@ using System.Threading.Tasks;
 
 namespace TwitchAPIs.V5
 {
-    public enum StreamType : byte
+    public class StreamType
     {
-        Live = 0,
-        Playlist = 1,
-        All = 2,
+        private static List<StreamType> List { get; } = new List<StreamType>();
+        public static StreamType[] Values => List.ToArray();
+
+        public static StreamType Live { get; } = new StreamType(nameof(Live), "live");
+        public static StreamType Playlist { get; } = new StreamType(nameof(Playlist), "playlist");
+        public static StreamType All { get; } = new StreamType(nameof(All), "all");
+
+        public string Name { get; }
+        public string Value { get; }
+
+        private StreamType(string name, string value)
+        {
+            this.Name = name;
+            this.Value = value;
+
+            List.Add(this);
+        }
+
     }
 
 }
