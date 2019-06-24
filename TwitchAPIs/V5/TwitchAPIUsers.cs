@@ -69,7 +69,7 @@ namespace TwitchAPIs.V5
             return new TwitchUserSubscription(jToken);
         }
 
-        public TwitchUserFollows GetUserFollows(string userId, int? limit = null, int? offset = null, SortDirection? direction = null, FollowSortMode sortby = null)
+        public TwitchUserFollows GetUserFollows(string userId, int? limit = null, int? offset = null, SortDirection direction = null, FollowSortMode sortby = null)
         {
             var apiRequest = new TwitchAPIRequest();
             apiRequest.Version = APIVersion.V5;
@@ -77,7 +77,7 @@ namespace TwitchAPIs.V5
             apiRequest.Method = "GET";
             apiRequest.QueryValues.Add("limit", limit);
             apiRequest.QueryValues.Add("offset", offset);
-            apiRequest.QueryValues.Add("direction", direction);
+            apiRequest.QueryValues.Add("direction", direction?.Value);
             apiRequest.QueryValues.Add("sortby", sortby?.Value);
             var jToken = this.Parent.RequestAsJson(apiRequest);
 

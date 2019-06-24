@@ -46,7 +46,7 @@ namespace TwitchAPIs.V5
             return jToken.ReadArray("users", t => new TwitchUser(t));
         }
 
-        public TwitchChannelFollowers GetChannelFollowers(string channelId, int? limit = null, int? offset = null, string cursor = null, SortDirection? direction = null)
+        public TwitchChannelFollowers GetChannelFollowers(string channelId, int? limit = null, int? offset = null, string cursor = null, SortDirection direction = null)
         {
             var apiRequest = new TwitchAPIRequest();
             apiRequest.Version = APIVersion.V5;
@@ -55,7 +55,7 @@ namespace TwitchAPIs.V5
             apiRequest.QueryValues.Add("limit", limit);
             apiRequest.QueryValues.Add("offset", offset);
             apiRequest.QueryValues.Add("cursor", cursor);
-            apiRequest.QueryValues.Add("direction", direction);
+            apiRequest.QueryValues.Add("direction", direction?.Value);
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
             return new TwitchChannelFollowers(jToken);
@@ -72,7 +72,7 @@ namespace TwitchAPIs.V5
             return jToken.ReadArray("teams", t => new TwitchTeam(t));
         }
 
-        public TwitchChannelSubscriptions GetChannelSubscribers(string channelId, int? limit = null, int? offset = null, SortDirection? direction = null)
+        public TwitchChannelSubscriptions GetChannelSubscribers(string channelId, int? limit = null, int? offset = null, SortDirection direction = null)
         {
             var apiRequest = new TwitchAPIRequest();
             apiRequest.Version = APIVersion.V5;
@@ -80,7 +80,7 @@ namespace TwitchAPIs.V5
             apiRequest.Method = "GET";
             apiRequest.QueryValues.Add("limit", limit);
             apiRequest.QueryValues.Add("offset", offset);
-            apiRequest.QueryValues.Add("direction", direction);
+            apiRequest.QueryValues.Add("direction", direction?.Value);
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
             return new TwitchChannelSubscriptions(jToken);
