@@ -6,11 +6,26 @@ using System.Threading.Tasks;
 
 namespace TwitchAPIs.V5
 {
-    public enum FollowSortMode : byte
+    public class FollowSortMode
     {
-        created_at = 0,
-        last_broadcast = 1,
-        login = 2,
+        private static List<FollowSortMode> List { get; } = new List<FollowSortMode>();
+        public static FollowSortMode[] Values => List.ToArray();
+
+        public static FollowSortMode CreatedAt { get; } = new FollowSortMode(nameof(CreatedAt), "created_at");
+        public static FollowSortMode LastBroadcast { get; } = new FollowSortMode(nameof(LastBroadcast), "last_broadcast");
+        public static FollowSortMode Login { get; } = new FollowSortMode(nameof(Login), "login");
+            
+        public string Name { get; }
+        public string Value { get; }
+
+        private FollowSortMode(string name, string value)
+        {
+            this.Name = name;
+            this.Value = value;
+
+            List.Add(this);
+        }
+
     }
 
 }
