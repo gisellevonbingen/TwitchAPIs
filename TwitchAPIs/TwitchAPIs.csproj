@@ -75,7 +75,7 @@
     <Compile Include="New\TwitchTopGames.cs" />
     <Compile Include="New\TwitchWebhookSubscription.cs" />
     <Compile Include="New\TwitchWebhookSubscriptions.cs" />
-    <Compile Include="V5\GetTopClipsPeriod.cs" />
+    <Compile Include="V5\TopClipsPeriod.cs" />
     <Compile Include="V5\HLSMode.cs" />
     <Compile Include="V5\SortDirection.cs" />
     <Compile Include="V5\FollowSortMode.cs" />

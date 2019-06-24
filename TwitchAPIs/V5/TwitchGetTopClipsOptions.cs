@@ -16,7 +16,7 @@ namespace TwitchAPIs.V5
         public string Game { get; set; }
         public List<string> Languages { get; } = new List<string>();
         public long? Limit { get; set; }
-        public GetTopClipsPeriod? Period { get; set; }
+        public TopClipsPeriod Period { get; set; }
         public bool? Trending { get; set; }
     }
 
