@@ -58,6 +58,7 @@
     <Compile Include="Authentication\OAuthRequestCode.cs" />
     <Compile Include="New\HearthstoneHero.cs" />
     <Compile Include="New\HearthstonePlayer.cs" />
+    <Compile Include="New\HubMode.cs" />
     <Compile Include="New\OverwatchHero.cs" />
     <Compile Include="New\OverwatchPlayer.cs" />
     <Compile Include="New\StreamMetadataHearthstone.cs" />

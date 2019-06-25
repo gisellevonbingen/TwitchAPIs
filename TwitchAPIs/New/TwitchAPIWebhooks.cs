@@ -14,7 +14,7 @@ namespace TwitchAPIs.New
 
         }
 
-        public string PostHub(string callback, string mode, string topic, int? leaseSeconds, string sercet)
+        public string PostHub(string callback, HubMode mode, string topic, int? leaseSeconds = null, string sercet = null)
         {
             var apiRequest = new TwitchAPIRequest();
             apiRequest.Version = APIVersion.New;
@@ -23,7 +23,7 @@ namespace TwitchAPIs.New
 
             var jToken = new JObject();
             jToken["hub.callback"] = callback;
-            jToken["hub.mode"] = mode;
+            jToken["hub.mode"] = mode?.Value;
             jToken["hub.topic"] = topic;
 
             if (leaseSeconds.HasValue == true)

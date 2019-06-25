@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TwitchAPIs.New;
 
 namespace TwitchAPIs.Test.New
 {
@@ -21,7 +22,7 @@ namespace TwitchAPIs.Test.New
             var handler = main.TwitchAPIHandler;
 
             var callback = user.ReadInput("Enter Calllback");
-            var mode = user.ReadInput("Enter Mode in (subscribe, unsubscribe)");
+            var mode = user.QueryInput("Enter Mode", HubMode.Values, v => v.Name, true).Value;
             var topic = user.ReadInput("Enter Topic");
             var leaseSeconds = NumberUtils.ToIntNullable(user.ReadInput("Enter Lease Seconds as int"));
             var secret = user.ReadInput("Enter Secret");
