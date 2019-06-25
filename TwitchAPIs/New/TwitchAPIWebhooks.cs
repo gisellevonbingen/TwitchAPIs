@@ -14,6 +14,14 @@ namespace TwitchAPIs.New
 
         }
 
+        public string GetTopicUserFollows(string fromId, string toId)
+        {
+            var apiRequest = this.Parent.New.Users.GetUserFollowsRequest(null, 1, fromId, toId);
+            var webRequest = this.Parent.CreateWebRequest(apiRequest);
+
+            return webRequest.Uri;
+        }
+
         public string PostHub(string callback, HubMode mode, string topic, int? leaseSeconds = null, string sercet = null)
         {
             var apiRequest = new TwitchAPIRequest();
