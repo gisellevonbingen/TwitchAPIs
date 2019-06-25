@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Giselle.Commons;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,7 @@ namespace TwitchAPIs.Test.New
             var user = main.User;
             var handler = main.TwitchAPIHandler;
 
+            var first = NumberUtils.ToIntNullable(user.ReadInput("Enter First as int"));
             var fromId = user.ReadInput("Enter From Id, show followings");
             var toId = user.ReadInput("Enter To Id, show followers");
 
@@ -29,7 +31,7 @@ namespace TwitchAPIs.Test.New
 
             while (true)
             {
-                var userFollows = api.New.Users.GetUserFollows(fromId, toId, cursor);
+                var userFollows = api.New.Users.GetUserFollows(cursor, first, fromId, toId);
                 user.SendMessageAsReflection("UserFollows", userFollows);
 
                 cursor = userFollows.Pagination.Cursor;
