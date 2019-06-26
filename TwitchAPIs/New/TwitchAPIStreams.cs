@@ -21,12 +21,12 @@ namespace TwitchAPIs.New
             apiRequest.Method = "GET";
             apiRequest.QueryValues.Add("after", options.After);
             apiRequest.QueryValues.Add("before", options.Before);
-            apiRequest.QueryValues.Add("community_id", options.CommunityId);
+            apiRequest.QueryValues.AddRange("community_id", options.CommunityIds);
             apiRequest.QueryValues.Add("first", options.First);
-            apiRequest.QueryValues.Add("game_id", options.GameId);
+            apiRequest.QueryValues.AddRange("game_id", options.GameIds);
             apiRequest.QueryValues.AddRange("language", options.Languages);
-            apiRequest.QueryValues.Add("user_id", options.UserId);
-            apiRequest.QueryValues.Add("user_login", options.UserLogin);
+            apiRequest.QueryValues.AddRange("user_id", options.UserIds);
+            apiRequest.QueryValues.AddRange("user_login", options.UserLogins);
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
             return new TwitchStreams(jToken);
@@ -40,12 +40,12 @@ namespace TwitchAPIs.New
             apiRequest.Method = "GET";
             apiRequest.QueryValues.Add("after", options.After);
             apiRequest.QueryValues.Add("before", options.Before);
-            apiRequest.QueryValues.Add("community_id", options.CommunityId);
+            apiRequest.QueryValues.AddRange("community_id", options.CommunityIds);
             apiRequest.QueryValues.Add("first", options.First);
-            apiRequest.QueryValues.Add("game_id", options.GameId);
+            apiRequest.QueryValues.AddRange("game_id", options.GameIds);
             apiRequest.QueryValues.AddRange("language", options.Languages);
-            apiRequest.QueryValues.Add("user_id", options.UserId);
-            apiRequest.QueryValues.Add("user_login", options.UserLogin);
+            apiRequest.QueryValues.AddRange("user_id", options.UserIds);
+            apiRequest.QueryValues.AddRange("user_login", options.UserLogins);
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
             return new TwitchStreamsMetadata(jToken);
