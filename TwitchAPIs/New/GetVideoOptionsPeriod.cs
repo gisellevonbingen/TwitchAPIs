@@ -6,25 +6,18 @@ using System.Threading.Tasks;
 
 namespace TwitchAPIs.New
 {
-    public class GetVideoOptionsPeriod
+    public class GetVideoOptionsPeriod : ValueEnum<string>
     {
-        private static List<GetVideoOptionsPeriod> List { get; } = new List<GetVideoOptionsPeriod>();
-        public static GetVideoOptionsPeriod[] Values => List.ToArray();
+        public static EnumRegister<GetVideoOptionsPeriod, string> Register { get; } = new EnumRegister<GetVideoOptionsPeriod, string>();
 
         public static GetVideoOptionsPeriod All { get; } = new GetVideoOptionsPeriod(nameof(All), "all");
         public static GetVideoOptionsPeriod Day { get; } = new GetVideoOptionsPeriod(nameof(Day), "day");
         public static GetVideoOptionsPeriod Week { get; } = new GetVideoOptionsPeriod(nameof(Week), "week");
         public static GetVideoOptionsPeriod Month { get; } = new GetVideoOptionsPeriod(nameof(Month), "month");
 
-        public string Name { get; }
-        public string Value { get; }
-
-        private GetVideoOptionsPeriod(string name, string value)
+        private GetVideoOptionsPeriod(string name, string value) : base(name, value)
         {
-            this.Name = name;
-            this.Value = value;
-
-            List.Add(this);
+            Register.Add(this);
         }
 
     }

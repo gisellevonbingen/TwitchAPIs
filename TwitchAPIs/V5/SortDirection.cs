@@ -6,23 +6,16 @@ using System.Threading.Tasks;
 
 namespace TwitchAPIs.V5
 {
-    public class SortDirection
+    public class SortDirection : ValueEnum<string>
     {
-        private static List<SortDirection> List { get; } = new List<SortDirection>();
-        public static SortDirection[] Values => List.ToArray();
+        public static EnumRegister<SortDirection, string> Register { get; } = new EnumRegister<SortDirection, string>();
 
         public static SortDirection Desc { get; } = new SortDirection(nameof(Desc), "desc");
         public static SortDirection Asc { get; } = new SortDirection(nameof(Asc), "asc");
-            
-        public string Name { get; }
-        public string Value { get; }
 
-        private SortDirection(string name, string value)
+        private SortDirection(string name, string value) : base(name, value)
         {
-            this.Name = name;
-            this.Value = value;
-
-            List.Add(this);
+            Register.Add(this);
         }
 
     }

@@ -6,25 +6,18 @@ using System.Threading.Tasks;
 
 namespace TwitchAPIs.V5
 {
-    public class TopClipsPeriod
+    public class TopClipsPeriod : ValueEnum<string>
     {
-        private static List<TopClipsPeriod> List { get; } = new List<TopClipsPeriod>();
-        public static TopClipsPeriod[] Values => List.ToArray();
+        public static EnumRegister<TopClipsPeriod, string> Register { get; } = new EnumRegister<TopClipsPeriod, string>();
 
         public static TopClipsPeriod Day { get; } = new TopClipsPeriod(nameof(Day), "day");
         public static TopClipsPeriod Week { get; } = new TopClipsPeriod(nameof(Week), "week");
         public static TopClipsPeriod Month { get; } = new TopClipsPeriod(nameof(Month), "month");
         public static TopClipsPeriod All { get; } = new TopClipsPeriod(nameof(All), "all");
 
-        public string Name { get; }
-        public string Value { get; }
-
-        private TopClipsPeriod(string name, string value)
+        private TopClipsPeriod(string name, string value) : base(name, value)
         {
-            this.Name = name;
-            this.Value = value;
-
-            List.Add(this);
+            Register.Add(this);
         }
 
     }

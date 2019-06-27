@@ -21,7 +21,7 @@ namespace TwitchAPIs.Test.V5
             var handler = main.TwitchAPIHandler;
 
             var channelId = user.ReadInput("Enter Channel Id");
-            var type = user.QueryInput("Enter StremType", StreamType.Values, v => v.Name, true).Value;
+            var type = user.QueryInput("Enter StremType", StreamType.Register, null, true).Value;
             var stream = handler.API.V5.Streams.GetStreamByUser(channelId, type);
 
             user.SendMessageAsReflection("TwitchStream", stream);

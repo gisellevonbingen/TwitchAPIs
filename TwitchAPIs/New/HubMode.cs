@@ -6,25 +6,17 @@ using System.Threading.Tasks;
 
 namespace TwitchAPIs.New
 {
-    public class HubMode
+    public class HubMode : ValueEnum<string>
     {
-        private static List<HubMode> List { get; } = new List<HubMode>();
-        public static HubMode[] Values => List.ToArray();
+        public static EnumRegister<HubMode, string> Register { get; } = new EnumRegister<HubMode, string>();
 
         public static HubMode Subscribe { get; } = new HubMode(nameof(Subscribe), "subscribe");
         public static HubMode Unsubscribe { get; } = new HubMode(nameof(Unsubscribe), "unsubscribe");
 
-        public string Name { get; }
-        public string Value { get; }
-
-        private HubMode(string name, string value)
+        private HubMode(string name, string value) : base(name, value)
         {
-            this.Name = name;
-            this.Value = value;
-
-            List.Add(this);
+            Register.Add(this);
         }
-
 
     }
 

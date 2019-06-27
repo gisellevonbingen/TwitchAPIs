@@ -6,24 +6,17 @@ using System.Threading.Tasks;
 
 namespace TwitchAPIs.V5
 {
-    public class HLSMode
+    public class HLSMode : ValueEnum<bool?>
     {
-        private static List<HLSMode> List { get; } = new List<HLSMode>();
-        public static HLSMode[] Values => List.ToArray();
+        public static EnumRegister<HLSMode, bool?> Register { get; } = new EnumRegister<HLSMode, bool?>();
 
         public static HLSMode OnlyHLS { get; } = new HLSMode(nameof(OnlyHLS), true);
         public static HLSMode OnlyRTMP { get; } = new HLSMode(nameof(OnlyRTMP), false);
         public static HLSMode Both { get; } = new HLSMode(nameof(Both), null);
 
-        public string Name { get; }
-        public bool? Value { get; }
-
-        private HLSMode(string name, bool? value)
+        private HLSMode(string name, bool? value) : base(name, value)
         {
-            this.Name = name;
-            this.Value = value;
-
-            List.Add(this);
+            Register.Add(this);
         }
 
     }

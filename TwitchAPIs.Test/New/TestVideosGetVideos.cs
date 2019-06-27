@@ -28,9 +28,9 @@ namespace TwitchAPIs.Test.New
 
             options.First = NumberUtils.ToIntNullable(user.ReadInput("Enter First as int"));
             options.Language = user.ReadInput("Enter Language");
-            options.Period = user.QueryInput("Enter Period", GetVideoOptionsPeriod.Values, v => v.Name, true).Value;
-            options.Sort = user.QueryInput("Enter Sort", GetVideoOptionsSort.Values, v => v.Name, true).Value;
-            options.Type = user.QueryInput("Enter Type", GetVideoOptionsType.Values, v => v.Name, true).Value;
+            options.Period = user.QueryInput("Enter Period", GetVideoOptionsPeriod.Register, null, true).Value;
+            options.Sort = user.QueryInput("Enter Sort", GetVideoOptionsSort.Register, null, true).Value;
+            options.Type = user.QueryInput("Enter Type", GetVideoOptionsType.Register, null, true).Value;
 
             while (true)
             {

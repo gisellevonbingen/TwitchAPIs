@@ -26,7 +26,7 @@ namespace TwitchAPIs.Test.V5
             options.Game = user.ReadInput("Enter Game");
             options.Languages.AddRange(user.ReadInputWhileBreak("Enter Language"));
             options.Limit = NumberUtils.ToLongNullable(user.ReadInput("Enter Limit as long"));
-            options.Period = user.QueryInput("Enter Channel", TopClipsPeriod.Values, v => v.Name, true).Value;
+            options.Period = user.QueryInput("Enter Channel", TopClipsPeriod.Register, null, true).Value;
             options.Trending = NumberUtils.ToBoolNullable(user.ReadInput("Enter Trending as bool"));
 
             while (true)

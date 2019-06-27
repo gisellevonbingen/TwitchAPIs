@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="Authentication\OAuthRequestClientCredentials.cs" />
     <Compile Include="Authentication\OAuthRequestCode.cs" />
+    <Compile Include="EnumRegister.cs" />
     <Compile Include="New\GetVideoOptionsPeriod.cs" />
     <Compile Include="New\GetVideoOptionsSort.cs" />
     <Compile Include="New\GetVideoOptionsType.cs" />
@@ -175,6 +176,7 @@
     <Compile Include="V5\TwitchUserOwn.cs" />
     <Compile Include="V5\TwitchAPITeam.cs" />
     <Compile Include="V5\TwitchUserSubscription.cs" />
+    <Compile Include="ValueEnum.cs" />
     <Compile Include="WebExplorerExtensions.cs" />
   </ItemGroup>
   <ItemGroup>

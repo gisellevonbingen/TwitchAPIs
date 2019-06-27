@@ -72,7 +72,7 @@ namespace TwitchAPIs.New
             apiRequest.Version = APIVersion.New;
             apiRequest.Path = "users";
             apiRequest.Method = "GET";
-            apiRequest.QueryValues.AddRange(requests.Select(r => new QueryValue(r.Type.ToString().ToLowerInvariant(), r.Value)));
+            apiRequest.QueryValues.AddRange(requests.Select(r => new QueryValue(r.Type.Value, r.Value)));
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
             return this.ParseUsers(jToken);

@@ -45,7 +45,7 @@ namespace TwitchAPIs.New
 
         public override string ToString()
         {
-            var type = this.Type.ToString().ToLowerInvariant();
+            var type = this.Type.Value;
             var value = this.Value;
             return $"{type}={value}";
         }
