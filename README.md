@@ -24,7 +24,7 @@ var twitchAPI = new TwitchAPI();
 twitchAPI.ClientId = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
 
 var userRequests = new List<UserRequest>();
-userRequests.Add(new UserRequest(UserType.Login, "loginid, email"));
+userRequests.Add(new UserRequest(UserRequestType.Login, "loginid, email"));
 
 var users = twitchAPI.New.Users.GetUsers(userRequests);
 
