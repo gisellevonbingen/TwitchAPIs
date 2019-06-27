@@ -22,6 +22,10 @@ namespace TwitchAPIs.Test
             {
                 list.Add(new PrintableLine(level, $"'{TwitchDateTimeUtils.ToString(dt)}'"));
             }
+            else if (obj is TimeSpan span)
+            {
+                list.Add(new PrintableLine(level, $"'{TwitchTimeSpanUtils.ToString(span)}'"));
+            }
             else if (obj is IConvertible convertible)
             {
                 list.Add(new PrintableLine(level, $"'{convertible}'"));

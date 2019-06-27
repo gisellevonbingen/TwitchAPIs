@@ -61,6 +61,7 @@
     <Compile Include="New\TestStreamsGetStreamsMetadata.cs" />
     <Compile Include="New\TestTagsReplaceStreamTags.cs" />
     <Compile Include="New\TestTagsGetStreamTags.cs" />
+    <Compile Include="New\TestVideosGetVideos.cs" />
     <Compile Include="New\TestWebhooksGetWebhookSubscriptions.cs" />
     <Compile Include="New\TestWebhooksPostHub.cs" />
     <Compile Include="New\TestStreamsGetStreams.cs" />

@@ -56,6 +56,9 @@
   <ItemGroup>
     <Compile Include="Authentication\OAuthRequestClientCredentials.cs" />
     <Compile Include="Authentication\OAuthRequestCode.cs" />
+    <Compile Include="New\GetVideoOptionsPeriod.cs" />
+    <Compile Include="New\GetVideoOptionsSort.cs" />
+    <Compile Include="New\GetVideoOptionsType.cs" />
     <Compile Include="New\HearthstoneHero.cs" />
     <Compile Include="New\HearthstonePlayer.cs" />
     <Compile Include="New\HubMode.cs" />
@@ -66,16 +69,21 @@
     <Compile Include="New\Pagination.cs" />
     <Compile Include="New\StreamMetadataAbstract.cs" />
     <Compile Include="New\TwitchAPIStreams.cs" />
+    <Compile Include="New\TwitchAPIVideos.cs" />
     <Compile Include="New\TwitchAPIWebhooks.cs" />
     <Compile Include="New\TwitchClipEdit.cs" />
     <Compile Include="New\TwitchGetStreamsOptions.cs" />
+    <Compile Include="New\TwitchGetVideosOptions.cs" />
     <Compile Include="New\TwitchStream.cs" />
     <Compile Include="New\TwitchStreamMetadata.cs" />
     <Compile Include="New\TwitchStreams.cs" />
     <Compile Include="New\TwitchStreamsMetadata.cs" />
     <Compile Include="New\TwitchTopGames.cs" />
+    <Compile Include="New\TwitchVideo.cs" />
+    <Compile Include="New\TwitchVideos.cs" />
     <Compile Include="New\TwitchWebhookSubscription.cs" />
     <Compile Include="New\TwitchWebhookSubscriptions.cs" />
+    <Compile Include="TwitchTimeSpanUtils.cs" />
     <Compile Include="V5\TopClipsPeriod.cs" />
     <Compile Include="V5\HLSMode.cs" />
     <Compile Include="V5\SortDirection.cs" />

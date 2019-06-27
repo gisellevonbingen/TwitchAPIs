@@ -13,6 +13,7 @@ namespace TwitchAPIs.New
         public TwitchAPIStreams Streams { get; }
         public TwitchAPITags Tags { get; }
         public TwitchAPIUsers Users { get; }
+        public TwitchAPIVideos Videos { get; }
         public TwitchAPIWebhooks Webhooks { get; }
 
         public TwitchAPINew(TwitchAPI parent)
@@ -22,6 +23,7 @@ namespace TwitchAPIs.New
             this.Streams = new TwitchAPIStreams(parent);
             this.Tags = new TwitchAPITags(parent);
             this.Users = new TwitchAPIUsers(parent);
+            this.Videos = new TwitchAPIVideos(parent);
             this.Webhooks = new TwitchAPIWebhooks(parent);
         }
 
