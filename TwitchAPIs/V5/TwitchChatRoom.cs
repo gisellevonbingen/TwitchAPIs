@@ -14,7 +14,7 @@ namespace TwitchAPIs.V5
         public string Name { get; set; }
         public string Topic { get; set; }
         public bool Previewable { get; set; }
-        public string MinimumAllowedRole { get; set; }
+        public ChatRoomMinimumAllowedRole MinimumAllowedRole { get; set; }
 
         public TwitchChatRoom()
         {
@@ -28,7 +28,7 @@ namespace TwitchAPIs.V5
             this.Name = jToken.Value<string>("name");
             this.Topic = jToken.Value<string>("topic");
             this.Previewable = jToken.Value<bool>("is_previewable");
-            this.MinimumAllowedRole = jToken.Value<string>("minimum_allowed_role");
+            this.MinimumAllowedRole = ChatRoomMinimumAllowedRole.Register.FromValue(jToken.Value<string>("minimum_allowed_role"));
         }
 
     }

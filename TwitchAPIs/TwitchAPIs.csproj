@@ -90,6 +90,9 @@
     <Compile Include="New\VideoType.cs" />
     <Compile Include="New\VideoViewable.cs" />
     <Compile Include="TwitchTimeSpanUtils.cs" />
+    <Compile Include="V5\BroadcasterType.cs" />
+    <Compile Include="V5\ChatRoomMinimumAllowedRole.cs" />
+    <Compile Include="V5\SubscriptionPlan.cs" />
     <Compile Include="V5\TopClipsPeriod.cs" />
     <Compile Include="V5\HLSMode.cs" />
     <Compile Include="V5\SortDirection.cs" />
@@ -181,6 +184,7 @@
     <Compile Include="V5\TwitchUserOwn.cs" />
     <Compile Include="V5\TwitchAPITeam.cs" />
     <Compile Include="V5\TwitchUserSubscription.cs" />
+    <Compile Include="V5\UserType.cs" />
     <Compile Include="ValueEnum.cs" />
     <Compile Include="WebExplorerExtensions.cs" />
   </ItemGroup>

@@ -27,7 +27,7 @@ namespace TwitchAPIs.V5
         public string Url { get; set; }
         public int Views { get; set; }
         public int Followers { get; set; }
-        public string BroadcasterType { get; set; }
+        public BroadcasterType BroadcasterType { get; set; }
         public string StreamKey { get; set; }
         public string Email { get; set; }
 
@@ -56,7 +56,7 @@ namespace TwitchAPIs.V5
             this.Url = jToken.Value<string>("url");
             this.Views = jToken.Value<int>("views");
             this.Followers = jToken.Value<int>("followers");
-            this.BroadcasterType = jToken.Value<string>("broadcaster_type");
+            this.BroadcasterType = BroadcasterType.Register.FromValue(jToken.Value<string>("broadcaster_type"));
             this.StreamKey = jToken.Value<string>("stream_key");
             this.Email = jToken.Value<string>("email");
         }

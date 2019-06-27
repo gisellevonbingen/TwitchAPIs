@@ -15,7 +15,7 @@ namespace TwitchAPIs.V5
         public string DisplayName { get; set; }
         public string Logo { get; set; }
         public string Name { get; set; }
-        public string Type { get; set; }
+        public UserType Type { get; set; }
         public DateTime UpdatedAt { get; set; }
 
         public TwitchUser()
@@ -31,7 +31,7 @@ namespace TwitchAPIs.V5
             this.DisplayName = jToken.Value<string>("display_name");
             this.Logo = jToken.Value<string>("logo");
             this.Name = jToken.Value<string>("name");
-            this.Type = jToken.Value<string>("type");
+            this.Type = UserType.Register.FromValue(jToken.Value<string>("type"));
             this.UpdatedAt = jToken.Value<DateTime>("updated_at");
         }
 

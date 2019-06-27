@@ -10,7 +10,7 @@ namespace TwitchAPIs.V5
     public class TwitchSubscription
     {
         public string Id { get; set; }
-        public string SubPlan { get; set; }
+        public SubscriptionPlan SubPlan { get; set; }
         public string SubPlanName { get; set; }
         public DateTime CreatedAt { get; set; }
 
@@ -22,7 +22,7 @@ namespace TwitchAPIs.V5
         public TwitchSubscription(JToken jToken)
         {
             this.Id = jToken.Value<string>("_id");
-            this.SubPlan = jToken.Value<string>("sub_plan");
+            this.SubPlan = SubscriptionPlan.Register.FromValue(jToken.Value<string>("sub_plan"));
             this.SubPlanName = jToken.Value<string>("sub_plan_name");
             this.CreatedAt = jToken.Value<DateTime>("created_at");
         }
