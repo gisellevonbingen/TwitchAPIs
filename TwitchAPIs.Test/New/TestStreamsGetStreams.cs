@@ -22,12 +22,12 @@ namespace TwitchAPIs.Test.New
             var handler = main.TwitchAPIHandler;
 
             var options = new TwitchGetStreamsOptions();
-            options.CommunityIds.AddRange(user.ReadInputWhileBreak("Enter Community Id, breakable"));
+            options.CommunityIds.AddRange(user.ReadInputWhileBreak("Enter Community Id"));
             options.First = NumberUtils.ToIntNullable(user.ReadInput("Enter First as int"));
-            options.GameIds.AddRange(user.ReadInputWhileBreak("Enter Game Id, brekable"));
-            options.Languages.AddRange(user.ReadInputWhileBreak("Enter Language, breakable"));
-            options.UserIds.AddRange(user.ReadInputWhileBreak("Enter User Id, breakable"));
-            options.UserLogins.AddRange(user.ReadInputWhileBreak("Enter User Login, breakable"));
+            options.GameIds.AddRange(user.ReadInputWhileBreak("Enter Game Id"));
+            options.Languages.AddRange(user.ReadInputWhileBreak("Enter Language"));
+            options.UserIds.AddRange(user.ReadInputWhileBreak("Enter User Id"));
+            options.UserLogins.AddRange(user.ReadInputWhileBreak("Enter User Login"));
 
             while (true)
             {
