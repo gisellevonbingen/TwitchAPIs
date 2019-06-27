@@ -8,16 +8,17 @@ namespace TwitchAPIs.New
 {
     public class StreamType : ValueEnum<string>
     {
-        public static EnumRegister<StreamType> Register { get; } = new EnumRegister<StreamType>();
+        public static EnumRegister<StreamType, string> Register { get; } = new EnumRegister<StreamType, string>((o, n, v) => new StreamType(o, n, v));
 
-        public static StreamType Live { get; } = new StreamType(nameof(Live), "live");
-        public static StreamType None { get; } = new StreamType(nameof(None), "");
+        public static StreamType Live { get; } = Register.Generate(nameof(Live), "live");
+        public static StreamType None { get; } = Register.Generate(nameof(None), "");
 
-        private StreamType(string name, string value) : base(name, value)
+        private StreamType(int ordinal, string name, string value) : base(ordinal, name, value)
         {
-            Register.Add(this);
+
         }
 
     }
 
 }
+

@@ -8,16 +8,16 @@ namespace TwitchAPIs.V5
 {
     public class TopClipsPeriod : ValueEnum<string>
     {
-        public static EnumRegister<TopClipsPeriod> Register { get; } = new EnumRegister<TopClipsPeriod>();
+        public static EnumRegister<TopClipsPeriod, string> Register { get; } = new EnumRegister<TopClipsPeriod, string>((o, n, v) => new TopClipsPeriod(o, n, v));
 
-        public static TopClipsPeriod Day { get; } = new TopClipsPeriod(nameof(Day), "day");
-        public static TopClipsPeriod Week { get; } = new TopClipsPeriod(nameof(Week), "week");
-        public static TopClipsPeriod Month { get; } = new TopClipsPeriod(nameof(Month), "month");
-        public static TopClipsPeriod All { get; } = new TopClipsPeriod(nameof(All), "all");
+        public static TopClipsPeriod Day { get; } = Register.Generate(nameof(Day), "day");
+        public static TopClipsPeriod Week { get; } = Register.Generate(nameof(Week), "week");
+        public static TopClipsPeriod Month { get; } = Register.Generate(nameof(Month), "month");
+        public static TopClipsPeriod All { get; } = Register.Generate(nameof(All), "all");
 
-        private TopClipsPeriod(string name, string value) : base(name, value)
+        private TopClipsPeriod(int ordinal, string name, string value) : base(ordinal, name, value)
         {
-            Register.Add(this);
+
         }
 
     }

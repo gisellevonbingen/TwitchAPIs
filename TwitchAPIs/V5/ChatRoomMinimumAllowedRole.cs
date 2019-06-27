@@ -8,17 +8,18 @@ namespace TwitchAPIs.V5
 {
     public class ChatRoomMinimumAllowedRole : ValueEnum<string>
     {
-        public static EnumRegister<ChatRoomMinimumAllowedRole> Register { get; } = new EnumRegister<ChatRoomMinimumAllowedRole>();
+        public static EnumRegister<ChatRoomMinimumAllowedRole, string> Register { get; } = new EnumRegister<ChatRoomMinimumAllowedRole, string>((o, n, v) => new ChatRoomMinimumAllowedRole(o, n, v));
 
-        public static ChatRoomMinimumAllowedRole Moderator { get; } = new ChatRoomMinimumAllowedRole(nameof(Moderator), "MODERATOR");
-        public static ChatRoomMinimumAllowedRole Subscriber { get; } = new ChatRoomMinimumAllowedRole(nameof(Subscriber), "SUBSCRIBER");
-        public static ChatRoomMinimumAllowedRole Everyone { get; } = new ChatRoomMinimumAllowedRole(nameof(Everyone), "EVERYONE");
+        public static ChatRoomMinimumAllowedRole Moderator { get; } = Register.Generate(nameof(Moderator), "MODERATOR");
+        public static ChatRoomMinimumAllowedRole Subscriber { get; } = Register.Generate(nameof(Subscriber), "SUBSCRIBER");
+        public static ChatRoomMinimumAllowedRole Everyone { get; } = Register.Generate(nameof(Everyone), "EVERYONE");
 
-        private ChatRoomMinimumAllowedRole(string name, string value) : base(name, value)
+        private ChatRoomMinimumAllowedRole(int ordinal, string name, string value) : base(ordinal, name, value)
         {
-            Register.Add(this);
+
         }
 
     }
 
 }
+

@@ -8,16 +8,16 @@ namespace TwitchAPIs.New
 {
     public class GetVideoOptionsPeriod : ValueEnum<string>
     {
-        public static EnumRegister<GetVideoOptionsPeriod> Register { get; } = new EnumRegister<GetVideoOptionsPeriod>();
+        public static EnumRegister<GetVideoOptionsPeriod, string> Register { get; } = new EnumRegister<GetVideoOptionsPeriod, string>((o, n, v) => new GetVideoOptionsPeriod(o, n, v));
 
-        public static GetVideoOptionsPeriod All { get; } = new GetVideoOptionsPeriod(nameof(All), "all");
-        public static GetVideoOptionsPeriod Day { get; } = new GetVideoOptionsPeriod(nameof(Day), "day");
-        public static GetVideoOptionsPeriod Week { get; } = new GetVideoOptionsPeriod(nameof(Week), "week");
-        public static GetVideoOptionsPeriod Month { get; } = new GetVideoOptionsPeriod(nameof(Month), "month");
+        public static GetVideoOptionsPeriod All { get; } = Register.Generate(nameof(All), "all");
+        public static GetVideoOptionsPeriod Day { get; } = Register.Generate(nameof(Day), "day");
+        public static GetVideoOptionsPeriod Week { get; } = Register.Generate(nameof(Week), "week");
+        public static GetVideoOptionsPeriod Month { get; } = Register.Generate(nameof(Month), "month");
 
-        private GetVideoOptionsPeriod(string name, string value) : base(name, value)
+        private GetVideoOptionsPeriod(int ordinal, string name, string value) : base(ordinal, name, value)
         {
-            Register.Add(this);
+
         }
 
     }

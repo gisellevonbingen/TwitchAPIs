@@ -8,7 +8,7 @@ namespace TwitchAPIs
 {
     public static class EnumRegisterExtensions
     {
-        public static bool TryFromValue<T, E>(this EnumRegister<T> register, E value, out T e) where T : ValueEnum<E>
+        public static bool TryFromValue<T, B, E>(this EnumRegister<T, B> register, E value, out T e) where T : ValueEnum<E>
         {
             foreach (var v in register)
             {
@@ -24,7 +24,7 @@ namespace TwitchAPIs
             return false;
         }
 
-        public static T FromValue<T, E>(this EnumRegister<T> register, E value) where T : ValueEnum<E>
+        public static T FromValue<T, B, E>(this EnumRegister<T, B> register, E value) where T : ValueEnum<E>
         {
             return TryFromValue(register, value, out var e) ? e : default;
         }

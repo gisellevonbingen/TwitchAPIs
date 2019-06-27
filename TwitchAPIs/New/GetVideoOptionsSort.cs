@@ -8,17 +8,18 @@ namespace TwitchAPIs.New
 {
     public class GetVideoOptionsSort : ValueEnum<string>
     {
-        public static EnumRegister<GetVideoOptionsSort> Register { get; } = new EnumRegister<GetVideoOptionsSort>();
+        public static EnumRegister<GetVideoOptionsSort, string> Register { get; } = new EnumRegister<GetVideoOptionsSort, string>((o, n, v) => new GetVideoOptionsSort(o, n, v));
 
-        public static GetVideoOptionsSort Time { get; } = new GetVideoOptionsSort(nameof(Time), "time");
-        public static GetVideoOptionsSort Trending { get; } = new GetVideoOptionsSort(nameof(Trending), "trending");
-        public static GetVideoOptionsSort Views { get; } = new GetVideoOptionsSort(nameof(Views), "views");
+        public static GetVideoOptionsSort Time { get; } = Register.Generate(nameof(Time), "time");
+        public static GetVideoOptionsSort Trending { get; } = Register.Generate(nameof(Trending), "trending");
+        public static GetVideoOptionsSort Views { get; } = Register.Generate(nameof(Views), "views");
 
-        private GetVideoOptionsSort(string name, string value) : base(name, value)
+        private GetVideoOptionsSort(int ordinal, string name, string value) : base(ordinal, name, value)
         {
-            Register.Add(this);
+
         }
 
     }
 
 }
+

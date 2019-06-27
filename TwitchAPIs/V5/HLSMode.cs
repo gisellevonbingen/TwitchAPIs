@@ -8,15 +8,15 @@ namespace TwitchAPIs.V5
 {
     public class HLSMode : ValueEnum<bool?>
     {
-        public static EnumRegister<HLSMode> Register { get; } = new EnumRegister<HLSMode>();
+        public static EnumRegister<HLSMode, bool?> Register { get; } = new EnumRegister<HLSMode, bool?>((o, n, v) => new HLSMode(o, n, v));
 
-        public static HLSMode OnlyHLS { get; } = new HLSMode(nameof(OnlyHLS), true);
-        public static HLSMode OnlyRTMP { get; } = new HLSMode(nameof(OnlyRTMP), false);
-        public static HLSMode Both { get; } = new HLSMode(nameof(Both), null);
+        public static HLSMode OnlyHLS { get; } = Register.Generate(nameof(OnlyHLS), true);
+        public static HLSMode OnlyRTMP { get; } = Register.Generate(nameof(OnlyRTMP), false);
+        public static HLSMode Both { get; } = Register.Generate(nameof(Both), null);
 
-        private HLSMode(string name, bool? value) : base(name, value)
+        private HLSMode(int ordinal, string name, bool? value) : base(ordinal, name, value)
         {
-            Register.Add(this);
+
         }
 
     }

@@ -8,15 +8,15 @@ namespace TwitchAPIs.New
 {
     public class BroadcasterType : ValueEnum<string>
     {
-        public static EnumRegister<BroadcasterType> Register { get; } = new EnumRegister<BroadcasterType>();
+        public static EnumRegister<BroadcasterType, string> Register { get; } = new EnumRegister<BroadcasterType, string>((o, n, v) => new BroadcasterType(o, n, v));
 
-        public static BroadcasterType Partner { get; } = new BroadcasterType(nameof(Partner), "partner");
-        public static BroadcasterType Affiliate { get; } = new BroadcasterType(nameof(Affiliate), "affiliate");
-        public static BroadcasterType None { get; } = new BroadcasterType(nameof(None), "");
+        public static BroadcasterType Partner { get; } = Register.Generate(nameof(Partner), "partner");
+        public static BroadcasterType Affiliate { get; } = Register.Generate(nameof(Affiliate), "affiliate");
+        public static BroadcasterType None { get; } = Register.Generate(nameof(None), "");
 
-        private BroadcasterType(string name, string value) : base(name, value)
+        private BroadcasterType(int ordinal, string name, string value) : base(ordinal, name, value)
         {
-            Register.Add(this);
+
         }
 
     }

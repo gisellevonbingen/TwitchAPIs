@@ -8,17 +8,19 @@ namespace TwitchAPIs
 {
     public interface ValueEnum
     {
+        int Ordinal { get; }
         string Name { get; }
-
     }
 
     public class ValueEnum<T> : ValueEnum
     {
+        public int Ordinal { get; }
         public string Name { get; }
         public T Value { get; }
 
-        protected ValueEnum(string name, T value)
+        protected ValueEnum(int ordinal, string name, T value)
         {
+            this.Ordinal = ordinal;
             this.Name = name;
             this.Value = value;
         }

@@ -8,17 +8,18 @@ namespace TwitchAPIs.New
 {
     public class VideoType : ValueEnum<string>
     {
-        public static EnumRegister<VideoType> Register { get; } = new EnumRegister<VideoType>();
+        public static EnumRegister<VideoType, string> Register { get; } = new EnumRegister<VideoType, string>((o, n, v) => new VideoType(o, n, v));
 
-        public static VideoType Upload { get; } = new VideoType(nameof(Upload), "upload");
-        public static VideoType Archive { get; } = new VideoType(nameof(Archive), "archive");
-        public static VideoType Highlight { get; } = new VideoType(nameof(Highlight), "highlight");
+        public static VideoType Upload { get; } = Register.Generate(nameof(Upload), "upload");
+        public static VideoType Archive { get; } = Register.Generate(nameof(Archive), "archive");
+        public static VideoType Highlight { get; } = Register.Generate(nameof(Highlight), "highlight");
 
-        private VideoType(string name, string value) : base(name, value)
+        private VideoType(int ordinal, string name, string value) : base(ordinal, name, value)
         {
-            Register.Add(this);
+
         }
 
     }
 
 }
+
