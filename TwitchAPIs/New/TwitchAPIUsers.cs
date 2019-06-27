@@ -24,7 +24,7 @@ namespace TwitchAPIs.New
             apiRequest.QueryValues.Add("description", HttpUtility.UrlEncode(description));
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
-            return this.ParseUsers(jToken).FirstOrDefault();
+            return jToken.ReadArray("data", t => new TwitchUser(t)).FirstOrDefault();
         }
 
         public TwitchAPIRequest GetUserFollowsRequest(string after = null, int? first = null, string fromId = null, string toId = null)
@@ -46,12 +46,7 @@ namespace TwitchAPIs.New
             var apiRequest = this.GetUserFollowsRequest(after, first, fromId, toId);
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
-            var uerFollows = new TwitchUserFollows();
-            uerFollows.Total = jToken.Value<int>("total");
-            uerFollows.Pagination = jToken.ReadIfExist("pagination", t => new Pagination(t));
-            uerFollows.Follows = jToken.ReadArray("data", t => new TwitchFollow(t));
-
-            return uerFollows;
+            return new TwitchUserFollows(jToken);
         }
 
         public TwitchUser GetUser()
@@ -75,11 +70,6 @@ namespace TwitchAPIs.New
             apiRequest.QueryValues.AddRange(requests.Select(r => new QueryValue(r.Type.Value, r.Value)));
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
-            return this.ParseUsers(jToken);
-        }
-
-        private TwitchUser[] ParseUsers(JToken jToken)
-        {
             return jToken.ReadArray("data", t => new TwitchUser(t));
         }
 

@@ -81,11 +81,7 @@ namespace TwitchAPIs.V5
             apiRequest.QueryValues.Add("sortby", sortby?.Value);
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
-            var follows = new TwitchUserFollows();
-            follows.Total = jToken.Value<int>("_total");
-            follows.Follows = jToken.ReadArray("follows", t => new TwitchFollow(t));
-
-            return follows;
+            return new TwitchUserFollows(jToken);
         }
 
         public TwitchFollow FollowChannel(string userId, string channelId, bool? notifications = null)
@@ -139,11 +135,7 @@ namespace TwitchAPIs.V5
             apiRequest.QueryValues.Add("offset", offset);
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
-            var blockList = new TwitchUserBlockList();
-            blockList.Total = jToken.Value<int>("_total");
-            blockList.Blocks = jToken.ReadArray("blocks", t => t.ReadIfExist("user", t2 => new TwitchUser(t2)));
-
-            return blockList;
+            return new TwitchUserBlockList(jToken);
         }
 
         public TwitchUser BlockUser(string sourceUserId, string targetUserId)

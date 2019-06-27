@@ -26,11 +26,7 @@ namespace TwitchAPIs.New
             apiRequest.QueryValues.AddRange("tag_id", tagIds);
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
-            var tags = new TwitchAllStreamTags();
-            tags.Tags = jToken.ReadArray("data", t => new TwitchStreamTag(t));
-            tags.Pagination = jToken.ReadIfExist("pagination", t => new Pagination(t));
-
-            return tags;
+            return new TwitchAllStreamTags(jToken);
         }
 
         public TwitchStreamTag[] GetStreamTags(string broadcasterId)

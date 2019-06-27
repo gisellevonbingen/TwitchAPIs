@@ -42,11 +42,7 @@ namespace TwitchAPIs.New
             apiRequest.QueryValues.Add("started_at", TwitchDateTimeUtils.ToString(options.StartedAt));
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
-            var clips = new TwitchClips();
-            clips.Clips = jToken.ReadArray("data", t => new TwitchClip(t));
-            clips.Pagination = jToken.ReadIfExist("pagination", t => new Pagination(t));
-
-            return clips;
+            return new TwitchClips(jToken);
         }
 
     }

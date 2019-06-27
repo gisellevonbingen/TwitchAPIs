@@ -17,6 +17,12 @@ namespace TwitchAPIs.New
 
         }
 
+        public TwitchClips(JToken jToken)
+        {
+            this.Clips = jToken.ReadArray("data", t => new TwitchClip(t));
+            this.Pagination = jToken.ReadIfExist("pagination", t => new Pagination(t));
+        }
+
     }
 
 }

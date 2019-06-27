@@ -18,6 +18,13 @@ namespace TwitchAPIs.New
 
         }
 
+        public TwitchUserFollows(JToken jToken)
+        {
+            this.Total = jToken.Value<int>("total");
+            this.Pagination = jToken.ReadIfExist("pagination", t => new Pagination(t));
+            this.Follows = jToken.ReadArray("data", t => new TwitchFollow(t));
+        }
+
     }
 
 }

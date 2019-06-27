@@ -17,6 +17,12 @@ namespace TwitchAPIs.V5
 
         }
 
+        public TwitchUserFollows(JToken jToken)
+        {
+            this.Total = jToken.Value<int>("_total");
+            this.Follows = jToken.ReadArray("follows", t => new TwitchFollow(t));
+        }
+
     }
 
 }
