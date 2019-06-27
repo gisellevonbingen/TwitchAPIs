@@ -8,7 +8,7 @@ namespace TwitchAPIs.V5
 {
     public class TopClipsPeriod : ValueEnum<string>
     {
-        public static EnumRegister<TopClipsPeriod, string> Register { get; } = new EnumRegister<TopClipsPeriod, string>();
+        public static EnumRegister<TopClipsPeriod> Register { get; } = new EnumRegister<TopClipsPeriod>();
 
         public static TopClipsPeriod Day { get; } = new TopClipsPeriod(nameof(Day), "day");
         public static TopClipsPeriod Week { get; } = new TopClipsPeriod(nameof(Week), "week");

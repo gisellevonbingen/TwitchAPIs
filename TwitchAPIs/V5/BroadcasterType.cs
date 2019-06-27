@@ -8,7 +8,7 @@ namespace TwitchAPIs.V5
 {
     public class BroadcasterType : ValueEnum<string>
     {
-        public static EnumRegister<BroadcasterType, string> Register { get; } = new EnumRegister<BroadcasterType, string>();
+        public static EnumRegister<BroadcasterType> Register { get; } = new EnumRegister<BroadcasterType>();
 
         public static BroadcasterType Partner { get; } = new BroadcasterType(nameof(Partner), "partner");
         public static BroadcasterType Affiliate { get; } = new BroadcasterType(nameof(Affiliate), "affiliate");

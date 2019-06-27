@@ -8,7 +8,7 @@ namespace TwitchAPIs.New
 {
     public class GetVideoOptionsPeriod : ValueEnum<string>
     {
-        public static EnumRegister<GetVideoOptionsPeriod, string> Register { get; } = new EnumRegister<GetVideoOptionsPeriod, string>();
+        public static EnumRegister<GetVideoOptionsPeriod> Register { get; } = new EnumRegister<GetVideoOptionsPeriod>();
 
         public static GetVideoOptionsPeriod All { get; } = new GetVideoOptionsPeriod(nameof(All), "all");
         public static GetVideoOptionsPeriod Day { get; } = new GetVideoOptionsPeriod(nameof(Day), "day");

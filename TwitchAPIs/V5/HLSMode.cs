@@ -8,7 +8,7 @@ namespace TwitchAPIs.V5
 {
     public class HLSMode : ValueEnum<bool?>
     {
-        public static EnumRegister<HLSMode, bool?> Register { get; } = new EnumRegister<HLSMode, bool?>();
+        public static EnumRegister<HLSMode> Register { get; } = new EnumRegister<HLSMode>();
 
         public static HLSMode OnlyHLS { get; } = new HLSMode(nameof(OnlyHLS), true);
         public static HLSMode OnlyRTMP { get; } = new HLSMode(nameof(OnlyRTMP), false);

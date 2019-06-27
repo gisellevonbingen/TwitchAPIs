@@ -8,7 +8,7 @@ namespace TwitchAPIs.V5
 {
     public class FollowSortMode : ValueEnum<string>
     {
-        public static EnumRegister<FollowSortMode, string> Register { get; } = new EnumRegister<FollowSortMode, string>();
+        public static EnumRegister<FollowSortMode> Register { get; } = new EnumRegister<FollowSortMode>();
 
         public static FollowSortMode CreatedAt { get; } = new FollowSortMode(nameof(CreatedAt), "created_at");
         public static FollowSortMode LastBroadcast { get; } = new FollowSortMode(nameof(LastBroadcast), "last_broadcast");

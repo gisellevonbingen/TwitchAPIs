@@ -8,7 +8,7 @@ namespace TwitchAPIs.V5
 {
     public class UserType : ValueEnum<string>
     {
-        public static EnumRegister<UserType, string> Register { get; } = new EnumRegister<UserType, string>();
+        public static EnumRegister<UserType> Register { get; } = new EnumRegister<UserType>();
 
         public static UserType Staff { get; } = new UserType(nameof(Staff), "staff");
         public static UserType Admin { get; } = new UserType(nameof(Admin), "admin");

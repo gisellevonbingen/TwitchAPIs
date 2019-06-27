@@ -8,7 +8,7 @@ namespace TwitchAPIs.New
 {
     public class StreamType : ValueEnum<string>
     {
-        public static EnumRegister<StreamType, string> Register { get; } = new EnumRegister<StreamType, string>();
+        public static EnumRegister<StreamType> Register { get; } = new EnumRegister<StreamType>();
 
         public static StreamType Live { get; } = new StreamType(nameof(Live), "live");
         public static StreamType None { get; } = new StreamType(nameof(None), "");

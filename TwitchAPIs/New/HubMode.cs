@@ -8,7 +8,7 @@ namespace TwitchAPIs.New
 {
     public class HubMode : ValueEnum<string>
     {
-        public static EnumRegister<HubMode, string> Register { get; } = new EnumRegister<HubMode, string>();
+        public static EnumRegister<HubMode> Register { get; } = new EnumRegister<HubMode>();
 
         public static HubMode Subscribe { get; } = new HubMode(nameof(Subscribe), "subscribe");
         public static HubMode Unsubscribe { get; } = new HubMode(nameof(Unsubscribe), "unsubscribe");

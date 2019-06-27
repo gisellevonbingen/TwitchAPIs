@@ -8,7 +8,7 @@ namespace TwitchAPIs.New
 {
     public class UserRequestType : ValueEnum<string>
     {
-        public static EnumRegister<UserRequestType, string> Register { get; } = new EnumRegister<UserRequestType, string>();
+        public static EnumRegister<UserRequestType> Register { get; } = new EnumRegister<UserRequestType>();
 
         public static UserRequestType Id { get; } = new UserRequestType(nameof(Id), "id");
         public static UserRequestType Login { get; } = new UserRequestType(nameof(Login), "login");

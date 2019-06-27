@@ -8,7 +8,7 @@ namespace TwitchAPIs.New
 {
     public class GetVideoOptionsSort : ValueEnum<string>
     {
-        public static EnumRegister<GetVideoOptionsSort, string> Register { get; } = new EnumRegister<GetVideoOptionsSort, string>();
+        public static EnumRegister<GetVideoOptionsSort> Register { get; } = new EnumRegister<GetVideoOptionsSort>();
 
         public static GetVideoOptionsSort Time { get; } = new GetVideoOptionsSort(nameof(Time), "time");
         public static GetVideoOptionsSort Trending { get; } = new GetVideoOptionsSort(nameof(Trending), "trending");

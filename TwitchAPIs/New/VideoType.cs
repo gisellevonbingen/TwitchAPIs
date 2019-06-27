@@ -8,7 +8,7 @@ namespace TwitchAPIs.New
 {
     public class VideoType : ValueEnum<string>
     {
-        public static EnumRegister<VideoType, string> Register { get; } = new EnumRegister<VideoType, string>();
+        public static EnumRegister<VideoType> Register { get; } = new EnumRegister<VideoType>();
 
         public static VideoType Upload { get; } = new VideoType(nameof(Upload), "upload");
         public static VideoType Archive { get; } = new VideoType(nameof(Archive), "archive");

@@ -8,7 +8,7 @@ namespace TwitchAPIs.V5
 {
     public class SortDirection : ValueEnum<string>
     {
-        public static EnumRegister<SortDirection, string> Register { get; } = new EnumRegister<SortDirection, string>();
+        public static EnumRegister<SortDirection> Register { get; } = new EnumRegister<SortDirection>();
 
         public static SortDirection Desc { get; } = new SortDirection(nameof(Desc), "desc");
         public static SortDirection Asc { get; } = new SortDirection(nameof(Asc), "asc");

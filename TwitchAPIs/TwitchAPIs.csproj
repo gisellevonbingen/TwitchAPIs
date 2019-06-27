@@ -57,6 +57,7 @@
     <Compile Include="Authentication\OAuthRequestClientCredentials.cs" />
     <Compile Include="Authentication\OAuthRequestCode.cs" />
     <Compile Include="EnumRegister.cs" />
+    <Compile Include="EnumRegisterExtensions.cs" />
     <Compile Include="New\GetVideoOptionsPeriod.cs" />
     <Compile Include="New\GetVideoOptionsSort.cs" />
     <Compile Include="New\GetVideoOptionsType.cs" />
