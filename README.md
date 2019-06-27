@@ -200,6 +200,8 @@ private static Uri GetResponseUri(OAuthRequestTokenCode authRequest, string auth
     * [Get Users](https://dev.twitch.tv/docs/api/reference/#get-users)
     * [Get Users Follows](https://dev.twitch.tv/docs/api/reference/#get-users-follows)
     * [Update User](https://dev.twitch.tv/docs/api/reference/#update-user)
+  * Videos
+    * [Get Videos](https://dev.twitch.tv/docs/api/reference/#get-videos)
   * Webhooks
     * [Get Webhook Subscriptions](https://dev.twitch.tv/docs/api/reference/#get-webhook-subscriptions)
     * [Subscribe To/Unsubscribe From Events](https://dev.twitch.tv/docs/api/webhooks-reference/#subscribe-tounsubscribe-from-events)
