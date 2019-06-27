@@ -32,7 +32,7 @@ namespace TwitchAPIs.Test.New
             while (true)
             {
                 var streamsMetadata = handler.API.New.Streams.GetStreamsMetadata(options);
-                user.SendMessageAsReflection("TwitchStreamsMetadata", streamsMetadata);
+                user.SendMessageAsReflection("StreamsMetadata", streamsMetadata);
 
                 options.After = null;
                 options.Before = null;

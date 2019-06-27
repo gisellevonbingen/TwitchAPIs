@@ -22,7 +22,7 @@ namespace TwitchAPIs.Test.V5
             var userId = user.ReadInput("Enter User Id").AsString;
             var tuser = handler.API.V5.Users.GetUserByID(userId);
 
-            user.SendMessageAsReflection("TwitchUser", tuser);
+            user.SendMessageAsReflection("User", tuser);
         }
 
     }

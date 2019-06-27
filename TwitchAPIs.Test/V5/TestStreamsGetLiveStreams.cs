@@ -29,7 +29,7 @@ namespace TwitchAPIs.Test.V5
             options.Offset = user.ReadInput("Enter Offset as int").AsInt;
             var liveStreams = handler.API.V5.Streams.GetLiveStreams(options);
 
-            user.SendMessageAsReflection("TwitchLiveStreams", liveStreams);
+            user.SendMessageAsReflection("LiveStreams", liveStreams);
         }
 
     }

@@ -22,7 +22,7 @@ namespace TwitchAPIs.Test.V5
             var channelId = user.ReadInput("Enter Channel Id").AsString;
             var follow = handler.API.V5.Users.CheckUserFollowsByChannel(userId, channelId);
 
-            user.SendMessageAsReflection("TwitchFollow", follow);
+            user.SendMessageAsReflection("Follow", follow);
         }
 
     }

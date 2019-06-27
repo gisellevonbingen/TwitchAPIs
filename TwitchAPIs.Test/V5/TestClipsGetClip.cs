@@ -21,7 +21,7 @@ namespace TwitchAPIs.Test.V5
             var slug = user.ReadInput("Enter Slug").AsString;
             var clip = handler.API.V5.Clips.GetClip(slug);
 
-            user.SendMessageAsReflection("TwitchClip", clip);
+            user.SendMessageAsReflection("Clip", clip);
         }
 
     }

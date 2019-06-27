@@ -35,7 +35,7 @@ namespace TwitchAPIs.Test.New
             while (true)
             {
                 var videos = handler.API.New.Videos.GetVideos(options);
-                user.SendMessageAsReflection("TwitchVideos", videos);
+                user.SendMessageAsReflection("Videos", videos);
 
                 options.After = null;
                 options.Before = null;

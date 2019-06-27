@@ -24,7 +24,7 @@ namespace TwitchAPIs.Test.V5
             var offset = user.ReadInput("Enter Offset as int").AsInt;
             var featuredStreams = handler.API.V5.Streams.GetFeaturedStreams(limit, offset);
 
-            user.SendMessageAsReflection("TwitchFeaturedStreams", featuredStreams);
+            user.SendMessageAsReflection("FeaturedStreams", featuredStreams);
         }
 
     }

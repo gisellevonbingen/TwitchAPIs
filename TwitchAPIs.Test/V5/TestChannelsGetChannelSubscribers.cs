@@ -27,7 +27,7 @@ namespace TwitchAPIs.Test.V5
             var direction = user.QueryInput("Enter Direction", SortDirection.Register, null, true).Value;
             var channelSubscriptions = handler.API.V5.Channels.GetChannelSubscribers(channelId, limit, offset, direction);
 
-            user.SendMessageAsReflection("TwitchChannelSubscriptions", channelSubscriptions);
+            user.SendMessageAsReflection("ChannelSubscriptions", channelSubscriptions);
         }
 
     }

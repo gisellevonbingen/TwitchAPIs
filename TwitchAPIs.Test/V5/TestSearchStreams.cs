@@ -26,7 +26,7 @@ namespace TwitchAPIs.Test.V5
             var hlsMode = user.QueryInput("Enter HLS", HLSMode.Register, null, true).Value;
 
             var streams = handler.API.V5.Search.SearchStreams(query, limit, offset, hlsMode);
-            user.SendMessageAsReflection($"TwitchSearchStreams", streams);
+            user.SendMessageAsReflection("SearchStreams", streams);
         }
 
     }

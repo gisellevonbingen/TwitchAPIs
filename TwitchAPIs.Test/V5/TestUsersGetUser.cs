@@ -19,7 +19,7 @@ namespace TwitchAPIs.Test.V5
             var handler = main.TwitchAPIHandler;
 
             var tuser = handler.API.V5.Users.GetUser();
-            user.SendMessageAsReflection("TwitchUser", tuser);
+            user.SendMessageAsReflection("User", tuser);
         }
 
     }

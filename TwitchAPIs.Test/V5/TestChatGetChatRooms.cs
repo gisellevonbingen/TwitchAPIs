@@ -22,7 +22,7 @@ namespace TwitchAPIs.Test.V5
             var channelId = user.ReadInput("Enter Channel Id").AsString;
             var rooms = handler.API.V5.Chat.GetChatRooms(channelId);
 
-            user.SendMessageAsReflection($"{channelId}'s Rooms", rooms);
+            user.SendMessageAsReflection($"ChatRooms", rooms);
         }
 
     }

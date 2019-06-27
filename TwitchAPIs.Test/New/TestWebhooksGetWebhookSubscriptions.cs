@@ -27,7 +27,7 @@ namespace TwitchAPIs.Test.New
             {
                 var subscriptions = handler.API.New.Webhooks.GetWebhookSubscriptions(after, first);
                 after = subscriptions.Pagination?.Cursor;
-                user.SendMessageAsReflection("TwitchWebhookSubscriptions", subscriptions);
+                user.SendMessageAsReflection("WebhookSubscriptions", subscriptions);
 
                 if (string.IsNullOrWhiteSpace(after) == true || user.ReadBreak() == true)
                 {

@@ -32,7 +32,7 @@ namespace TwitchAPIs.Test.New
             while (true)
             {
                 var streams = handler.API.New.Streams.GetStreams(options);
-                user.SendMessageAsReflection("TwitchStreams", streams);
+                user.SendMessageAsReflection("Streams", streams);
 
                 options.After = null;
                 options.Before = null;

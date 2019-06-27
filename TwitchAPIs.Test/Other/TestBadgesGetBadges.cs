@@ -34,7 +34,7 @@ namespace TwitchAPIs.Test.Other
                 set = badges.GetChannelBadges(channelId);
             }
 
-            user.SendMessageAsReflection($"{channelId}", set);
+            user.SendMessageAsReflection("Badges", set);
 
         }
 

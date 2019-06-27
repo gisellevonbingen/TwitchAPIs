@@ -22,7 +22,7 @@ namespace TwitchAPIs.Test.V5
             var loginList = user.ReadInputWhileBreak("Enter User Login");
             var users = handler.API.V5.Users.GetUsers(loginList);
 
-            user.SendMessageAsReflection("TwtichUsers", users);
+            user.SendMessageAsReflection("Users", users);
         }
 
     }

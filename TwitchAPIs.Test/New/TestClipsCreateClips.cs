@@ -24,7 +24,7 @@ namespace TwitchAPIs.Test.New
             var hasDelay = user.ReadInput("Enter Has Delay as bool").AsBool;
             var clipEdit = handler.API.New.Clips.CreateClip(broadcasterId, hasDelay);
 
-            user.SendMessageAsReflection("TwitchClipEdit", clipEdit);
+            user.SendMessageAsReflection("ClipEdit", clipEdit);
         }
 
     }

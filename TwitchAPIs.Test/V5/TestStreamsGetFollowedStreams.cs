@@ -21,7 +21,7 @@ namespace TwitchAPIs.Test.V5
 
             var followedStreams = handler.API.V5.Streams.GetFollowedStreams();
 
-            user.SendMessageAsReflection("TwitchFollowedStreams", followedStreams);
+            user.SendMessageAsReflection("FollowedStreams", followedStreams);
         }
 
     }
