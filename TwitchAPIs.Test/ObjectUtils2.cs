@@ -26,6 +26,10 @@ namespace TwitchAPIs.Test
             {
                 list.Add(new PrintableLine(level, $"'{TwitchTimeSpanUtils.ToString(span)}'"));
             }
+            else if (obj is ValueEnum ve)
+            {
+                list.Add(new PrintableLine(level, $"'{ve}'"));
+            }
             else if (obj is IConvertible convertible)
             {
                 list.Add(new PrintableLine(level, $"'{convertible}'"));

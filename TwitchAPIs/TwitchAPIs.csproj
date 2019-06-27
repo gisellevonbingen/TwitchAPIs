@@ -69,6 +69,7 @@
     <Compile Include="New\StreamMetadataOverwatch.cs" />
     <Compile Include="New\Pagination.cs" />
     <Compile Include="New\StreamMetadataAbstract.cs" />
+    <Compile Include="New\StreamType.cs" />
     <Compile Include="New\TwitchAPIStreams.cs" />
     <Compile Include="New\TwitchAPIVideos.cs" />
     <Compile Include="New\TwitchAPIWebhooks.cs" />
@@ -84,6 +85,10 @@
     <Compile Include="New\TwitchVideos.cs" />
     <Compile Include="New\TwitchWebhookSubscription.cs" />
     <Compile Include="New\TwitchWebhookSubscriptions.cs" />
+    <Compile Include="New\BroadcasterType.cs" />
+    <Compile Include="New\UserType.cs" />
+    <Compile Include="New\VideoType.cs" />
+    <Compile Include="New\VideoViewable.cs" />
     <Compile Include="TwitchTimeSpanUtils.cs" />
     <Compile Include="V5\TopClipsPeriod.cs" />
     <Compile Include="V5\HLSMode.cs" />
@@ -169,7 +174,7 @@
     <Compile Include="V5\TwitchChatRoom.cs" />
     <Compile Include="V5\TwitchBitAction.cs" />
     <Compile Include="New\UserRequest.cs" />
-    <Compile Include="New\UserType.cs" />
+    <Compile Include="New\UserRequestType.cs" />
     <Compile Include="V5\TwitchAPIUsers.cs" />
     <Compile Include="V5\TwitchAPIV5.cs" />
     <Compile Include="V5\TwitchUserNotifications.cs" />

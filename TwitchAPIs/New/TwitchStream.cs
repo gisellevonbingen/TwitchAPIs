@@ -14,7 +14,7 @@ namespace TwitchAPIs.New
         public string UserName { get; set; }
         public string GameId { get; set; }
         public string[] CommunityIds { get; set; }
-        public string Type { get; set; }
+        public StreamType Type { get; set; }
         public string Title { get; set; }
         public int ViewerCount { get; set; }
         public DateTime StartedAt { get; set; }
@@ -34,7 +34,7 @@ namespace TwitchAPIs.New
             this.UserName = jToken.Value<string>("user_name");
             this.GameId = jToken.Value<string>("game_id");
             this.CommunityIds = jToken.ArrayValues<string>("community_ids");
-            this.Type = jToken.Value<string>("type");
+            this.Type = StreamType.Register.FromValue(jToken.Value<string>("type"));
             this.Title = jToken.Value<string>("title");
             this.ViewerCount = jToken.Value<int>("viewer_count");
             this.StartedAt = jToken.Value<DateTime>("started_at");

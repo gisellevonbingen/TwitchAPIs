@@ -8,11 +8,11 @@ namespace TwitchAPIs.New
 {
     public struct UserRequest : IEquatable<UserRequest>
     {
-        public UserType Type { get; set; }
+        public UserRequestType Type { get; set; }
 
         public string Value { get; set; }
 
-        public UserRequest(UserType type, string value) : this()
+        public UserRequest(UserRequestType type, string value) : this()
         {
             this.Type = type;
             this.Value = value;

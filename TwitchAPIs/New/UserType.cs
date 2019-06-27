@@ -10,8 +10,10 @@ namespace TwitchAPIs.New
     {
         public static EnumRegister<UserType, string> Register { get; } = new EnumRegister<UserType, string>();
 
-        public static UserType Id { get; } = new UserType(nameof(Id), "id");
-        public static UserType Login { get; } = new UserType(nameof(Login), "login");
+        public static UserType Staff { get; } = new UserType(nameof(Staff), "staff");
+        public static UserType Admin { get; } = new UserType(nameof(Admin), "admin");
+        public static UserType GlobalMod { get; } = new UserType(nameof(GlobalMod), "global_mod");
+        public static UserType None { get; } = new UserType(nameof(None), "");
 
         private UserType(string name, string value) : base(name, value)
         {

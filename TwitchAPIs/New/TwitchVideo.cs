@@ -18,10 +18,10 @@ namespace TwitchAPIs.New
         public DateTime PublishedAt { get; set; }
         public string Url { get; set; }
         public string ThumbnailUrl { get; set; }
-        public string Viewable { get; set; }
+        public VideoViewable Viewable { get; set; }
         public string ViewCount { get; set; }
         public string Language { get; set; }
-        public string Type { get; set; }
+        public VideoType Type { get; set; }
         public TimeSpan Duration { get; set; }
 
         public TwitchVideo()
@@ -40,10 +40,10 @@ namespace TwitchAPIs.New
             this.PublishedAt = jToken.Value<DateTime>("published_at");
             this.Url = jToken.Value<string>("url");
             this.ThumbnailUrl = jToken.Value<string>("thumbnail_url");
-            this.Viewable = jToken.Value<string>("viewable");
+            this.Viewable = VideoViewable.Register.FromValue(jToken.Value<string>("viewable"));
             this.ViewCount = jToken.Value<string>("view_count");
             this.Language = jToken.Value<string>("language");
-            this.Type = jToken.Value<string>("type");
+            this.Type = VideoType.Register.FromValue(jToken.Value<string>("type"));
             this.Duration = TwitchTimeSpanUtils.ToTimeSpan(jToken.Value<string>("duration"));
         }
 

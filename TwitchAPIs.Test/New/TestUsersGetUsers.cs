@@ -24,7 +24,7 @@ namespace TwitchAPIs.Test.New
 
             while (true)
             {
-                var typeInput = user.QueryInput("Enter UserType", UserType.Register, null, true);
+                var typeInput = user.QueryInput("Enter UserType", UserRequestType.Register, null, true);
 
                 if (typeInput.Breaked == true)
                 {

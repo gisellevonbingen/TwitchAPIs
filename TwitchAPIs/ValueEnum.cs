@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace TwitchAPIs
 {
-    public class ValueEnum<T>
+    public interface ValueEnum
+    {
+        string Name { get; }
+
+    }
+
+    public class ValueEnum<T> : ValueEnum
     {
         public string Name { get; }
         public T Value { get; }
