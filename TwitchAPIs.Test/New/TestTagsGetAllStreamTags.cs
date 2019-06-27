@@ -21,20 +21,8 @@ namespace TwitchAPIs.Test.New
             var user = main.User;
             var handler = main.TwitchAPIHandler;
 
-            var first = NumberUtils.ToIntNullable(user.ReadInput("Enter First as int"));
-            var tagIds = new List<string>();
-
-            while (true)
-            {
-                var item = user.ReadInput("Enter TagId (Emtpy is break)");
-
-                if (string.IsNullOrWhiteSpace(item) == true)
-                {
-                    break;
-                }
-
-                tagIds.Add(item);
-            }
+            var first = user.ReadInput("Enter First as int").AsInt;
+            var tagIds = new List<string>(user.ReadInputWhileBreak("Enter Tag Id"));
 
             string cursor = null;
 

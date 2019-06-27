@@ -21,11 +21,11 @@ namespace TwitchAPIs.Test.New
             var user = main.User;
             var handler = main.TwitchAPIHandler;
 
-            var callback = user.ReadInput("Enter Calllback");
-            var mode = user.QueryInput("Enter Mode", HubMode.Register, v => v.Name, true).Value;
-            var topic = user.ReadInput("Enter Topic");
-            var leaseSeconds = NumberUtils.ToIntNullable(user.ReadInput("Enter Lease Seconds as int"));
-            var secret = user.ReadInput("Enter Secret");
+            var callback = user.ReadInput("Enter Calllback").AsString;
+            var mode = user.QueryInput("Enter Mode", HubMode.Register, null, true).Value;
+            var topic = user.ReadInput("Enter Topic").AsString;
+            var leaseSeconds = user.ReadInput("Enter Lease Seconds as int").AsInt;
+            var secret = user.ReadInput("Enter Secret").AsString;
 
             var result = handler.API.New.Webhooks.PostHub(callback, mode, topic, leaseSeconds, secret);
             user.SendMessage(result);

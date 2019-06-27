@@ -28,7 +28,7 @@ namespace TwitchAPIs.Test
         public bool Create()
         {
             var user = this.User;
-            var clientId = user.ReadInput("Enter Client-ID");
+            var clientId = user.ReadInput("Enter Client-ID").AsString;
             var api = this.API = new TwitchAPI();
             api.ClientId = clientId;
 
@@ -75,20 +75,20 @@ namespace TwitchAPIs.Test
                 return null;
             }
 
-            request.Scopes.AddRange(user.ReadInput($"Enter Scopes, '{OAuthRequest.ScopeSeparater}' separated").Split(OAuthRequest.ScopeSeparater));
+            request.Scopes.AddRange(user.ReadInput($"Enter Scopes, '{OAuthRequest.ScopeSeparater}' separated").AsString.Split(OAuthRequest.ScopeSeparater));
 
             if (request is OAuthRequestAuthorizationCode auth)
             {
-                auth.ClientSecret = user.ReadInput("Enter Client-Secret");
+                auth.ClientSecret = user.ReadInput("Enter Client-Secret").AsString;
             }
             else if (request is OAuthRequestClientCredentials client)
             {
-                client.ClientSecret = user.ReadInput("Enter Client-Secret");
+                client.ClientSecret = user.ReadInput("Enter Client-Secret").AsString;
             }
 
             if (request is OAuthRequestCode code)
             {
-                code.RedirectUri = user.ReadInput("Enter Redirect Uri");
+                code.RedirectUri = user.ReadInput("Enter Redirect Uri").AsString;
                 code.ForceVerify = false;
                 code.State = Guid.NewGuid().ToString().Replace("-", "");
             }

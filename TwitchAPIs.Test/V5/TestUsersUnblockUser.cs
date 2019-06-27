@@ -19,8 +19,8 @@ namespace TwitchAPIs.Test.V5
             var user = main.User;
             var handler = main.TwitchAPIHandler;
 
-            var sourceUserId = user.ReadInput("Enter Source User Id");
-            var targetUserId = user.ReadInput("Enter Target User Id");
+            var sourceUserId = user.ReadInput("Enter Source User Id").AsString;
+            var targetUserId = user.ReadInput("Enter Target User Id").AsString;
             handler.API.V5.Users.UnblockUser(sourceUserId, targetUserId);
 
             user.SendMessage("UnblockUser");

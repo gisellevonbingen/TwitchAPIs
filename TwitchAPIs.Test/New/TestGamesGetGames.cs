@@ -19,9 +19,8 @@ namespace TwitchAPIs.Test.New
             var user = main.User;
             var handler = main.TwitchAPIHandler;
 
-            var id = user.ReadInput("Enter Id");
-            var name = user.ReadInput("Enter Name");
-
+            var id = user.ReadInput("Enter Id").AsString;
+            var name = user.ReadInput("Enter Name").AsString;
             var games = handler.API.New.Games.GetGames(id, name);
 
             user.SendMessageAsReflection("Games", games);

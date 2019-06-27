@@ -23,11 +23,11 @@ namespace TwitchAPIs.Test.New
 
             var options = new TwitchGetVideosOptions();
             options.Ids.AddRange(user.ReadInputWhileBreak("Enter Id"));
-            options.UserId = user.ReadInput("Enter User Id");
-            options.GameId = user.ReadInput("Enter Game Id");
+            options.UserId = user.ReadInput("Enter User Id").AsString;
+            options.GameId = user.ReadInput("Enter Game Id").AsString;
 
-            options.First = NumberUtils.ToIntNullable(user.ReadInput("Enter First as int"));
-            options.Language = user.ReadInput("Enter Language");
+            options.First = user.ReadInput("Enter First as int").AsInt;
+            options.Language = user.ReadInput("Enter Language").AsString;
             options.Period = user.QueryInput("Enter Period", GetVideoOptionsPeriod.Register, null, true).Value;
             options.Sort = user.QueryInput("Enter Sort", GetVideoOptionsSort.Register, null, true).Value;
             options.Type = user.QueryInput("Enter Type", GetVideoOptionsType.Register, null, true).Value;

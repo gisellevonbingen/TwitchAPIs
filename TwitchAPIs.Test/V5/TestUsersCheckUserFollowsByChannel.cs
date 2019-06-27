@@ -18,8 +18,8 @@ namespace TwitchAPIs.Test.V5
             var user = main.User;
             var handler = main.TwitchAPIHandler;
 
-            var userId = user.ReadInput("Enter User Id");
-            var channelId = user.ReadInput("Enter Channel Id");
+            var userId = user.ReadInput("Enter User Id").AsString;
+            var channelId = user.ReadInput("Enter Channel Id").AsString;
             var follow = handler.API.V5.Users.CheckUserFollowsByChannel(userId, channelId);
 
             user.SendMessageAsReflection("TwitchFollow", follow);

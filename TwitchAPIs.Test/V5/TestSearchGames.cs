@@ -20,10 +20,10 @@ namespace TwitchAPIs.Test.V5
             var user = main.User;
             var handler = main.TwitchAPIHandler;
 
-            string query = user.ReadInput("Enter Query");
-            bool? live = NumberUtils.ToBoolNullable(user.ReadInput("Enter Live"));
-
+            var query = user.ReadInput("Enter Query").AsString;
+            var live = user.ReadInput("Enter Live as bool").AsBool;
             var games = handler.API.V5.Search.SearchGames(query, live);
+
             user.SendMessageAsReflection($"TwitchGames", games);
         }
 

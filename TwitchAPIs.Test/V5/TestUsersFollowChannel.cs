@@ -20,9 +20,9 @@ namespace TwitchAPIs.Test.V5
             var user = main.User;
             var handler = main.TwitchAPIHandler;
 
-            var userId = user.ReadInput("Enter UserId");
-            var channelId = user.ReadInput("Enter ChannelId");
-            var notifications = NumberUtils.ToBoolNullable(user.ReadInput("Enter Notifications as bool"));
+            var userId = user.ReadInput("Enter UserId").AsString;
+            var channelId = user.ReadInput("Enter ChannelId").AsString;
+            var notifications = user.ReadInput("Enter Notifications as bool").AsBool;
             var follow = handler.API.V5.Users.FollowChannel(userId, channelId, notifications);
 
             user.SendMessageAsReflection("Follow", follow);

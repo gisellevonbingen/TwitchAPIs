@@ -22,11 +22,11 @@ namespace TwitchAPIs.Test.V5
 
             var options = new TwitchGetLiveStreamsOptions();
             options.Channels.AddRange(user.ReadInputWhileBreak("Enter ChannelId"));
-            options.Game = user.ReadInput("Enter Game");
-            options.Language = user.ReadInput("Enter Language");
+            options.Game = user.ReadInput("Enter Game").AsString;
+            options.Language = user.ReadInput("Enter Language").AsString;
             options.StreamType = user.QueryInput("Enter StremType", StreamType.Register, null, true).Value;
-            options.Limit = NumberUtils.ToIntNullable(user.ReadInput("Enter Limit as int"));
-            options.Offset = NumberUtils.ToIntNullable(user.ReadInput("Enter Offset as int"));
+            options.Limit = user.ReadInput("Enter Limit as int").AsInt;
+            options.Offset = user.ReadInput("Enter Offset as int").AsInt;
             var liveStreams = handler.API.V5.Streams.GetLiveStreams(options);
 
             user.SendMessageAsReflection("TwitchLiveStreams", liveStreams);

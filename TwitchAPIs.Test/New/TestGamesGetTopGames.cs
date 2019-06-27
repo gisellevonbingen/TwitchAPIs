@@ -20,7 +20,7 @@ namespace TwitchAPIs.Test.New
             var user = main.User;
             var handler = main.TwitchAPIHandler;
 
-            var first = NumberUtils.ToIntNullable(user.ReadInput("Enter First as int"));
+            var first = user.ReadInput("Enter First as int").AsInt;
 
             string after = null;
             string before = null;

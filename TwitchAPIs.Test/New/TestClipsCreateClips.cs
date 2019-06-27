@@ -20,8 +20,8 @@ namespace TwitchAPIs.Test.New
             var user = main.User;
             var handler = main.TwitchAPIHandler;
 
-            var broadcasterId = user.ReadInput("Enter Broadcaster Id");
-            var hasDelay = NumberUtils.ToBoolNullable(user.ReadInput("Enter Has Delay"));
+            var broadcasterId = user.ReadInput("Enter Broadcaster Id").AsString;
+            var hasDelay = user.ReadInput("Enter Has Delay as bool").AsBool;
             var clipEdit = handler.API.New.Clips.CreateClip(broadcasterId, hasDelay);
 
             user.SendMessageAsReflection("TwitchClipEdit", clipEdit);

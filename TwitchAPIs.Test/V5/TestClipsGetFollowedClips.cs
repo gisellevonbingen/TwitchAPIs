@@ -20,8 +20,8 @@ namespace TwitchAPIs.Test.V5
             var user = main.User;
             var handler = main.TwitchAPIHandler;
 
-            var limit = NumberUtils.ToLongNullable(user.ReadInput("Enter Limit as long"));
-            var trending = NumberUtils.ToBoolNullable(user.ReadInput("Enter Trending as bool"));
+            var limit = user.ReadInput("Enter Limit as long").AsLong;
+            var trending = user.ReadInput("Enter Trending as bool").AsBool;
 
             string cursor = null;
 

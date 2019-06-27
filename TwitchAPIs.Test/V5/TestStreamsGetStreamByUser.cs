@@ -20,7 +20,7 @@ namespace TwitchAPIs.Test.V5
             var user = main.User;
             var handler = main.TwitchAPIHandler;
 
-            var channelId = user.ReadInput("Enter Channel Id");
+            var channelId = user.ReadInput("Enter Channel Id").AsString;
             var type = user.QueryInput("Enter StremType", StreamType.Register, null, true).Value;
             var stream = handler.API.V5.Streams.GetStreamByUser(channelId, type);
 

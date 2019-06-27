@@ -20,8 +20,8 @@ namespace TwitchAPIs.Test.V5
             var user = main.User;
             var handler = main.TwitchAPIHandler;
 
-            var limit = NumberUtils.ToIntNullable(user.ReadInput("Enter Limit as int"));
-            var offset = NumberUtils.ToIntNullable(user.ReadInput("Enter Offset as int"));
+            var limit = user.ReadInput("Enter Limit as int").AsInt;
+            var offset = user.ReadInput("Enter Offset as int").AsInt;
             var featuredStreams = handler.API.V5.Streams.GetFeaturedStreams(limit, offset);
 
             user.SendMessageAsReflection("TwitchFeaturedStreams", featuredStreams);

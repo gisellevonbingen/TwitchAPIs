@@ -23,12 +23,12 @@ namespace TwitchAPIs.Test.New
             var handler = main.TwitchAPIHandler;
 
             var options = new TwitchGetClipsOptions();
-            options.BroadcasterId = user.ReadInput("Enter BroadcasterId");
-            options.GameId = user.ReadInput("Enter GameId");
+            options.BroadcasterId = user.ReadInput("Enter BroadcasterId").AsString;
+            options.GameId = user.ReadInput("Enter GameId").AsString;
             options.Ids.AddRange(user.ReadInputWhileBreak("Enter Id"));
-            options.First = NumberUtils.ToIntNullable(user.ReadInput("Enter First as int"));
-            options.StartedAt = TwitchDateTimeUtils.ToDatetime(user.ReadInput("Enter StartedAt as TwtichDateTime"));
-            options.EndedAt = TwitchDateTimeUtils.ToDatetime(user.ReadInput("Enter EndedAt as TwtichDateTime"));
+            options.First = user.ReadInput("Enter First as int").AsInt;
+            options.StartedAt = TwitchDateTimeUtils.ToDatetime(user.ReadInput("Enter StartedAt as TwtichDateTime").AsString);
+            options.EndedAt = TwitchDateTimeUtils.ToDatetime(user.ReadInput("Enter EndedAt as TwtichDateTime").AsString);
 
             string cursor = null;
 

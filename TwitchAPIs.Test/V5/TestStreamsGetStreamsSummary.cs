@@ -19,7 +19,7 @@ namespace TwitchAPIs.Test.V5
             var user = main.User;
             var handler = main.TwitchAPIHandler;
 
-            var game = user.ReadInput("Enter Game");
+            var game = user.ReadInput("Enter Game").AsString;
             var streamsSummary = handler.API.V5.Streams.GetStreamsSummary(game);
 
             user.SendMessageAsReflection("TwitchStreamsSummary", streamsSummary);

@@ -19,7 +19,7 @@ namespace TwitchAPIs.Test.New
             var user = main.User;
             var handler = main.TwitchAPIHandler;
 
-            var description = user.ReadInput("Enter Descrption");
+            var description = user.ReadInput("Enter Descrption").AsString;
             var tuser = handler.API.New.Users.UpdateUser(description);
 
             user.SendMessageAsReflection("Updated User", tuser);

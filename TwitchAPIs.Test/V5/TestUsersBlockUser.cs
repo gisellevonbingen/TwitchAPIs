@@ -19,8 +19,8 @@ namespace TwitchAPIs.Test.V5
             var user = main.User;
             var handler = main.TwitchAPIHandler;
 
-            var sourceUserId = user.ReadInput("Enter Source User Id");
-            var targetUserId = user.ReadInput("Enter Target User Id");
+            var sourceUserId = user.ReadInput("Enter Source User Id").AsString;
+            var targetUserId = user.ReadInput("Enter Target User Id").AsString;
             var tuser = handler.API.V5.Users.BlockUser(sourceUserId, targetUserId);
 
             user.SendMessageAsReflection("BlockUser", tuser);

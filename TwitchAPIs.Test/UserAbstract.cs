@@ -32,7 +32,7 @@ namespace TwitchAPIs.Test
 
         protected abstract string OnReadInput();
 
-        public virtual string ReadInput()
+        public virtual InputResult ReadInput()
         {
             var input = this.OnReadInput();
             var returnInput = this.ReturnInput;
@@ -42,7 +42,7 @@ namespace TwitchAPIs.Test
                 throw new UserInputReturnException();
             }
 
-            return input;
+            return new InputResult(input);
         }
 
         public virtual string GetBreakMessage()
@@ -69,7 +69,7 @@ namespace TwitchAPIs.Test
         public virtual bool ReadBreak(string breakMessage, string breakInput)
         {
             var input = this.ReadInput(breakMessage);
-            return this.IsBreak(breakInput, input);
+            return this.IsBreak(breakInput, input.AsString);
         }
 
         public virtual bool IsBreak(string input)
@@ -82,7 +82,7 @@ namespace TwitchAPIs.Test
             return input.Equals(breakInput, StringComparison.OrdinalIgnoreCase);
         }
 
-        public virtual string ReadInput(string message)
+        public virtual InputResult ReadInput(string message)
         {
             this.SendMessage(message);
 
@@ -127,9 +127,10 @@ namespace TwitchAPIs.Test
                     this.SendMessage(breakMessage);
                 }
 
-                string input = this.ReadInput(message);
+                var input = this.ReadInput(message);
+                var asIntNullable = input.AsInt;
 
-                if (input.Equals(breakInput) == true)
+                if (this.IsBreak(input.AsString, breakInput) == true)
                 {
                     if (breakable == true)
                     {
@@ -137,9 +138,15 @@ namespace TwitchAPIs.Test
                     }
 
                 }
-                else if (int.TryParse(input, out int index) == true && 0 <= index && index < array.Length)
+                else if (asIntNullable.HasValue == true)
                 {
-                    return new QueryResult<T>(index, array[index], false);
+                    var index = asIntNullable.Value;
+
+                    if (0 <= index && index < array.Length)
+                    {
+                        return new QueryResult<T>(index, array[index], false);
+                    }
+
                 }
 
                 this.SendMessage();

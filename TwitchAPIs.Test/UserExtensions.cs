@@ -10,10 +10,10 @@ namespace TwitchAPIs.Test
     {
         public static List<string> ReadInputWhileBreak(this UserAbstract user, string message)
         {
-            return ReadInputWhileBreak(user, message, (u, s) => s);
+            return ReadInputWhileBreak(user, message, (u, ir) => ir.AsString);
         }
 
-        public static List<T> ReadInputWhileBreak<T>(this UserAbstract user, string message, Func<UserAbstract, string, T> func)
+        public static List<T> ReadInputWhileBreak<T>(this UserAbstract user, string message, Func<UserAbstract, InputResult, T> func)
         {
             var list = new List<T>();
 
@@ -24,7 +24,7 @@ namespace TwitchAPIs.Test
 
                 var input = user.ReadInput();
 
-                if (user.IsBreak(input) == true)
+                if (user.IsBreak(input.AsString) == true)
                 {
                     break;
                 }

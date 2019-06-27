@@ -18,7 +18,7 @@ namespace TwitchAPIs.Test.New
             var user = main.User;
             var handler = main.TwitchAPIHandler;
 
-            var broadcasterId = user.ReadInput("Enter Broadcaster Id");
+            var broadcasterId = user.ReadInput("Enter Broadcaster Id").AsString;
             var tagsId = user.ReadInputWhileBreak("Enter Tag Id");
             handler.API.New.Tags.ReplaceStreamTags(broadcasterId, tagsId);
         }

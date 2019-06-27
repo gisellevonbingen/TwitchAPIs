@@ -33,7 +33,7 @@ namespace TwitchAPIs.Test.New
 
                 var request = new UserRequest();
                 request.Type = typeInput.Value;
-                request.Value = user.ReadInput("Enter User" + request.Type);
+                request.Value = user.ReadInput($"Enter User{request.Type}").AsString;
 
                 requests.Add(request);
             }

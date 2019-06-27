@@ -20,11 +20,11 @@ namespace TwitchAPIs.Test.V5
             var user = main.User;
             var handler = main.TwitchAPIHandler;
 
-            string query = user.ReadInput("Enter Query");
-            int? limit = NumberUtils.ToIntNullable(user.ReadInput("Enter Limit"));
-            int? offset = NumberUtils.ToIntNullable(user.ReadInput("Enter Offset"));
-
+            var query = user.ReadInput("Enter Query").AsString;
+            var limit = user.ReadInput("Enter Limit").AsInt;
+            var offset = user.ReadInput("Enter Offset").AsInt;
             var channels = handler.API.V5.Search.SearchChannels(query, limit, offset);
+
             user.SendMessageAsReflection($"TwitchChannels", channels);
         }
 

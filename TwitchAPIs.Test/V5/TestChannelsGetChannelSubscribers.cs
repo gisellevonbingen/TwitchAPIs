@@ -21,9 +21,9 @@ namespace TwitchAPIs.Test.V5
             var user = main.User;
             var handler = main.TwitchAPIHandler;
 
-            var channelId = user.ReadInput("Enter Channels");
-            var limit = NumberUtils.ToIntNullable(user.ReadInput("Enter Limit as int"));
-            var offset = NumberUtils.ToIntNullable(user.ReadInput("Enter Offset as int"));
+            var channelId = user.ReadInput("Enter Channels").AsString;
+            var limit = user.ReadInput("Enter Limit as int").AsInt;
+            var offset = user.ReadInput("Enter Offset as int").AsInt;
             var direction = user.QueryInput("Enter Direction", SortDirection.Register, null, true).Value;
             var channelSubscriptions = handler.API.V5.Channels.GetChannelSubscribers(channelId, limit, offset, direction);
 

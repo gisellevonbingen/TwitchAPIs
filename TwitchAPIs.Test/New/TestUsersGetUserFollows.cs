@@ -22,9 +22,9 @@ namespace TwitchAPIs.Test.New
             var user = main.User;
             var handler = main.TwitchAPIHandler;
 
-            var first = NumberUtils.ToIntNullable(user.ReadInput("Enter First as int"));
-            var fromId = user.ReadInput("Enter From Id, show followings");
-            var toId = user.ReadInput("Enter To Id, show followers");
+            var first = user.ReadInput("Enter First as int").AsInt;
+            var fromId = user.ReadInput("Enter From Id, show followings").AsString;
+            var toId = user.ReadInput("Enter To Id, show followers").AsString;
 
             var api = handler.API;
             string cursor = null;

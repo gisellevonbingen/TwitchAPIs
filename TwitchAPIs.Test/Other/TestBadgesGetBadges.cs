@@ -21,7 +21,7 @@ namespace TwitchAPIs.Test.Other
             var user = main.User;
             var handler = main.TwitchAPIHandler;
 
-            var channelId = user.ReadInput("Channel-Id(Empty is Global)");
+            var channelId = user.ReadInput("Channel Id(Empty is Global)").AsString;
             var badges = handler.API.Badges;
             TwitchBadgeSet set = null;
 

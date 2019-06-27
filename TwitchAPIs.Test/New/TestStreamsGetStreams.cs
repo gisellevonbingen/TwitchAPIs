@@ -23,7 +23,7 @@ namespace TwitchAPIs.Test.New
 
             var options = new TwitchGetStreamsOptions();
             options.CommunityIds.AddRange(user.ReadInputWhileBreak("Enter Community Id"));
-            options.First = NumberUtils.ToIntNullable(user.ReadInput("Enter First as int"));
+            options.First = user.ReadInput("Enter First as int").AsInt;
             options.GameIds.AddRange(user.ReadInputWhileBreak("Enter Game Id"));
             options.Languages.AddRange(user.ReadInputWhileBreak("Enter Language"));
             options.UserIds.AddRange(user.ReadInputWhileBreak("Enter User Id"));

@@ -22,9 +22,9 @@ namespace TwitchAPIs.Test.V5
             var user = main.User;
             var handler = main.TwitchAPIHandler;
 
-            var userId = user.ReadInput("Enter UserId");
-            var limit = NumberUtils.ToIntNullable(user.ReadInput("Enter Limit as int"));
-            var offset = NumberUtils.ToIntNullable(user.ReadInput("Enter Offset as int"));
+            var userId = user.ReadInput("Enter UserId").AsString;
+            var limit = user.ReadInput("Enter Limit as int").AsInt;
+            var offset = user.ReadInput("Enter Offset as int").AsInt;
             var direction = user.QueryInput("Enter Direction", SortDirection.Register, null, true).Value;
             var sortby = user.QueryInput("Enter Sortby", FollowSortMode.Register, null, true).Value;
             var userFollows = handler.API.V5.Users.GetUserFollows(userId, limit, offset, direction, sortby);
