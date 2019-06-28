@@ -68,6 +68,7 @@
     <Compile Include="New\TestStreamsGetStreams.cs" />
     <Compile Include="ObjectUtils2.cs" />
     <Compile Include="Other\TestBadgesTwitchTVGetChannelBadges.cs" />
+    <Compile Include="Other\TestCbenniAPIGetBadges.cs" />
     <Compile Include="PrintableLine.cs" />
     <Compile Include="QueryResult.cs" />
     <Compile Include="TestStep.cs" />
