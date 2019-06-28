@@ -9,13 +9,11 @@ namespace TwitchAPIs.Test
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
     public class TwitchAPITestAttribute : Attribute
     {
-        public string Version { get; }
-        public string Resource { get; }
+        public string[] Steps { get; }
 
-        public TwitchAPITestAttribute(string version, string resource)
+        public TwitchAPITestAttribute(params string[] steps)
         {
-            this.Version = version;
-            this.Resource = resource;
+            this.Steps = steps;
         }
 
     }

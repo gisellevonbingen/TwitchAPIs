@@ -59,7 +59,7 @@ namespace TwitchAPIs.Test
         private void RunTest()
         {
             var user = this.User;
-            var testMap = this.GetTestMap();
+            var mainStep = this.GetTestStep();
 
             user.SendMessage();
             user.SendMessage();
@@ -71,19 +71,27 @@ namespace TwitchAPIs.Test
                 {
                     user.SendMessage();
 
-                    var versions = testMap.OrderBy(pair => pair.Key);
-                    var versionInput = user.QueryInput("Enter Version", versions, pair => pair.Key);
+                    var parentStep = mainStep;
 
-                    var resources = versionInput.Value.Value.OrderBy(pair => pair.Key);
-                    var reosurceInput = user.QueryInput("Enter Resource", resources, pair => pair.Key);
+                    while (true)
+                    {
+                        var list = new List<KeyValuePair<string, object>>();
+                        list.AddRange(parentStep.Children.Select(s => new KeyValuePair<string, object>(s.Name, s)));
+                        list.AddRange(parentStep.Tests.Select(t => new KeyValuePair<string, object>(t.GetType().Name, t)));
 
-                    var tests = reosurceInput.Value.Value.OrderBy(t => t.GetType().FullName);
-                    var testInput = user.QueryInput("Enter Test", tests, t => t.GetType().Name);
+                        var selected = user.QueryInput("Enter Step, Test", list, pair => pair.Key).Value.Value;
 
-                    var test = testInput.Value;
-                    user.SendMessage("Test - " + test.GetType().Name);
+                        if (selected is TestStep step)
+                        {
+                            parentStep = step;
+                        }
+                        else if (selected is TestAbstract test)
+                        {
+                            test.Run(this);
+                            break;
+                        }
 
-                    test.Run(this);
+                    }
 
                     user.SendMessage();
                 }
@@ -101,10 +109,39 @@ namespace TwitchAPIs.Test
             }
 
         }
-
-        private Dictionary<string, Dictionary<string, List<TestAbstract>>> GetTestMap()
+        private TestStep GetStep(TestStep mainStep, string[] stepNames)
         {
-            var testMap = new Dictionary<string, Dictionary<string, List<TestAbstract>>>();
+            var parent = mainStep;
+
+            foreach (var stepName in stepNames)
+            {
+                parent = this.GetStep(parent, stepName);
+            }
+
+            return parent;
+        }
+
+        private TestStep GetStep(TestStep parent, string stepName)
+        {
+            var step = parent.Children.FirstOrDefault(s => s.Name.Equals(stepName, StringComparison.OrdinalIgnoreCase));
+
+            if (step != null)
+            {
+                return step;
+            }
+            else
+            {
+                step = new TestStep(stepName);
+                parent.Children.Add(step);
+
+                return step;
+            }
+
+        }
+
+        private TestStep GetTestStep()
+        {
+            var mainStep = new TestStep("TwitchAPIs.Test");
 
             var testType = typeof(TestAbstract);
             var types = this.GetType().Assembly.GetTypes();
@@ -114,11 +151,14 @@ namespace TwitchAPIs.Test
                 if (testType.IsAssignableFrom(type) == true && type.Equals(testType) == false)
                 {
                     var testAttribute = type.GetCustomAttribute<TwitchAPITestAttribute>();
+                    var steps = testAttribute?.Steps;
 
-                    if (testAttribute != null)
+                    if (steps != null)
                     {
+                        var step = this.GetStep(mainStep, steps);
                         var testObject = type.GetConstructor(new Type[0]).Invoke(new object[0]) as TestAbstract;
-                        this.AddTestCase(testMap, testAttribute.Version, testAttribute.Resource, testObject);
+
+                        step.Tests.Add(testObject);
                     }
                     else
                     {
@@ -129,24 +169,7 @@ namespace TwitchAPIs.Test
 
             }
 
-            return testMap;
-        }
-
-        private void AddTestCase(Dictionary<string, Dictionary<string, List<TestAbstract>>> tests, string version, string resrouce, TestAbstract test)
-        {
-            if (tests.TryGetValue(version, out var versionMap) == false)
-            {
-                versionMap = new Dictionary<string, List<TestAbstract>>();
-                tests[version] = versionMap;
-            }
-
-            if (versionMap.TryGetValue(resrouce, out var resourceList) == false)
-            {
-                resourceList = new List<TestAbstract>();
-                versionMap[resrouce] = resourceList;
-            }
-
-            resourceList.Add(test);
+            return mainStep;
         }
 
     }

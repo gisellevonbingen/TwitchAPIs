@@ -90,6 +90,9 @@
     <Compile Include="New\UserType.cs" />
     <Compile Include="New\VideoType.cs" />
     <Compile Include="New\VideoViewable.cs" />
+    <Compile Include="Other\BadgesTwitchTV.cs" />
+    <Compile Include="Other\CbenniAPI.cs" />
+    <Compile Include="Other\TwitchAPIOther.cs" />
     <Compile Include="TwitchTimeSpanUtils.cs" />
     <Compile Include="V5\BroadcasterType.cs" />
     <Compile Include="V5\ChatRoomMinimumAllowedRole.cs" />
@@ -174,7 +177,6 @@
     <Compile Include="V5\TwitchUserFollows.cs" />
     <Compile Include="New\TwitchUserFollows.cs" />
     <Compile Include="New\TwitchUser.cs" />
-    <Compile Include="Other\TwitchAPIBadges.cs" />
     <Compile Include="V5\TwitchChatRoom.cs" />
     <Compile Include="V5\TwitchBitAction.cs" />
     <Compile Include="New\UserRequest.cs" />

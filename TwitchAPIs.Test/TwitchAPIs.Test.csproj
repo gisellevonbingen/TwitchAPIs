@@ -67,8 +67,10 @@
     <Compile Include="New\TestWebhooksPostHub.cs" />
     <Compile Include="New\TestStreamsGetStreams.cs" />
     <Compile Include="ObjectUtils2.cs" />
+    <Compile Include="Other\TestBadgesTwitchTVGetChannelBadges.cs" />
     <Compile Include="PrintableLine.cs" />
     <Compile Include="QueryResult.cs" />
+    <Compile Include="TestStep.cs" />
     <Compile Include="TwitchAPITestAttribute.cs" />
     <Compile Include="UserExtensions.cs" />
     <Compile Include="UserInputReturnException.cs" />
@@ -101,7 +103,7 @@
     <Compile Include="V5\TestUsersFollowChannel.cs" />
     <Compile Include="New\TestTagsGetAllStreamTags.cs" />
     <Compile Include="V5\TestChannelsGetChannel.cs" />
-    <Compile Include="Other\TestBadgesGetBadges.cs" />
+    <Compile Include="Other\TestBadgesTwitchTVGetGlobalBadges.cs" />
     <Compile Include="V5\TestChatGetChatRooms.cs" />
     <Compile Include="V5\TestBitsGetCheermotes.cs" />
     <Compile Include="New\TestClipsGetClips.cs" />

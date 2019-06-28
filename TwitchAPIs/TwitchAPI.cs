@@ -20,7 +20,7 @@ namespace TwitchAPIs
     {
         public WebExplorer Web { get; }
         public TwitchAPIAuthentication Authentication { get; }
-        public TwitchAPIBadges Badges { get; }
+        public TwitchAPIOther Other { get; }
 
         public TwitchAPINew New { get; }
         public TwitchAPIV5 V5 { get; }
@@ -33,7 +33,7 @@ namespace TwitchAPIs
         {
             this.Web = new WebExplorer();
             this.Authentication = new TwitchAPIAuthentication(this);
-            this.Badges = new TwitchAPIBadges(this);
+            this.Other = new TwitchAPIOther(this);
 
             this.New = new TwitchAPINew(this);
             this.V5 = new TwitchAPIV5(this);

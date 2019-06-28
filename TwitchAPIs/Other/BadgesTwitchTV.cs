@@ -1,5 +1,4 @@
 ﻿using Giselle.Commons.Web;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,23 +7,10 @@ using System.Threading.Tasks;
 
 namespace TwitchAPIs.Other
 {
-    public class TwitchAPIBadges : TwitchAPIPart
+    public class BadgesTwitchTV : TwitchAPIPart
     {
-        public TwitchAPIBadges(TwitchAPI parent) : base(parent)
+        public BadgesTwitchTV(TwitchAPI parent) : base(parent)
         {
-
-        }
-
-        public TwitchBadgeSet GetIntegrationBadges(string channelName)
-        {
-            var req = new WebRequestParameter();
-            req.Uri = $"https://cbenni.com/api/badges/{channelName}";
-            req.Method = "GET";
-
-            using (var res = this.Parent.Web.Request(req))
-            {
-                return new TwitchBadgeSet(res.ReadAsJson());
-            }
 
         }
 
