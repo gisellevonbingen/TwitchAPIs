@@ -1,6 +1,6 @@
 # TwitchAPIs
 
-Twithc API(New, V5)'s C# Wrapper
+Twithc API(New, V5), Other Third Party's C# Wrapper
 
 ## Examples
 
@@ -166,10 +166,9 @@ private static Uri GetResponseUri(OAuthRequestTokenCode authRequest, string auth
 
 ## References
 * [Twitch Developers Reference](https://dev.twitch.tv/docs/api/reference/)
-* [Badge API](https://discuss.dev.twitch.tv/t/beta-badge-api/6388)
-  * Global - https://badges.twitch.tv/v1/badges/global/display
-  * Channel - https://badges.twitch.tv/v1/badges/channels/{channelId}/display
-  * Integration(Global+Channel) - https://cbenni.com/api/badges/{channelName}
+* [Badges Twitch TV](https://discuss.dev.twitch.tv/t/beta-badge-api/6388)
+* [Cbenni API](https://discuss.dev.twitch.tv/t/beta-badge-api/6388/11)
+* [Twitch Emotes API](https://twitchemotes.com/apidocs)
 
 ## Dependencies
 * [Giselle.Commons](https://github.com/gisellevonbingen/Giselle.Commons)
@@ -251,10 +250,14 @@ private static Uri GetResponseUri(OAuthRequestTokenCode authRequest, string auth
     * [Block User](https://dev.twitch.tv/docs/v5/reference/users/#block-user)
     * [Unblock User](https://dev.twitch.tv/docs/v5/reference/users/#unblock-user)
 * Other
-  * Badges
+  * BadgesTwitchTVs
     * Get Global Badges
     * Get Channel Badges
-    * Get Integration(Global+Channel) Badges
+  * CbenniAPIs
+    * Get Badges (Global+Channel)
+  * TwitchEmotesAPIs
+    * Get Emotes
+    * Get EmoteSets
 
 # TwitchAPIs.Test
 
