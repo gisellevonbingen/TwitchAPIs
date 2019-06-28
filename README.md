@@ -73,7 +73,7 @@ foreach (var block in blockList.Blocks)
 ```CSharp
 var twitchAPI = new TwitchAPI();
 var channelName = "xxxxxxx";
-var badges = twitchAPI.Badges.GetIntegrationBadges(channelName);
+var badges = twitchAPI.Other.CbenniAPI.GetBadges(channelName);
 
 var broadcasterBadge = badges.Get("broadcaster", "1");
 var moderatorBadge = badges.Get("moderator", "1");
@@ -84,15 +84,15 @@ foreach (var namePair in badges.Set)
 {
     var name = namePair.Key;
     var versionSet = namePair.Value;
-    
+
     Console.WriteLine();
     Console.WriteLine($"Name = {name}");
-    
+
     foreach (var versionPair in versionSet)
     {
         var key = versionPair.Key;
         var badge = versionPair.Value;
-        
+
         Console.WriteLine();
         Console.WriteLine($"    Version = {key}");
         Console.WriteLine($"    Title = {badge.Title}");
