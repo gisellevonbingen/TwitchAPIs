@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Giselle.Commons;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,18 @@ namespace TwitchAPIs.V5
         public TwitchAPIChat(TwitchAPI parent) : base(parent)
         {
 
+        }
+
+        public TwitchEmoticonSets GetChatEmoticonsBySet(List<int> emoteSets = null)
+        {
+            var apiRequest = new TwitchAPIRequest();
+            apiRequest.Version = APIVersion.V5;
+            apiRequest.Path = $"chat/emoticon_images";
+            apiRequest.Method = "GET";
+            apiRequest.QueryValues.Add("emotesets", emoteSets?.Join(","));
+            var jToken = this.Parent.RequestAsJson(apiRequest);
+
+            return new TwitchEmoticonSets(jToken);
         }
 
         public TwitchChatRoom[] GetChatRooms(string channelId)
