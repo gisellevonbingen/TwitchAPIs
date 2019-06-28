@@ -90,9 +90,12 @@
     <Compile Include="New\UserType.cs" />
     <Compile Include="New\VideoType.cs" />
     <Compile Include="New\VideoViewable.cs" />
-    <Compile Include="Other\BadgesTwitchTV.cs" />
-    <Compile Include="Other\CbenniAPI.cs" />
+    <Compile Include="Other\BadgesTwitchTVs\BadgesTwitchTV.cs" />
+    <Compile Include="Other\CbenniAPIs\CbenniAPI.cs" />
+    <Compile Include="Other\TwitchEmotesAPIs\Emote.cs" />
     <Compile Include="Other\TwitchAPIOther.cs" />
+    <Compile Include="Other\TwitchEmotesAPIs\EmoteSet.cs" />
+    <Compile Include="Other\TwitchEmotesAPIs\TwitchEmotesAPI.cs" />
     <Compile Include="TwitchTimeSpanUtils.cs" />
     <Compile Include="V5\BroadcasterType.cs" />
     <Compile Include="V5\ChatRoomMinimumAllowedRole.cs" />

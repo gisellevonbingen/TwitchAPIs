@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TwitchAPIs.Other
+namespace TwitchAPIs.Other.BadgesTwitchTVs
 {
     public class BadgesTwitchTV : TwitchAPIPart
     {

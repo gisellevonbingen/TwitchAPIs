@@ -69,6 +69,8 @@
     <Compile Include="ObjectUtils2.cs" />
     <Compile Include="Other\TestBadgesTwitchTVGetChannelBadges.cs" />
     <Compile Include="Other\TestCbenniAPIGetBadges.cs" />
+    <Compile Include="Other\TestTwitchEmotesAPIGetEmotes.cs" />
+    <Compile Include="Other\TestTwitchEmotesAPIGetEmoteSets.cs" />
     <Compile Include="PrintableLine.cs" />
     <Compile Include="QueryResult.cs" />
     <Compile Include="TestStep.cs" />
