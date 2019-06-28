@@ -13,7 +13,7 @@ namespace TwitchAPIs
         public static JToken ReadAsJson(this WebResponse session)
         {
             var content = session.ReadAsString();
-            var jToken = JObject.Parse(content);
+            var jToken = JToken.Parse(content);
 
             return jToken;
         }
