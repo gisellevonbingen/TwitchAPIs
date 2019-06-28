@@ -9,8 +9,6 @@ namespace TwitchAPIs.V5
 {
     public class TwitchGetTopClipsOptions
     {
-        public static string LanguageDelimiter { get; } = ",";
-
         public string Channel { get; set; }
         public string Cursor { get; set; }
         public string Game { get; set; }

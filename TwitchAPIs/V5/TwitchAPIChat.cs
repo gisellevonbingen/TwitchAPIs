@@ -21,7 +21,7 @@ namespace TwitchAPIs.V5
             apiRequest.Version = APIVersion.V5;
             apiRequest.Path = $"chat/emoticon_images";
             apiRequest.Method = "GET";
-            apiRequest.QueryValues.Add("emotesets", emoteSets?.Join(","));
+            apiRequest.QueryValues.Add("emotesets", emoteSets?.Join(TwitchAPIV5.QueryArrayValueDelimiter));
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
             return new TwitchEmoticonSets(jToken);

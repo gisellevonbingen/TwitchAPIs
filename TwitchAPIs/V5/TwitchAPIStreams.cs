@@ -31,7 +31,7 @@ namespace TwitchAPIs.V5
             apiRequest.Version = APIVersion.V5;
             apiRequest.Path = $"streams";
             apiRequest.Method = "GET";
-            apiRequest.QueryValues.Add("channel", string.Join(TwitchGetLiveStreamsOptions.ChannelSeparater, options.Channels));
+            apiRequest.QueryValues.Add("channel", string.Join(TwitchAPIV5.QueryArrayValueDelimiter, options.Channels));
             apiRequest.QueryValues.Add("game", options.Game);
             apiRequest.QueryValues.Add("language", options.Language);
             apiRequest.QueryValues.Add("stream_type", options.StreamType?.Value);

@@ -41,7 +41,7 @@ namespace TwitchAPIs.V5
             apiRequest.Version = APIVersion.V5;
             apiRequest.Path = $"users";
             apiRequest.Method = "GET";
-            apiRequest.QueryValues.Add("login", string.Join(",", logins));
+            apiRequest.QueryValues.Add("login", string.Join(TwitchAPIV5.QueryArrayValueDelimiter, logins));
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
             return jToken.ReadArray("users", t => new TwitchUser(t));

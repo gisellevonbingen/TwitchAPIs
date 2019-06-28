@@ -8,6 +8,8 @@ namespace TwitchAPIs.V5
 {
     public class TwitchAPIV5
     {
+        public static string QueryArrayValueDelimiter { get; } = ",";
+
         public TwitchAPIBits Bits { get; }
         public TwitchAPIChannels Channels { get; }
         public TwitchAPIChat Chat { get; }

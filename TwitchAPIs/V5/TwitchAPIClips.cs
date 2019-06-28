@@ -33,7 +33,7 @@ namespace TwitchAPIs.V5
             apiRequest.QueryValues.Add("channel", options.Channel);
             apiRequest.QueryValues.Add("cursor", options.Cursor);
             apiRequest.QueryValues.Add("game", options.Game);
-            apiRequest.QueryValues.Add("language", string.Join(TwitchGetTopClipsOptions.LanguageDelimiter, options.Languages));
+            apiRequest.QueryValues.Add("language", string.Join(TwitchAPIV5.QueryArrayValueDelimiter, options.Languages));
             apiRequest.QueryValues.Add("limit", options.Limit);
             apiRequest.QueryValues.Add("period", options.Period?.Value);
             apiRequest.QueryValues.Add("trending", options.Trending);
