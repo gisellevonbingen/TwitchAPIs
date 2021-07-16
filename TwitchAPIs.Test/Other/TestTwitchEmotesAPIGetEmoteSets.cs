@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Giselle.Commons.Users;
 
 namespace TwitchAPIs.Test.Other
 {
@@ -19,7 +20,7 @@ namespace TwitchAPIs.Test.Other
             var user = main.User;
             var handler = main.TwitchAPIHandler;
 
-            var setIds = user.ReadInputWhileBreak("Enter Emote Set Id");
+            var setIds = user.ReadInputWhileBreakAsString("Enter Emote Set Id");
             var emotes = handler.API.Other.TwitchEmotesAPI.GetEmoteSets(setIds);
 
             user.SendMessageAsReflection("EmoteSets", emotes);

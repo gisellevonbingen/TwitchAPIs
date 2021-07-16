@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Giselle.Commons.Collections;
+using Giselle.Commons.Tags;
 
 namespace TwitchAPIs.V5
 {
-    public class SortDirection : ValueEnum<string>
+    public class SortDirection : SimpleNameTag
     {
-        public static EnumRegister<SortDirection, string> Register { get; } = new EnumRegister<SortDirection, string>((o, n, v) => new SortDirection(o, n, v));
+        public static SimpleNameTags<SortDirection> Tags { get; } = new SimpleNameTags<SortDirection>();
 
-        public static SortDirection Desc { get; } = Register.Generate(nameof(Desc), "desc");
-        public static SortDirection Asc { get; } = Register.Generate(nameof(Asc), "asc");
+        public static SortDirection Desc { get; } = Tags.AddAndGet(new SortDirection("desc"));
+        public static SortDirection Asc { get; } = Tags.AddAndGet(new SortDirection("asc"));
 
-        private SortDirection(int ordinal, string name, string value) : base(ordinal, name, value)
+        public SortDirection(string name) : base(name)
         {
 
         }

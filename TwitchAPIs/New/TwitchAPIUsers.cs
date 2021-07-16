@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Giselle.Commons.Net.Http;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -67,7 +68,7 @@ namespace TwitchAPIs.New
             apiRequest.Version = APIVersion.New;
             apiRequest.Path = "users";
             apiRequest.Method = "GET";
-            apiRequest.QueryValues.AddRange(requests.Select(r => new QueryValue(r.Type.Value, r.Value)));
+            apiRequest.QueryValues.AddRange(requests.Select(r => new QueryValue(r.Type.Name, r.Value)));
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
             return jToken.ReadArray("data", t => new TwitchUser(t));

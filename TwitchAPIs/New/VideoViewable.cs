@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Giselle.Commons.Collections;
+using Giselle.Commons.Tags;
 
 namespace TwitchAPIs.New
 {
-    public class VideoViewable : ValueEnum<string>
+    public class VideoViewable : SimpleNameTag
     {
-        public static EnumRegister<VideoViewable, string> Register { get; } = new EnumRegister<VideoViewable, string>((o, n, v) => new VideoViewable(o, n, v));
+        public static SimpleNameTags<VideoViewable> Tags { get; } = new SimpleNameTags<VideoViewable>();
 
-        public static VideoViewable Public { get; } = Register.Generate(nameof(Public), "public");
-        public static VideoViewable Private { get; } = Register.Generate(nameof(Private), "private");
+        public static VideoViewable Public { get; } = Tags.AddAndGet(new VideoViewable("public"));
+        public static VideoViewable Private { get; } = Tags.AddAndGet(new VideoViewable("private"));
 
-        private VideoViewable(int ordinal, string name, string value) : base(ordinal, name, value)
+        public VideoViewable(string name) : base(name)
         {
 
         }

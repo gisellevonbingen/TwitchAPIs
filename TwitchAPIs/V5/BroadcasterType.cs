@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Giselle.Commons.Collections;
+using Giselle.Commons.Tags;
 
 namespace TwitchAPIs.V5
 {
-    public class BroadcasterType : ValueEnum<string>
+    public class BroadcasterType : SimpleNameTag
     {
-        public static EnumRegister<BroadcasterType, string> Register { get; } = new EnumRegister<BroadcasterType, string>((o, n, v) => new BroadcasterType(o, n, v));
+        public static SimpleNameTags<BroadcasterType> Tags { get; } = new SimpleNameTags<BroadcasterType>();
 
-        public static BroadcasterType Partner { get; } = Register.Generate(nameof(Partner), "partner");
-        public static BroadcasterType Affiliate { get; } = Register.Generate(nameof(Affiliate), "affiliate");
-        public static BroadcasterType None { get; } = Register.Generate(nameof(None), "");
+        public static BroadcasterType Partner { get; } = Tags.AddAndGet(new BroadcasterType("partner"));
+        public static BroadcasterType Affiliate { get; } = Tags.AddAndGet(new BroadcasterType("affiliate"));
+        public static BroadcasterType None { get; } = Tags.AddAndGet(new BroadcasterType(""));
 
-        private BroadcasterType(int ordinal, string name, string value) : base(ordinal, name, value)
+        public BroadcasterType(string name) : base(name)
         {
 
         }

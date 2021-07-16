@@ -1,4 +1,5 @@
 ﻿using Giselle.Commons;
+using Giselle.Commons.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace TwitchAPIs.Test.New
             var options = new TwitchGetClipsOptions();
             options.BroadcasterId = user.ReadInput("Enter BroadcasterId").AsString;
             options.GameId = user.ReadInput("Enter GameId").AsString;
-            options.Ids.AddRange(user.ReadInputWhileBreak("Enter Id"));
+            options.Ids.AddRange(user.ReadInputWhileBreakAsString("Enter Id"));
             options.First = user.ReadInput("Enter First as int").AsInt;
             options.StartedAt = TwitchDateTimeUtils.ToDatetime(user.ReadInput("Enter StartedAt as TwtichDateTime").AsString);
             options.EndedAt = TwitchDateTimeUtils.ToDatetime(user.ReadInput("Enter EndedAt as TwtichDateTime").AsString);

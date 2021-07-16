@@ -1,9 +1,7 @@
 ﻿using Giselle.Commons;
-using Giselle.Commons.Web;
-using Newtonsoft.Json.Linq;
+using Giselle.Commons.Net.Http;
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,15 +30,15 @@ namespace TwitchAPIs.Authentication
 
             using (var response = this.Parent.Request(apiRequest))
             {
-                return response.Impl.ResponseUri.AbsoluteUri;
+                return response.ResponseUri.AbsoluteUri;
             }
 
         }
 
         public AuthenticationResult GetAuthenticationResult(Uri responseUri, OAuthRequestCode request)
         {
-            QueryValues queryValues = null;
-            AuthenticationResult result = null;
+            QueryValues queryValues;
+            AuthenticationResult result;
 
             if (request is OAuthRequestAuthorizationCode auth)
             {

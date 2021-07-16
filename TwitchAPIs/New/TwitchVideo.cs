@@ -40,10 +40,10 @@ namespace TwitchAPIs.New
             this.PublishedAt = jToken.Value<DateTime>("published_at");
             this.Url = jToken.Value<string>("url");
             this.ThumbnailUrl = jToken.Value<string>("thumbnail_url");
-            this.Viewable = VideoViewable.Register.FromValue(jToken.Value<string>("viewable"));
+            this.Viewable = VideoViewable.Tags.Find(jToken.Value<string>("viewable"));
             this.ViewCount = jToken.Value<string>("view_count");
             this.Language = jToken.Value<string>("language");
-            this.Type = VideoType.Register.FromValue(jToken.Value<string>("type"));
+            this.Type = VideoType.Tags.Find(jToken.Value<string>("type"));
             this.Duration = TwitchTimeSpanUtils.ToTimeSpan(jToken.Value<string>("duration"));
         }
 

@@ -55,7 +55,7 @@ namespace TwitchAPIs.V5
             apiRequest.QueryValues.Add("limit", limit);
             apiRequest.QueryValues.Add("offset", offset);
             apiRequest.QueryValues.Add("cursor", cursor);
-            apiRequest.QueryValues.Add("direction", direction?.Value);
+            apiRequest.QueryValues.Add("direction", direction?.Name);
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
             return new TwitchChannelFollowers(jToken);
@@ -80,7 +80,7 @@ namespace TwitchAPIs.V5
             apiRequest.Method = "GET";
             apiRequest.QueryValues.Add("limit", limit);
             apiRequest.QueryValues.Add("offset", offset);
-            apiRequest.QueryValues.Add("direction", direction?.Value);
+            apiRequest.QueryValues.Add("direction", direction?.Name);
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
             return new TwitchChannelSubscriptions(jToken);

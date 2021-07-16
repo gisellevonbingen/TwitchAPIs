@@ -1,4 +1,5 @@
 ﻿using Giselle.Commons;
+using Giselle.Commons.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace TwitchAPIs.Test.V5
             var options = new TwitchGetTopClipsOptions();
             options.Channel = user.ReadInput("Enter Channel").AsString;
             options.Game = user.ReadInput("Enter Game").AsString;
-            options.Languages.AddRange(user.ReadInputWhileBreak("Enter Language"));
+            options.Languages.AddRange(user.ReadInputWhileBreakAsString("Enter Language"));
             options.Limit = user.ReadInput("Enter Limit as long").AsLong;
             options.Period = user.QueryInput("Enter Channel", TopClipsPeriod.Register, null, true).Value;
             options.Trending = user.ReadInput("Enter Trending as bool").AsBool;

@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Giselle.Commons.Collections;
+using Giselle.Commons.Tags;
 
 namespace TwitchAPIs.V5
 {
-    public class StreamType : ValueEnum<string>
+    public class StreamType : SimpleNameTag
     {
-        public static EnumRegister<StreamType, string> Register { get; } = new EnumRegister<StreamType, string>((o, n, v) => new StreamType(o, n, v));
+        public static SimpleNameTags<StreamType> Tags { get; } = new SimpleNameTags<StreamType>();
 
-        public static StreamType Live { get; } = Register.Generate(nameof(Live), "live");
-        public static StreamType Playlist { get; } = Register.Generate(nameof(Playlist), "playlist");
-        public static StreamType All { get; } = Register.Generate(nameof(All), "all");
+        public static StreamType Live { get; } = Tags.AddAndGet(new StreamType("live"));
+        public static StreamType Playlist { get; } = Tags.AddAndGet(new StreamType("playlist"));
+        public static StreamType All { get; } = Tags.AddAndGet(new StreamType("all"));
 
-        private StreamType(int ordinal, string name, string value) : base(ordinal, name, value)
+        public StreamType(string name) : base(name)
         {
 
         }

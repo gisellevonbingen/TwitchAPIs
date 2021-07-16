@@ -1,4 +1,5 @@
 ﻿using Giselle.Commons;
+using Giselle.Commons.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,12 +23,12 @@ namespace TwitchAPIs.Test.New
             var handler = main.TwitchAPIHandler;
 
             var options = new TwitchGetStreamsOptions();
-            options.CommunityIds.AddRange(user.ReadInputWhileBreak("Enter Community Id"));
+            options.CommunityIds.AddRange(user.ReadInputWhileBreakAsString("Enter Community Id"));
             options.First = user.ReadInput("Enter First as int").AsInt;
-            options.GameIds.AddRange(user.ReadInputWhileBreak("Enter Game Id"));
-            options.Languages.AddRange(user.ReadInputWhileBreak("Enter Language"));
-            options.UserIds.AddRange(user.ReadInputWhileBreak("Enter User Id"));
-            options.UserLogins.AddRange(user.ReadInputWhileBreak("Enter User Login"));
+            options.GameIds.AddRange(user.ReadInputWhileBreakAsString("Enter Game Id"));
+            options.Languages.AddRange(user.ReadInputWhileBreakAsString("Enter Language"));
+            options.UserIds.AddRange(user.ReadInputWhileBreakAsString("Enter User Id"));
+            options.UserLogins.AddRange(user.ReadInputWhileBreakAsString("Enter User Login"));
 
             while (true)
             {

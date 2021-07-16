@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web;
-using Giselle.Commons;
-using Giselle.Commons.Web;
+using Giselle.Commons.Net;
 using Newtonsoft.Json.Linq;
 using TwitchAPIs.New;
 using TwitchAPIs.Authentication;
 using TwitchAPIs.Other;
 using TwitchAPIs.V5;
+using System.Net;
+using Giselle.Commons.Net.Http;
 
 namespace TwitchAPIs
 {
@@ -111,7 +109,7 @@ namespace TwitchAPIs
 
         }
 
-        public JToken ReadAsJsonThrowIfError(WebResponse response, string errorKey = null)
+        public JToken ReadAsJsonThrowIfError(HttpWebResponse response, string errorKey = null)
         {
             var jToken = response.ReadAsJson();
 
@@ -129,7 +127,7 @@ namespace TwitchAPIs
 
         }
 
-        public WebResponse Request(TwitchAPIRequest apiRequest)
+        public HttpWebResponse Request(TwitchAPIRequest apiRequest)
         {
             var webRequest = this.CreateWebRequest(apiRequest);
             return this.Web.Request(webRequest);

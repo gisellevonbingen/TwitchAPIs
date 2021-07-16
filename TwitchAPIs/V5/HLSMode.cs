@@ -3,20 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Giselle.Commons.Collections;
+using Giselle.Commons.Tags;
 
 namespace TwitchAPIs.V5
 {
-    public class HLSMode : ValueEnum<bool?>
+    public class HLSMode : SimpleNameTag
     {
-        public static EnumRegister<HLSMode, bool?> Register { get; } = new EnumRegister<HLSMode, bool?>((o, n, v) => new HLSMode(o, n, v));
+        public static SimpleNameTags<HLSMode> Tags { get; } = new SimpleNameTags<HLSMode>();
 
-        public static HLSMode OnlyHLS { get; } = Register.Generate(nameof(OnlyHLS), true);
-        public static HLSMode OnlyRTMP { get; } = Register.Generate(nameof(OnlyRTMP), false);
-        public static HLSMode Both { get; } = Register.Generate(nameof(Both), null);
+        public static HLSMode OnlyHLS { get; } = Tags.AddAndGet(new HLSMode(nameof(OnlyHLS), true));
+        public static HLSMode OnlyRTMP { get; } = Tags.AddAndGet(new HLSMode(nameof(OnlyRTMP), false));
+        public static HLSMode Both { get; } = Tags.AddAndGet(new HLSMode(nameof(Both), null));
 
-        private HLSMode(int ordinal, string name, bool? value) : base(ordinal, name, value)
+        public bool? Value { get; }
+
+        public HLSMode(string name, bool? value) : base(name)
         {
-
+            this.Value = value;
         }
 
     }

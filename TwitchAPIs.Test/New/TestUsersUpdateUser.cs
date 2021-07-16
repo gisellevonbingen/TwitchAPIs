@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Giselle.Commons.Users;
 
 namespace TwitchAPIs.Test.New
 {
@@ -21,7 +22,7 @@ namespace TwitchAPIs.Test.New
 
             var description = user.ReadInput("Enter Descrption").AsString;
             var tuser = handler.API.New.Users.UpdateUser(description);
-
+            
             user.SendMessageAsReflection("User", tuser);
         }
 

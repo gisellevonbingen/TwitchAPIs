@@ -3,19 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Giselle.Commons.Collections;
+using Giselle.Commons.Tags;
 
 namespace TwitchAPIs.New
 {
-    public class GetVideoOptionsType : ValueEnum<string>
+    public class GetVideoOptionsType : SimpleNameTag
     {
-        public static EnumRegister<GetVideoOptionsType, string> Register { get; } = new EnumRegister<GetVideoOptionsType, string>((o, n, v) => new GetVideoOptionsType(o, n, v));
+        public static SimpleNameTags<GetVideoOptionsType> Tags { get; } = new SimpleNameTags<GetVideoOptionsType>();
 
-        public static GetVideoOptionsType All { get; } = Register.Generate(nameof(All), "all");
-        public static GetVideoOptionsType Upload { get; } = Register.Generate(nameof(Upload), "upload");
-        public static GetVideoOptionsType Archive { get; } = Register.Generate(nameof(Archive), "archive");
-        public static GetVideoOptionsType Highlight { get; } = Register.Generate(nameof(Highlight), "highlight");
+        public static GetVideoOptionsType All { get; } = Tags.AddAndGet(new GetVideoOptionsType("all"));
+        public static GetVideoOptionsType Upload { get; } = Tags.AddAndGet(new GetVideoOptionsType("upload"));
+        public static GetVideoOptionsType Archive { get; } = Tags.AddAndGet(new GetVideoOptionsType("archive"));
+        public static GetVideoOptionsType Highlight { get; } = Tags.AddAndGet(new GetVideoOptionsType("highlight"));
 
-        private GetVideoOptionsType(int ordinal, string name, string value) : base(ordinal, name, value)
+        public GetVideoOptionsType(string name) : base(name)
         {
 
         }

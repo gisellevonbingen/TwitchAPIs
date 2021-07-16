@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Giselle.Commons.Users;
 
 namespace TwitchAPIs.Test.V5
 {
@@ -20,7 +21,7 @@ namespace TwitchAPIs.Test.V5
 
             var slug = user.ReadInput("Enter Slug").AsString;
             var clip = handler.API.V5.Clips.GetClip(slug);
-
+            
             user.SendMessageAsReflection("Clip", clip);
         }
 

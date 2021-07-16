@@ -3,19 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Giselle.Commons.Collections;
+using Giselle.Commons.Tags;
 
 namespace TwitchAPIs.New
 {
-    public class UserType : ValueEnum<string>
+    public class UserType : SimpleNameTag
     {
-        public static EnumRegister<UserType, string> Register { get; } = new EnumRegister<UserType, string>((o, n, v) => new UserType(o, n, v));
+        public static SimpleNameTags<UserType> Tags { get; } = new SimpleNameTags<UserType>();
 
-        public static UserType Staff { get; } = Register.Generate(nameof(Staff), "staff");
-        public static UserType Admin { get; } = Register.Generate(nameof(Admin), "admin");
-        public static UserType GlobalMod { get; } = Register.Generate(nameof(GlobalMod), "global_mod");
-        public static UserType None { get; } = Register.Generate(nameof(None), "");
+        public static UserType Staff { get; } = Tags.AddAndGet(new UserType("staff"));
+        public static UserType Admin { get; } = Tags.AddAndGet(new UserType("admin"));
+        public static UserType GlobalMod { get; } = Tags.AddAndGet(new UserType("global_mod"));
+        public static UserType None { get; } = Tags.AddAndGet(new UserType(""));
 
-        private UserType(int ordinal, string name, string value) : base(ordinal, name, value)
+        public UserType(string name) : base(name)
         {
 
         }

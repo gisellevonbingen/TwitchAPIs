@@ -27,7 +27,7 @@ namespace TwitchAPIs.New
 
         public TwitchUser(JToken jToken)
         {
-            this.BroadcasterType = BroadcasterType.Register.FromValue(jToken.Value<string>("broadcaster_type"));
+            this.BroadcasterType = BroadcasterType.Tags.Find(jToken.Value<string>("broadcaster_type"));
             this.Description = jToken.Value<string>("description");
             this.DisplayName = jToken.Value<string>("display_name");
             this.Email = jToken.Value<string>("email");
@@ -35,7 +35,7 @@ namespace TwitchAPIs.New
             this.Login = jToken.Value<string>("login");
             this.OfflineImageUrl = jToken.Value<string>("offline_image_url");
             this.ProfileImageUrl = jToken.Value<string>("profile_image_url");
-            this.Type = UserType.Register.FromValue(jToken.Value<string>("type"));
+            this.Type = UserType.Tags.Find(jToken.Value<string>("type"));
             this.ViewCount = jToken.Value<int>("view_count");
         }
 

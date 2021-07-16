@@ -34,7 +34,7 @@ namespace TwitchAPIs.New
             this.UserName = jToken.Value<string>("user_name");
             this.GameId = jToken.Value<string>("game_id");
             this.CommunityIds = jToken.ArrayValues<string>("community_ids");
-            this.Type = StreamType.Register.FromValue(jToken.Value<string>("type"));
+            this.Type = StreamType.Tags.Find(jToken.Value<string>("type"));
             this.Title = jToken.Value<string>("title");
             this.ViewerCount = jToken.Value<int>("viewer_count");
             this.StartedAt = jToken.Value<DateTime>("started_at");

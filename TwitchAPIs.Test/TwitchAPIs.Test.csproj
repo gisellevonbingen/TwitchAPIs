@@ -52,11 +52,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EnumUtils.cs" />
-    <Compile Include="History.cs" />
-    <Compile Include="InputEditHistory.cs" />
-    <Compile Include="InputEditType.cs" />
-    <Compile Include="InputEditSnapshot.cs" />
-    <Compile Include="InputResult.cs" />
     <Compile Include="New\TestClipsCreateClips.cs" />
     <Compile Include="New\TestGamesGetTopGames.cs" />
     <Compile Include="New\TestStreamsGetStreamsMetadata.cs" />
@@ -66,17 +61,13 @@
     <Compile Include="New\TestWebhooksGetWebhookSubscriptions.cs" />
     <Compile Include="New\TestWebhooksPostHub.cs" />
     <Compile Include="New\TestStreamsGetStreams.cs" />
-    <Compile Include="ObjectUtils2.cs" />
     <Compile Include="Other\TestBadgesTwitchTVGetChannelBadges.cs" />
     <Compile Include="Other\TestCbenniAPIGetBadges.cs" />
     <Compile Include="Other\TestTwitchEmotesAPIGetEmotes.cs" />
     <Compile Include="Other\TestTwitchEmotesAPIGetEmoteSets.cs" />
-    <Compile Include="PrintableLine.cs" />
-    <Compile Include="QueryResult.cs" />
     <Compile Include="TestStep.cs" />
     <Compile Include="TwitchAPITestAttribute.cs" />
-    <Compile Include="UserExtensions.cs" />
-    <Compile Include="UserInputReturnException.cs" />
+    <Compile Include="UserExtensions2.cs" />
     <Compile Include="V5\TestChannelsCheckChannelSubscriptionByUser.cs" />
     <Compile Include="V5\TestChannelsGetChannelFollowers.cs" />
     <Compile Include="V5\TestChannelsGetChannelByID.cs" />
@@ -121,9 +112,6 @@
     <Compile Include="New\TestUsersUpdateUser.cs" />
     <Compile Include="TwitchAPIHandler.cs" />
     <Compile Include="TwitchAuthHandler.cs" />
-    <Compile Include="UserAbstract.cs" />
-    <Compile Include="UserConsole.cs" />
-    <Compile Include="UserFile.cs" />
     <Compile Include="TestAbstract.cs" />
     <Compile Include="TestMain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

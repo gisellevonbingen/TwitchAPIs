@@ -56,7 +56,7 @@ namespace TwitchAPIs.V5
             this.Url = jToken.Value<string>("url");
             this.Views = jToken.Value<int>("views");
             this.Followers = jToken.Value<int>("followers");
-            this.BroadcasterType = BroadcasterType.Register.FromValue(jToken.Value<string>("broadcaster_type"));
+            this.BroadcasterType = BroadcasterType.Tags.Find(jToken.Value<string>("broadcaster_type"));
             this.StreamKey = jToken.Value<string>("stream_key");
             this.Email = jToken.Value<string>("email");
         }

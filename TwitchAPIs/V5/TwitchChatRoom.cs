@@ -28,7 +28,7 @@ namespace TwitchAPIs.V5
             this.Name = jToken.Value<string>("name");
             this.Topic = jToken.Value<string>("topic");
             this.Previewable = jToken.Value<bool>("is_previewable");
-            this.MinimumAllowedRole = ChatRoomMinimumAllowedRole.Register.FromValue(jToken.Value<string>("minimum_allowed_role"));
+            this.MinimumAllowedRole = ChatRoomMinimumAllowedRole.Tags.Find(jToken.Value<string>("minimum_allowed_role"));
         }
 
     }

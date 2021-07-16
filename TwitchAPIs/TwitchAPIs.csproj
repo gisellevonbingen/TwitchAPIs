@@ -56,8 +56,6 @@
   <ItemGroup>
     <Compile Include="Authentication\OAuthRequestClientCredentials.cs" />
     <Compile Include="Authentication\OAuthRequestCode.cs" />
-    <Compile Include="EnumRegister.cs" />
-    <Compile Include="EnumRegisterExtensions.cs" />
     <Compile Include="New\GetVideoOptionsPeriod.cs" />
     <Compile Include="New\GetVideoOptionsSort.cs" />
     <Compile Include="New\GetVideoOptionsType.cs" />
@@ -104,7 +102,6 @@
     <Compile Include="V5\HLSMode.cs" />
     <Compile Include="V5\SortDirection.cs" />
     <Compile Include="V5\FollowSortMode.cs" />
-    <Compile Include="HttpUtility2.cs" />
     <Compile Include="New\TwitchAPIGames.cs" />
     <Compile Include="New\TwitchAPIUsers.cs" />
     <Compile Include="New\TwitchAPINew.cs" />
@@ -117,8 +114,6 @@
     <Compile Include="Authentication\OAuthResponseType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="APIVersion.cs" />
-    <Compile Include="QueryValue.cs" />
-    <Compile Include="QueryValues.cs" />
     <Compile Include="TwitchAPI.cs" />
     <Compile Include="Authentication\TwitchAPIAuthentication.cs" />
     <Compile Include="V5\StreamType.cs" />
@@ -191,7 +186,6 @@
     <Compile Include="V5\TwitchAPITeam.cs" />
     <Compile Include="V5\TwitchUserSubscription.cs" />
     <Compile Include="V5\UserType.cs" />
-    <Compile Include="ValueEnum.cs" />
     <Compile Include="WebExplorerExtensions.cs" />
   </ItemGroup>
   <ItemGroup>

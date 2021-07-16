@@ -3,19 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Giselle.Commons.Collections;
+using Giselle.Commons.Tags;
 
 namespace TwitchAPIs.V5
 {
-    public class TopClipsPeriod : ValueEnum<string>
+    public class TopClipsPeriod : SimpleNameTag
     {
-        public static EnumRegister<TopClipsPeriod, string> Register { get; } = new EnumRegister<TopClipsPeriod, string>((o, n, v) => new TopClipsPeriod(o, n, v));
+        public static SimpleNameTags<TopClipsPeriod> Register { get; } = new SimpleNameTags<TopClipsPeriod>();
 
-        public static TopClipsPeriod Day { get; } = Register.Generate(nameof(Day), "day");
-        public static TopClipsPeriod Week { get; } = Register.Generate(nameof(Week), "week");
-        public static TopClipsPeriod Month { get; } = Register.Generate(nameof(Month), "month");
-        public static TopClipsPeriod All { get; } = Register.Generate(nameof(All), "all");
+        public static TopClipsPeriod Day { get; } = Register.AddAndGet(new TopClipsPeriod("day"));
+        public static TopClipsPeriod Week { get; } = Register.AddAndGet(new TopClipsPeriod("week"));
+        public static TopClipsPeriod Month { get; } = Register.AddAndGet(new TopClipsPeriod("month"));
+        public static TopClipsPeriod All { get; } = Register.AddAndGet(new TopClipsPeriod("all"));
 
-        private TopClipsPeriod(int ordinal, string name, string value) : base(ordinal, name, value)
+        public TopClipsPeriod(string name) : base(name)
         {
 
         }

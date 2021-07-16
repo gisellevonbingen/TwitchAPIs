@@ -35,7 +35,7 @@ namespace TwitchAPIs.V5
             apiRequest.QueryValues.Add("game", options.Game);
             apiRequest.QueryValues.Add("language", string.Join(TwitchAPIV5.QueryArrayValueDelimiter, options.Languages));
             apiRequest.QueryValues.Add("limit", options.Limit);
-            apiRequest.QueryValues.Add("period", options.Period?.Value);
+            apiRequest.QueryValues.Add("period", options.Period?.Name);
             apiRequest.QueryValues.Add("trending", options.Trending);
             var jToken = this.Parent.RequestAsJson(apiRequest);
 

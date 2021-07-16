@@ -1,4 +1,5 @@
 ﻿using Giselle.Commons;
+using Giselle.Commons.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace TwitchAPIs.Test.V5
             var query = user.ReadInput("Enter Query").AsString;
             var limit = user.ReadInput("Enter Limit").AsInt;
             var offset = user.ReadInput("Enter Offset").AsInt;
-            var hlsMode = user.QueryInput("Enter HLS", HLSMode.Register, null, true).Value;
+            var hlsMode = user.QueryInput("Enter HLS", HLSMode.Tags, null, true).Value;
 
             var streams = handler.API.V5.Search.SearchStreams(query, limit, offset, hlsMode);
             user.SendMessageAsReflection("SearchStreams", streams);

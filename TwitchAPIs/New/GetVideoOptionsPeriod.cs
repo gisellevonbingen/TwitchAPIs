@@ -3,19 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Giselle.Commons.Collections;
+using Giselle.Commons.Tags;
 
 namespace TwitchAPIs.New
 {
-    public class GetVideoOptionsPeriod : ValueEnum<string>
+    public class GetVideoOptionsPeriod : SimpleNameTag
     {
-        public static EnumRegister<GetVideoOptionsPeriod, string> Register { get; } = new EnumRegister<GetVideoOptionsPeriod, string>((o, n, v) => new GetVideoOptionsPeriod(o, n, v));
+        public static SimpleNameTags<GetVideoOptionsPeriod> Tags { get; } = new SimpleNameTags<GetVideoOptionsPeriod>();
 
-        public static GetVideoOptionsPeriod All { get; } = Register.Generate(nameof(All), "all");
-        public static GetVideoOptionsPeriod Day { get; } = Register.Generate(nameof(Day), "day");
-        public static GetVideoOptionsPeriod Week { get; } = Register.Generate(nameof(Week), "week");
-        public static GetVideoOptionsPeriod Month { get; } = Register.Generate(nameof(Month), "month");
+        public static GetVideoOptionsPeriod All { get; } = Tags.AddAndGet(new GetVideoOptionsPeriod("all"));
+        public static GetVideoOptionsPeriod Day { get; } = Tags.AddAndGet(new GetVideoOptionsPeriod("day"));
+        public static GetVideoOptionsPeriod Week { get; } = Tags.AddAndGet(new GetVideoOptionsPeriod("week"));
+        public static GetVideoOptionsPeriod Month { get; } = Tags.AddAndGet(new GetVideoOptionsPeriod("month"));
 
-        private GetVideoOptionsPeriod(int ordinal, string name, string value) : base(ordinal, name, value)
+        public GetVideoOptionsPeriod(string name) : base(name)
         {
 
         }

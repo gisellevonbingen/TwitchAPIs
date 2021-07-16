@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Giselle.Commons.Net;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,10 +30,12 @@ namespace TwitchAPIs.New
             apiRequest.Path = "webhooks/hub";
             apiRequest.Method = "POST";
 
-            var jToken = new JObject();
-            jToken["hub.callback"] = callback;
-            jToken["hub.mode"] = mode?.Value;
-            jToken["hub.topic"] = topic;
+            var jToken = new JObject
+            {
+                ["hub.callback"] = callback,
+                ["hub.mode"] = mode?.Name,
+                ["hub.topic"] = topic
+            };
 
             if (leaseSeconds.HasValue == true)
             {

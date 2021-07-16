@@ -1,4 +1,5 @@
 ﻿using Giselle.Commons;
+using Giselle.Commons.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace TwitchAPIs.Test.New
             var handler = main.TwitchAPIHandler;
 
             var first = user.ReadInput("Enter First as int").AsInt;
-            var tagIds = new List<string>(user.ReadInputWhileBreak("Enter Tag Id"));
+            var tagIds = new List<string>(user.ReadInputWhileBreakAsString("Enter Tag Id"));
 
             string cursor = null;
 

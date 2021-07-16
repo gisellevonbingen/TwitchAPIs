@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Giselle.Commons.Collections;
+using Giselle.Commons.Tags;
 
 namespace TwitchAPIs.New
 {
-    public class UserRequestType : ValueEnum<string>
+    public class UserRequestType : SimpleNameTag
     {
-        public static EnumRegister<UserRequestType, string> Register { get; } = new EnumRegister<UserRequestType, string>((o, n, v) => new UserRequestType(o, n, v));
+        public static SimpleNameTags<UserRequestType> Tags { get; } = new SimpleNameTags<UserRequestType>();
 
-        public static UserRequestType Id { get; } = Register.Generate(nameof(Id), "id");
-        public static UserRequestType Login { get; } = Register.Generate(nameof(Login), "login");
+        public static UserRequestType Id { get; } = Tags.AddAndGet(new UserRequestType("id"));
+        public static UserRequestType Login { get; } = Tags.AddAndGet(new UserRequestType("login"));
 
-        private UserRequestType(int ordinal, string name, string value) : base(ordinal, name, value)
+        public UserRequestType(string name) : base(name)
         {
 
         }

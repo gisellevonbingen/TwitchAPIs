@@ -1,4 +1,5 @@
 ﻿using Giselle.Commons;
+using Giselle.Commons.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,10 +22,10 @@ namespace TwitchAPIs.Test.V5
             var handler = main.TwitchAPIHandler;
 
             var options = new TwitchGetLiveStreamsOptions();
-            options.Channels.AddRange(user.ReadInputWhileBreak("Enter ChannelId"));
+            options.Channels.AddRange(user.ReadInputWhileBreakAsString("Enter ChannelId"));
             options.Game = user.ReadInput("Enter Game").AsString;
             options.Language = user.ReadInput("Enter Language").AsString;
-            options.StreamType = user.QueryInput("Enter StremType", StreamType.Register, null, true).Value;
+            options.StreamType = user.QueryInput("Enter StremType", StreamType.Tags, null, true).Value;
             options.Limit = user.ReadInput("Enter Limit as int").AsInt;
             options.Offset = user.ReadInput("Enter Offset as int").AsInt;
             var liveStreams = handler.API.V5.Streams.GetLiveStreams(options);

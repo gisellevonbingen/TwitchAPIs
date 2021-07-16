@@ -22,7 +22,7 @@ namespace TwitchAPIs.Test.New
             var handler = main.TwitchAPIHandler;
 
             var callback = user.ReadInput("Enter Calllback").AsString;
-            var mode = user.QueryInput("Enter Mode", HubMode.Register, null, true).Value;
+            var mode = user.QueryInput("Enter Mode", HubMode.Tags, null, true).Value;
             var topic = user.ReadInput("Enter Topic").AsString;
             var leaseSeconds = user.ReadInput("Enter Lease Seconds as int").AsInt;
             var secret = user.ReadInput("Enter Secret").AsString;

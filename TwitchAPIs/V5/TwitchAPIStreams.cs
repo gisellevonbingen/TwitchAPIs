@@ -19,7 +19,7 @@ namespace TwitchAPIs.V5
             apiRequest.Version = APIVersion.V5;
             apiRequest.Path = $"streams/{channelId}";
             apiRequest.Method = "GET";
-            apiRequest.QueryValues.Add("stream_type", type?.Value);
+            apiRequest.QueryValues.Add("stream_type", type?.Name);
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
             return jToken.ReadIfExist("stream", t => new TwitchStream(t));
@@ -34,7 +34,7 @@ namespace TwitchAPIs.V5
             apiRequest.QueryValues.Add("channel", string.Join(TwitchAPIV5.QueryArrayValueDelimiter, options.Channels));
             apiRequest.QueryValues.Add("game", options.Game);
             apiRequest.QueryValues.Add("language", options.Language);
-            apiRequest.QueryValues.Add("stream_type", options.StreamType?.Value);
+            apiRequest.QueryValues.Add("stream_type", options.StreamType?.Name);
             apiRequest.QueryValues.Add("limit", options.Limit);
             apiRequest.QueryValues.Add("offset", options.Offset);
             var jToken = this.Parent.RequestAsJson(apiRequest);

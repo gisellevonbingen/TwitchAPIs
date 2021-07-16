@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Giselle.Commons.Users;
 using TwitchAPIs.New;
 
 namespace TwitchAPIs.Test.New
@@ -24,7 +25,7 @@ namespace TwitchAPIs.Test.New
 
             while (true)
             {
-                var typeInput = user.QueryInput("Enter UserType", UserRequestType.Register, null, true);
+                var typeInput = user.QueryInput("Enter UserType", UserRequestType.Tags, null, true);
 
                 if (typeInput.Breaked == true)
                 {

@@ -1,4 +1,5 @@
 ﻿using Giselle.Commons;
+using Giselle.Commons.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace TwitchAPIs.Test.V5
             var channelId = user.ReadInput("Enter Channel Id").AsString;
             var limit = user.ReadInput("Enter Limit as int").AsInt;
             var offset = user.ReadInput("Enter Offset as int").AsInt;
-            var direction = user.QueryInput("Enter Direction", SortDirection.Register, null, true).Value;
+            var direction = user.QueryInput("Enter Direction", SortDirection.Tags, null, true).Value;
 
             string cursor = null;
 

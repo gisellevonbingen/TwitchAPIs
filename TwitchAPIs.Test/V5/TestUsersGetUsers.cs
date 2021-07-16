@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Giselle.Commons.Users;
 
 namespace TwitchAPIs.Test.V5
 {
@@ -19,7 +20,7 @@ namespace TwitchAPIs.Test.V5
             var user = main.User;
             var handler = main.TwitchAPIHandler;
 
-            var loginList = user.ReadInputWhileBreak("Enter User Login");
+            var loginList = user.ReadInputWhileBreakAsString("Enter User Login");
             var users = handler.API.V5.Users.GetUsers(loginList);
 
             user.SendMessageAsReflection("Users", users);

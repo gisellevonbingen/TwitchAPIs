@@ -1,4 +1,5 @@
 ﻿using Giselle.Commons;
+using Giselle.Commons.Users;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -14,7 +15,7 @@ namespace TwitchAPIs.Test
 {
     public class TwitchAPIHandler
     {
-        private UserAbstract User;
+        private readonly UserAbstract User;
 
         public TwitchAPI API { get; private set; }
         public OAuthRequest OAuthRequest { get; private set; }
@@ -62,11 +63,13 @@ namespace TwitchAPIs.Test
 
         private OAuthRequest CreateOAuthRequest(UserAbstract user)
         {
-            var list = new List<OAuthRequest>();
-            list.Add(null);
-            list.Add(new OAuthRequestTokenCode());
-            list.Add(new OAuthRequestAuthorizationCode());
-            list.Add(new OAuthRequestClientCredentials());
+            var list = new List<OAuthRequest>
+            {
+                null,
+                new OAuthRequestTokenCode(),
+                new OAuthRequestAuthorizationCode(),
+                new OAuthRequestClientCredentials()
+            };
 
             var request = user.QueryInput("Enter RequestType", list, req => req == null ? "Not Auth" : req.GetType().Name).Value;
 

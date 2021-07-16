@@ -22,7 +22,7 @@ namespace TwitchAPIs.V5
         public TwitchSubscription(JToken jToken)
         {
             this.Id = jToken.Value<string>("_id");
-            this.SubPlan = SubscriptionPlan.Register.FromValue(jToken.Value<string>("sub_plan"));
+            this.SubPlan = SubscriptionPlan.Register.Find(jToken.Value<string>("sub_plan"));
             this.SubPlanName = jToken.Value<string>("sub_plan_name");
             this.CreatedAt = jToken.Value<DateTime>("created_at");
         }

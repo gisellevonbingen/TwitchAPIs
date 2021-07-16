@@ -20,7 +20,7 @@ namespace TwitchAPIs.New
 
         public override bool Equals(object obj)
         {
-            return obj is UserRequest other ? this.Equals(other) : false;
+            return obj is UserRequest other && this.Equals(other);
         }
 
         public bool Equals(UserRequest other)
@@ -45,7 +45,7 @@ namespace TwitchAPIs.New
 
         public override string ToString()
         {
-            var type = this.Type.Value;
+            var type = this.Type.Name;
             var value = this.Value;
             return $"{type}={value}";
         }

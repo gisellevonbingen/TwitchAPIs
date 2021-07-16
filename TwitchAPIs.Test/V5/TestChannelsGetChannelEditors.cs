@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Giselle.Commons.Users;
 
 namespace TwitchAPIs.Test.V5
 {
@@ -21,7 +22,7 @@ namespace TwitchAPIs.Test.V5
 
             var channelid = user.ReadInput("Enter Channel Id").AsString;
             var users = handler.API.V5.Channels.GetChannelEditors(channelid);
-
+            
             user.SendMessageAsReflection("ChannelEditors", users);
         }
 

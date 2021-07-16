@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -77,8 +78,8 @@ namespace TwitchAPIs.V5
             apiRequest.Method = "GET";
             apiRequest.QueryValues.Add("limit", limit);
             apiRequest.QueryValues.Add("offset", offset);
-            apiRequest.QueryValues.Add("direction", direction?.Value);
-            apiRequest.QueryValues.Add("sortby", sortby?.Value);
+            apiRequest.QueryValues.Add("direction", direction?.Name);
+            apiRequest.QueryValues.Add("sortby", sortby?.Name);
             var jToken = this.Parent.RequestAsJson(apiRequest);
 
             return new TwitchUserFollows(jToken);
@@ -105,7 +106,7 @@ namespace TwitchAPIs.V5
 
             using (var response = this.Parent.Request(apiRequest))
             {
-                if (response.Impl.StatusCode != System.Net.HttpStatusCode.NoContent)
+                if (response.StatusCode != System.Net.HttpStatusCode.NoContent)
                 {
                     this.Parent.ReadAsJsonThrowIfError(response);
                 }
@@ -158,7 +159,7 @@ namespace TwitchAPIs.V5
 
             using (var response = this.Parent.Request(apiRequest))
             {
-                if (response.Impl.StatusCode != System.Net.HttpStatusCode.NoContent)
+                if (response.StatusCode != HttpStatusCode.NoContent)
                 {
                     this.Parent.ReadAsJsonThrowIfError(response);
                 }
